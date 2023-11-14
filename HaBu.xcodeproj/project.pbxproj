@@ -11,6 +11,9 @@
 		5C2658402B03B430008BEB6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583F2B03B430008BEB6D /* ContentView.swift */; };
 		5C2658422B03B431008BEB6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2658412B03B431008BEB6D /* Assets.xcassets */; };
 		5C2658452B03B431008BEB6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2658442B03B431008BEB6D /* Preview Assets.xcassets */; };
+		5C26584F2B03B9A5008BEB6D /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26584E2B03B9A5008BEB6D /* FeedView.swift */; };
+		5C2658532B03BAA1008BEB6D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658522B03BAA1008BEB6D /* Const.swift */; };
+		5C2658572B03BB18008BEB6D /* Extencions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658562B03BB18008BEB6D /* Extencions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		5C26583F2B03B430008BEB6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5C2658412B03B431008BEB6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C2658442B03B431008BEB6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5C26584E2B03B9A5008BEB6D /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		5C2658522B03BAA1008BEB6D /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		5C2658562B03BB18008BEB6D /* Extencions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extencions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +57,9 @@
 		5C26583C2B03B430008BEB6D /* HaBu */ = {
 			isa = PBXGroup;
 			children = (
-				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
-				5C26583F2B03B430008BEB6D /* ContentView.swift */,
+				5C2658542B03BAB8008BEB6D /* Extencion */,
+				5C2658502B03BA8E008BEB6D /* App */,
+				5C26584B2B03B989008BEB6D /* Core */,
 				5C2658412B03B431008BEB6D /* Assets.xcassets */,
 				5C2658432B03B431008BEB6D /* Preview Content */,
 			);
@@ -65,6 +72,56 @@
 				5C2658442B03B431008BEB6D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5C26584B2B03B989008BEB6D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5C26584C2B03B98C008BEB6D /* Feed */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5C26584C2B03B98C008BEB6D /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				5C26584D2B03B993008BEB6D /* View */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		5C26584D2B03B993008BEB6D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C26584E2B03B9A5008BEB6D /* FeedView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C2658502B03BA8E008BEB6D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
+				5C26583F2B03B430008BEB6D /* ContentView.swift */,
+				5C2658512B03BA91008BEB6D /* Const */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5C2658512B03BA91008BEB6D /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				5C2658522B03BAA1008BEB6D /* Const.swift */,
+			);
+			path = Const;
+			sourceTree = "<group>";
+		};
+		5C2658542B03BAB8008BEB6D /* Extencion */ = {
+			isa = PBXGroup;
+			children = (
+				5C2658562B03BB18008BEB6D /* Extencions.swift */,
+			);
+			path = Extencion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +195,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
+				5C2658532B03BAA1008BEB6D /* Const.swift in Sources */,
+				5C2658572B03BB18008BEB6D /* Extencions.swift in Sources */,
+				5C26584F2B03B9A5008BEB6D /* FeedView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
