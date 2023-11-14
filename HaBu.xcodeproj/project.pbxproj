@@ -14,6 +14,8 @@
 		5C26584F2B03B9A5008BEB6D /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26584E2B03B9A5008BEB6D /* FeedView.swift */; };
 		5C2658532B03BAA1008BEB6D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658522B03BAA1008BEB6D /* Const.swift */; };
 		5C2658572B03BB18008BEB6D /* Extencions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658562B03BB18008BEB6D /* Extencions.swift */; };
+		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
+		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,9 @@
 		5C26584E2B03B9A5008BEB6D /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		5C2658522B03BAA1008BEB6D /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		5C2658562B03BB18008BEB6D /* Extencions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extencions.swift; sourceTree = "<group>"; };
+
+		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +65,9 @@
 				5C2658542B03BAB8008BEB6D /* Extencion */,
 				5C2658502B03BA8E008BEB6D /* App */,
 				5C26584B2B03B989008BEB6D /* Core */,
+				94D588E52B03B6FD006327A3 /* Model */,
+				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
+				5C26583F2B03B430008BEB6D /* ContentView.swift */,
 				5C2658412B03B431008BEB6D /* Assets.xcassets */,
 				5C2658432B03B431008BEB6D /* Preview Content */,
 			);
@@ -122,6 +130,13 @@
 				5C2658562B03BB18008BEB6D /* Extencions.swift */,
 			);
 			path = Extencion;
+		94D588E52B03B6FD006327A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				94D588E62B03B70C006327A3 /* User.swift */,
+				88A23C092B03B8A80030183A /* Post.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +214,8 @@
 				5C2658572B03BB18008BEB6D /* Extencions.swift in Sources */,
 				5C26584F2B03B9A5008BEB6D /* FeedView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
+				94D588E72B03B70C006327A3 /* User.swift in Sources */,
+				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
