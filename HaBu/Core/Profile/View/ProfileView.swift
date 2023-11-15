@@ -1,8 +1,8 @@
 //
-//  Profile.swift
+//  ProfileView.swift
 //  HaBu
 //
-//  Created by yusuf on 15.11.2023.
+//  Created by OmerErbalta on 16.11.2023.
 //
 
 import SwiftUI
@@ -90,3 +90,4 @@ struct ProfileView: View {
 #Preview {
     ProfileView()
 }
+
