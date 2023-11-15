@@ -40,21 +40,24 @@ struct ActionButton: View {
 }
 
 #Preview {
-    ActionButton(button: .like) {
+    ActionButton(button: .liked) {
         
     }
 }
 
 enum actionButtons {
-    case like
+    case unLike
+    case liked
     case bubble
     case send
     case savePost
     
     var icon : UIImage{
         switch self {
-        case .like:
+        case .unLike:
             return UIImage(systemName: "heart")!
+        case .liked:
+            return UIImage(systemName: "heart.fill")!.tinted(with: Const.primaryUiColor)!
         case .bubble:
            return UIImage(systemName: "bubble.right")!
         case .send:
@@ -66,7 +69,9 @@ enum actionButtons {
     
     var text : String{
         switch self{
-        case .like:
+        case .unLike:
+            return "like"
+        case .liked:
             return "like"
         case .bubble:
             return "yorum"

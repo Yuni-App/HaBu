@@ -15,6 +15,9 @@
 		5C2658602B03C51C008BEB6D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26585F2B03C51C008BEB6D /* Const.swift */; };
 		5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658622B03C53C008BEB6D /* Extencion.swift */; };
 		5C2DAB4B2B050D1C00C6E145 /* IrishGrover-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DAB4A2B050D1C00C6E145 /* IrishGrover-Regular.ttf */; };
+		5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB4E2B050EE800C6E145 /* TabbarView.swift */; };
+		5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB522B050F7900C6E145 /* SerachView.swift */; };
+		5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB562B050FC500C6E145 /* NotificationView.swift */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
 		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
@@ -44,6 +47,9 @@
 		5C2658622B03C53C008BEB6D /* Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extencion.swift; sourceTree = "<group>"; };
 		5C2DAB472B04FE1C00C6E145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2DAB4A2B050D1C00C6E145 /* IrishGrover-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IrishGrover-Regular.ttf"; sourceTree = "<group>"; };
+		5C2DAB4E2B050EE800C6E145 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		5C2DAB522B050F7900C6E145 /* SerachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachView.swift; sourceTree = "<group>"; };
+		5C2DAB562B050FC500C6E145 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
@@ -117,6 +123,9 @@
 		5C2658582B03C451008BEB6D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5C2DAB542B050FB100C6E145 /* Notification */,
+				5C2DAB502B050F6100C6E145 /* Serach */,
+				5C2DAB4C2B050EC700C6E145 /* Tabbar */,
 				949016D32B04189C00164405 /* Authentication */,
 				94CCABE52B03C7AD00DCFB51 /* Components */,
 				5C2658592B03C45C008BEB6D /* Feed */,
@@ -176,6 +185,54 @@
 				5C2DAB4A2B050D1C00C6E145 /* IrishGrover-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		5C2DAB4C2B050EC700C6E145 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DAB4D2B050EDD00C6E145 /* View */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		5C2DAB4D2B050EDD00C6E145 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DAB4E2B050EE800C6E145 /* TabbarView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C2DAB502B050F6100C6E145 /* Serach */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DAB512B050F6C00C6E145 /* View */,
+			);
+			path = Serach;
+			sourceTree = "<group>";
+		};
+		5C2DAB512B050F6C00C6E145 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DAB522B050F7900C6E145 /* SerachView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C2DAB542B050FB100C6E145 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DAB552B050FB800C6E145 /* View */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		5C2DAB552B050FB800C6E145 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DAB562B050FC500C6E145 /* NotificationView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		949016D32B04189C00164405 /* Authentication */ = {
@@ -289,17 +346,20 @@
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
+				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */,
 				949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
+				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */,
 				5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */,
+				5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */,
 				949016E22B041EF400164405 /* LoginView.swift in Sources */,
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
 				5C2658602B03C51C008BEB6D /* Const.swift in Sources */,

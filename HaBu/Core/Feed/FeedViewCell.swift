@@ -76,8 +76,7 @@ struct FeedViewCell: View {
             .padding()
             //action buttons
             HStack{
-                ActionButton(button: .like,number: 20) {
-                    print("like")
+                ActionButton(button: .liked,number: 20) {
                         
                 }
                 ActionButton(button: .bubble, number: 10) {
