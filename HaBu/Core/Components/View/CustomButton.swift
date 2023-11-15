@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CustomButton: View {
     var title: String
-       var backgroundColor: Color
-       var action: () -> Void
+    var backgroundColor: Color
+    var action: () -> Void
     var destinaiton : AnyView
 
        var body: some View {
@@ -19,10 +19,10 @@ struct CustomButton: View {
                    NavigationLink(destination: destinaiton) {
                        Text(title)
                            .padding()
-                           .frame(width: UIScreen.main.bounds.width * 3/4  )
+                           .frame(width: UIScreen.main.bounds.width * 2/4  ,height: 30 )
                            .background(backgroundColor)
                            .foregroundColor(.white)
-                           .cornerRadius(7)
+                           .cornerRadius(4)
                    }
                    
                }
@@ -30,5 +30,5 @@ struct CustomButton: View {
 }
 
 #Preview {
-    CustomButton(title: "", backgroundColor: .black, action: {}, destinaiton: AnyView(LoginView()))
+    CustomButton(title: "login", backgroundColor: Const.primaryColor, action: {}, destinaiton: AnyView(LoginView()))
 }

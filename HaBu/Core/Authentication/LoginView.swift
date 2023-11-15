@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct LoginView: View {
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationStack{
+            VStack{
+                CustomTextField(icon: "mail", placeHolder: "e-posta")
+                CustomTextField(icon: "key", placeHolder: "Şifre")
+                CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
+                
+                CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                    print("cliked login button")
+                }, destinaiton: AnyView(FeedView()))
+                
+            }.padding(30)
+        }     //will delete the back button from feedview
     }
 }
 
 #Preview {
     LoginView()
 }
+
+
