@@ -50,9 +50,9 @@ struct FeedView: View {
                         //Filter Button Action
                         
                     }, label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
-                            .font(.title2)
-                            .foregroundStyle(.black)
+                        Image("filter")
+                            .resizable()
+                            .frame(width: 30,height: 30)
                     })
                     
                 }
