@@ -130,6 +130,7 @@
 				5C2DAB542B050FB100C6E145 /* Notification */,
 				5C2DAB502B050F6100C6E145 /* Serach */,
 				5C2DAB4C2B050EC700C6E145 /* Tabbar */,
+				88A44A982B04FAE700F47BF8 /* Profile */,
 				949016D32B04189C00164405 /* Authentication */,
 				94CCABE52B03C7AD00DCFB51 /* Components */,
 				5C2658592B03C45C008BEB6D /* Feed */,
@@ -241,6 +242,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		88A44A982B04FAE700F47BF8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				88A44A992B04FAFC00F47BF8 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		88A44A992B04FAFC00F47BF8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88A44A9A2B04FB1800F47BF8 /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		949016D32B04189C00164405 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88A44A9B2B04FB1800F47BF8 /* ProfileView.swift in Sources */,
 				9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */,
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
