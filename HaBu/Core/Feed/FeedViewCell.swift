@@ -9,6 +9,11 @@ import SwiftUI
 import Kingfisher
 struct FeedViewCell: View {
     @State private var showingComment = false
+    @State private var savePost = actionButtons.savePost
+    @State private var likePost = actionButtons.unLike
+
+    
+    
     let post : Post
     var user : User
     init(post: Post,user:User) {
@@ -16,87 +21,72 @@ struct FeedViewCell: View {
         self.user = user
     }
     var body: some View {
-        VStack{
-            //User Info
-            HStack{
-                CircleProfileImage(userIamgeUrl: "", size: .xsmall)
-                VStack{
-                    Text("\(user.name) \(user.surName)")
-                        .fontWeight(.semibold)
-                        .font(.caption)
-                    Text("\(user.username)")
-                        .opacity(0.5)
-                        .fontWeight(.semibold)
-                        .font(.caption2)
-                }
+        NavigationStack {
+            VStack{
+                //User Info
+                UserInfo(user: user, imageSize: .xsmall)
+                .padding(.horizontal)
                 
-                
-                Spacer()
-                Text("4s")
-                    .opacity(0.6)
-                    .fontWeight(.semibold)
-                Button(action: {
-                    
-                }, label: {
-                   Image("3DotHoriizontal")
+                //ımage ?? nil
+                if let imageUrl = post.imageUrl{
+                    KFImage(URL(string: imageUrl))
                         .resizable()
-                        .frame(width: 10,height: 15)
-                        .padding(.horizontal)
-                })
-            }
-            .padding(.horizontal)
-            
-            //ımage ?? nil
-            if let imageUrl = post.imageUrl{
-                KFImage(URL(string: imageUrl))
-                    .resizable()
-                    .frame(width: Const.width * 0.95,height: Const.height * 0.25)
-                    .scaledToFill()
-            }
-            
-            // caption
-            HStack {
-                if let _ =  post.imageUrl {
-                    Text("\(user.username ): ")
-                        .fontWeight(.semibold)
-                    +  Text(post.caption)
-                      .font(.caption)
-                      .fontWeight(.semibold)
+                        .frame(width: Const.width * 0.95,height: Const.height * 0.35)
+                        .scaledToFill()
                 }
-                else{
-                    Text(post.caption)
-                      .font(.caption)
-                      .fontWeight(.semibold)
+                
+                // caption
+                HStack {
+                    if let _ =  post.imageUrl {
+                        Text("\(user.username ): ")
+                            .fontWeight(.bold)
+                            .font(.subheadline)
+                        +  Text(post.caption)
+                    }
+                    else{
+                        Text(post.caption)
+                    }
+                     
+                    Spacer()
                 }
-                 
-                Spacer()
-            }
-            .font(.caption)
-            .padding()
-            //action buttons
-            HStack{
-                ActionButton(button: .liked,number: 20) {
+                .font(.caption)
+                .fontWeight(.semibold)
+                .padding()
+                //action buttons
+                HStack{
+                    ActionButton(button: likePost,number: 20) {
+                        if likePost == .unLike{
+                            likePost = .liked
+                        }
+                        else{
+                            likePost = .unLike
+                        }
+                    }
+                    ActionButton(button: .bubble, number: 10) {
+                        showingComment = true
+                        print("comment")
                         
+                    }
+                    .sheet(isPresented: $showingComment) {
+                        CommentBottomSheet()
+                            .presentationDetents([.large,.medium])
+                    }
+                    ActionButton(button: .send) {
+                        print("gönder")
+                    }
+                    Spacer()
+                        ActionButton(button: savePost) {
+                            if savePost == .savePost{
+                                savePost = .savedPost
+                            }
+                            else{
+                                savePost = .savePost
+                            }
+                                                
+                    }
                 }
-                ActionButton(button: .bubble, number: 10) {
-                    showingComment = true
-                    print("comment")
-                    
-                }
-                .sheet(isPresented: $showingComment) {
-                    CommentBottomSheet()
-                        .presentationDetents([.large,.medium])
-                }
-                ActionButton(button: .send) {
-                    print("gönder")
-                }
-                Spacer()
-                ActionButton(button: .savePost) {
-                    print("kaydet")
-                }
+                .padding()
             }
-            .padding()
-            
         }
        
         Divider()
