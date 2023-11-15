@@ -9,7 +9,28 @@ import SwiftUI
 
 struct RegisterBuildFirstView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            VStack{
+                Spacer()
+                Spacer()
+                CustomTextField(icon: "envelope", placeHolder: "e-posta")
+                CustomTextField(icon: "key", placeHolder: "Şifre")
+                CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
+                HStack{
+                    Spacer()
+                    CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
+                    }, destinaiton: AnyView(RegisterBuildSecondView()), width: Const.width/3)
+                }
+                Spacer()
+                HStack{
+                    Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
+                    NavigationLink {
+                        LoginView()
+                    } label: {
+                        HStack{  Text("Giriş Yap").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
+                    }
+                }}.padding(30)
+        }
     }
 }
 

@@ -14,9 +14,14 @@
 		5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26585B2B03C4A1008BEB6D /* FeedView.swift */; };
 		5C2658602B03C51C008BEB6D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26585F2B03C51C008BEB6D /* Const.swift */; };
 		5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658622B03C53C008BEB6D /* Extencion.swift */; };
+		5C2DAB462B04FD8700C6E145 /* IrishGrover-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DAB452B04FD8700C6E145 /* IrishGrover-Regular.ttf */; };
+		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
+		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		88A44A9B2B04FB1800F47BF8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A44A9A2B04FB1800F47BF8 /* ProfileView.swift */; };
+		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
+		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
 		949016E02B041EBD00164405 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016DF2B041EBD00164405 /* InfoView.swift */; };
 		949016E22B041EF400164405 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E12B041EF400164405 /* LoginView.swift */; };
 		949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */; };
@@ -38,9 +43,15 @@
 		5C26585B2B03C4A1008BEB6D /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		5C26585F2B03C51C008BEB6D /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		5C2658622B03C53C008BEB6D /* Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extencion.swift; sourceTree = "<group>"; };
+		5C2DAB452B04FD8700C6E145 /* IrishGrover-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IrishGrover-Regular.ttf"; sourceTree = "<group>"; };
+		5C2DAB472B04FE1C00C6E145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
+		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		88A44A9A2B04FB1800F47BF8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		949016DF2B041EBD00164405 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		949016E12B041EF400164405 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildFirstView.swift; sourceTree = "<group>"; };
@@ -83,6 +94,8 @@
 		5C26583C2B03B430008BEB6D /* HaBu */ = {
 			isa = PBXGroup;
 			children = (
+				5C2DAB472B04FE1C00C6E145 /* Info.plist */,
+				5C2DAB442B04FD6C00C6E145 /* Fonts */,
 				5C2658612B03C532008BEB6D /* Extencion */,
 				5C26585D2B03C50C008BEB6D /* App */,
 				5C2658582B03C451008BEB6D /* Core */,
@@ -118,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
+				5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -126,8 +140,10 @@
 			isa = PBXGroup;
 			children = (
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
+				5C4133C02B04EFD3006F29AF /* ActionButton.swift */,
 				949016E92B04275F00164405 /* CustomButton.swift */,
 				949E2A0E2B04D4E200DF967E /* CustomTextField.swift */,
+				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -144,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				5C26585F2B03C51C008BEB6D /* Const.swift */,
+				9411AA892B04F4900042A354 /* ImageManager.swift */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -176,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				949016DF2B041EBD00164405 /* InfoView.swift */,
+        	5C2DAB452B04FD8700C6E145 /* IrishGrover-Regular.ttf */,
 				949016E12B041EF400164405 /* LoginView.swift */,
 				949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */,
 				949016E52B041F3000164405 /* RegisterBuildSecondView.swift */,
@@ -267,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2658452B03B431008BEB6D /* Preview Assets.xcassets in Resources */,
+				5C2DAB462B04FD8700C6E145 /* IrishGrover-Regular.ttf in Resources */,
 				5C2658422B03B431008BEB6D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,9 +298,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				88A44A9B2B04FB1800F47BF8 /* ProfileView.swift in Sources */,
+				9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */,
+				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
+				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
+				5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */,
 				949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
@@ -431,6 +454,7 @@
 				DEVELOPMENT_TEAM = 72DGBQN223;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HaBu/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -460,6 +484,7 @@
 				DEVELOPMENT_TEAM = 72DGBQN223;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HaBu/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
