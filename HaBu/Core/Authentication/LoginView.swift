@@ -11,7 +11,7 @@ struct LoginView: View {
 
     var body: some View {
         
-        
+
         NavigationStack{
             VStack{
                 Spacer()
@@ -29,10 +29,13 @@ struct LoginView: View {
                         .foregroundColor(.gray)
                         .font(.system(size: 14))
                 }
-                CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                    //will delete the back button from feedview
-                    print("cliked login button")
-                }, destinaiton: AnyView(FeedView()))
+                HStack{
+                    Spacer()
+                    CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                        //will delete the back button from feedview
+                        print("cliked login button")
+                    }, destinaiton: AnyView(FeedView()),width: Const.width/3)
+                }
                 Spacer()
                 HStack{
                     Text("Bir hesabınız yok mu ?").foregroundStyle(.black).font(.system(size: 14))

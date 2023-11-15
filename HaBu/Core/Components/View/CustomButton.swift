@@ -12,6 +12,7 @@ struct CustomButton: View {
     var backgroundColor: Color
     var action: () -> Void
     var destinaiton : AnyView
+    var width : Double?
 
        var body: some View {
            Button(
@@ -19,7 +20,7 @@ struct CustomButton: View {
                    NavigationLink(destination: destinaiton) {
                        Text(title)
                            .padding()
-                           .frame(width: UIScreen.main.bounds.width * 2/4  ,height: 30 )
+                           .frame(width: width ?? Const.screenWidht/2  ,height: 30 )
                            .background(backgroundColor)
                            .foregroundColor(.white)
                            .cornerRadius(4)
