@@ -11,4 +11,5 @@ class Const{
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height
     static let primaryColor  = Color(uiColor: UIColor(hex: "55BCB6"))
+    static let secondaryColor = Color(uiColor : UIColor(hex:"68E4DD"))
 }
