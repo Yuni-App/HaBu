@@ -13,7 +13,7 @@ struct RegisterBuildFirstView: View {
             VStack{
                 Spacer()
                 Spacer()
-                CustomTextField(icon: "mail", placeHolder: "e-posta")
+                CustomTextField(icon: "envelope", placeHolder: "e-posta")
                 CustomTextField(icon: "key", placeHolder: "Şifre")
                 CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
                 HStack{

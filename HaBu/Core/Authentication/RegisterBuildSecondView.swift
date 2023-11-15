@@ -11,17 +11,29 @@ struct RegisterBuildSecondView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                CustomTextField(icon: "mail", placeHolder: "e-posta")
-                CustomTextField(icon: "key", placeHolder: "Şifre")
-                CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
-                
-                CustomButton(title: "Kayıt Ol", backgroundColor: Const.primaryColor, action: {
-                    //will delete the back button from feedview
-                    print("  login button")
-                }, destinaiton: AnyView(FeedView()))
-                
-            }.padding(30)
-        }    }
+                Spacer()
+                Spacer()
+                CustomTextField(icon: "person.fill", placeHolder: "Ad")
+                CustomTextField(icon: "person.fill", placeHolder: "Soy Ad")
+                CustomTextField(icon: "person.badge.plus", placeHolder: "Kullanıcı Adı")
+                CustomTextField(icon: "calendar", placeHolder: "Yaş")
+                CustomTextField(icon: "pencil", placeHolder: "Bio")
+                HStack{
+                    Spacer()
+                    CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
+                    }, destinaiton: AnyView(RegisterBuildThirdView()), width: Const.width/3)
+                }
+                Spacer()
+                HStack{
+                    Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
+                    NavigationLink {
+                        LoginView()
+                    } label: {
+                        HStack{  Text("Giriş Yap").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
+                    }
+                }}.padding(30)
+        }
+    }
 }
 
 #Preview {
