@@ -12,6 +12,9 @@ struct FeedView: View {
         NavigationStack{
             ScrollView{
                 
+                ForEach(Post.MockData , id: \.id){post in
+                    FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
+                }
                 
             }.toolbar{
                 

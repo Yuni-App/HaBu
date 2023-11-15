@@ -10,25 +10,27 @@ import Kingfisher
 struct FeedViewCell: View {
     let post : Post
     var user : User
-    init(post: Post) {
+    init(post: Post,user:User) {
         self.post = post
-        user = User.MockData[0]
+        self.user = user
+        
+       
     }
     var body: some View {
         VStack{
             //User Info
             HStack{
-                CircleProfileImage(userIamgeUrl: "", size: .small)
+                CircleProfileImage(userIamgeUrl: "", size: .xsmall)
                 VStack{
                     Text("\(user.name) \(user.surName)")
                         .fontWeight(.semibold)
+                        .font(.caption)
                     Text("\(user.username)")
                         .opacity(0.5)
                         .fontWeight(.semibold)
-                        .font(.callout)
+                        .font(.caption2)
                 }
                 
-                .padding(.horizontal)
                 
                 Spacer()
                 Text("4s")
@@ -55,45 +57,47 @@ struct FeedViewCell: View {
             
             // caption
             HStack {
-                Text("\(user.username): ")
-                    .fontWeight(.semibold) +
+                if let _ =  post.imageUrl {
+                    Text("\(user.username ): ")
+                        .fontWeight(.semibold)
+                    +  Text(post.caption)
+                      .font(.caption)
+                      .fontWeight(.semibold)
+                }
+                else{
                     Text(post.caption)
+                      .font(.caption)
+                      .fontWeight(.semibold)
+                }
+                 
+                Spacer()
             }
             .font(.caption)
+            .padding()
             //action buttons
             HStack{
-                Button(action: {
-                    
-                }, label: {
-                    actionButtonLabel(button: .like,number: 10)
-                    
-                })
-                Button(action: {
-                    
-                }, label: {
-                    actionButtonLabel(button: .bubble,number: 4)
-                    
-                })
-                Button(action: {
-                    
-                }, label: {
-                    actionButtonLabel(button: .send)
-                    
-                })
+                ActionButton(button: .like,number: 20) {
+                    print("like")
+                        
+                }
+                ActionButton(button: .bubble, number: 10) {
+                    print("yorum")
+                }
+                ActionButton(button: .send) {
+                    print("gönder")
+                }
                 Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    actionButtonLabel(button: .savePost)
-                    
-                })
+                ActionButton(button: .savePost) {
+                    print("kaydet")
+                }
             }
             .padding()
             
         }
+        Divider()
     }
 }
 
 #Preview {
-    FeedViewCell(post: Post.MockData[0])
+    FeedViewCell(post: Post.MockData[0], user:  User.MockData[0])
 }

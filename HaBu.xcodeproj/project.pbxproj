@@ -16,7 +16,7 @@
 		5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2658622B03C53C008BEB6D /* Extencion.swift */; };
 		5C2DAB462B04FD8700C6E145 /* IrishGrover-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DAB452B04FD8700C6E145 /* IrishGrover-Regular.ttf */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
-		5C4133C12B04EFD3006F29AF /* actionButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* actionButtonLabel.swift */; };
+		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
@@ -34,8 +34,9 @@
 		5C26585F2B03C51C008BEB6D /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		5C2658622B03C53C008BEB6D /* Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extencion.swift; sourceTree = "<group>"; };
 		5C2DAB452B04FD8700C6E145 /* IrishGrover-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IrishGrover-Regular.ttf"; sourceTree = "<group>"; };
+		5C2DAB472B04FE1C00C6E145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
-		5C4133C02B04EFD3006F29AF /* actionButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = actionButtonLabel.swift; sourceTree = "<group>"; };
+		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		5C26583C2B03B430008BEB6D /* HaBu */ = {
 			isa = PBXGroup;
 			children = (
+				5C2DAB472B04FE1C00C6E145 /* Info.plist */,
 				5C2DAB442B04FD6C00C6E145 /* Fonts */,
 				5C2658612B03C532008BEB6D /* Extencion */,
 				5C26585D2B03C50C008BEB6D /* App */,
@@ -116,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
-				5C4133C02B04EFD3006F29AF /* actionButtonLabel.swift */,
+				5C4133C02B04EFD3006F29AF /* ActionButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,7 +254,7 @@
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
-				5C4133C12B04EFD3006F29AF /* actionButtonLabel.swift in Sources */,
+				5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
@@ -395,6 +397,7 @@
 				DEVELOPMENT_TEAM = 72DGBQN223;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HaBu/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +427,7 @@
 				DEVELOPMENT_TEAM = 72DGBQN223;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HaBu/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

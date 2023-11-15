@@ -7,23 +7,30 @@
 
 import SwiftUI
 
-struct actionButtonLabel: View {
+struct ActionButton: View {
     let button : actionButtons
     var number = ""
-    init(button: actionButtons) {
+    var action: () -> Void
+    init(button: actionButtons,action : @escaping () -> Void) {
         self.button = button
-        
+        self.action = action
     }
-    init(button:actionButtons,number:Int?) {
+    init(button:actionButtons,number:Int?,action : @escaping () -> Void) {
         self.button = button
         if let number = number {
             self.number = String(number)
         }
-        
+        self.action = action
+
     }
     var body: some View {
         VStack {
-            Image(uiImage: button.icon)
+            Button(action: {
+                
+            }, label: {
+                Image(uiImage: button.icon)
+                
+        })
             Text("\(number) \(button.text)")
                 .foregroundStyle(.black)
                 .fontWeight(.semibold)
@@ -33,7 +40,9 @@ struct actionButtonLabel: View {
 }
 
 #Preview {
-    actionButtonLabel(button: .like)
+    ActionButton(button: .like) {
+        
+    }
 }
 
 enum actionButtons {
