@@ -34,7 +34,7 @@ struct LoginView: View {
                     CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                         //will delete the back button from feedview
                         print("cliked login button")
-                    }, destinaiton: AnyView(FeedView()),width: Const.width/3)
+                    }, destinaiton: AnyView(TabbarView()),width: Const.width/3)
                 }
                 Spacer()
                 HStack{
