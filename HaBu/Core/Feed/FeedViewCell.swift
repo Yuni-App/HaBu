@@ -8,13 +8,12 @@
 import SwiftUI
 import Kingfisher
 struct FeedViewCell: View {
+    @State private var showingComment = false
     let post : Post
     var user : User
     init(post: Post,user:User) {
         self.post = post
         self.user = user
-        
-       
     }
     var body: some View {
         VStack{
@@ -80,7 +79,13 @@ struct FeedViewCell: View {
                         
                 }
                 ActionButton(button: .bubble, number: 10) {
-                    print("yorum")
+                    showingComment = true
+                    print("comment")
+                    
+                }
+                .sheet(isPresented: $showingComment) {
+                    CommentBottomSheet()
+                        .presentationDetents([.large,.medium])
                 }
                 ActionButton(button: .send) {
                     print("gönder")
@@ -93,6 +98,7 @@ struct FeedViewCell: View {
             .padding()
             
         }
+       
         Divider()
     }
 }

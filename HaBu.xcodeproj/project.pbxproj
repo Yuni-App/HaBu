@@ -18,6 +18,8 @@
 		5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB4E2B050EE800C6E145 /* TabbarView.swift */; };
 		5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB522B050F7900C6E145 /* SerachView.swift */; };
 		5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB562B050FC500C6E145 /* NotificationView.swift */; };
+		5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */; };
+		5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
 		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
@@ -50,6 +52,8 @@
 		5C2DAB4E2B050EE800C6E145 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		5C2DAB522B050F7900C6E145 /* SerachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachView.swift; sourceTree = "<group>"; };
 		5C2DAB562B050FC500C6E145 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBottomSheet.swift; sourceTree = "<group>"; };
+		5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextFieldModifier.swift; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			children = (
 				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 				5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */,
+				5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 				949016E92B04275F00164405 /* CustomButton.swift */,
 				949E2A0E2B04D4E200DF967E /* CustomTextField.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
+				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,9 +352,11 @@
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
+				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
 				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
+				5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */,
 				5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */,
 				949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,

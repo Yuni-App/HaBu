@@ -26,7 +26,7 @@ struct ActionButton: View {
     var body: some View {
         VStack {
             Button(action: {
-                
+                action()
             }, label: {
                 Image(uiImage: button.icon)
                 
@@ -34,7 +34,7 @@ struct ActionButton: View {
             Text("\(number) \(button.text)")
                 .foregroundStyle(.black)
                 .fontWeight(.semibold)
-                .font(.footnote)
+                .font(.caption2)
         }
     }
 }

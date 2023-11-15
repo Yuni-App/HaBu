@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var searchText = ""
-    
     var body: some View {
         NavigationStack{
             ScrollView{
