@@ -17,6 +17,8 @@
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
 		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
+		9411AA8C2B050EDB0042A354 /* BackgroundLinearColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */; };
+		9411AA8E2B0510F80042A354 /* CustomImageRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8D2B0510F80042A354 /* CustomImageRectangle.swift */; };
 		949016E02B041EBD00164405 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016DF2B041EBD00164405 /* InfoView.swift */; };
 		949016E22B041EF400164405 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E12B041EF400164405 /* LoginView.swift */; };
 		949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */; };
@@ -41,6 +43,8 @@
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLinearColor.swift; sourceTree = "<group>"; };
+		9411AA8D2B0510F80042A354 /* CustomImageRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageRectangle.swift; sourceTree = "<group>"; };
 		949016DF2B041EBD00164405 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		949016E12B041EF400164405 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildFirstView.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				949016E92B04275F00164405 /* CustomButton.swift */,
 				949E2A0E2B04D4E200DF967E /* CustomTextField.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
+				9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */,
+				9411AA8D2B0510F80042A354 /* CustomImageRectangle.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,11 +270,13 @@
 			files = (
 				9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */,
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
+				9411AA8E2B0510F80042A354 /* CustomImageRectangle.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
 				949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
+				9411AA8C2B050EDB0042A354 /* BackgroundLinearColor.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
