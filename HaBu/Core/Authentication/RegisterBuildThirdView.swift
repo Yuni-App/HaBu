@@ -12,32 +12,35 @@ struct RegisterBuildThirdView: View {
 
     var body: some View {
         NavigationStack{
-            VStack{
-                Spacer()
-                Spacer()
-                CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
-                CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
-                CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
-                HStack{
+            ZStack {
+                VStack{
+                    CustomImageRectangle(width: 227, height: 376, imagePath: ImageManager.infoVector)
+                    CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
+                    CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
+                    CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
+                    HStack{
+                        Spacer()
+                        CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {
+                        }, destinaiton: AnyView(FeedView()), width: Const.width/3)
+                    }
                     Spacer()
-                    CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {
-                    }, destinaiton: AnyView(RegisterBuildThirdView()), width: Const.width/3)
-                }
-                Spacer()
-                HStack{
-                    CheckBoxView(checked:isChecked) {
-                        
-                    }
+                    HStack{
+                        CheckBoxView(checked: $isChecked)
 
-                    Text("Lütfen").foregroundStyle(.black).font(.system(size: 14))
-                    NavigationLink {
-                        LoginView()
-                    } label: {
-                        HStack{  Text("Gizlilik Politikasını ").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 14))}
-                    }
-                    Text("Onaylayınız").foregroundStyle(.black).font(.system(size: 14))
+                        Text("Lütfen").foregroundStyle(.black).font(.system(size: 14))
+                        NavigationLink {
+                            LoginView()
+                        } label: {
+                            HStack{  Text("Gizlilik Politikasını ").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 14))}
+                        }
+                        Text("Onaylayınız").foregroundStyle(.black).font(.system(size: 14))
 
                 }}.padding(30)
+                    .frame(width: 430, height: 932)
+                    .background(
+                        BackgroundLinearColor()
+                    )
+            }
         }
     }
 }
