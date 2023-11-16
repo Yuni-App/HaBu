@@ -90,7 +90,8 @@ struct ProfileView: View {
                                 print("tapped")
                             }) {
                                 Spacer()
-                                Text("< Edit").font(.headline).foregroundColor(.black)
+                                Text("<Edit").font(.headline)
+                                    .foregroundColor(.black)
                                     .padding(.horizontal, 20)
                                     .frame(height: 43)
                                     .background(Color.white)
