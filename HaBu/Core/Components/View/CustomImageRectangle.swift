@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct CustomImageRectangle: View {
+    var width : Double
+    var height : Double
+    var imagePath : String
     var body: some View {
         Rectangle()
             .foregroundColor(.clear)
-            .frame(width: 537, height: 376)
+            .frame(width: width , height: height)
             .background(
-                Image(ImageManager.registerVector)
+                Image(imagePath)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(.white)
@@ -22,5 +25,5 @@ struct CustomImageRectangle: View {
 }
 
 #Preview {
-    CustomImageRectangle()
+    CustomImageRectangle(width: 0, height: 0, imagePath: "")
 }
