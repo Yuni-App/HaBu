@@ -14,6 +14,10 @@ struct FeedView: View {
                 
                 ForEach(Post.MockData , id: \.id){post in
                     FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
+                    Divider()
+                    ThreeDRotateFeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
+                    Divider()
+                        
                 }
                 
             }.toolbar{

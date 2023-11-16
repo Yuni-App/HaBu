@@ -11,8 +11,6 @@ struct FeedViewCell: View {
     @State private var showingComment = false
     @State private var savePost = actionButtons.savePost
     @State private var likePost = actionButtons.unLike
-
-    
     
     let post : Post
     var user : User
