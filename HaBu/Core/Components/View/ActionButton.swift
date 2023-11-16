@@ -29,6 +29,9 @@ struct ActionButton: View {
                 action()
             }, label: {
                 Image(uiImage: button.icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20,height: 20)
                 
         })
             Text("\(number) \(button.text)")
@@ -40,7 +43,7 @@ struct ActionButton: View {
 }
 
 #Preview {
-    ActionButton(button: .liked) {
+    ActionButton(button: .unLike) {
         
     }
 }
@@ -51,7 +54,7 @@ enum actionButtons {
     case bubble
     case send
     case savePost
-    
+    case savedPost
     var icon : UIImage{
         switch self {
         case .unLike:
@@ -64,6 +67,8 @@ enum actionButtons {
            return UIImage(systemName: "paperplane")!
         case .savePost:
             return UIImage(systemName: "bookmark")!
+        case .savedPost:
+            return UIImage(systemName: "bookmark.fill")!
         }
     }
     
@@ -78,6 +83,8 @@ enum actionButtons {
         case .send:
             return "send"
         case .savePost:
+            return "kaydet"
+        case .savedPost:
             return "kaydet"
         }
     }
