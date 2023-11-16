@@ -26,53 +26,65 @@ struct ActionButton: View {
     var body: some View {
         VStack {
             Button(action: {
-                
+                action()
             }, label: {
                 Image(uiImage: button.icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20,height: 20)
                 
         })
             Text("\(number) \(button.text)")
                 .foregroundStyle(.black)
                 .fontWeight(.semibold)
-                .font(.footnote)
+                .font(.caption2)
         }
     }
 }
 
 #Preview {
-    ActionButton(button: .like) {
+    ActionButton(button: .unLike) {
         
     }
 }
 
 enum actionButtons {
-    case like
+    case unLike
+    case liked
     case bubble
     case send
     case savePost
-    
+    case savedPost
     var icon : UIImage{
         switch self {
-        case .like:
+        case .unLike:
             return UIImage(systemName: "heart")!
+        case .liked:
+            return UIImage(systemName: "heart.fill")!.tinted(with: Const.primaryUiColor)!
         case .bubble:
            return UIImage(systemName: "bubble.right")!
         case .send:
            return UIImage(systemName: "paperplane")!
         case .savePost:
             return UIImage(systemName: "bookmark")!
+        case .savedPost:
+            return UIImage(systemName: "bookmark.fill")!
         }
     }
     
     var text : String{
         switch self{
-        case .like:
+        case .unLike:
+            return "like"
+        case .liked:
             return "like"
         case .bubble:
             return "yorum"
         case .send:
             return "send"
         case .savePost:
+            return "kaydet"
+        case .savedPost:
             return "kaydet"
         }
     }

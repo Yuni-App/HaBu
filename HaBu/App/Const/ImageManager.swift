@@ -9,5 +9,7 @@ import Foundation
 
 class ImageManager {
     static let infoVector = "InfoVector"
+    static let registerVector = "RegisterVector"
     static let habuLogo = "HabuLogo"
+
 }
