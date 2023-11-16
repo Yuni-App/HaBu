@@ -22,7 +22,9 @@
 		5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
 		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
+		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5AB992B056BDC00502D9F /* ProfileView.swift */; };
+		5CE5AB9C2B056D3C00502D9F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
@@ -59,7 +61,9 @@
 		5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextFieldModifier.swift; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5CE5AB992B056BDC00502D9F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 				5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */,
 				5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */,
+				5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -165,7 +170,7 @@
 				9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */,
 				9411AA8D2B0510F80042A354 /* CustomImageRectangle.swift */,
 				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
-
+				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,6 +406,8 @@
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
 				5C2658602B03C51C008BEB6D /* Const.swift in Sources */,
 				949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */,
+				5CE5AB9C2B056D3C00502D9F /* UserInfo.swift in Sources */,
+				5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */,
 				949E2A0F2B04D4E200DF967E /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
