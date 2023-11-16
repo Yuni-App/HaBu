@@ -6,25 +6,44 @@
 //
 
 import SwiftUI
-
 struct CustomTextField: View {
     @State private var text: String = ""
     var icon : String
     var placeHolder : String
     var body: some View {
-        HStack{
-            Image(systemName: icon)
-                .foregroundColor(.gray)
-                .frame(width:20,height: 20)
-            TextField(placeHolder, text: $text)
-                .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
+        VStack {
+            HStack(alignment: .center) {
+                Image(systemName: icon)
+                    .resizable()
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(.white)
+                ZStack(alignment: .leading) {
+                    if text.isEmpty {
+                        Text(placeHolder)
+                            .foregroundColor(.white.opacity(0.6))
+                    }
+                    
+                    TextField("", text: $text)
+                        .foregroundColor(.white)
+                    
+                }
+            }
+            .frame(height: 40)
+            .padding(.horizontal, 10)
+            .background(Color(UIColor(hex: "13446C")))
+            .overlay(
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(Const.secondaryColor, lineWidth: 2)
+            )
+            .padding(.horizontal, 20)
         }
-    }
+        .padding(.vertical, 10)
+
+
+        
+        }
 }
 
 #Preview {
-    CustomTextField(icon: "", placeHolder: "")
+    CustomTextField(icon: "mail", placeHolder: "place holder")
 }
