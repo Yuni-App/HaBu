@@ -26,3 +26,29 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
+
+
+extension UIImage {
+    func tinted(with color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        guard let context = UIGraphicsGetCurrentContext(), let cgImage = self.cgImage else {
+            return nil
+        }
+        
+        color.setFill()
+        let rect = CGRect(origin: .zero, size: self.size)
+        context.translateBy(x: 0, y: self.size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.setBlendMode(.normal)
+        context.draw(cgImage, in: rect)
+        context.clip(to: rect, mask: cgImage)
+        context.addRect(rect)
+        context.drawPath(using: .fill)
+        
+        let coloredImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return coloredImage
+    }
+}
+

@@ -43,6 +43,23 @@ struct LoginView: View {
                         } label: {
                             HStack{  Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
                         }
+                        .foregroundColor(.gray)
+                        .font(.system(size: 14))
+                }
+                HStack{
+                    Spacer()
+                    CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                        //will delete the back button from feedview
+                        print("cliked login button")
+                    }, destinaiton: AnyView(TabbarView()),width: Const.width/3)
+                }
+                Spacer()
+                HStack{
+                    Text("Bir hesabınız yok mu ?").foregroundStyle(.black).font(.system(size: 14))
+                    NavigationLink {
+                        RegisterBuildFirstView()
+                    } label: {
+                        HStack{  Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
                     }
                 }
                 .padding(30)
