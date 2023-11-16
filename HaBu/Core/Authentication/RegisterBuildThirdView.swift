@@ -25,7 +25,9 @@ struct RegisterBuildThirdView: View {
                 }
                 Spacer()
                 HStack{
-                    CheckBoxView(checked: $isChecked)
+                    CheckBoxView(checked:isChecked) {
+                        
+                    }
 
                     Text("Lütfen").foregroundStyle(.black).font(.system(size: 14))
                     NavigationLink {

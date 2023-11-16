@@ -21,7 +21,6 @@ struct ActionButton: View {
             self.number = String(number)
         }
         self.action = action
-
     }
     var body: some View {
         VStack {
