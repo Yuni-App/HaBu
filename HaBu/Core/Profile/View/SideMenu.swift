@@ -50,7 +50,7 @@ struct SideMenu: View {
             Spacer()
         }
         .frame(width: 175)
-        .background(Color.black)
+        .background(Color(red: 0.36, green: 0.51, blue: 0.57))
         .edgesIgnoringSafeArea(.bottom)
     }
 }
