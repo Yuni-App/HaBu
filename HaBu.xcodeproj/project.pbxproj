@@ -25,8 +25,10 @@
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5AB992B056BDC00502D9F /* ProfileView.swift */; };
 		5CE5AB9C2B056D3C00502D9F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */; };
+		887CD10B2B064CBC00D7C8DC /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887CD10A2B064CBC00D7C8DC /* SideMenu.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
+		88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B85B332B06348200D03ED9 /* EditProfileView.swift */; };
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
 		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
 		9411AA8C2B050EDB0042A354 /* BackgroundLinearColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */; };
@@ -64,8 +66,10 @@
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5CE5AB992B056BDC00502D9F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		887CD10A2B064CBC00D7C8DC /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		88B85B332B06348200D03ED9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLinearColor.swift; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				5CE5AB992B056BDC00502D9F /* ProfileView.swift */,
+				88B85B332B06348200D03ED9 /* EditProfileView.swift */,
+				887CD10A2B064CBC00D7C8DC /* SideMenu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 				9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */,
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				9411AA8E2B0510F80042A354 /* CustomImageRectangle.swift in Sources */,
+				887CD10B2B064CBC00D7C8DC /* SideMenu.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
@@ -400,6 +407,7 @@
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */,
+				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
 				5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */,
 				5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */,
 				949016E22B041EF400164405 /* LoginView.swift in Sources */,
