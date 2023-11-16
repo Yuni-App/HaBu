@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ForgotPasswordMailBottomSheet: View {
+    @Binding var showSheet: Bool
+    @Binding var goPage: Bool
 
     var body: some View {
         NavigationStack{
             VStack{
                 Text("Lütfen mail adresinizi giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
-            CustomTextField(icon: "mail", placeHolder: "email")
+                CustomTextField(icon: "mail", placeHolder: "email")
                 CustomButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
                     //mail check
-                    LoginView()
-                })
-          
+                },destinaiton: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet , goPage: $goPage)))
+                
             }.padding(30)
                 .frame(width: Const.width , height:  Const.height)
                 .background(
@@ -29,5 +30,5 @@ struct ForgotPasswordMailBottomSheet: View {
 }
 
 #Preview {
-    ForgotPasswordMailBottomSheet()
+    ForgotPasswordMailBottomSheet(showSheet: .constant(false), goPage: .constant(false))
 }
