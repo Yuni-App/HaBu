@@ -63,7 +63,6 @@ struct FeedViewCell: View {
                     ActionButton(button: .bubble, number: 10) {
                         showingComment = true
                         print("comment")
-                        
                     }
                     .sheet(isPresented: $showingComment) {
                         CommentBottomSheet()

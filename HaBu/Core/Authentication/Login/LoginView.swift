@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginView: View {   
+struct LoginView: View {
     @State private var showingForgotPassword = false
     @State private var goPage = false
     
@@ -64,11 +64,28 @@ struct LoginView: View {
             }.background(
                 NavigationLink("", destination: TabbarView(), isActive: $goPage).hidden()
             )
-            
+            .foregroundColor(.gray)
+            .font(.system(size: 14))
         }
-        
+        HStack{
+            Spacer()
+            CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                //will delete the back button from feedview
+                print("cliked login button")
+            }, destinaiton: AnyView(TabbarView()),width: Const.width/3)
+        }  .padding(30)
+            .frame(width: 430, height: 932)
+            .background(
+                BackgroundLinearColor()
+            )
     }
+    
 }
+
+
+
+
+
 #Preview {
     LoginView()
 }
