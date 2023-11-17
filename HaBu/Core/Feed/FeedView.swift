@@ -12,7 +12,6 @@ struct FeedView: View {
     var body: some View {
         NavigationStack{
             ScrollView{
-                
                 ForEach(Post.MockData , id: \.id){post in
                     FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
                     Divider()
@@ -22,13 +21,11 @@ struct FeedView: View {
                 }
                 
             }
-            
             .sheet(isPresented: $showCategoryFilter) {
                 
                 CategoryFilter()
                     .presentationDetents([.large,.height(Const.height * 0.3)])
             }
-            
             .toolbar{
                 
                 ToolbarItem(placement:.topBarLeading){

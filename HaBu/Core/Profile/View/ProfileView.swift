@@ -9,14 +9,176 @@ import SwiftUI
 
 
 
-struct ProfileView: View {
+
+
+struct ProfileView : View {
+    @State private var showMenu: Bool = false
+    @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 4.5)
+    let user : User
+    var body: some View {
+            NavigationStack {
+                VStack{
+                        ScrollView{
+                            HStack{
+                               
+                                Spacer()
+                                Button{
+                                    self.showMenu.toggle()
+                                }label: {
+                                    if showMenu {
+                                        Image(systemName: "xmark")
+                                            .foregroundColor(.white)
+                                    }else{
+                                        Image(systemName: "text.justify")
+                                            .foregroundColor(.white)
+                                    }
+                                    
+                                }.padding(.horizontal,20)
+                                
+                            }// settings action
+                            .frame(width:Const.width,height: 10)
+                            //User Info
+                            ZStack {
+                                VStack{
+                                    ZStack {
+                                        HStack{
+                                            VStack {
+                                                Button(action: {
+                                                    
+                                                }, label: {
+                                                    CircleProfileImage(userIamgeUrl: "", size: .lage)
+                                            })
+                                                HStack{
+                                                    Image(systemName: "largecircle.fill.circle")
+                                                        .resizable()
+                                                        .frame(width: 5,height: 5)
+                                                        .foregroundStyle(.white)
+                                                    
+                                                    Image(systemName: "largecircle.fill.circle")
+                                                        .resizable()
+                                                        .frame(width: 5,height: 5)
+                                                        .foregroundStyle(.black)
+                                                    
+                                                    Image(systemName: "largecircle.fill.circle")
+                                                        .resizable()
+                                                        .frame(width: 5,height: 5)
+                                                        .foregroundStyle(.black)
+                                                } //Image selection radio
+                                            }
+                                            VStack(alignment:.leading){
+                                                Text("\(user.name) \(user.surName)")
+                                                    .font(.headline)
+                                                    .fontWeight(.semibold)
+                                                Text("Bilgisayar Mühendisliği")
+                                                HStack {
+                                                    Image(systemName: "star.fill")
+                                                        .foregroundStyle(.yellow)
+                                                    Text("145").font(.subheadline)
+                                                }//Rating
+                                            }
+                                            Spacer()
+                                            VStack{
+                                                Spacer()
+                                                Text("4")
+                                                    .font(.title)
+                                                    .fontWeight(.semibold)
+                                                    .foregroundStyle(.white)
+                                                Text("Post")
+                                                    .foregroundStyle(.white)
+                                                    .font(.footnote)
+                                                    .fontWeight(.semibold)
+                                                Spacer()
+                                                
+                                            } //Post Count
+                                            .padding(.horizontal,30)
+                                            
+                                            
+                                        } //User Info
+                                        HStack{
+                                            Image(systemName:"chevron.backward")
+                                                .fontWeight(.bold)
+                                                .font(.subheadline)
+                                            Text(" Edit")
+                                                .font(.title3)
+                                                .fontWeight(.semibold)
+                                        } //edit button
+                                        .padding(.vertical,5)
+                                        .padding(.horizontal,10)
+                                        .padding(.trailing,100)
+                                        .background(.white)
+                                        .clipShape(
+                                            .rect(
+                                                topLeadingRadius: 20,
+                                                bottomLeadingRadius: 20,
+                                                bottomTrailingRadius: 0,
+                                                topTrailingRadius: 0
+                                            )
+                                        )
+                                        .padding(.bottom,10)
+                                        .position(editButtonPosition)
+                                        .gesture(DragGesture().onChanged({ value in
+                                            if value.translation.width > -50{
+                                                print(value.translation.width)
+                                                editButtonPosition = CGPoint(x: Const.width + value.translation.width, y : Const.height / 4.5)
+                                            }
+                                            
+                                        })
+                                            .onEnded({ _ in
+                                                editButtonPosition = CGPoint(x: Const.width , y : Const.height / 5)
+                                            })
+                                        )
+                                    }
+                                }.frame(width: Const.width,height: Const.height * 0.25)
+                               
+                            }
+                            //postGrid
+                            VStack{
+                                ForEach(Post.MockData,id:\.id){post in
+                                    Text("12123123")
+                                        .font(.title)
+                                        .padding(.vertical,100)
+                                }
+                            }
+                            .frame(width: Const.width)
+                            .background(.white)
+                            .clipShape(
+                                .rect(
+                                    topLeadingRadius:40 ,
+                                    bottomLeadingRadius: 0,
+                                    bottomTrailingRadius: 0,
+                                    topTrailingRadius:40
+                                )
+                            )
+                            
+                        }
+                        .background(Const.primaryColor)
+                    }
+                }
+                .background(Const.primaryColor)
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+struct ProfilseView: View {
     //properties
     
     @State private var showMenu: Bool = false
     @GestureState private var isDetectingLongPress = false
     @State private var completedLongPress = false
     @State private var offset: CGSize = .zero
-    
+    @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     
     var longPressGesture: some Gesture {
         LongPressGesture(minimumDuration: 1)
@@ -42,83 +204,115 @@ struct ProfileView: View {
             
             ZStack {
                 VStack{
-                    HStack{
-                        
-                        CircleProfileImage(userIamgeUrl: "", size: .xlage)
-                            .frame(width: 80).padding()
-                        VStack {
-                            Text("Yusuf Aydın")
-                                .font(.title2)
-                            Text("MMF/bilgisayar").font(.subheadline)
-                            HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundStyle(.yellow)
-                                Text("145").font(.subheadline)
-                            }
+                    VStack {
+                        HStack{
+                            //Image
+                            CircleProfileImage(userIamgeUrl: "", size: .xlage)
+                                .padding(.leading)
                             
-                        }
-                        .toolbar {
-                            //show menu button
-                            Button{
-                                self.showMenu.toggle()
-                            }label: {
-                                if showMenu {
-                                    Image(systemName: "xmark")
-                                        .foregroundColor(.white)
-                                }else{
-                                    Image(systemName: "text.justify")
-                                        .foregroundColor(.white)
+                            //User Info
+                            VStack (alignment:.leading){
+                                Text("Yusuf Aydın")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                Text("MMF/bilgisayar")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                HStack {
+                                    Image(systemName: "star.fill")
+                                        .foregroundStyle(.yellow)
+                                    Text("145").font(.subheadline)
                                 }
                                 
                             }
-                            
-                        }
-                        // **********
-                        Spacer()
-                        
-                        
-                        VStack{
-                            
-                            
-                            Spacer()
-                            Text("4 Post").frame(width: 75, height: 20).padding(.vertical, 4).padding(.horizontal, 8)
                             Spacer()
                             
-                            //edit button
-                            Button(action: {
-                                //Goes to profile editing page based on button
-                                print("tapped")
-                            }) {
+                            VStack{
                                 Spacer()
-                                Text("< Edit").font(.headline).foregroundColor(.black)
-                                    .padding(.horizontal, 20)
-                                    .frame(height: 43)
-                                    .background(Color.white)
-                                    .clipShape(
-                                        .rect(
-                                            topLeadingRadius: 20,
-                                            bottomLeadingRadius: 20,
-                                            bottomTrailingRadius: 0,
-                                            topTrailingRadius: 0
-                                        )
-                                    )
-                                    .offset(offset)
-                                    .gesture(longPressGesture)
+                                Text("4")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                Text("Post")
+                                    .foregroundStyle(.white)
+                                    .font(.footnote)
+                                    .fontWeight(.semibold)
+                                Spacer()
                                 
                             }
-                        }.frame(width: 95,height: 175)
-                        
-                        
-                    }.frame(height: 200)
-                        .background(Color(red: 0.33, green: 0.74, blue: 0.72))
+                            .padding(.horizontal,30)
+                            
+                            
+                        }.frame(height: Const.height * 0.25)
+                    }
+                    .frame(height: Const.height * 0.25)
                     
-                    Spacer()
                     VStack{
-                        Text("dsadasda")
+                        
+                    }
+                    .frame(width: Const.width, height: Const.height * 0.75)
+                    .background(.white)
+                     .clipShape(
+                        .rect(
+                            topLeadingRadius:40 ,
+                            bottomLeadingRadius: 0,
+                            bottomTrailingRadius: 0,
+                            topTrailingRadius:40
+                        )
+                    )
+                     
+                }
+                .background(Const.primaryColor)
+                .toolbar {
+                    //show menu button
+                    Button{
+                        self.showMenu.toggle()
+                    }label: {
+                        if showMenu {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.white)
+                        }else{
+                            Image(systemName: "text.justify")
+                                .foregroundColor(.white)
+                        }
+                        
                     }
                     
-                    
                 }
+                HStack{
+                    Image(systemName:"chevron.backward")
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                    Text(" Edit")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                }
+                .padding(.vertical,5)
+                .padding(.horizontal,10)
+                .padding(.trailing,100)
+                .background(.white)
+                .clipShape(
+                    .rect(
+                        topLeadingRadius: 20,
+                        bottomLeadingRadius: 20,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 0
+                    )
+                )
+
+                .padding(.bottom,10)
+                .position(editButtonPosition)
+                .gesture(DragGesture().onChanged({ value in
+                    if value.translation.width > -50{
+                        print(value.translation.width)
+                        editButtonPosition = CGPoint(x: Const.width + value.translation.width, y : Const.height / 5)
+                    }
+                   
+                })
+                    .onEnded({ _ in
+                        editButtonPosition = CGPoint(x: Const.width , y : Const.height / 5)
+                    })
+                )
                 GeometryReader { _ in
                     HStack {
                         Spacer()
@@ -128,6 +322,8 @@ struct ProfileView: View {
                     }
                 }.background(Color.gray.opacity(showMenu ? 0.3: 0))
                 //profile screen makes pale "solgunlaştırır"
+                
+                
             }
             
             
@@ -140,6 +336,6 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView( user: User.MockData[0])
 }
 

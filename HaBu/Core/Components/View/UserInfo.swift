@@ -15,7 +15,7 @@ struct UserInfo: View {
             HStack {
                 VStack{
                     NavigationLink{
-                        ProfileView()
+                        ProfileView(user: User.MockData[0])
                     }label: {
                         CircleProfileImage(userIamgeUrl: "", size: imageSize)
                     
