@@ -11,7 +11,8 @@ import SwiftUI
 struct ProfileView : View {
     @State private var showMenu: Bool = false
     @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
-
+    @State private var isShowingPopUp = false
+    
     let user : User
     var images = [
         "LoginVector",
@@ -53,10 +54,40 @@ struct ProfileView : View {
                                         HStack{
                                             VStack {
                                                 Button(action: {
-                                                    
+                                                    isShowingPopUp = true
                                                 }, label: {
                                                     CircleProfileImage(userIamgeUrl:images[imageCount] , size: .lage)
                                                         .padding(.leading,10)
+                                                        .fullScreenCover(isPresented: $isShowingPopUp, content: {
+                                                                    ZStack {
+                                                                        Const.secondaryColor
+                                                                            .opacity(0.6)
+                                                                            .edgesIgnoringSafeArea(.all)
+                                                                        
+                                                                        VStack {
+                                                                            Text("Detaylı Görüntü")
+                                                                                .font(.title)
+                                                                                .foregroundColor(.white)
+                                                                                .padding()
+                                                                            
+                                                                            Image(images[imageCount])
+                                                                                .resizable()
+                                                                                .aspectRatio(contentMode: .fit)
+                                                                                .frame(maxWidth: .infinity, maxHeight: 300)
+                                                                                .padding()
+                                                                            Button("Kapat") {
+                                                                                // Pop-up kapatma
+                                                                                isShowingPopUp = false
+                                                                            }
+                                                                            .padding()
+                                                                            .foregroundColor(.white)
+                                                                        }
+                                                                        .background(Color.gray)
+                                                                        .cornerRadius(20)
+                                                                        .padding()
+                                                                    }
+                                                                })
+                                                            
                                                         .gesture(DragGesture().onEnded({ value in
                                                             if value.translation.width < 1 {
                                                                 withAnimation{
@@ -227,6 +258,32 @@ struct ProfileView : View {
 
 
 
+
+
+struct PopUpImageView: View {
+    @Binding var isShowingPopUp: Bool
+    let imageName: String
+    
+    var body: some View {
+        VStack {
+            Text("Detaylı Görüntü")
+                .font(.title)
+                .padding()
+            
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onTapGesture {
+                    // Pop-up kapatma
+                    isShowingPopUp = false
+                }
+        }
+        .background(Color.white)
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
 
 
 
