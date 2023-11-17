@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct deneme: View {
+    @Binding var showSheet: Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            VStack{
+                
+                
+                CustomButton(title: "fdghfd", backgroundColor: .black, action: {
+             
+            },destinaiton: AnyView(denemetwo(showSheet: $showSheet)))
+            }
+        }
     }
-}
-
-#Preview {
-    deneme()
 }
