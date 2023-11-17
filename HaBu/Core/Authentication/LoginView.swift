@@ -53,14 +53,6 @@ struct LoginView: View {
                         print("cliked login button")
                     }, destinaiton: AnyView(TabbarView()),width: Const.width/3)
                 }
-                Spacer()
-                HStack{
-                    Text("Bir hesabınız yok mu ?").foregroundStyle(.black).font(.system(size: 14))
-                    NavigationLink {
-                        RegisterBuildFirstView()
-                    } label: {
-                        HStack{  Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
-                    }
                 }
                 .padding(30)
                 .frame(width: 430, height: 932)
