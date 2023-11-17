@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FeedView: View {
+    @State var showCategoryFilter = false
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -17,19 +18,27 @@ struct FeedView: View {
                     Divider()
                     ThreeDRotateFeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
                     Divider()
-                        
+                    
                 }
                 
-            }.toolbar{
+            }
+            
+            .sheet(isPresented: $showCategoryFilter) {
+                
+                CategoryFilter()
+                    .presentationDetents([.large,.height(Const.height * 0.3)])
+            }
+            
+            .toolbar{
                 
                 ToolbarItem(placement:.topBarLeading){
                     Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
                 }
-            
+                
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                    // -> MessageBox View
-                    
+                        // -> MessageBox View
+                        
                     }, label: {
                         ZStack{
                             Image(systemName: "tray.fill")
@@ -49,12 +58,12 @@ struct FeedView: View {
                             
                             
                         }
-                            
+                        
                     })
                 }
                 ToolbarItem(){
                     Button(action: {
-                        //Filter Button Action
+                        showCategoryFilter = true
                         
                     }, label: {
                         Image("filter")
@@ -68,6 +77,7 @@ struct FeedView: View {
         }
     }
 }
+
 
 #Preview {
     FeedView()

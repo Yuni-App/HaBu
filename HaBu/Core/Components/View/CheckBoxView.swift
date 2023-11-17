@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct CheckBoxView: View {
-    @Binding var checked: Bool
-
+    @State var checked: Bool
+    var action: () -> Void
+    
+    init(checked: Bool, action: @escaping () -> Void) {
+        self._checked = State(initialValue: checked)
+        self.action = action
+    }
+    
     var body: some View {
         Button(action: {
-            self.checked.toggle()
+            action()
+            checked.toggle()
         }) {
             Image(systemName: checked ? "checkmark.square.fill" : "square")
                 .foregroundColor(checked ? .blue : .black)
@@ -20,3 +27,4 @@ struct CheckBoxView: View {
         }
     }
 }
+
