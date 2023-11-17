@@ -36,8 +36,9 @@ struct EditProfileView: View {
                     HStack {
                         myText(text: "İsim")
                         Spacer()
-                    }
-                    TextField("isminizi girin\(name)", text: $name).frame(width: 300,height: 30)
+                    }.frame(width: Const.width * 0.8)
+
+                    TextField("isminizi girin\(name)", text: $name).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                     Divider().frame(width: 330).background(Color.black)
                         
                 }
@@ -47,10 +48,11 @@ struct EditProfileView: View {
             HStack {
                 VStack {
                     HStack {
-                        myText(text: "     Soyisim")
+                        myText(text: "Soyisim")
                         Spacer()
-                    }
-                    TextField("Soyisiminizi girin\(surName)", text: $surName).frame(width: 300,height: 30)
+                    }.frame(width: Const.width * 0.8)
+
+                    TextField(" Soyisminizi girin\(surName)", text: $surName).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                     Divider().frame(width: 330).background(Color.black)
                         
                 }
@@ -61,22 +63,21 @@ struct EditProfileView: View {
                 VStack {
                     HStack {
                         
-                        myText(text: "  Email")
+                        myText(text: "Email")
                         Image(systemName: "lock.fill")
-                        
                         Spacer()
-                    }
-                    Text("\(email)").frame(width: 300,height: 30)
+                    }.frame(width: Const.width * 0.8)
+                    Text("\(email)").frame(width: Const.width * 0.8, height: Const.height * 0.03)
                     Divider().frame(width: 330).background(Color.black)
                 }
             }
             HStack{
                 VStack{
                     HStack {
-                        myText(text: "    Biografi")
+                        myText(text: "Biografi")
                         Spacer()
-                    }
-                    TextField("Biyografi girin\(biyografi)", text: $biyografi).frame(width: 300, height: 50)
+                    }.frame(width: Const.width * 0.8)
+                    TextField("Biyografi girin\(biyografi)", text: $biyografi).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                     Divider().frame(width: 330).background(Color.black)
                 }
             }
@@ -85,8 +86,10 @@ struct EditProfileView: View {
                     HStack {
                         myText(text: "Şifre")
                         Spacer()
-                    }
-                    SecureField("************** \(password)", text:$password ).frame(width: 300,height: 30)
+                    }.frame(width: Const.width * 0.8)
+
+                    
+                    SecureField("************** \(password)", text:$password ).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                     Divider().frame(width: 330).background(Color.black)
                         
                 }
@@ -106,7 +109,8 @@ struct EditProfileView: View {
                 })
             }
             
-        }.background(Color(red: 0.33, green: 0.74, blue: 0.72))
+        }.frame(width: Const.width * 1)
+        .background(Color(red: 0.33, green: 0.74, blue: 0.72))
         
     }
 }
@@ -118,7 +122,7 @@ struct myText: View{
             self.text = text
                 }
     var body: some View{
-        Text(text).bold().frame(width: 100).foregroundColor(.white)
+        Text(text).bold().foregroundColor(.white)
     }
 }
 
