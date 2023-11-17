@@ -48,12 +48,17 @@ struct CircleProfileImage: View {
     }
     var body: some View {
         if  userIamgeUrl != ""{
-           KFImage(URL(string: userIamgeUrl))
+           Image(userIamgeUrl)
                 .resizable()
                 .scaledToFill()
                 .frame(width: size.deminsion,height:size.deminsion)
                 .clipShape(.circle)
-            
+                .padding(.all,5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.white, lineWidth: 1)
+                )
+                
         }
         else{
             Image(systemName:"person.circle.fill")
