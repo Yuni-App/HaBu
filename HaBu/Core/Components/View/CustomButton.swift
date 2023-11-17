@@ -11,7 +11,7 @@ struct CustomButton: View {
     var title: String
     var backgroundColor: Color
     var action: () -> Void
-    var destinaiton : AnyView
+    var destinaiton : AnyView?
     var width : Double?
     var textColor : Color?
 
