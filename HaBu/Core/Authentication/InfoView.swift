@@ -12,13 +12,13 @@ struct InfoView: View {
         NavigationStack {
             ZStack {
                     VStack {
-                        CustomImageRectangle(width: 330, height: 390, imagePath: ImageManager.infoVector)
+                        CustomImageRectangle(width: Const.width, height: Const.height/2, imagePath: ImageManager.registerThirdVector)
                         ZStack{
                             Image("")
                                 .frame(width: 330, height: 250)
-                                .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.09))
+                                .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
                                 .cornerRadius(10)
-                                .shadow(color: Color.black.opacity(0.9), radius: 10, x: 10, y: 5)
+                                .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
                             VStack{
                                 CustomImageRectangle(width: 330, height: 90, imagePath: ImageManager.habuLogo)
                                 CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
@@ -29,7 +29,6 @@ struct InfoView: View {
                                     print("register view")
                                 }, destinaiton: AnyView(RegisterBuildFirstView()),textColor: .black)
                             }
-                            
                         }
                     }
                     .padding()
