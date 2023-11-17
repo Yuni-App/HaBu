@@ -12,7 +12,8 @@ struct ProfileView : View {
     @State private var showMenu: Bool = false
     @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     @State private var isShowingPopUp = false
-    
+    @State private var shouldNavigate = false
+
     let user : User
     var images = [
         "LoginVector",
@@ -157,7 +158,13 @@ struct ProfileView : View {
                                             Text(" Edit")
                                                 .font(.title3)
                                                 .fontWeight(.semibold)
-                                        } //edit button
+                                        }
+                                        .background(
+                                            NavigationLink(destination: EditProfileView(), isActive: $shouldNavigate) {
+                                                            EmptyView()
+                                                        }
+                                                        .hidden()
+                                        )//edit button
                                         .padding(.vertical,5)
                                         .padding(.horizontal,10)
                                         .padding(.trailing,100)
@@ -180,6 +187,7 @@ struct ProfileView : View {
                                         })
                                             .onEnded({ _ in
                                                 editButtonPosition = CGPoint(x: Const.width , y : Const.height / 5)
+                                               shouldNavigate = true
                                             })
                                         )
                                     }
