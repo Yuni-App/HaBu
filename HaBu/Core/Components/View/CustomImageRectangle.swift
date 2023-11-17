@@ -25,5 +25,5 @@ struct CustomImageRectangle: View {
 }
 
 #Preview {
-    CustomImageRectangle(width: 0, height: 0, imagePath: "")
+    CustomImageRectangle(width: 50, height: 50, imagePath: ImageManager.infoVector)
 }
