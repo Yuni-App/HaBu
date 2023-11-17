@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
@@ -50,5 +51,11 @@ extension UIImage {
         
         return coloredImage
     }
+    
 }
 
+extension Image {
+    func withBool(with condition: Bool) -> Image {
+        return self.foregroundStyle(condition ? Color.white : Color.black) as! Image
+    }
+}

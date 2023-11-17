@@ -8,13 +8,22 @@
 import SwiftUI
 
 
-
-
-
 struct ProfileView : View {
     @State private var showMenu: Bool = false
-    @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 4.5)
+    @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
+
     let user : User
+    var images = [
+        "LoginVector",
+        "RegisterSecondVector",
+        "RegisterVector"
+    ]
+    @State var imageCount = 0
+    @State var gridSelector = 0
+    var gridOptions = [
+    "Post",
+    "Kaydedilenler"
+    ]
     var body: some View {
             NavigationStack {
                 VStack{
@@ -46,23 +55,39 @@ struct ProfileView : View {
                                                 Button(action: {
                                                     
                                                 }, label: {
-                                                    CircleProfileImage(userIamgeUrl: "", size: .lage)
+                                                    CircleProfileImage(userIamgeUrl:images[imageCount] , size: .lage)
+                                                        .padding(.leading,10)
+                                                        .gesture(DragGesture().onEnded({ value in
+                                                            if value.translation.width < 1 {
+                                                                withAnimation{
+                                                                    if imageCount < 2{
+                                                                        imageCount += 1
+                                                                    }
+                                                                    else{
+                                                                        imageCount = 0
+                                                                    }
+                                                                }
+                                                            }
+                                                            else{
+                                                                withAnimation{
+                                                                    if imageCount > 0{
+                                                                        imageCount -= 1
+                                                                    }
+                                                                    else{
+                                                                        imageCount = 2
+                                                                    }
+                                                                }
+                                                            }
+                                                            }))
+                                                        
                                             })
+                                               
                                                 HStack{
-                                                    Image(systemName: "largecircle.fill.circle")
-                                                        .resizable()
-                                                        .frame(width: 5,height: 5)
-                                                        .foregroundStyle(.white)
-                                                    
-                                                    Image(systemName: "largecircle.fill.circle")
-                                                        .resizable()
-                                                        .frame(width: 5,height: 5)
-                                                        .foregroundStyle(.black)
-                                                    
-                                                    Image(systemName: "largecircle.fill.circle")
-                                                        .resizable()
-                                                        .frame(width: 5,height: 5)
-                                                        .foregroundStyle(.black)
+                                                    ForEach(0..<images.count) { index in
+                                                            Circle()
+                                                            .frame(width: 5, height: 5)
+                                                            .foregroundColor(index == self.imageCount ? .white : .black)
+                                                }
                                                 } //Image selection radio
                                             }
                                             VStack(alignment:.leading){
@@ -118,8 +143,7 @@ struct ProfileView : View {
                                         .position(editButtonPosition)
                                         .gesture(DragGesture().onChanged({ value in
                                             if value.translation.width > -50{
-                                                print(value.translation.width)
-                                                editButtonPosition = CGPoint(x: Const.width + value.translation.width, y : Const.height / 4.5)
+                                                editButtonPosition = CGPoint(x: Const.width + value.translation.width, y : Const.height / 5)
                                             }
                                             
                                         })
@@ -133,10 +157,47 @@ struct ProfileView : View {
                             }
                             //postGrid
                             VStack{
+                                
+                                
+                                VStack{
+                                    HStack{
+                                        ForEach(0..<gridOptions.count) { index in
+                                            Spacer().frame(width:Const.width * 0.1)
+                                            Button(action: {
+                                                gridSelector = index
+                                            }, label: {
+                                                VStack {
+                                                    Text(gridOptions[index])
+                                                        .font(.headline)
+                                                        .foregroundStyle(.black)
+                                                        .fontWeight(.semibold)
+                                                    
+                                                    Circle()
+                                                    .frame(width: 10, height: 10)
+                                                    .foregroundColor(index == self.gridSelector ? Const.primaryColor : .white)
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 30)
+                                                            .stroke(Color.black, lineWidth: 1)
+                                                    )
+                                                }
+                                                
+                                            })
+                                            Spacer().frame(width:Const.width * 0.1)
+                                           
+                                        }
+                                    }
+                                    .padding(.vertical,10)
+                                    Divider().frame(height:1)
+                                        .background(.gray)
+                                        .opacity(0.5)
+                                   
+
+                                }
                                 ForEach(Post.MockData,id:\.id){post in
-                                    Text("12123123")
+                                    FeedViewCell(post: post, user: User.MockData[0])
                                         .font(.title)
-                                        .padding(.vertical,100)
+                                        .padding(.top,20)
+                                    Divider()
                                 }
                             }
                             .frame(width: Const.width)
@@ -336,6 +397,6 @@ struct ProfilseView: View {
 }
 
 #Preview {
-    ProfileView( user: User.MockData[0])
+    ProfileView( user: User.MockData[1])
 }
 
