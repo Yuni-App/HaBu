@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct CustomButton: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    var title: String
+    var backgroundColor: Color
+    var action: () -> Void
+    var width : Double?
+    var textColor : Color?
+       var body: some View {
+           Button(action: action)
+           {
+               Text(title)
+                   .padding()
+                   .frame(width: width ?? Const.width-130  ,height: 30 )
+                   .background(backgroundColor)
+                   .foregroundColor(textColor ?? .white)
+                   .cornerRadius(4)
+        }
     }
 }
-
 #Preview {
-    CustomButton()
+    CustomButton(title: "login", backgroundColor: Const.primaryColor, action: {})
 }
