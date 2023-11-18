@@ -160,7 +160,7 @@ struct ProfileView : View {
                                                 .fontWeight(.semibold)
                                         }
                                         .background(
-                                            NavigationLink(destination: EditProfileView(), isActive: $shouldNavigate) {
+                                            NavigationLink(destination: EditProfileView(user: User.MockData[0]), isActive: $shouldNavigate) {
                                                             EmptyView()
                                                         }
                                                         .hidden()
@@ -258,15 +258,6 @@ struct ProfileView : View {
             }
 
         }
-
-
-
-
-
-
-
-
-
 
 struct PopUpImageView: View {
     @Binding var isShowingPopUp: Bool

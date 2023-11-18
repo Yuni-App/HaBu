@@ -12,35 +12,35 @@ struct SideMenu: View {
         VStack {
             Spacer()
             NavigationLink {
-                EditProfileView()
+                EditProfileView(user:User.MockData[0])
             } label: {
                 Text("Ayarlar").foregroundColor(.white)
                     .font(.title3)
             }
             .frame(height: 50)
             NavigationLink {
-                EditProfileView()
+                EditProfileView(user:User.MockData[0])
             } label: {
                 Text("Engellene kullanıcılar").foregroundColor(.white)
                     .font(.title3)
             }
             .frame(height: 50)
             NavigationLink {
-                EditProfileView()
+                EditProfileView(user:User.MockData[0])
             } label: {
                 Text("Puanlarım").foregroundColor(.white)
                     .font(.title2)
             }
             .frame(height: 50)
             NavigationLink {
-                EditProfileView()
+                EditProfileView(user:User.MockData[0])
             } label: {
                 Text("Geri Bildirim").foregroundColor(.white)
                     .font(.title2)
             }
             .frame(height: 50)
             NavigationLink {
-                EditProfileView()
+                EditProfileView(user:User.MockData[0])
             } label: {
                 Text("Çıkış Yap").foregroundColor(.white)
                     .font(.title2)

@@ -35,6 +35,7 @@ struct UserInfo: View {
                 Spacer()
                 Text("4s")
                     .opacity(0.6)
+                    .font(.footnote)
                     .fontWeight(.semibold)
                 Button(action: {
                     
