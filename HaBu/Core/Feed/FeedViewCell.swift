@@ -91,5 +91,5 @@ struct FeedViewCell: View {
 }
 
 #Preview {
-    FeedViewCell(post: Post.MockData[0], user:  User.MockData[0])
+    FeedViewCell(post: Post.MockData[1], user:  User.MockData[0])
 }

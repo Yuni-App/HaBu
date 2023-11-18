@@ -20,7 +20,7 @@ struct TabbarView: View {
             NotificationView().tabItem {
                 Image(systemName: "bell.fill")
             }
-            ProfileView().tabItem {
+            ProfileView(user: User.MockData[0]).tabItem {
                 Image(systemName: "person")
             }
         }
