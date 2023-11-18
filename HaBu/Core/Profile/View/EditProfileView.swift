@@ -30,7 +30,7 @@ struct EditProfileView: View {
                 }
             }
             .frame(width: Const.width * 1, height: Const.height * 0.2)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.36, green: 0.51, blue: 0.57)]), startPoint: .topLeading, endPoint: .leading).rotationEffect(Angle(degrees: 40)).frame(width: Const.width * 1.15, height: Const.height * 0.5))
+            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.36, green: 0.51, blue: 0.57)]), startPoint: .topLeading, endPoint: .leading).rotationEffect(Angle(degrees: 220)).frame(width: Const.width * 1.15, height: Const.height * 0.5).shadow(radius: 10))
             Spacer()
             
             HStack {
