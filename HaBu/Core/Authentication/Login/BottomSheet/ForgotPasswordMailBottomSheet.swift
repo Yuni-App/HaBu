@@ -16,7 +16,7 @@ struct ForgotPasswordMailBottomSheet: View {
             VStack{
                 Text("Lütfen mail adresinizi giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
                 CustomTextField(icon: "mail", placeHolder: "email")
-                CustomButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
+                CustomLinkButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
                     //mail check
                 },destinaiton: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet , goPage: $goPage)))
                 
