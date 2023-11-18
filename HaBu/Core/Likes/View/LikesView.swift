@@ -19,7 +19,7 @@ struct LikesView: View {
                     HStack{
                         Text("Beğenenler").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         Spacer()
-                        Text(String(post.likeList.count)).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        Text("\(String(post.likeList.count)) beğeni ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     }.padding(.bottom , 30)
                     //user.MockData veri tabanından gelen beğenen userlar listesi olacak
                     if post.likeList.count == 0 {

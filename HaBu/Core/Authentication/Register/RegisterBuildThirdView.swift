@@ -24,7 +24,7 @@ struct RegisterBuildThirdView: View {
                             CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
                             CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
                             CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
-                            CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {
+                            CustomLinkButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {
                             }, destinaiton: AnyView(TabbarView())).padding(.top , 50)
                         }
                     }

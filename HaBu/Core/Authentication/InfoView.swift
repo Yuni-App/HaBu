@@ -21,11 +21,11 @@ struct InfoView: View {
                                 .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
                             VStack{
                                 CustomImageRectangle(width: 330, height: 90, imagePath: ImageManager.habuLogo)
-                                CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                                CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                                     print("login button")
                                 }, destinaiton: AnyView(LoginView()))
 
-                                CustomButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
+                                CustomLinkButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
                                     print("register view")
                                 }, destinaiton: AnyView(RegisterBuildFirstView()),textColor: .black)
                             }
