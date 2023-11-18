@@ -9,12 +9,21 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var searchText = ""
+    
+    //filteredUser
+    var filteredUser: [User]{
+        return User.MockData.filter {$0.name.localizedCaseInsensitiveContains(searchText)}
+    }
+    
+    
+    
     var body: some View {
         NavigationStack{
             ScrollView{
                 LazyVStack(spacing:15){
-                    ForEach(User.MockData, id : \.id){user in
-                        NavigationLink(destination: Text("ProfileView"), 
+                    //User.MockData = filtereduser
+                    ForEach(filteredUser, id : \.id){user in
+                        NavigationLink(destination: Text("ProfileView"),
                         label: {
                             HStack(){
                                 CircleProfileImage(userIamgeUrl: "", size: .small)

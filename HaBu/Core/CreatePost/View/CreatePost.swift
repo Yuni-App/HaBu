@@ -19,7 +19,7 @@ struct CreatePost: View {
                         CustomImageRectangle(width: 100, height: 100, imagePath: ImageManager.registerThirdVector)
                         CustomImageRectangle(width: 100, height: 100, imagePath: ImageManager.registerThirdVector)
                     }.padding()
-                    TextField(text: $text, label : Text("Ne Düşünüyorsunuz ? "))
+                    //TextField(text: $text, label : Text("Ne Düşünüyorsunuz ? "))
                   
                        
                 }.padding()
