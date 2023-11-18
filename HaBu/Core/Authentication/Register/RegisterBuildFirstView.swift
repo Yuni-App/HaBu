@@ -23,7 +23,7 @@ struct RegisterBuildFirstView: View {
                             CustomTextField(icon: "envelope", placeHolder: "e-posta")
                             CustomTextField(icon: "key", placeHolder: "Şifre")
                             CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
-                            CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
+                            CustomLinkButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
                             }, destinaiton: AnyView(RegisterBuildSecondView())).padding(.top , 50)
                      
                         }
