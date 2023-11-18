@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct CreatePost: View {
+    @State private var text: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            ScrollView{
+                VStack(alignment: .leading) {
+                    Text("Medya").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    HStack{
+                        CustomImageRectangle(width: 100, height: 100, imagePath: ImageManager.registerThirdVector)
+                        CustomImageRectangle(width: 100, height: 100, imagePath: ImageManager.registerThirdVector)
+                        CustomImageRectangle(width: 100, height: 100, imagePath: ImageManager.registerThirdVector)
+                    }.padding()
+                    TextField(text: $text, label : Text("Ne Düşünüyorsunuz ? "))
+                  
+                       
+                }.padding()
+            }
+        }
     }
 }
 
