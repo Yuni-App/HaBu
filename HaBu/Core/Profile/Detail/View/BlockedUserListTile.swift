@@ -15,7 +15,7 @@ struct BlockedUserListTile: View {
     var body: some View {
         NavigationStack{
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .xsmall)
+                CircleProfileImage(userIamgeUrl: "", size: .small)
                 VStack{
                     Text("\(user.name) \(user.surName)")
                         .fontWeight(.semibold)

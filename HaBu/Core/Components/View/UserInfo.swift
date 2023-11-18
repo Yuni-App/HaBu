@@ -52,5 +52,5 @@ struct UserInfo: View {
 
 
 #Preview {
-    UserInfo(user: User.MockData[0], imageSize: .xsmall)
+    UserInfo(user: User.MockData[0], imageSize: .small)
 }

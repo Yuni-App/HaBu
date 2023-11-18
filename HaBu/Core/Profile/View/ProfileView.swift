@@ -13,7 +13,6 @@ struct ProfileView : View {
     @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     @State private var isShowingPopUp = false
     @State private var shouldNavigate = false
-
     let user : User
     var images = [
         "LoginVector",
@@ -324,7 +323,7 @@ struct ProfilseView: View {
                     VStack {
                         HStack{
                             //Image
-                            CircleProfileImage(userIamgeUrl: "", size: .xlage)
+                            CircleProfileImage(userIamgeUrl: "", size: .lage)
                                 .padding(.leading)
                             
                             //User Info
