@@ -10,13 +10,13 @@ import SwiftUI
 struct SerachView: View {
     @State private var searchText = ""
     
-    //filteredUser
+    //filtered user "name" or "userName"
     var filteredUser: [User]{
-        return User.MockData.filter {$0.name.localizedCaseInsensitiveContains(searchText)}
+        return User.MockData.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText) ||
+                $0.username.localizedCaseInsensitiveContains(searchText)
+            }
     }
-    
-    
-    
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -24,7 +24,7 @@ struct SerachView: View {
                     //User.MockData = filtereduser
                     ForEach(filteredUser, id : \.id){user in
                         NavigationLink(destination: Text("ProfileView"),
-                        label: {
+                                       label: {
                             HStack(){
                                 CircleProfileImage(userIamgeUrl: "", size: .small)
                                 VStack (alignment:.leading){
@@ -32,6 +32,7 @@ struct SerachView: View {
                                     Text("\(user.name) \(user.surName)")
                                         .opacity(0.6)
                                         .font(.footnote)
+                                    
                                 }
                             }
                             .frame(maxWidth: .infinity,alignment: .leading)
@@ -39,7 +40,6 @@ struct SerachView: View {
                             .padding(.leading,8)
                         })
                     }
-                    
                 }
                 .padding(.top,15)
                 .searchable(text: $searchText,prompt: "Arama...")

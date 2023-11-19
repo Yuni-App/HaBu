@@ -9,9 +9,36 @@ import SwiftUI
 
 struct NotificationView: View {
     var body: some View {
-        Text("Notification")
+        NavigationStack{
+            VStack {
+                HStack {
+                    Text("Bildirimler").font(.title).bold()
+                        .frame(width: Const.width * 0.4)
+                    Spacer()
+                }
+                Spacer()
+                ScrollView {
+                    ForEach(Notification.MockData, id : \.id){notification in
+                        NavigationLink(destination: Text("ProfileView, myPostView, otherPostView"),
+                                       label: {
+                            HStack(){
+                                CircleProfileImage(userIamgeUrl: "", size: .xsmall)
+                                Text("\(notification.userName) \(notification.status)")
+                                Spacer()
+                                
+                            }
+                            .frame(width: Const.width * 0.9)
+                            .foregroundStyle(.black)
+                        })
+                    }
+                }
+                
+            }
+            
+        }
     }
 }
+
 
 #Preview {
     NotificationView()
