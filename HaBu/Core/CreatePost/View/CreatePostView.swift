@@ -27,27 +27,27 @@ struct CreatePostView: View {
                             )
                         HStack{
                             if imageList.isEmpty {
-                                GenerateImageBox(image: "AddPhoto")
+                                GenerateImageBox(buttonsheet: false, image: "AddPhoto" )
                             }
                             if imageList.count == 3 {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
-                                    GenerateImageBox(image: userImage)
+                                    GenerateImageBox(buttonsheet: false, image: userImage)
                                  }
                             }
                             if imageList.count == 2 {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
-                                    GenerateImageBox(image: userImage)
+                                    GenerateImageBox(buttonsheet: false, image: userImage)
                                  }
-                                GenerateImageBox(image: "AddPhoto")
+                                GenerateImageBox(buttonsheet: true, image: "AddPhoto")
                             }
                             if imageList.count == 1 {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
-                                    GenerateImageBox(image: userImage)
+                                    GenerateImageBox(buttonsheet: false, image: userImage)
                                  }
-                                GenerateImageBox(image: "AddPhoto")
+                                GenerateImageBox(buttonsheet: true, image: "AddPhoto")
                             }
                         }
                     }
@@ -106,12 +106,15 @@ struct CreatePostView: View {
 
 struct GenerateImageBox: View {
     @State private var addPhotoBottomSheet: Bool = false
+    let buttonsheet : Bool
     let image: String
 
     var body: some View {
         Button(action: {
-            addPhotoBottomSheet = true
-            print("Tapped")
+            if buttonsheet {
+                        addPhotoBottomSheet = true
+                        print("Tapped")
+                    }
         }) {
             ZStack {
                 Rectangle()
@@ -121,9 +124,12 @@ struct GenerateImageBox: View {
                         Image(image)
                             .resizable()
                             .sheet(isPresented: $addPhotoBottomSheet) {
-                                
-                                Text("bottom sheet ")
-                                    .presentationDetents([.medium,.height(CGFloat(Const.height/4 + 10))])
+                                VStack{
+                                    HStack{
+                                        
+                                    }
+                                }.frame(width: Const.width  )
+                                    .presentationDetents([.medium,.height(CGFloat(Const.height/4))])
                             }
                             .foregroundColor(.white)
                             .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
