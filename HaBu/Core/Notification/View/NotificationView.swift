@@ -22,7 +22,7 @@ struct NotificationView: View {
                         NavigationLink(destination: Text("ProfileView, myPostView, otherPostView"),
                                        label: {
                             HStack(){
-                                CircleProfileImage(userIamgeUrl: "", size: .xsmall)
+                                CircleProfileImage(userIamgeUrl: "\(notification.userProfileImageUrl)", size: .xsmall)
                                 Text("\(notification.userName) \(notification.status)")
                                 Spacer()
                                 

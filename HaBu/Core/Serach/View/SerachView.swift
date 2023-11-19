@@ -9,13 +9,21 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var searchText = ""
+    @State private var isSearchBar = false
     
     //filtered user "name" or "userName"
     var filteredUser: [User]{
-        return User.MockData.filter {
+        if isSearchBar{
+            return User.MockData.filter {
                 $0.name.localizedCaseInsensitiveContains(searchText) ||
                 $0.username.localizedCaseInsensitiveContains(searchText)
             }
+        }else {
+            return User.MockData.filter {
+                $0.rating > 20
+            }
+        }
+        
     }
     var body: some View {
         NavigationStack{
@@ -42,7 +50,9 @@ struct SerachView: View {
                     }
                 }
                 .padding(.top,15)
-                .searchable(text: $searchText,prompt: "Arama...")
+                .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
+                    isSearchBar = newValue != ""
+                }
             }
             .navigationTitle("Arama")
             .navigationBarTitleDisplayMode(.inline)
