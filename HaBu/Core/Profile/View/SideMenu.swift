@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct SideMenu: View {
+    @Binding var isShowingSideMenu :Bool
     var body: some View {
         VStack {
+            HStack{
+                Spacer()
+                Button(action: {
+                    isShowingSideMenu = false
+                }, label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .padding(.trailing,20)
+                })
+            }
             Spacer()
             NavigationLink {
                 EditProfileView(user:User.MockData[0])
@@ -55,6 +66,3 @@ struct SideMenu: View {
     }
 }
 
-#Preview {
-    SideMenu()
-}
