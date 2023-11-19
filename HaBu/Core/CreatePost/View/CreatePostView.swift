@@ -17,7 +17,7 @@ struct CreatePostView: View {
                     ZStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .frame(width: Const.width , height: 130)
+                            .frame(width: Const.width , height: 145)
                             .background(
                                 Image("")
                                     .resizable()
@@ -33,12 +33,23 @@ struct CreatePostView: View {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
                                     GenerateImageBox(buttonsheet: false, image: userImage)
+                                    
                                  }
                             }
                             if imageList.count == 2 {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
-                                    GenerateImageBox(buttonsheet: false, image: userImage)
+                                    Button(action: {
+                                        //image delete
+                                        print("delete")
+                                    }, label: {
+                                        ZStack{
+                                            GenerateImageBox(buttonsheet: false, image: userImage)
+                                            Image(systemName: "multiply")
+                                                       .font(.system(size: 20)) // İkonun boyutunu ayarlamak için
+                                                       .foregroundColor(.black).position(CGPoint(x: 70.0, y: 137.0))
+                                        }
+                                    })
                                  }
                                 GenerateImageBox(buttonsheet: true, image: "AddPhoto")
                             }
@@ -51,14 +62,16 @@ struct CreatePostView: View {
                             }
                         }
                     }
+                    Text("İçerik").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).padding(.horizontal ,15).padding(.top , 20)
                     
                     //TEXT FİELD
                     VStack {
-                               TextField("Ne düşünüyorsunuz?", text: $text)
+                               TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
                                    .padding()
+                                   .lineLimit(10...)
                                    .background(Color.gray.opacity(0.2))
                                 .cornerRadius(10)
-                           }   .padding()
+                    }   .padding(.horizontal , 10)
                 }
             }
 
@@ -83,6 +96,7 @@ struct CreatePostView: View {
                 }*/
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
+                        
                     }, label: {
                         NavigationLink(destination: AddFilterView()) {
                             Image(systemName: "chevron.right.circle.fill")
@@ -124,12 +138,7 @@ struct GenerateImageBox: View {
                         Image(image)
                             .resizable()
                             .sheet(isPresented: $addPhotoBottomSheet) {
-                                VStack{
-                                    HStack{
-                                        
-                                    }
-                                }.frame(width: Const.width  )
-                                    .presentationDetents([.medium,.height(CGFloat(Const.height/4))])
+                       
                             }
                             .foregroundColor(.white)
                             .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
@@ -141,3 +150,4 @@ struct GenerateImageBox: View {
         }
     }
 }
+

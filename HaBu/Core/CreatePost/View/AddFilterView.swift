@@ -113,7 +113,7 @@ struct AddFilterView: View {
                         FeedView().navigationBarBackButtonHidden(true)
                     } label: {
                         HStack{
-                            Text("Tamamla")
+                            Text("Paylaş")
                                 .fontWeight(.bold)
                                 .foregroundColor(Const.primaryColor)
                             
