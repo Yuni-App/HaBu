@@ -25,8 +25,6 @@ struct EditProfileView: View {
         self.user = user
     }
     var body: some View {
-        
-        
             VStack {
                 
                 ZStack {
@@ -55,11 +53,10 @@ struct EditProfileView: View {
                         HStack {
                             ZStack{
                                 
-                        CircleProfileImage(userImage: images[0], index: imageIndices[0])
-                                                                        
-                        CircleProfileImage(userImage: images[1], index: imageIndices[1])
-                                                                        
-                        CircleProfileImage(userImage: images[2], index: imageIndices[2])
+                        CircleProfileImage(userImage: images[0] , index: imageIndices[0])
+                        
+                        CircleProfileImage(userImage: images[1] , index: imageIndices[1])
+                        CircleProfileImage(userImage: images[2] , index: imageIndices[2])
                             }
                             .frame(width: Const.width)
                             .gesture(DragGesture().onChanged({ value in

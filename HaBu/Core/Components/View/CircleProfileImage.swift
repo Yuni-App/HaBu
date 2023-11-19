@@ -88,23 +88,23 @@ struct CircleProfileImage: View {
             if  userIamgeUrl != ""{
                 Image(userIamgeUrl)
                     .resizable()
-                    .scaledToFill()
-                    .frame(width: size.deminsion,height:size.deminsion)
-                    .clipShape(.circle)
-                    .padding(.all,5)
+                    .clipShape(.rect(cornerRadius: 30))
                     .overlay(
                         RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color.white, lineWidth: 1)
+                            .stroke(Color.white, lineWidth: 2)
                     )
+                    .frame(width: size.deminsion ,height: size.deminsion)
                 
             }
             else{
-                Image(systemName:"person.circle.fill")
+                Image("profil1")
                     .resizable()
-                    .scaledToFill()
+                    .clipShape(.rect(cornerRadius: 30))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.white, lineWidth: 2)
+                    )
                     .frame(width: size.deminsion ,height: size.deminsion)
-                    .clipShape(.circle)
-                    .foregroundStyle(.gray)
             }
         }
         if let index = self.index{
@@ -125,5 +125,5 @@ struct CircleProfileImage: View {
 }
 
 #Preview {
-    CircleProfileImage(userIamgeUrl: "", size:.xsmall)
+    CircleProfileImage(userIamgeUrl: "", size:.xlage)
 }
