@@ -138,7 +138,7 @@ struct GenerateImageBox: View {
                         Image(image)
                             .resizable()
                             .sheet(isPresented: $addPhotoBottomSheet) {
-                       
+                                AddImageBottomSheet()
                             }
                             .foregroundColor(.white)
                             .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
