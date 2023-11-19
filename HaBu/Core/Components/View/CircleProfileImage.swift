@@ -16,21 +16,21 @@ enum ImageLocationAndSize:Int{
     var size : CGFloat{
         switch self {
         case .Left:
-            return Const.width * 0.12
+            return Const.width * 0.1
         case .Center:
             return Const.width * 0.3
         case .Right:
-            return Const.width * 0.12
+            return Const.width * 0.1
         }
     }
     var Position : CGPoint{
         switch self {
         case .Left:
-            return CGPoint(x:Const.width * 0.25, y : 0 )
+            return CGPoint(x:Const.width * 0.25, y :0 )
         case .Center:
-            return CGPoint(x:Const.width / 2,y: Const.height * 0.1)
+            return CGPoint(x:Const.width * 0.5,y: Const.height * 0.1)
         case .Right:
-            return CGPoint(x:Const.width * 0.75, y : 0)
+            return CGPoint(x:Const.width * 0.75, y :0)
         }
     }
     static func fromRawValue(_ rawValue: Int) -> ImageLocationAndSize? {
@@ -118,12 +118,13 @@ struct CircleProfileImage: View {
                 )
                 .frame(width: value!.size, height: value!.size)
                 .position(value!.Position)
-                
-            
+                .onTapGesture {
+                    
+                }
         }
     }
 }
 
 #Preview {
-    CircleProfileImage(userIamgeUrl: "", size:.xlage)
+    EditProfileView(user: User.MockData[0])
 }

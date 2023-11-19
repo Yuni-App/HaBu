@@ -8,16 +8,34 @@
 import SwiftUI
 
 
+struct CategoryView: View {
+    let isActive : Bool
+    let text :String
+    var body: some View {
+        VStack(alignment: .leading,spacing: 0){
+            Text(text)
+                .font(.system(size:18))
+                .fontWeight(.medium)
+                .foregroundStyle(isActive ?  Const.primaryColor : Color.black.opacity(0.5))
+            if(isActive){
+                Color("Primary")
+                    .frame(width: 15,height: 2)
+                    .clipShape(.capsule)
+            }
+        }.padding(.horizontal)
+    }
+}
+
 struct ProfileView : View {
     @State private var showMenu: Bool = false
     @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     @State private var isShowingPopUp = false
     @State private var shouldNavigate = false
+    @State private var selectedIndex = 0
+    
     let user : User
     var images = [
         "profil1",
-        "profil2",
-        "profil3"
     ]
     @State var imageCount = 0
     @State var gridSelector = 0
@@ -38,7 +56,6 @@ struct ProfileView : View {
                                 
                                 Image(systemName: "text.justify")
                                     .foregroundColor(.white)
-                                
                                 
                             }.padding(.horizontal,20)
                             
@@ -87,7 +104,7 @@ struct ProfileView : View {
                                                     .gesture(DragGesture().onEnded({ value in
                                                         if value.translation.width < 1 {
                                                             withAnimation{
-                                                                if imageCount < 2{
+                                                                if imageCount < images.count - 1{
                                                                     imageCount += 1
                                                                 }
                                                                 else{
@@ -101,7 +118,7 @@ struct ProfileView : View {
                                                                     imageCount -= 1
                                                                 }
                                                                 else{
-                                                                    imageCount = 2
+                                                                    imageCount = images.count - 1
                                                                 }
                                                             }
                                                         }
@@ -191,42 +208,21 @@ struct ProfileView : View {
                         }
                         //postGrid
                         VStack{
-                            
-                            
-                            VStack{
+                            HStack{
                                 HStack{
-                                    ForEach(0..<gridOptions.count) { index in
-                                        Spacer().frame(width:Const.width * 0.1)
-                                        Button(action: {
-                                            gridSelector = index
-                                        }, label: {
-                                            VStack {
-                                                Text(gridOptions[index])
-                                                    .font(.headline)
-                                                    .foregroundStyle(.black)
-                                                    .fontWeight(.semibold)
-                                                
-                                                Circle()
-                                                    .frame(width: 10, height: 10)
-                                                    .foregroundColor(index == self.gridSelector ? Const.primaryColor : .white)
-                                                    .overlay(
-                                                        RoundedRectangle(cornerRadius: 30)
-                                                            .stroke(Color.black, lineWidth: 1)
-                                                    )
+                                    ForEach(0..<gridOptions.count) { i in
+                                        CategoryView(isActive: i==selectedIndex, text: gridOptions[i])
+                                            .onTapGesture {
+                                                selectedIndex = i
                                             }
-                                            
-                                        })
-                                        Spacer().frame(width:Const.width * 0.1)
                                         
-                                    }
+                                    }.padding()
                                 }
-                                .padding(.vertical,10)
-                                Divider().frame(height:1)
-                                    .background(.gray)
-                                    .opacity(0.5)
-                                
-                                
                             }
+                            Divider()
+                                .background(.black)
+                                .frame(height:1)
+
                             ForEach(Post.MockData,id:\.id){post in
                                 FeedViewCell(post: post, user: User.MockData[0])
                                     .font(.title)
@@ -293,4 +289,3 @@ struct PopUpImageView: View {
 #Preview {
     ProfileView( user: User.MockData[1])
 }
-

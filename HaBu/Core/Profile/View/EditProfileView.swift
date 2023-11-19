@@ -16,6 +16,8 @@ struct EditProfileView: View {
     @State var password: String = ""
     @State private var dragDirection: DragDirection = .none
     @State private var imageIndices = [0, 1, 2]
+    @State var imagePickerPresented = false
+
     var images = [
         "profil1",
         "profil2",
@@ -54,7 +56,6 @@ struct EditProfileView: View {
                             ZStack{
                                 
                         CircleProfileImage(userImage: images[0] , index: imageIndices[0])
-                        
                         CircleProfileImage(userImage: images[1] , index: imageIndices[1])
                         CircleProfileImage(userImage: images[2] , index: imageIndices[2])
                             }
