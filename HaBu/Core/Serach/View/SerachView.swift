@@ -12,6 +12,8 @@ struct SerachView: View {
     @State private var isSearchBar = false
     @State private var ratingSorted = false
     
+    
+    
     //filtered user "name" or "userName"
     var filteredUser: [User]{
         if isSearchBar{
@@ -36,6 +38,14 @@ struct SerachView: View {
         }
     }
     var body: some View {
+        let silver = Color(red: 0.75, green: 0.75, blue: 0.75)
+        let shine = Color(red: 1.0, green: 1.0, blue: 1.0)
+
+        let gradient = LinearGradient(
+            colors: [silver, shine],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
         NavigationStack{
             ScrollView{
                 LazyVStack(spacing:15){
@@ -56,14 +66,15 @@ struct SerachView: View {
                                 HStack {
                                     switch (ratingSorted, user.rating) {
                                     case (false, 20...30):
-                                        Image(systemName:"star.fill").background(Color.white)
-                                            .foregroundColor(Color.cyan)
+                                        Image(systemName:"star.fill")
+                                            .foregroundColor(Color(UIColor(hex: "#cd7f32", alpha: 1)))
                                     case(false, 30...40):
-                                        Image(systemName:"star.fill").background(Color.white)
-                                            .foregroundColor(Color.yellow)
+                                        Image(systemName: "star.fill").foregroundStyle(Color(UIColor(hex: "#aaa9ad", alpha: 1)))
                                     case (false, 40...):
-                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
-                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
+                                        Image(systemName:"star.fill")
+                                            .foregroundColor(Color.yellow)
+                                        
+                                        
                                     default:
                                         Image(systemName: "star")
                                                     .foregroundColor(Color.gray)
