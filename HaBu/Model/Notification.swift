@@ -27,7 +27,7 @@ struct Notification: Identifiable, Codable{
 
 extension Notification{
     static var MockData: [Notification] = [
-        .init(id: "0", postId: "1", commentId: "12", userId: "456", userName: "yusuf", status: "yorumunuzu begendi", userProfileImageUrl: "https://instagram.fsaw1-11.fna.fbcdn.net/v/t51.2885-19/300941828_733875135020076_8974027012574327300_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fsaw1-11.fna.fbcdn.net&_nc_cat=100&_nc_ohc=_O6ogk8VBg0AX9da5Bf&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfBuqcMn7fAgXOYBWpsSHNA3znfg5NFjNz9olIvEBR877w&oe=655E8D22&_nc_sid=8b3546"),
+        .init(id: "0", postId: "1", commentId: "12", userId: "456", userName: "yusuf", status: "yorumunuzu begendi", userProfileImageUrl: ""),
         .init(id: "1", postId: "2", commentId: "13", userId: "789", userName: "ahmet", status: "gönderinizi beğendi", userProfileImageUrl: ""),
         .init(id: "2", postId: "3", commentId: "14", userId: "123", userName: "mehmet", status: "gönderinize yorum attı", userProfileImageUrl: ""),
         .init(id: "3", postId: "4", commentId: "15", userId: "567", userName: "serkan", status: "gönderinizi beğendi", userProfileImageUrl: ""),
