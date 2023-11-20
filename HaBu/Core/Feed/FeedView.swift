@@ -27,9 +27,13 @@ struct FeedView: View {
                     .presentationDetents([.large,.height(Const.height * 0.3)])
             }
             .toolbar{
-                
                 ToolbarItem(placement:.topBarLeading){
-                    Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
+                    NavigationLink {
+                        CreatePostView()
+                    } label: {
+                        Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
+                    }
+
                 }
                 
                 ToolbarItem(placement: .topBarTrailing){
