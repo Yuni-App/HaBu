@@ -63,8 +63,7 @@ struct LoginView: View {
                     )
             }.background(
                 NavigationLink("", destination: TabbarView(), isActive: $goPage).hidden()
-            )
-            
+            )            
 
 
         }
