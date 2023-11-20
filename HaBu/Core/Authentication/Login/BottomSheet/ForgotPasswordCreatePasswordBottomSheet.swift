@@ -16,16 +16,10 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
                 Text("Şifre Oluştur").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
                 CustomTextField(icon: "key", placeHolder: "şifre")
                 CustomTextField(icon: "key", placeHolder: "şifre tekrar")
-                Button(action: {
+                CustomButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
                     showSheet = false
                     goPage = true
-                }, label: {
-                    Text("Oluştur").padding()
-                        .frame(width: Const.width-130  ,height: 30 )
-                        .background(Const.primaryColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                })
+                }, size: CustomButtonSize.small)
             }.padding(30)
                 .frame(width: Const.width , height: Const.height)
                 .background(

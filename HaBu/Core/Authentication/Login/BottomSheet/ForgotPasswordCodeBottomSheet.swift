@@ -16,7 +16,7 @@ struct ForgotPasswordCodeBottomSheet: View {
             Text("Lütfen kodu  giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
             CustomTextField(icon: "key", placeHolder: "kod")
             CustomLinkButton(title: "Onayla", backgroundColor: Const.primaryColor, action: {
-            },destinaiton: AnyView(ForgotPasswordCreatePasswordBottomSheet(showSheet: $showSheet , goPage: $goPage)))
+            },destinaiton: AnyView(ForgotPasswordCreatePasswordBottomSheet(showSheet: $showSheet , goPage: $goPage)), size: CustomButtonSize.small)
         }.padding(30)
                 .frame(width: Const.width , height:  Const.height)
                 .background(

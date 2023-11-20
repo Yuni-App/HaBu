@@ -43,12 +43,13 @@ struct CreatePostView: View {
                                         //image delete
                                         print("delete")
                                     }, label: {
-                                        ZStack{
+                                        
                                             GenerateImageBox(buttonsheet: false, image: userImage)
-                                            Image(systemName: "multiply")
-                                                       .font(.system(size: 20)) // İkonun boyutunu ayarlamak için
-                                                       .foregroundColor(.black).position(CGPoint(x: 70.0, y: 137.0))
-                                        }
+                                            /*
+                                             Image(systemName: "multiply")
+                                                        .font(.system(size: 20)) // İkonun boyutunu ayarlamak için
+                                                        .foregroundColor(.black).position(CGPoint(x: 70.0, y: 137.0))
+                                             */
                                     })
                                  }
                                 GenerateImageBox(buttonsheet: true, image: "AddPhoto")
