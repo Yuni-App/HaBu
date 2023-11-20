@@ -21,12 +21,10 @@ struct AddFilterView: View {
                         VStack(alignment : .leading){
                             //post image
                             HStack{
-                                //update
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
                                     GenerateImageBox(buttonsheet: false, image: userImage)
                                 }
-                                
                             }.padding(.bottom , 5)
                             HStack{
                                 Text("bu kısım post hakkında kısmıdır. halısahaya bir rakip arıyoruz kendine güvenene takımlar bana ulaşsın ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -34,65 +32,32 @@ struct AddFilterView: View {
                         }
                         .padding()
                         .frame(width: Const.width)
-                        .background( RoundedRectangle(cornerRadius: 20) // Oval şeklinde kenarlıklar ekleniyor
+                        .background( RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(Color.gray.opacity(0.2)))
                         
                     }
                     //filtre
+                    //veriler geldiğinde update gerekiyor
                     HStack{
-                        VStack(alignment: .leading){
-                            HStack{
-                                CheckBoxView(checked: false) {
-                                }
-                                Text("kiralik ev")
-                            }
-                            HStack{
-                                CheckBoxView(checked: false) {
-                                }
-                                Text("ikinci el")
-                            }
-                        }.padding(.leading , 15)
-                            .frame(width:Const.width/3)
+                        FiltreRow(firstCategory: "kiralık ev", secondCategory: "oda")
                         Spacer()
-                        VStack(alignment: .leading){
-                            HStack{
-                                CheckBoxView(checked: false) {
-                                }
-                                Text("oda")
-                                
-                            }
-                            HStack{
-                                
-                                CheckBoxView(checked: false) {
-                                }
-                                Text("güzel erkek")
-                            }
-                        } .frame(width:Const.width/3)
+                        FiltreRow(firstCategory: "ders notu", secondCategory: "ikinci el")
                         Spacer()
-                        VStack(alignment: .leading){
-                            HStack{
-                                CheckBoxView(checked: false) {
-                                }
-                                Text("ders notu")
-                            }
-                            HStack{
-                                
-                                CheckBoxView(checked: false) {
-                                }
-                                Text("itiraf")
-                            }
-                        }.padding(.trailing , 15)
-                            .frame(width:Const.width/3)
-                    }.frame(width: Const.width,height: Const.height/8).background(RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(Color.gray.opacity(0.2)))
+                        FiltreRow(firstCategory: "güzel kız", secondCategory: "itiraf")
+                    }.frame(width: Const.width,height: Const.height/8)
+                        .background(RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color.gray.opacity(0.2)))
+                    
                     //anonim gönderi
                     HStack{
                         Toggle("Anonim Gönderi", isOn: $isAnonimPost)
                             .padding()
                             .fontWeight(.bold)
                     }.padding()
-                        .background( RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(Color.gray.opacity(0.2)))
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(Color.gray.opacity(0.2)))
+                    
                     //anonim yorum
                     HStack{
                         Toggle("Anonim Yorum", isOn: $isAnonimComment)
@@ -117,10 +82,12 @@ struct AddFilterView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(Const.primaryColor)
                             
-                            Image(systemName: "checkmark.circle.fill") .foregroundColor(Const.primaryColor)
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.title2)
+                                .foregroundColor(Const.primaryColor)
                         }
                     }
-
+                    
                 }
             }
         }
@@ -137,3 +104,23 @@ struct AddFilterView: View {
  
  }
  */
+
+struct FiltreRow: View {
+    var  firstCategory  : String
+    var  secondCategory : String
+    var body: some View {
+        VStack(alignment: .leading){
+            HStack{
+                CheckBoxView(checked: false) {
+                }
+                Text(firstCategory)
+            }
+            HStack{
+                CheckBoxView(checked: false) {
+                }
+                Text(secondCategory)
+            }
+        }.padding(.leading , 15)
+            .frame(width:Const.width/3)
+    }
+}

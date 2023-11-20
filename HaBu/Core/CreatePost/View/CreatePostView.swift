@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct CreatePostView: View {
-    var imageList  : [String] = ["Mert","Mert"]
+    var imageList  : [String] = ["Mert"]
     @State private var text: String = ""
     var body: some View {
         NavigationStack{
@@ -17,13 +17,10 @@ struct CreatePostView: View {
                     ZStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .frame(width: Const.width , height: 145)
+                            .frame(width: Const.width , height: Const.height/6)
                             .background(
-                                Image("")
-                                    .resizable()
-                                    .foregroundColor(.white).background(Color(red: 1, green: 1, blue: 1).opacity(0.1))
-                                    .cornerRadius(10)
-                                    .shadow(color: Color.black.opacity(1), radius: 0, x: 4, y:4)
+                                RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color.gray.opacity(0.2))
                             )
                         HStack{
                             if imageList.isEmpty {
@@ -33,24 +30,13 @@ struct CreatePostView: View {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
                                     GenerateImageBox(buttonsheet: false, image: userImage)
-                                    
                                  }
                             }
                             if imageList.count == 2 {
                                 ForEach(imageList, id: \.self) { userImage in
                                     //Image box
-                                    Button(action: {
-                                        //image delete
-                                        print("delete")
-                                    }, label: {
-                                        
-                                            GenerateImageBox(buttonsheet: false, image: userImage)
-                                            /*
-                                             Image(systemName: "multiply")
-                                                        .font(.system(size: 20)) // İkonun boyutunu ayarlamak için
-                                                        .foregroundColor(.black).position(CGPoint(x: 70.0, y: 137.0))
-                                             */
-                                    })
+                                    GenerateImageBox(buttonsheet: false, image: userImage)
+                                   
                                  }
                                 GenerateImageBox(buttonsheet: true, image: "AddPhoto")
                             }
@@ -75,39 +61,21 @@ struct CreatePostView: View {
                     }   .padding(.horizontal , 10)
                 }
             }
-
-            
-            
             .toolbar{
-                /*ToolbarItem(placement: .principal) {
-                    Text("Gönderi Oluştur").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                }*/
-                /*
-                ToolbarItem(placement: .topBarLeading){
-                    Button(action: {
-                        
-                        
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .font(.title2)
-                            .foregroundStyle(.black)
-
-
-                    })
-                }*/
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
                         
                     }, label: {
                         NavigationLink(destination: AddFilterView()) {
-                            Image(systemName: "chevron.right.circle.fill")
-                                .font(.title2)
-                                .foregroundStyle(Const.primaryColor)
+                            HStack{
+                                Text("Devam")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Const.primaryColor)
+                                Image(systemName: "chevron.right.circle.fill")
+                                    .font(.title2)
+                                    .foregroundStyle(Const.primaryColor)
+                            }
                         }
-                            
-                         
-                        
-
                     })
                 }
             }
@@ -119,36 +87,5 @@ struct CreatePostView: View {
     CreatePostView()
 }
 
-struct GenerateImageBox: View {
-    @State private var addPhotoBottomSheet: Bool = false
-    let buttonsheet : Bool
-    let image: String
 
-    var body: some View {
-        Button(action: {
-            if buttonsheet {
-                        addPhotoBottomSheet = true
-                        print("Tapped")
-                    }
-        }) {
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 100, height: 100)
-                    .background(
-                        Image(image)
-                            .resizable()
-                            .sheet(isPresented: $addPhotoBottomSheet) {
-                                AddImageBottomSheet()
-                            }
-                            .foregroundColor(.white)
-                            .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y: 4)
-                    )
-                CustomImageRectangle(width: 100, height: 100, imagePath: "").frame(width: 100, height: 100)
-            }
-        }
-    }
-}
 
