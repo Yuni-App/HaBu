@@ -13,12 +13,13 @@ struct CustomButton: View {
     var action: () -> Void
     var width : Double?
     var textColor : Color?
+    var size : CustomButtonSize
        var body: some View {
            Button(action: action)
            {
                Text(title)
                    .padding()
-                   .frame(width: width ?? Const.width-130  ,height: 30 )
+                   .frame(width: size.width  ,height: size.height )
                    .background(backgroundColor)
                    .foregroundColor(textColor ?? .white)
                    .cornerRadius(4)
@@ -26,5 +27,5 @@ struct CustomButton: View {
     }
 }
 #Preview {
-    CustomButton(title: "login", backgroundColor: Const.primaryColor, action: {})
+    CustomButton(title: "login", backgroundColor: Const.primaryColor, action: {}, size: CustomButtonSize.xlage)
 }

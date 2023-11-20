@@ -18,7 +18,8 @@ struct ForgotPasswordMailBottomSheet: View {
                 CustomTextField(icon: "mail", placeHolder: "email")
                 CustomLinkButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
                     //mail check
-                },destinaiton: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet , goPage: $goPage)))
+
+                },destinaiton: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet , goPage: $goPage)), size: CustomButtonSize.small)
                 
             }.padding(30)
                 .frame(width: Const.width , height:  Const.height)

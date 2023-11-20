@@ -23,11 +23,10 @@ struct InfoView: View {
                                 CustomImageRectangle(width: 330, height: 90, imagePath: ImageManager.habuLogo)
                                 CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                                     print("login button")
-                                }, destinaiton: AnyView(LoginView()))
-
+                                }, destinaiton: AnyView(LoginView()), size: CustomButtonSize.small)
                                 CustomLinkButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
                                     print("register view")
-                                }, destinaiton: AnyView(RegisterBuildFirstView()),textColor: .black)
+                                },destinaiton: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
                             }
                         }
                     }

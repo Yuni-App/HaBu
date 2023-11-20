@@ -29,7 +29,7 @@ struct BlockedUserListTile: View {
                 Spacer()
                 CustomButton(title: "Kaldır", backgroundColor: Const.primaryColor, action: {
                     
-                } ,width: Const.width/3)
+                } ,size: CustomButtonSize.xxxsmall)
                
             }
         }

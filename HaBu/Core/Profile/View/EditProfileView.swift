@@ -144,10 +144,9 @@ struct EditProfileView: View {
                     
                 } //bio
                 Spacer()
-                CustomButton(title: "Kaydet", backgroundColor: Const.thirColor) {
+                CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     print("kaydet")
-                }
-                
+                }, size: .lage)
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
         }
@@ -157,8 +156,8 @@ struct myText: View{
     var text: String
     
     init(text: String) {
-            self.text = text
-                }
+        self.text = text
+    }
     var body: some View{
         Text(text)
             .foregroundColor(.white)

@@ -47,3 +47,28 @@ struct CustomTextField: View {
 #Preview {
     CustomTextField(icon: "mail", placeHolder: "place holder")
 }
+
+
+/*
+ VStack {
+            TextField("Ne düşünüyorsunuz?", text: $text)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .frame(height: UIScreen.main.bounds.height / 3)
+        }
+        .padding()
+ 
+ 
+ */
+
+/*
+ TextField("Email", text: $text)
+     .frame(height: 235)
+     .textFieldStyle(PlainTextFieldStyle())
+     .padding([.horizontal], 4)
+     .background(Color.gray.opacity(0.2))
+     .cornerRadius(4)
+     .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))
+     .lineLimit(5)
+ */

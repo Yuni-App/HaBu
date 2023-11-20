@@ -9,13 +9,40 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var searchText = ""
+    @State private var isSearchBar = false
+    @State private var ratingSorted = false
+    
+    //filtered user "name" or "userName"
+    var filteredUser: [User]{
+        if isSearchBar{
+            return User.MockData.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText) ||
+                $0.username.localizedCaseInsensitiveContains(searchText)
+            }
+        }else {
+            return User.MockData.filter { $0.rating > 20 }.sorted { $0.rating > $1.rating }
+        }
+    }
+    
+    var ratingSort: [User]{
+        if ratingSorted{
+            return User.MockData.filter {
+                $0.rating >= 20 && $0.rating <= 30
+            }
+        }else{
+            return User.MockData.filter {
+                $0.rating > 40
+            }
+        }
+    }
     var body: some View {
         NavigationStack{
             ScrollView{
                 LazyVStack(spacing:15){
-                    ForEach(User.MockData, id : \.id){user in
-                        NavigationLink(destination: Text("ProfileView"), 
-                        label: {
+                    //User.MockData = filtereduser
+                    ForEach(filteredUser, id : \.id){user in
+                        NavigationLink(destination: Text("ProfileView"),
+                                       label: {
                             HStack(){
                                 CircleProfileImage(userIamgeUrl: "", size: .small)
                                 VStack (alignment:.leading){
@@ -24,16 +51,35 @@ struct SerachView: View {
                                         .opacity(0.6)
                                         .font(.footnote)
                                 }
+                                Spacer()
+                                
+                                HStack {
+                                    switch (ratingSorted, user.rating) {
+                                    case (false, 20...30):
+                                        Image(systemName:"star.fill").background(Color.white)
+                                            .foregroundColor(Color.cyan)
+                                    case(false, 30...40):
+                                        Image(systemName:"star.fill").background(Color.white)
+                                            .foregroundColor(Color.yellow)
+                                    case (false, 40...):
+                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
+                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
+                                    default:
+                                        Image(systemName: "star")
+                                                    .foregroundColor(Color.gray)
+                                    }                                }
+                                
                             }
-                            .frame(maxWidth: .infinity,alignment: .leading)
+                            .frame(width: Const.width * 0.9,alignment: .leading)
                             .foregroundStyle(.black)
                             .padding(.leading,8)
                         })
                     }
-                    
                 }
                 .padding(.top,15)
-                .searchable(text: $searchText,prompt: "Arama...")
+                .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
+                    isSearchBar = newValue != ""
+                }
             }
             .navigationTitle("Arama")
             .navigationBarTitleDisplayMode(.inline)

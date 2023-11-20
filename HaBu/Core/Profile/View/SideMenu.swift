@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+struct myDivider: View{
+    var body: some View{
+        Rectangle()
+            .background(Color.black)
+            .frame(height: 1).bold()
+    }
+}
+
 struct SideMenu: View {
     @Binding var isShowingSideMenu :Bool
     var body: some View {
@@ -29,6 +37,7 @@ struct SideMenu: View {
                     .font(.title3)
             }
             .frame(height: 50)
+            myDivider()
             NavigationLink {
                 EditProfileView(user:User.MockData[0])
             } label: {
@@ -36,6 +45,7 @@ struct SideMenu: View {
                     .font(.title3)
             }
             .frame(height: 50)
+            myDivider()
             NavigationLink {
                 EditProfileView(user:User.MockData[0])
             } label: {
@@ -43,13 +53,16 @@ struct SideMenu: View {
                     .font(.title2)
             }
             .frame(height: 50)
+            myDivider()
             NavigationLink {
                 EditProfileView(user:User.MockData[0])
             } label: {
                 Text("Geri Bildirim").foregroundColor(.white)
                     .font(.title2)
+                
             }
             .frame(height: 50)
+            myDivider()
             NavigationLink {
                 EditProfileView(user:User.MockData[0])
             } label: {

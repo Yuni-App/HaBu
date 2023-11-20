@@ -27,7 +27,10 @@ struct LikesListTile: View {
                 }
                 .foregroundStyle(.black)
                 Spacer()
-               CustomLinkButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {} , destinaiton: AnyView(  ProfileView(user: User.MockData[0])),width: Const.width/3)
+
+
+                CustomLinkButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {} , destinaiton: AnyView(  ProfileView(user:User.MockData[0])), size: CustomButtonSize.xxxsmall)
+
                 
             }
         }
