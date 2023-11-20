@@ -33,8 +33,8 @@ struct UniInfo :Identifiable,Codable {
 extension User {
     static var MockData: [User] = [
         .init(id: "12345", email: "erbalta80@gmail.com", createdAt: "03.10.2000", username: "omer_erbalta", name: "Ömer", surName: "Erbalta", password: "123456", rating: 20),
-        .init(id: "12346", email: "yusufAydın@gmail.com", createdAt: "04.10.2000", username: "chatYSF", name: "Yusuf", surName: "Aydın", password: "123456", rating: 30),
-        .init(id: "12347", email: "mertAlp@gmail.com", createdAt: "05.10.2000", username: "alp_mert", name: "Mert", surName: "Alp", password: "123456", rating: 12),
+        .init(id: "12346", email: "yusufAydın@gmail.com", createdAt: "04.10.2000", username: "chatYSF", name: "Yusuf", surName: "Aydın", password: "123456", rating: 50),
+        .init(id: "12347", email: "mertAlp@gmail.com", createdAt: "05.10.2000", username: "alp_mert", name: "Mert", surName: "Alp", password: "123456", rating: 32),
         .init(id: "12348", email: "asliCetin@gmail.com", createdAt: "06.10.2000", username: "asli_cetin", name: "Aslı", surName: "Çetin", password: "123456", rating: 18),
         .init(id: "12349", email: "emreYilmaz@gmail.com", createdAt: "07.10.2000", username: "emre_yilmaz", name: "Emre", surName: "Yılmaz", password: "123456", rating: 17),
         .init(id: "12350", email: "gizemArslan@gmail.com", createdAt: "08.10.2000", username: "gizem_arslan", name: "Gizem", surName: "Arslan", password: "123456", rating: 14),
