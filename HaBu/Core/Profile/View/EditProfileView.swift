@@ -17,7 +17,7 @@ struct EditProfileView: View {
     @State private var dragDirection: DragDirection = .none
     @State private var imageIndices = [0, 1, 2]
     @State var imagePickerPresented = false
-
+    
     var images = [
         "profil1",
         "profil2",
@@ -27,6 +27,9 @@ struct EditProfileView: View {
         self.user = user
     }
     var body: some View {
+        
+        VStack {
+            
             VStack {
                 
                 ZStack {
@@ -45,19 +48,19 @@ struct EditProfileView: View {
                                 .fontWeight(.semibold)
                         }
                         Text(user.username)
-                            
+                        
                             .foregroundStyle(.white)
                             .font(.title3)
                             .fontWeight(.semibold)
                         
-                       
+                        
                         //profile Images
                         HStack {
                             ZStack{
                                 
-                        CircleProfileImage(userImage: images[0] , index: imageIndices[0])
-                        CircleProfileImage(userImage: images[1] , index: imageIndices[1])
-                        CircleProfileImage(userImage: images[2] , index: imageIndices[2])
+                                CircleProfileImage(userImage: images[0] , index: imageIndices[0])
+                                CircleProfileImage(userImage: images[1] , index: imageIndices[1])
+                                CircleProfileImage(userImage: images[2] , index: imageIndices[2])
                             }
                             .frame(width: Const.width)
                             .gesture(DragGesture().onChanged({ value in
@@ -85,20 +88,20 @@ struct EditProfileView: View {
                         }
                         
                     }
-                   
+                    
                     
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
-                               
+                
                 HStack {
                     VStack {
                         HStack {
                             myText(text: "İsim")
                             Spacer()
                         }.frame(width: Const.width * 0.8)
-
+                        
                         TextField("isminizi girin\(name)", text: $name).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                         Divider().frame(width: 330).background(Color.black)
-                            
+                        
                     }
                     
                 } //isim
@@ -109,10 +112,10 @@ struct EditProfileView: View {
                             myText(text: "Soyisim")
                             Spacer()
                         }.frame(width: Const.width * 0.8)
-
+                        
                         TextField(" Soyisminizi girin\(surName)", text: $surName).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                         Divider().frame(width: 330).background(Color.black)
-                            
+                        
                     }
                     
                 } //soyisim
@@ -139,7 +142,7 @@ struct EditProfileView: View {
                         TextField("Biyografi girin\(biyografi)", text: $biyografi).frame(width: Const.width * 0.8, height: Const.height * 0.03)
                         
                         Divider().frame(width: 330).background(Color.black)
-
+                        
                     }
                     
                 } //bio
@@ -151,6 +154,7 @@ struct EditProfileView: View {
                 .background(Const.primaryColor)
         }
     }
+}
 
 struct myText: View{
     var text: String
@@ -164,6 +168,18 @@ struct myText: View{
             .fontWeight(.bold)
             .font(.headline)
         
+    }
+}
+struct myTextField: View {
+    var placeholder: String
+    @Binding var text: String
+    init (placeholder: String, text: Binding<String>){
+        self.placeholder = placeholder
+        self._text = text
+    }
+    var body: some View {
+        TextField(placeholder, text: $text)
+            .frame(width: Const.width * 0.8, height: Const.height * 0.03)
     }
 }
 
