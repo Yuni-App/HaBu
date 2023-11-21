@@ -25,7 +25,7 @@ struct FeedView: View {
             .toolbar{
                 ToolbarItem(placement:.topBarLeading){
                     NavigationLink {
-                    // CreatePost()
+                     CreatePostView()
                     } label: {
                         Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
                     }
