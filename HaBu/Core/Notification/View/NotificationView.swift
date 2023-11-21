@@ -19,26 +19,17 @@ struct NotificationView: View {
                 Spacer()
                 ScrollView {
                     ForEach(Notification.MockData, id : \.id){notification in
-                        NavigationLink(destination: ProfilseView(),
+                        NavigationLink(destination: Text("ProfileView, myPostView, otherPostView"),
                                        label: {
                             HStack(){
                                 CircleProfileImage(userIamgeUrl: "\(notification.userProfileImageUrl)", size: .xsmall)
+                                Text("\(notification.userName) \(notification.status)")
+                                Spacer()
+                                
                             }
-                            NavigationLink(destination: FeedView(), label: {
-                                HStack(){
-                                    Text("\(notification.userName) \(notification.status)")
-                                    Spacer()
-                                    
-                                }
-                            })
-                            NavigationLink(destination: CommentBottomSheet()) {
-                                HStack(){
-                                    Image(systemName: "star")
-                                }
-                            }
-                            
-                        }).frame(width: Const.width * 0.9)
+                            .frame(width: Const.width * 0.9)
                             .foregroundStyle(.black)
+                        })
                     }
                 }
                 

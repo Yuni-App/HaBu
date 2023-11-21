@@ -66,15 +66,14 @@ struct SerachView: View {
                                 HStack {
                                     switch (ratingSorted, user.rating) {
                                     case (false, 20...30):
-                                        Image(systemName:"star.fill")
-                                            .foregroundColor(Color(UIColor(hex: "#cd7f32", alpha: 1)))
+                                        Image(systemName:"star.fill").background(Color.white)
+                                            .foregroundColor(Color.cyan)
                                     case(false, 30...40):
-                                        Image(systemName: "star.fill").foregroundStyle(Color(UIColor(hex: "#aaa9ad", alpha: 1)))
-                                    case (false, 40...):
-                                        Image(systemName:"star.fill")
+                                        Image(systemName:"star.fill").background(Color.white)
                                             .foregroundColor(Color.yellow)
-                                        
-                                        
+                                    case (false, 40...):
+                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
+                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
                                     default:
                                         Image(systemName: "star")
                                                     .foregroundColor(Color.gray)

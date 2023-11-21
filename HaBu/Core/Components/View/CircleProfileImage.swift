@@ -8,6 +8,36 @@ import SwiftUI
 import Kingfisher
 
 
+enum ImageLocationAndSize:Int{
+    case Center = 1
+    case Right = 2
+    case Left = 0
+    
+    var size : CGFloat{
+        switch self {
+        case .Left:
+            return Const.width * 0.1
+        case .Center:
+            return Const.width * 0.3
+        case .Right:
+            return Const.width * 0.1
+        }
+    }
+    var Position : CGPoint{
+        switch self {
+        case .Left:
+            return CGPoint(x:Const.width * 0.25, y :0 )
+        case .Center:
+            return CGPoint(x:Const.width * 0.5,y: Const.height * 0.1)
+        case .Right:
+            return CGPoint(x:Const.width * 0.75, y :0)
+        }
+    }
+    static func fromRawValue(_ rawValue: Int) -> ImageLocationAndSize? {
+          return ImageLocationAndSize(rawValue: rawValue)
+      }
+    
+}
 enum ProfileImageSize{
     case xxxsmall
     case xxsmall
@@ -17,6 +47,7 @@ enum ProfileImageSize{
     case lage
     case xlage
     case xxlage
+    
     var deminsion : CGFloat{
         switch self {
         case .xxxsmall:
@@ -41,36 +72,59 @@ enum ProfileImageSize{
 
 struct CircleProfileImage: View {
     let userIamgeUrl : String
-    let size : ProfileImageSize
+    var index : Int?
+    var size : ProfileImageSize?
+    
     init(userIamgeUrl: String, size: ProfileImageSize) {
         self.userIamgeUrl = userIamgeUrl
         self.size = size
     }
+    init(userImage:String,index : Int){
+        self.userIamgeUrl = userImage
+        self.index = index
+    }
     var body: some View {
-        if  userIamgeUrl != ""{
-           Image(userIamgeUrl)
+        if let size = self.size{
+            if  userIamgeUrl != ""{
+                Image(userIamgeUrl)
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 30))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.white, lineWidth: 2)
+                    )
+                    .frame(width: size.deminsion ,height: size.deminsion)
+                
+            }
+            else{
+                Image("profil1")
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 30))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.white, lineWidth: 2)
+                    )
+                    .frame(width: size.deminsion ,height: size.deminsion)
+            }
+        }
+        if let index = self.index{
+            let value = ImageLocationAndSize.fromRawValue(index)
+            Image(userIamgeUrl)
                 .resizable()
-                .scaledToFill()
-                .frame(width: size.deminsion,height:size.deminsion)
-                .clipShape(.circle)
-                .padding(.all,5)
+                .clipShape(.rect(cornerRadius: 30))
                 .overlay(
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(Color.white, lineWidth: 1)
                 )
-                
-        }
-        else{
-            Image(systemName:"person.circle.fill")
-                .resizable()
-                .scaledToFill()
-                .frame(width: size.deminsion ,height: size.deminsion)
-                .clipShape(.circle)
-                .foregroundStyle(.gray)
+                .frame(width: value!.size, height: value!.size)
+                .position(value!.Position)
+                .onTapGesture {
+                    
+                }
         }
     }
 }
 
 #Preview {
-    CircleProfileImage(userIamgeUrl: "", size:.xsmall)
+    EditProfileView(user: User.MockData[0])
 }

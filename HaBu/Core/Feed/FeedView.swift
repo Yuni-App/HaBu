@@ -15,21 +15,17 @@ struct FeedView: View {
                 ForEach(Post.MockData , id: \.id){post in
                     FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
                     Divider()
-                    ThreeDRotateFeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
-                    Divider()
-                    
+
                 }
-                
             }
             .sheet(isPresented: $showCategoryFilter) {
-                
                 CategoryFilter()
                     .presentationDetents([.large,.height(Const.height * 0.3)])
             }
             .toolbar{
                 ToolbarItem(placement:.topBarLeading){
                     NavigationLink {
-                        CreatePostView()
+                    // CreatePost()
                     } label: {
                         Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
                     }
