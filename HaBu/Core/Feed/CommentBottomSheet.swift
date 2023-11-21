@@ -42,7 +42,7 @@ struct CommentViewCell : View {
         VStack{
             //User Info
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .xxsmall)
+                CircleProfileImage(userIamgeUrl: "", size: .small)
                     .padding(.horizontal,10)
                 VStack(alignment:.leading){
                     Text(user.username)

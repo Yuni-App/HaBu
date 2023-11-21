@@ -35,6 +35,7 @@ struct UserInfo: View {
                 Spacer()
                 Text("4s")
                     .opacity(0.6)
+                    .font(.footnote)
                     .fontWeight(.semibold)
                 Button(action: {
                     
@@ -51,5 +52,5 @@ struct UserInfo: View {
 
 
 #Preview {
-    UserInfo(user: User.MockData[0], imageSize: .xsmall)
+    UserInfo(user: User.MockData[0], imageSize: .small)
 }

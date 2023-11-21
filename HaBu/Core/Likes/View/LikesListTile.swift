@@ -15,7 +15,7 @@ struct LikesListTile: View {
     var body: some View {
         NavigationStack{
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .xsmall)
+                CircleProfileImage(userIamgeUrl: "", size: .small)
                 VStack{
                     Text("\(user.name) \(user.surName)")
                         .fontWeight(.semibold)
@@ -28,7 +28,8 @@ struct LikesListTile: View {
                 .foregroundStyle(.black)
                 Spacer()
 
-                CustomLinkButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {} , destinaiton: AnyView(  ProfileView()), size: CustomButtonSize.xxxsmall)
+
+                CustomLinkButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {} , destinaiton: AnyView(  ProfileView(user:User.MockData[0])), size: CustomButtonSize.xxxsmall)
 
                 
             }
