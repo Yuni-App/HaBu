@@ -350,8 +350,8 @@
 		943FB8DD2B063295009C55C6 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				949016E52B041F3000164405 /* RegisterBuildSecondView.swift */,
 				949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */,
+				949016E52B041F3000164405 /* RegisterBuildSecondView.swift */,
 				949016E72B041F4900164405 /* RegisterBuildThirdView.swift */,
 			);
 			path = Register;

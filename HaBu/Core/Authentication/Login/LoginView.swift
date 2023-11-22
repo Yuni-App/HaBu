@@ -37,7 +37,7 @@ struct LoginView: View {
                             CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                                true
                             }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
-                        }.frame(width: Const.width*0.85, height:  Const.height * 0.35)
+                        }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                         .background(
                             RectangleBlur(color: Const.primaryColor))
                        
