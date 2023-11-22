@@ -24,7 +24,7 @@ struct InfoView: View {
                             true
                         },destination: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
                         
-                    }.padding(25)
+                    }.frame(width: Const.width*0.85,height: Const.height * 0.35)
                         .background(
                             RectangleBlur(color: Const.primaryColor))
                 }
