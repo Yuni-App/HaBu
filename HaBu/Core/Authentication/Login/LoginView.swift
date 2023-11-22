@@ -15,7 +15,7 @@ struct LoginView: View {
         NavigationStack{
             ZStack {
                 VStack{
-                    CustomImageRectangle(width: Const.width, height: Const.height/2, imagePath: ImageManager.loginVector)
+                    CustomImage(width: Const.width, height: Const.height/2, imagePath: ImageManager.loginVector)
                     ZStack{
                         Image("")
                             .frame(width: 370, height: 320)

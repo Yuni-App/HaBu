@@ -13,7 +13,7 @@ struct RegisterBuildThirdView: View {
         NavigationStack{
             ZStack {
                 VStack{
-                    CustomImageRectangle(width: Const.width, height: Const.height/3, imagePath: ImageManager.registerThirdVector)
+                    CustomImage(width: Const.width, height: Const.height/3, imagePath: ImageManager.registerThirdVector)
                     ZStack{
                         Image("")
                             .frame(width: 370, height: 330)

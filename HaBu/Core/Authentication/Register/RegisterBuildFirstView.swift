@@ -12,7 +12,7 @@ struct RegisterBuildFirstView: View {
         NavigationStack{
             ZStack {
                 VStack{
-                    CustomImageRectangle(width: Const.width, height: Const.height/3, imagePath: ImageManager.RegisterSecondVector)
+                    CustomImage(width: Const.width, height: Const.height/3, imagePath: ImageManager.RegisterSecondVector)
                     ZStack{
                         Image("")
                             .frame(width: 370, height: 330)
