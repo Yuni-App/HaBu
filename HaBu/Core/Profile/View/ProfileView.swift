@@ -148,45 +148,8 @@ struct ProfileView : View {
                                         
                                     } //User Info
                                     
-                                    HStack{
-                                        Image(systemName:"chevron.backward")
-                                            .fontWeight(.bold)
-                                            .font(.subheadline)
-                                        Text(" Edit")
-                                            .font(.title3)
-                                            .fontWeight(.semibold)
-                                    }
-                                    .background(
-                                        NavigationLink(destination: EditProfileView(user: User.MockData[0]), isActive: $shouldNavigate) {
-                                            EmptyView()
-                                        }
-                                            .hidden()
-                                    )//edit button
-                                    .padding(.vertical,5)
-                                    .padding(.horizontal,10)
-                                    .padding(.trailing,100)
-                                    .background(.white)
-                                    .clipShape(
-                                        .rect(
-                                            topLeadingRadius: 20,
-                                            bottomLeadingRadius: 20,
-                                            bottomTrailingRadius: 0,
-                                            topTrailingRadius: 0
-                                        )
-                                    )
-                                    .padding(.bottom,10)
-                                    .position(editButtonPosition)
-                                    .gesture(DragGesture().onChanged({ value in
-                                        if value.translation.width > -50{
-                                            editButtonPosition = CGPoint(x: Const.width + value.translation.width, y : Const.height / 5)
-                                        }
-                                        
-                                    })
-                                        .onEnded({ _ in
-                                            editButtonPosition = CGPoint(x: Const.width , y : Const.height / 5)
-                                            shouldNavigate = true
-                                        })
-                                    )
+                                    SlidableButton(destination: AnyView(EditProfileView(user: User.MockData[0])), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white)
+                                    
                                 }
                             }.frame(width: Const.width,height: Const.height * 0.25)
                             

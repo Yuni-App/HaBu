@@ -13,7 +13,7 @@ struct FeedView: View {
         NavigationStack{
             VStack {
                 HStack{
-                    SweepableButton(destination: AnyView(AddPostView(imageList: [])), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "asd")
+                    SlidableButton(destination: AnyView(AddPostView(imageList: [])), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor)
                         .padding(.top,50)
                 }
                 .frame(maxHeight:.ulpOfOne)

@@ -20,7 +20,7 @@
 		5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB562B050FC500C6E145 /* NotificationView.swift */; };
 		5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */; };
 		5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */; };
-		5C34FC9B2B0DEE9B00989A67 /* SweepableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C34FC9A2B0DEE9B00989A67 /* SweepableButton.swift */; };
+		5C34FC9B2B0DEE9B00989A67 /* SlidableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C34FC9A2B0DEE9B00989A67 /* SlidableButton.swift */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
 		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
@@ -76,7 +76,7 @@
 		5C2DAB562B050FC500C6E145 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBottomSheet.swift; sourceTree = "<group>"; };
 		5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextFieldModifier.swift; sourceTree = "<group>"; };
-		5C34FC9A2B0DEE9B00989A67 /* SweepableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SweepableButton.swift; path = "../../../../../.Trash/HaBu 19.38.51/HaBu/Core/Components/View/SweepableButton.swift"; sourceTree = "<group>"; };
+		5C34FC9A2B0DEE9B00989A67 /* SlidableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SlidableButton.swift; path = "../../../../../.Trash/HaBu 19.38.51/HaBu/Core/Components/View/SlidableButton.swift"; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
 				5C9420B02B063460004F9A17 /* CategoryFilter.swift */,
 				94BDAD682B07B05200F66312 /* CustomButton.swift */,
-				5C34FC9A2B0DEE9B00989A67 /* SweepableButton.swift */,
+				5C34FC9A2B0DEE9B00989A67 /* SlidableButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -535,7 +535,7 @@
 				94BDAD692B07B05200F66312 /* CustomButton.swift in Sources */,
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
 				5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */,
-				5C34FC9B2B0DEE9B00989A67 /* SweepableButton.swift in Sources */,
+				5C34FC9B2B0DEE9B00989A67 /* SlidableButton.swift in Sources */,
 				5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */,
 				949016E22B041EF400164405 /* LoginView.swift in Sources */,
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
