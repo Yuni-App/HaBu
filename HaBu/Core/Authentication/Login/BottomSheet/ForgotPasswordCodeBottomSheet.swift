@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ForgotPasswordCodeBottomSheet: View {
     @Binding var showSheet: Bool
-    @Binding var goPage: Bool
+   
 
     var body: some View {
         NavigationStack{  VStack{
@@ -17,7 +17,7 @@ struct ForgotPasswordCodeBottomSheet: View {
             CustomTextField(icon: "key", placeHolder: "kod")
             CustomButton(title: "Onayla", backgroundColor: Const.primaryColor, action: {
                 true
-            },destination: AnyView(ForgotPasswordCreatePasswordBottomSheet(showSheet: $showSheet , goPage: $goPage)), size: CustomButtonSize.small)
+            },destination: AnyView(ForgotPasswordCreatePasswordBottomSheet(showSheet: $showSheet).navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
         }.padding(30)
                 .frame(width: Const.width , height:  Const.height)
                 .background(
@@ -27,7 +27,7 @@ struct ForgotPasswordCodeBottomSheet: View {
     }
 }
 #Preview {
-    ForgotPasswordCodeBottomSheet(showSheet: .constant(false), goPage: .constant(false))
+    ForgotPasswordCodeBottomSheet(showSheet: .constant(false))
 }
 
 

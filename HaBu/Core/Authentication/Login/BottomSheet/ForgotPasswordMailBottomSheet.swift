@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ForgotPasswordMailBottomSheet: View {
     @Binding var showSheet: Bool
-    @Binding var goPage: Bool
+ 
 
     var body: some View {
         NavigationStack{
@@ -19,7 +19,7 @@ struct ForgotPasswordMailBottomSheet: View {
                 CustomButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
                     true
                     //mail check
-                },destination: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet , goPage: $goPage)), size: CustomButtonSize.small)
+                },destination: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet ).navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
                 
             }.padding(30)
                 .frame(width: Const.width , height:  Const.height)
@@ -31,5 +31,5 @@ struct ForgotPasswordMailBottomSheet: View {
 }
 
 #Preview {
-    ForgotPasswordMailBottomSheet(showSheet: .constant(false), goPage: .constant(false))
+    ForgotPasswordMailBottomSheet(showSheet: .constant(false))
 }
