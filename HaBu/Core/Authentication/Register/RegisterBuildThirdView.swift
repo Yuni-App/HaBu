@@ -24,9 +24,9 @@ struct RegisterBuildThirdView: View {
                             CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
                             CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
                             CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
-                            CustomLinkButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {
+                            CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {true
 
-                            }, destinaiton: AnyView(TabbarView()), size: CustomButtonSize.small).padding(.top , 50)
+                            }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.top , 50)
                         }
                     }
                     HStack{

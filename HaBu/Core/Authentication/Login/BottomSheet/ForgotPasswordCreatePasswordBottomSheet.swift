@@ -19,6 +19,7 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
                 CustomButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
                     showSheet = false
                     goPage = true
+                    return false
                 }, size: CustomButtonSize.small)
             }.padding(30)
                 .frame(width: Const.width , height: Const.height)

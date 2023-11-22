@@ -25,8 +25,7 @@ struct RegisterBuildSecondView: View {
                             CustomTextField(icon: "person.badge.plus", placeHolder: "Kullanıcı Adı")
                             CustomTextField(icon: "calendar", placeHolder: "Yaş")
                             CustomTextField(icon: "pencil", placeHolder: "Bio")
-                            CustomLinkButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                            }, destinaiton: AnyView(RegisterBuildThirdView()), size: CustomButtonSize.small)
+                            CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildThirdView()), size: CustomButtonSize.small)
                             .padding(.top,50)
                         }
                     }
