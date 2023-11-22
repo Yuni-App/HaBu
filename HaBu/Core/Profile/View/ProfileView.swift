@@ -147,6 +147,7 @@ struct ProfileView : View {
                                         
                                         
                                     } //User Info
+                                    
                                     HStack{
                                         Image(systemName:"chevron.backward")
                                             .fontWeight(.bold)
@@ -206,7 +207,7 @@ struct ProfileView : View {
                             Divider()
                                 .background(.black)
                                 .frame(height:1)
-
+                            
                             ForEach(Post.MockData,id:\.id){post in
                                 FeedViewCell(post: post, user: User.MockData[0])
                                     .font(.title)
