@@ -14,11 +14,9 @@ struct CustomButton: View {
     var size : CustomButtonSize
     var textColor : Color?
     @State private var isActiveDestination: Bool = false
-
-    
     
     var body: some View {
-    
+        
         NavigationLink(
             destination: destination ?? AnyView(EmptyView()),
             isActive: $isActiveDestination,
@@ -36,16 +34,12 @@ struct CustomButton: View {
                 .foregroundColor(textColor ?? .white)
                 .cornerRadius(4)
         })
-        
-        
-        
     }
 }
 
 #Preview {
     CustomButton(title: "Giriş", backgroundColor: Const.primaryColor, action: {5>3}, destination: AnyView(FeedView()), size: CustomButtonSize.medium)
 }
-
 
 enum CustomButtonSize{
     case xxxsmall
@@ -74,7 +68,7 @@ enum CustomButtonSize{
             return Const.width * 0.9
         case .xxlage:
             return Const.width * 0.95
-         }
+        }
     }
     var height : CGFloat{
         switch self {
