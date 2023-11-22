@@ -23,8 +23,8 @@ struct LoginView: View {
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
                         VStack{
-                            CustomTextField(icon: "mail", placeHolder: "e-posta")
-                            CustomTextField(icon: "key", placeHolder: "Şifre")
+                            CustomTextField(icon: .mail, placeHolder: "e-posta")
+                            CustomTextField(icon: .key, placeHolder: "Şifre")
                             HStack{
                                 Spacer()
                                 Text("Şifremi unuttum.")

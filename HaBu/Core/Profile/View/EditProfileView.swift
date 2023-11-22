@@ -135,6 +135,7 @@ struct EditProfileView: View {
                 } //email
                 HStack{
                     VStack{
+                        
                         HStack {
                             myText(text: "Biografi")
                             Spacer()

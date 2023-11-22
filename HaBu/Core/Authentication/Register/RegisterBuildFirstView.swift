@@ -20,9 +20,9 @@ struct RegisterBuildFirstView: View {
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
                         VStack{
-                            CustomTextField(icon: "envelope", placeHolder: "e-posta")
-                            CustomTextField(icon: "key", placeHolder: "Şifre")
-                            CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
+                            CustomTextField(icon: .envelope, placeHolder: "e-posta")
+                            CustomTextField(icon: .key, placeHolder: "Şifre")
+                            CustomTextField(icon: .key, placeHolder: "Şifre Tekrar")
                             CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildSecondView()), size: CustomButtonSize.small).padding(.top , 50)
                      
                         }

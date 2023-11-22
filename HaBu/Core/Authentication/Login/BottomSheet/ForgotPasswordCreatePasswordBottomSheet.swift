@@ -14,8 +14,8 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
         NavigationStack {
             VStack{
                 Text("Şifre Oluştur").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
-                CustomTextField(icon: "key", placeHolder: "şifre")
-                CustomTextField(icon: "key", placeHolder: "şifre tekrar")
+                CustomTextField(icon: .kepencily, placeHolder: "şifre")
+                CustomTextField(icon: .key, placeHolder: "şifre tekrar")
                 CustomButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
                     showSheet = false
                     goPage = true
