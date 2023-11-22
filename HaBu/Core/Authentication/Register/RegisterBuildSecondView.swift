@@ -12,14 +12,7 @@ struct RegisterBuildSecondView: View {
         NavigationStack{
             ZStack {
                 VStack{
-                    CustomImageRectangle(width: Const.width, height: Const.height/3, imagePath: ImageManager.registerVector)
-                    
-                    ZStack{
-                        Image("")
-                            .frame(width: 370, height: 470)
-                            .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
+                    CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
                         VStack{
                             CustomTextField(icon: "person.fill", placeHolder: "Ad")
                             CustomTextField(icon: "person.fill", placeHolder: "Soy Ad")
@@ -27,9 +20,9 @@ struct RegisterBuildSecondView: View {
                             CustomTextField(icon: "calendar", placeHolder: "Yaş")
                             CustomTextField(icon: "pencil", placeHolder: "Bio")
                             CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildThirdView()), size: CustomButtonSize.small)
-                            .padding(.top,50)
-                        }
-                    }
+                        }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
+                        .background(RectangleBlur(color: Const.primaryColor))
+                    
                     HStack{
                         Text("Bir hesabınız var mı?")
                             .foregroundStyle(.black)
@@ -41,13 +34,13 @@ struct RegisterBuildSecondView: View {
                                 .foregroundStyle(.blue)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
                         }
-                    }.padding(30)}
-                    .padding(.horizontal , 20)
-                    .frame(width: 430, height: 1000)
-                    .background(
-                        BackgroundLinearColor()
-                    )
+                    }}.frame(width: Const.width , height: Const.height+100)
+                    .padding()
+    
             }
+            .background(
+                BackgroundLinearColor()
+            )
         }
     }
 }
