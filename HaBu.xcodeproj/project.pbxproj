@@ -51,6 +51,7 @@
 		949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E72B041F4900164405 /* RegisterBuildThirdView.swift */; };
 		949016EA2B04275F00164405 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomButton.swift */; };
 		949E2A0F2B04D4E200DF967E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E2A0E2B04D4E200DF967E /* CustomTextField.swift */; };
+		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsers.swift */; };
 		94BDAD672B07AC1A00F66312 /* BlockedUserListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
@@ -106,6 +107,7 @@
 		949016E72B041F4900164405 /* RegisterBuildThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildThirdView.swift; sourceTree = "<group>"; };
 		949016E92B04275F00164405 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		949E2A0E2B04D4E200DF967E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsers.swift; sourceTree = "<group>"; };
 		94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserListTile.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				5C26585F2B03C51C008BEB6D /* Const.swift */,
 				9411AA892B04F4900042A354 /* ImageManager.swift */,
+				94BCDEB02B0E2DEF00785CBE /* IconManager.swift */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				94808CD62B0CE63D00CC51FD /* AddPostView.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
+				94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */,
 				9411AA8C2B050EDB0042A354 /* BackgroundLinearColor.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
 				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
