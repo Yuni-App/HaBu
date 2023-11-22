@@ -27,7 +27,7 @@ struct BlockedUserListTile: View {
                 }
                 .foregroundStyle(.black)
                 Spacer()
-                CustomLinkButton(title: "Kaldır", backgroundColor: Const.primaryColor, action: {
+                CustomButton(title: "Kaldır", backgroundColor: Const.primaryColor, action: {
                     false
                 } ,size: CustomButtonSize.xxxsmall)
                

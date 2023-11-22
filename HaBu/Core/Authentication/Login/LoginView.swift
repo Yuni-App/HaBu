@@ -42,7 +42,7 @@ struct LoginView: View {
                                     .font(.system(size: 12))
                             }
 
-                            CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                            CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                                 //will delete the back button from feedview
                                true
                             }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.vertical , 30)

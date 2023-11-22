@@ -49,7 +49,7 @@
 		949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */; };
 		949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E52B041F3000164405 /* RegisterBuildSecondView.swift */; };
 		949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E72B041F4900164405 /* RegisterBuildThirdView.swift */; };
-		949016EA2B04275F00164405 /* CustomLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomLinkButton.swift */; };
+		949016EA2B04275F00164405 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomButton.swift */; };
 		949E2A0F2B04D4E200DF967E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E2A0E2B04D4E200DF967E /* CustomTextField.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsers.swift */; };
 		94BDAD672B07AC1A00F66312 /* BlockedUserListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */; };
@@ -103,7 +103,7 @@
 		949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildFirstView.swift; sourceTree = "<group>"; };
 		949016E52B041F3000164405 /* RegisterBuildSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildSecondView.swift; sourceTree = "<group>"; };
 		949016E72B041F4900164405 /* RegisterBuildThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildThirdView.swift; sourceTree = "<group>"; };
-		949016E92B04275F00164405 /* CustomLinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLinkButton.swift; sourceTree = "<group>"; };
+		949016E92B04275F00164405 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		949E2A0E2B04D4E200DF967E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsers.swift; sourceTree = "<group>"; };
 		94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserListTile.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 			children = (
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
 				5C4133C02B04EFD3006F29AF /* ActionButton.swift */,
-				949016E92B04275F00164405 /* CustomLinkButton.swift */,
+				949016E92B04275F00164405 /* CustomButton.swift */,
 				949E2A0E2B04D4E200DF967E /* CustomTextField.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 				9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */,
@@ -502,7 +502,7 @@
 				9411AA8E2B0510F80042A354 /* CustomImageRectangle.swift in Sources */,
 				887CD10B2B064CBC00D7C8DC /* SideMenu.swift in Sources */,
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,
-				949016EA2B04275F00164405 /* CustomLinkButton.swift in Sources */,
+				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
 				943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */,

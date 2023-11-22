@@ -147,7 +147,7 @@ struct EditProfileView: View {
                     
                 } //bio
                 Spacer()
-                CustomLinkButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
+                CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     false
                 }, size: .lage)
             }.frame(width: Const.width * 1)
