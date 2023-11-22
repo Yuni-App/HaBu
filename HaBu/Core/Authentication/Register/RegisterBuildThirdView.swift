@@ -13,39 +13,28 @@ struct RegisterBuildThirdView: View {
         NavigationStack{
             ZStack {
                 VStack{
-                    CustomImage(width: Const.width, height: Const.height/3, imagePath: ImageManager.registerThirdVector)
-                    ZStack{
-                        Image("")
-                            .frame(width: 370, height: 330)
-                            .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
-                        VStack{
-                            CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
-                            CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
-                            CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
-                            CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {true
-
-                            }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.top , 50)
-                        }
-                    }
+                    CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
+                    VStack{
+                        CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
+                        CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
+                        CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
+                        CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {true
+                        }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
+                        
+                    }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
+                    .background(RectangleBlur(color: Const.primaryColor))
                     HStack{
                         CheckBoxView(checked: isChecked){
-                            
                         }
                         Text("Lütfen").foregroundStyle(.black).font(.system(size: 14))
                         NavigationLink {
                             LoginView()
                         } label: {
-                            HStack{  Text("Gizlilik Politikasını ").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 14))}
+                            HStack{  Text("Gizlilik Politikasın").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 14))}
                         }
                         Text("Onaylayınız").foregroundStyle(.black).font(.system(size: 14))
-                }.padding(.top , 30)}.padding(.horizontal , 20)
-                    .frame(width: 430, height: 932)
-                    .background(
-                        BackgroundLinearColor()
-                )
-            }
+                    }}.frame(width: Const.width , height: Const.height+100)
+            }.background(BackgroundLinearColor())
         }
     }
 }
