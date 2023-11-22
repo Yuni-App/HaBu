@@ -9,28 +9,41 @@ import SwiftUI
 struct CustomLinkButton: View {
     var title: String
     var backgroundColor: Color
-    var action: () -> Void
-    var destinaiton : AnyView
+    var action: () -> Bool
+    var destination : AnyView?
     var size : CustomButtonSize
     var textColor : Color?
+    @State private var isActiveDestination: Bool = false
+
+    
     
     var body: some View {
-        Button(
-            action: action) {
-                NavigationLink(destination: destinaiton) {
-                    Text(title)
-                        .padding()
-                        .frame(width: size.width , height: size.height)
-                        .background(backgroundColor)
-                        .foregroundColor(textColor ?? .white)
-                        .cornerRadius(4)
-                }
+    
+        NavigationLink(
+            destination: destination ?? AnyView(EmptyView()),
+            isActive: $isActiveDestination,
+            label: {})
+        
+        Button(action: {
+            if action(){
+                isActiveDestination = true
             }
+        }, label: {
+            Text(title)
+                .padding()
+                .frame(width: size.width , height: size.height)
+                .background(backgroundColor)
+                .foregroundColor(textColor ?? .white)
+                .cornerRadius(4)
+        })
+        
+        
+        
     }
 }
 
 #Preview {
-    CustomLinkButton(title: "login", backgroundColor: Const.primaryColor, action: {}, destinaiton: AnyView(LoginView()) , size: CustomButtonSize.xxxsmall)
+    CustomLinkButton(title: "Giriş", backgroundColor: Const.primaryColor, action: {5>3}, destination: AnyView(FeedView()), size: CustomButtonSize.medium)
 }
 
 

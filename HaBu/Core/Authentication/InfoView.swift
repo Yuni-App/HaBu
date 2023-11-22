@@ -22,11 +22,11 @@ struct InfoView: View {
                             VStack{
                                 CustomImageRectangle(width: 330, height: 90, imagePath: ImageManager.habuLogo)
                                 CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                                    print("login button")
-                                }, destinaiton: AnyView(LoginView()), size: CustomButtonSize.small)
+                                    true
+                                }, destination: AnyView(LoginView()), size: CustomButtonSize.small).padding()
                                 CustomLinkButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
-                                    print("register view")
-                                },destinaiton: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
+                                    true
+                                },destination: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
                             }
                         }
                     }

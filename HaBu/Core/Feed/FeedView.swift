@@ -10,7 +10,7 @@ import SwiftUI
 struct FeedView: View {
     @State var showCategoryFilter = false
     var body: some View {
-        NavigationStack{
+        NavigationView{
             ScrollView{
                 ForEach(Post.MockData , id: \.id){post in
                     FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])

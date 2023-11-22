@@ -44,8 +44,8 @@ struct LoginView: View {
 
                             CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                                 //will delete the back button from feedview
-                                print("cliked login button")
-                            }, destinaiton: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.vertical , 30)
+                               true
+                            }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.vertical , 30)
                         }
                     }
                     HStack{
@@ -62,8 +62,8 @@ struct LoginView: View {
                         BackgroundLinearColor()
                     )
             }.background(
-                NavigationLink("", destination: TabbarView(), isActive: $goPage).hidden()
-            )            
+                NavigationLink("", destination: TabbarView().navigationBarBackButtonHidden(true), isActive: $goPage).hidden()
+            )
 
 
         }
