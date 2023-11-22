@@ -148,7 +148,7 @@ struct ProfileView : View {
                                         
                                     } //User Info
                                     
-                                    SlidableButton(destination: AnyView(EditProfileView(user: User.MockData[0])), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white)
+                                    SlidableButton(destination: AnyView(EditProfileView(user: User.MockData[0])), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
                                     
                                 }
                             }.frame(width: Const.width,height: Const.height * 0.25)
