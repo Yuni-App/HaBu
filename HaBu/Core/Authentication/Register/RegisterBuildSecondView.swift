@@ -13,6 +13,7 @@ struct RegisterBuildSecondView: View {
             ZStack {
                 VStack{
                     CustomImageRectangle(width: Const.width, height: Const.height/3, imagePath: ImageManager.registerVector)
+                    
                     ZStack{
                         Image("")
                             .frame(width: 370, height: 470)
@@ -20,11 +21,11 @@ struct RegisterBuildSecondView: View {
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
                         VStack{
-                            CustomTextField(icon: "person.fill", placeHolder: "Ad")
-                            CustomTextField(icon: "person.fill", placeHolder: "Soy Ad")
-                            CustomTextField(icon: "person.badge.plus", placeHolder: "Kullanıcı Adı")
-                            CustomTextField(icon: "calendar", placeHolder: "Yaş")
-                            CustomTextField(icon: "pencil", placeHolder: "Bio")
+                            CustomTextField(icon: .person, placeHolder: "Ad")
+                            CustomTextField(icon: .person, placeHolder: "Soy Ad")
+                            CustomTextField(icon: .personBadgePlus, placeHolder: "Kullanıcı Adı")
+                            CustomTextField(icon: .calendar, placeHolder: "Yaş")
+                            CustomTextField(icon: .pencil, placeHolder: "Bio")
                             CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildThirdView()), size: CustomButtonSize.small)
                             .padding(.top,50)
                         }

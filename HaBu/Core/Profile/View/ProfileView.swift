@@ -190,7 +190,7 @@ struct ProfileView : View {
                             }.frame(width: Const.width,height: Const.height * 0.25)
                             
                         }
-                        //postGrid
+                                                //postGrid
                         VStack{
                             HStack{
                                 HStack{

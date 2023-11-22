@@ -12,6 +12,7 @@ struct TabbarView: View {
         TabView{
             FeedView().tabItem {
                 Image(systemName: "house.fill")
+                
             }
             
             SerachView().tabItem {

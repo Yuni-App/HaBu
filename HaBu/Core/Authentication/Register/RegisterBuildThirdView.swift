@@ -21,9 +21,9 @@ struct RegisterBuildThirdView: View {
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
                         VStack{
-                            CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
-                            CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
-                            CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
+                            CustomTextField(icon: .person, placeHolder: "Fakülte")
+                            CustomTextField(icon: .person, placeHolder: "Bölüm")
+                            CustomTextField(icon: .calendar, placeHolder: "Giriş Yılı")
                             CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {true
 
                             }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.top , 50)

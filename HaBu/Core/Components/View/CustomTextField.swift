@@ -8,15 +8,12 @@
 import SwiftUI
 struct CustomTextField: View {
     @State private var text: String = ""
-    var icon : String
+    var icon : AppIcon
     var placeHolder : String
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Image(systemName: icon)
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                    .foregroundColor(.white)
+                Image.appIcon(.mail, size: 15, weight: .bold, color: .white)
                 ZStack(alignment: .leading) {
                     if text.isEmpty {
                         Text(placeHolder)
@@ -45,7 +42,7 @@ struct CustomTextField: View {
 }
 
 #Preview {
-    CustomTextField(icon: "mail", placeHolder: "place holder")
+    CustomTextField(icon:.mail, placeHolder: "place holder")
 }
 
 
