@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1FCA132B0F6F8F00A3ED5B /* CustomTextField2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */; };
 		5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583D2B03B430008BEB6D /* HaBuApp.swift */; };
 		5C2658402B03B430008BEB6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583F2B03B430008BEB6D /* ContentView.swift */; };
 		5C2658422B03B431008BEB6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2658412B03B431008BEB6D /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField2.swift; sourceTree = "<group>"; };
 		5C26583A2B03B430008BEB6D /* HaBu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaBu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C26583D2B03B430008BEB6D /* HaBuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaBuApp.swift; sourceTree = "<group>"; };
 		5C26583F2B03B430008BEB6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				5C9420B02B063460004F9A17 /* CategoryFilter.swift */,
 				5C34FC9A2B0DEE9B00989A67 /* SlidableButton.swift */,
 				94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */,
+				5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				9411AA8C2B050EDB0042A354 /* BackgroundLinearColor.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
 				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
+				5C1FCA132B0F6F8F00A3ED5B /* CustomTextField2.swift in Sources */,
 				5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
