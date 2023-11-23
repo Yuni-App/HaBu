@@ -17,7 +17,6 @@ struct EditProfileView: View {
     @State private var dragDirection: DragDirection = .none
     @State private var imageIndices = [0, 1, 2]
     @State var imagePickerPresented = false
-    
     var images = [
         "profil1",
         "profil2",
@@ -91,60 +90,14 @@ struct EditProfileView: View {
                     
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
                 
-                HStack {
-                    VStack {
-                        HStack {
-                            myText(text: "İsim")
-                            Spacer()
-                        }.frame(width: Const.width * 0.8)
-                        
-                        TextField("isminizi girin\(name)", text: $name).frame(width: Const.width * 0.8, height: Const.height * 0.03)
-                        Divider().frame(width: 330).background(Color.black)
-                        
-                    }
-                    
-                } //isim
-                
-                HStack {
-                    VStack {
-                        HStack {
-                            myText(text: "Soyisim")
-                            Spacer()
-                        }.frame(width: Const.width * 0.8)
-                        
-                        TextField(" Soyisminizi girin\(surName)", text: $surName).frame(width: Const.width * 0.8, height: Const.height * 0.03)
-                        Divider().frame(width: 330).background(Color.black)
-                        
-                    }
-                    
-                } //soyisim
-                
-                HStack {
-                    VStack {
-                        HStack {
-                            
-                            myText(text: "Email")
-                            Image(systemName: "lock.fill")
-                                .opacity(0.4)
-                            Spacer()
-                        }.frame(width: Const.width * 0.8)
-                        TextField("Mail Adresiniz\(email)", text: $email).frame(width: Const.width * 0.8, height: Const.height * 0.03)
-                        Divider().frame(width: 330).background(Color.black)
-                    }
-                } //email
-                HStack{
-                    VStack{
-                        HStack {
-                            myText(text: "Biografi")
-                            Spacer()
-                        }.frame(width: Const.width * 0.8)
-                        TextField("Biyografi girin\(biyografi)", text: $biyografi).frame(width: Const.width * 0.8, height: Const.height * 0.03)
-                        
-                        Divider().frame(width: 330).background(Color.black)
-                        
-                    }
-                    
-                } //bio
+               //isim
+                CustomTextField2(headline: "İsim", color: .white, islocked: false, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
+                 //soyisim
+                CustomTextField2(headline: "Soyisim", color: .white, islocked: false, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
+                //email
+                CustomTextField2(headline: "Email", color: .white, islocked: true, icon: .lock, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
+                //bio
+                CustomTextField2(headline: "Biografi", color: .white, islocked: false, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     false
@@ -152,33 +105,6 @@ struct EditProfileView: View {
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
         }
-    }
-}
-
-struct myText: View{
-    var text: String
-    
-    init(text: String) {
-        self.text = text
-    }
-    var body: some View{
-        Text(text)
-            .foregroundColor(.white)
-            .fontWeight(.bold)
-            .font(.headline)
-        
-    }
-}
-struct myTextField: View {
-    var placeholder: String
-    @Binding var text: String
-    init (placeholder: String, text: Binding<String>){
-        self.placeholder = placeholder
-        self._text = text
-    }
-    var body: some View {
-        TextField(placeholder, text: $text)
-            .frame(width: Const.width * 0.8, height: Const.height * 0.03)
     }
 }
 
