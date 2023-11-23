@@ -53,7 +53,6 @@ struct EditProfileView: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                         
-                        
                         //profile Images
                         HStack {
                             ZStack{
