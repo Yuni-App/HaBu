@@ -33,10 +33,12 @@ struct EditProfileView: View {
                 
                 ZStack {
                     Rectangle()
-                        .frame(width: Const.height * 0.5,height: Const.height * 0.5)
+                        .frame(width: Const.height * 0.52,height: Const.height * 0.52)
                         .foregroundStyle(Const.thirColor)
+                        .border(Const.primaryColor)
                         .rotationEffect(Angle(degrees: 45))
                         .position(x:Const.width / 2 ,y:-Const.height * 0.1)
+                        .shadow(color: Color.black.opacity(0.4), radius: 7, x: 5, y:20)
                     
                     VStack{
                         Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
@@ -61,27 +63,7 @@ struct EditProfileView: View {
                                 CircleProfileImage(userImage: images[2] , index: imageIndices[2])
                             }
                             .frame(width: Const.width)
-                            .gesture(DragGesture().onChanged({ value in
-                                print(value.translation.width)
-                                let direction: DragDirection = value.translation.width > 1 ? .right : .left
-                                if dragDirection != direction{
-                                    withAnimation{
-                                        dragDirection = direction
-                                        if dragDirection   == .left{
-                                            incrementImageIndices(&imageIndices,shouldIncrement: false)
-                                        }
-                                        else if dragDirection == .right{
-                                            incrementImageIndices(&imageIndices,shouldIncrement: true)
-                                            
-                                            
-                                        }
-                                    }
-                                }
-                            })
-                                .onEnded({ value in
-                                    dragDirection = .none
-                                })
-                            )
+                            .gesture(dragGesture)
                             
                         }
                         
@@ -91,13 +73,13 @@ struct EditProfileView: View {
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
                 
                //isim
-                CustomTextField2(headline: "İsim", color: .white, islocked: false, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
+                CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $name, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
                  //soyisim
-                CustomTextField2(headline: "Soyisim", color: .white, islocked: false, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
+                CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $surName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
                 //email
-                CustomTextField2(headline: "Email", color: .white, islocked: true, icon: .lock, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
+                CustomTextField2(headline: "Email", color: .white, islocked: true, text: $email, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
                 //bio
-                CustomTextField2(headline: "Biografi", color: .white, islocked: false, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
+                CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $biyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     false
@@ -106,6 +88,33 @@ struct EditProfileView: View {
                 .background(Const.primaryColor)
         }
     }
+    
+    private var dragGesture: some Gesture {
+          DragGesture()
+              .onChanged(onDragChanged)
+              .onEnded(onDragEnded)
+      }
+    private func onDragChanged(value: DragGesture.Value) {
+            let direction: DragDirection = value.translation.width > 1 ? .right : .left
+            if dragDirection != direction{
+                withAnimation{
+                    dragDirection = direction
+                    if dragDirection   == .left{
+                        incrementImageIndices(&imageIndices,shouldIncrement: false)
+                    }
+                    else if dragDirection == .right{
+                        incrementImageIndices(&imageIndices,shouldIncrement: true)
+                        
+                        
+                    }
+                }
+            }
+        
+      }
+    private func onDragEnded(value: DragGesture.Value) {
+        dragDirection = .none
+       }
+    
 }
 
 
