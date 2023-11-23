@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ForgotPasswordCreatePasswordBottomSheet: View {
     @Binding var showSheet: Bool
-    @Binding var goPage: Bool
+
     var body: some View {
         NavigationStack {
             VStack{
@@ -18,7 +18,8 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
                 CustomTextField(icon: "key", placeHolder: "şifre tekrar")
                 CustomButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
                     showSheet = false
-                    goPage = true
+               
+                    return false
                 }, size: CustomButtonSize.small)
             }.padding(30)
                 .frame(width: Const.width , height: Const.height)
@@ -30,7 +31,7 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
 }
 
 #Preview {
-    ForgotPasswordCreatePasswordBottomSheet(showSheet: .constant(false), goPage: .constant(false))
+    ForgotPasswordCreatePasswordBottomSheet(showSheet: .constant(true))
 }
 
 

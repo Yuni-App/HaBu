@@ -9,19 +9,13 @@ import SwiftUI
 
 struct LoginView: View {   
     @State private var showingForgotPassword = false
-    @State private var goPage = false
+   
     
     var body: some View {
         NavigationStack{
             ZStack {
                 VStack{
-                    CustomImageRectangle(width: Const.width, height: Const.height/2, imagePath: ImageManager.loginVector)
-                    ZStack{
-                        Image("")
-                            .frame(width: 370, height: 320)
-                            .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
+                    CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
                         VStack{
                             CustomTextField(icon: "mail", placeHolder: "e-posta")
                             CustomTextField(icon: "key", placeHolder: "Şifre")
@@ -31,23 +25,23 @@ struct LoginView: View {
                                     .padding()
                                     .onTapGesture {
                                         showingForgotPassword = true
-                                        //  Bottomsheet will openSheet
                                         print("Şifremi unuttum ")
                                     }
                                     .sheet(isPresented: $showingForgotPassword) {
-                                        ForgotPasswordMailBottomSheet(showSheet: $showingForgotPassword , goPage: $goPage)
+                                        ForgotPasswordMailBottomSheet(showSheet: $showingForgotPassword )
                                             .presentationDetents([.medium,.height(CGFloat(Const.height/4 + 10))])
                                     }
                                     .foregroundColor(.white)
                                     .font(.system(size: 12))
                             }
-
-                            CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                                //will delete the back button from feedview
-                                print("cliked login button")
-                            }, destinaiton: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small).padding(.vertical , 30)
-                        }
-                    }
+                            CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                               true
+                            }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
+                        }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
+                        .background(
+                            RectangleBlur(color: Const.primaryColor))
+                       
+                    
                     HStack{
                         Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                         NavigationLink {
@@ -56,14 +50,14 @@ struct LoginView: View {
                             HStack{  Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
                         }
                     }
-                }.padding()
-                    .frame(width: Const.width, height: 1000)
-                    .background(
-                        BackgroundLinearColor()
-                    )
+                    //TODO : update 100
+                } .frame(width: Const.width , height: Const.height+100)
+                    .padding()
+                    
+                    
             }.background(
-                NavigationLink("", destination: TabbarView(), isActive: $goPage).hidden()
-            )            
+                BackgroundLinearColor()
+            )
 
 
         }

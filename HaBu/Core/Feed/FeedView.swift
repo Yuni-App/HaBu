@@ -15,6 +15,12 @@ struct FeedView: View {
                 HStack{
                     SlidableButton(destination: AnyView(AddPostView(imageList: [])), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
                         .padding(.top,50)
+       
+            ScrollView{
+                ForEach(Post.MockData , id: \.id){post in
+                    FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
+                    Divider()
+
                 }
                 .frame(maxHeight:.ulpOfOne)
                 ScrollView{
