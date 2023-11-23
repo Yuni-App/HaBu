@@ -13,7 +13,7 @@ struct CustomTextField2: View {
     let islocked : Bool
     var icon: AppIcon?
     var iconColor:Color?
-    @State private var text: String = ""
+    @Binding var text: String
     var placeHolder : String
     var contentType : UITextContentType
     var keybordType : UIKeyboardType
@@ -30,10 +30,15 @@ struct CustomTextField2: View {
                     }
                     Spacer()
                 }
-                TextField(placeHolder, text: $text)
-                    .textContentType(contentType)
-                    .keyboardType(keybordType)
+                HStack {
+                    if islocked == true{
+                        Image.iconManager(.lock, size: 16, weight: .semibold, color: iconColor ?? .white)
+                    }
+                    TextField(placeHolder, text: $text)
+                        .textContentType(contentType)
+                        .keyboardType(keybordType)
                     .disabled(islocked)
+                }
                 Divider().frame(width: 330).background(Color.black)
             }
             .frame(width: Const.width * 0.85)
@@ -43,5 +48,5 @@ struct CustomTextField2: View {
 }
 
 #Preview {
-    CustomTextField2(headline: "İsim", color: .blue, islocked: false, placeHolder:"isminizi giriniz",contentType: .name,keybordType: .namePhonePad)
+    CustomTextField2(headline: "İsim", color: .blue, islocked: true, icon: .lock, iconColor: .blue, text: .constant(""), placeHolder:"isminizi giriniz",contentType: .name,keybordType: .namePhonePad)
 }
