@@ -26,8 +26,8 @@ struct FeedView: View {
                 }
                 .padding(.top,50)
                 .sheet(isPresented: $showCategoryFilter) {
-                    CategoryFilter()
-                        .presentationDetents([.large,.height(Const.height * 0.3)])
+                    CategoryFilterBottomSheet()
+                        .presentationDetents([.large,.large])
                 }
                 .toolbar{
                     ToolbarItem(placement:.topBarLeading){
