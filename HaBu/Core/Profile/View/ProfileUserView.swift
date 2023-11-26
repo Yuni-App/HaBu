@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct ProfileHeaderView: View {
+struct ProfileUserView: View {
+    @Binding var isShowingSideMenu:Bool
     let topEdge:CGFloat
-    let maxHeight = UIScreen.main.bounds.height / 2.4
+    let maxHeight = UIScreen.main.bounds.height / 2.7
+    var user:User
     
     @State var offset : CGFloat = 0
     
@@ -17,7 +19,7 @@ struct ProfileHeaderView: View {
         ScrollView(.vertical,showsIndicators: false){
             VStack(spacing:15){
                 GeometryReader{proxy in
-                    Tabbar(user : User.MockData[0], topEdge: topEdge,offset: $offset,maxHeight:maxHeight)
+                    Tabbar(user:user, topEdge: topEdge,offset: $offset,maxHeight:maxHeight)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: getHeaderHeight(),alignment:.bottom)
@@ -34,14 +36,17 @@ struct ProfileHeaderView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 20,height: 20)
                                 .clipShape(.circle)
-                                Text("Ömer  Erbalta")
+                                Text(user.username)
                                     .fontWeight(.bold)
                                     .foregroundStyle(.primary)
                             }
                             .opacity(topBarTitleOpacity())
                            
                             Spacer()
-                            Button(action: {}, label: {
+                            Button(action: {
+                                isShowingSideMenu = true
+                                
+                            }, label: {
                                 Image(systemName: "line.3.horizontal.decrease")
                                     .font(.body.bold())
                             })
@@ -59,9 +64,8 @@ struct ProfileHeaderView: View {
                 .offset(y:-offset)
                 .zIndex(2)
                 VStack(spacing:15){
-                    //PostView
-                    ForEach(0..<20){_ in
-                            Text("deneme")
+                    ForEach(Post.MockData){post in
+                        FeedViewCell(post: post, user: user)
                     }
                 }
                 .zIndex(1)
@@ -69,7 +73,6 @@ struct ProfileHeaderView: View {
             }
             .modifier(OffsetModifier(offset: $offset))
         }
-        .coordinateSpace(name: "SCROLL")
         .ignoresSafeArea(.all)
     }
     func getHeaderHeight() -> CGFloat{
@@ -80,18 +83,17 @@ struct ProfileHeaderView: View {
         let progress = -offset / (maxHeight - (40 + topEdge))
         let value =  1 - progress
         let radius = value * 40
-        
-        return offset < 0 ? radius : 40
+        return offset < 0 ? radius : 25
     }
     func topBarTitleOpacity()-> CGFloat{
-        let progress = -(offset) / (maxHeight - (80 + topEdge))
+        let progress = -(offset) / ((maxHeight-40) - (40 + topEdge))
         return progress
         
         
     }
 }
 #Preview {
-    ProfileHeaderView(topEdge: 50)
+    ProfileUserView(isShowingSideMenu: .constant(false), topEdge: 50, user: User.MockData[0])
 }
 
 struct Tabbar:View {
@@ -165,8 +167,7 @@ struct Tabbar:View {
                         .foregroundStyle(.white)
                     Text("Post")
                         .foregroundStyle(.white)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
+                        .font(.footnote.bold())
                     Spacer()
                     
                 }

@@ -29,8 +29,6 @@ struct CategoryFilterBottomSheet: View {
                 .frame(height: 35)
                 .padding(.vertical,15)
             }
-            .scrollClipDisabled(true)
-            .scrollIndicators(.hidden)
             .overlay {
                 if SelectedTags.isEmpty{
                     Text("Şeçilen Kategoriler")
@@ -55,7 +53,6 @@ struct CategoryFilterBottomSheet: View {
                 }
                 .padding(15)
             }
-            .scrollClipDisabled(true)
             .scrollIndicators(.hidden)
             .background(.black.opacity(0.07))
             .zIndex(0)
