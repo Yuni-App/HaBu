@@ -66,7 +66,6 @@ struct SlidableButton: View {
             )
         )
         
-        .padding(.bottom,10)
         .position(position)
         .gesture(DragGesture().onChanged({ value in
             if value.translation.width > 0 && value.translation.width < 50 && dragDirection == .right{
