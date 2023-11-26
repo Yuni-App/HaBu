@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-struct TagLayout: Layout {
     struct TagLayout: Layout {
         var alignment: Alignment = .center
         var spacing : CGFloat = 10
@@ -81,9 +79,5 @@ struct TagLayout: Layout {
             }
             return col
         }
-    }
-
-    
-    
 }
 

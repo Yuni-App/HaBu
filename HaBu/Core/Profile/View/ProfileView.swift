@@ -27,6 +27,8 @@ struct ProfileView : View {
         "Post",
         "Kaydedilenler"
     ]
+    
+    
     var body: some View {
         NavigationStack {
             ZStack {

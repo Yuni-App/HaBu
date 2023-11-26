@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct CategoryFilterBottomSheet: View {
-    let tags = ["ömer", "mert","yusuf","kerem","burak","selim","yiğit","ismail"]
-    @State var SelectedTags:[String] = []
+@State var SelectedTags:[String] = []
 @Namespace private var animation
     var body: some View {
         VStack {
@@ -44,7 +43,7 @@ struct CategoryFilterBottomSheet: View {
             .zIndex(1)
             ScrollView(.vertical){
                 TagLayout(spacing: 10){
-                    ForEach(tags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
+                    ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
                         TagView(tag, .blue, "plus")
                             .matchedGeometryEffect(id: tag, in: animation)
                             .onTapGesture {
