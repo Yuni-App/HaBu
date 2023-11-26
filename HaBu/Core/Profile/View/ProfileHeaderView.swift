@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewProfileViewStyle: View {
+struct ProfileHeaderView: View {
     let topEdge:CGFloat
     let maxHeight = UIScreen.main.bounds.height / 2.4
     
@@ -17,12 +17,12 @@ struct NewProfileViewStyle: View {
         ScrollView(.vertical,showsIndicators: false){
             VStack(spacing:15){
                 GeometryReader{proxy in
-                    Tabbar(topEdge: topEdge,offset: $offset,maxHeight:maxHeight)
+                    Tabbar(user : User.MockData[0], topEdge: topEdge,offset: $offset,maxHeight:maxHeight)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: getHeaderHeight(),alignment:.bottom)
                     .background(
-                        .blue,
+                        Const.primaryColor,
                         in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
                     
                     )
@@ -91,28 +91,90 @@ struct NewProfileViewStyle: View {
     }
 }
 #Preview {
-    NewProfileViewStyle(topEdge: 50)
+    ProfileHeaderView(topEdge: 50)
 }
 
 struct Tabbar:View {
+    @State var editButtonPosition = CGPoint(x:Const.width, y:0)
+    let user:User
+    var images = [
+        "profil1",
+        "profil2",
+        "profil3"
+    ]
+    @State var imageCount = 0
     var topEdge: CGFloat
     @Binding var offset:CGFloat
     var maxHeight:CGFloat
     var body: some View {
-        VStack(alignment: .leading,spacing:15){
-            Image("profil1")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80,height:80)
-                .clipShape(.rect(cornerRadius: 10))
-            Text("Ömer Erbalta")
-                .font(.title.bold())
-            Text("asdasdasdas adsaasdadas dadsadsdas asdasadasd")
-                .foregroundStyle(.white.opacity(0.8))
+        VStack{
+            Spacer()
+            HStack{
+                //Image and picker
+                VStack {
+                    CircleProfileImage(userIamgeUrl:images[imageCount] , size: .xlage)
+                    .padding(.leading,10)
+                    .gesture(DragGesture().onEnded({ value in
+                        if value.translation.width < 1 {
+                            withAnimation{
+                                if imageCount < images.count - 1{
+                                    imageCount += 1
+                                }
+                                else{
+                                    imageCount = 0
+                                }
+                            }
+                        }
+                        else{
+                            withAnimation{
+                                if imageCount > 0{
+                                    imageCount -= 1
+                                }
+                                else{
+                                    imageCount = images.count - 1
+                                }
+                            }
+                        }
+                }))
+                    HStack{
+                        ForEach(0..<images.count) { index in
+                            Circle()
+                                .frame(width: 5, height: 5)
+                                .foregroundColor(index == self.imageCount ? .white : .black)
+                        }
+                    }
+                }
+                VStack(alignment:.leading){
+                    Text("\(user.name) \(user.surName)")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                    Text("Bilgisayar Mühendisliği")
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .foregroundStyle(.yellow)
+                        Text("145").font(.subheadline)
+                    }//Rating
+                }
+                Spacer()
+                //User Info
+                VStack{
+                    Spacer()
+                    Text("4")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                    Text("Post")
+                        .foregroundStyle(.white)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    Spacer()
+                    
+                }
+            }
+            .padding(.top,maxHeight * 0.25)
+            SlidableButton(destination: AnyView(EditProfileView(user: User.MockData[0])), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
         }
         .padding()
-        
-        .padding(.bottom)
         .opacity(getOpacity())
     }
     
