@@ -32,7 +32,6 @@ struct FeedViewCell: View {
                         .frame(width: Const.width * 0.95,height: Const.height * 0.35)
                         .scaledToFill()
                 }
-                
                 // caption
                 HStack {
                     if let _ =  post.imageUrl {
@@ -89,7 +88,6 @@ struct FeedViewCell: View {
         Divider()
     }
 }
-
 #Preview {
     FeedViewCell(post: Post.MockData[1], user:  User.MockData[0])
 }

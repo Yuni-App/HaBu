@@ -122,8 +122,4 @@ struct ThreeDRotateFeedViewCell: View {
 #Preview {
     ThreeDRotateFeedViewCell(post: Post.MockData[0], user: User.MockData[0])
 }
-enum DragDirection {
-    case none
-    case right
-    case left
-}
+
