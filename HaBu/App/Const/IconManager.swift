@@ -18,4 +18,7 @@ enum AppIcon: String{
     case calendar = "calendar"
     case pencil = "pencil"
     case lock = "lock.circle"
+    case tray = "tray.fill"
+    case circleFill = "circle.fill"
+    case filter = "line.horizontal.3.decrease"
 }

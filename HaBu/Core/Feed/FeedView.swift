@@ -43,12 +43,8 @@ struct FeedView: View {
                             
                         }, label: {
                             ZStack{
-                                Image(systemName: "tray.fill")
-                                    .font(.title2)
-                                    .foregroundStyle(.black)
-                                Image(systemName: "circle.fill")
-                                    .foregroundStyle(.red)
-                                    .font(.subheadline)
+                                Image.iconManager(.tray, size: 20, weight: .bold, color: .black)
+                                Image.iconManager(.circleFill, size:15 , weight: .bold, color: .red)
                                     .padding(.leading,25)
                                     .padding(.bottom,25)
                                 Text("5")
@@ -68,9 +64,7 @@ struct FeedView: View {
                             showCategoryFilter = true
                             
                         }, label: {
-                            Image("filter")
-                                .resizable()
-                                .frame(width: 30,height: 30)
+                            Image.iconManager(.filter, size: 20, weight: .bold, color: .black)
                         })
                         
                     } //filter

@@ -62,8 +62,6 @@ extension Image {
 extension Image {
     static func iconManager(_ iconManager: AppIcon, size: CGFloat, weight: Font.Weight, color: Color) -> some View {
         Image(systemName: iconManager.rawValue)
-            .resizable()
-            .frame(width: size, height: size)
             .font(Font.system(size: size, weight: weight))
             .foregroundColor(color)
             .scaledToFit()
