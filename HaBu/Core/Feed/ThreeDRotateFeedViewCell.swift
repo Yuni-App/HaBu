@@ -70,15 +70,27 @@ struct ThreeDRotateFeedViewCell: View {
                 axis: (x: 0.0, y: 1.0, z: 0.0)
             )
             .gesture(DragGesture().onChanged({ value in
-                let direction: DragDirection = value.translation.width > 0 ? .right : .left
-                if dragDirection != direction{
-                    withAnimation{
-                        dragDirection = direction
-                        degrees += dragDirection == .left ? -180:180
-                        isFlipped.toggle()
-                    }
+                var direction: DragDirection = value.translation.width > 200 ? .right : .left
+                withAnimation(.smooth){
+                    dragDirection = direction
+                    degrees += (value.translation.width / 100)
+                    degrees = degrees == 360 ? 0 : degrees
                 }
-        }))
+        })
+                .onEnded({ _ in
+                        withAnimation{
+                            if degrees > 0 {
+                                degrees += (degrees + 180)
+                            }
+                            else{
+                                degrees = -180
+                            }
+                            
+                            isFlipped.toggle()
+                        }
+                    }
+                )
+            )
             HStack{
                 ActionButton(button: likePost,number: 20) {
                     if likePost == .unLike{

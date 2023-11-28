@@ -51,7 +51,7 @@ struct SlidableButton: View {
         .background(color)
         .foregroundStyle(textColor)
         .background(
-            NavigationLink(destination: EditProfileView(user: User.MockData[0]), isActive: $shouldNavigate) {
+            NavigationLink(destination:AnyView(destinaiton), isActive: $shouldNavigate) {
                 EmptyView()
             }
                 .hidden()
