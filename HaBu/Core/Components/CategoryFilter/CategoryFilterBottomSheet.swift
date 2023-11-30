@@ -22,18 +22,18 @@ struct CategoryFilterBottomSheet: View {
                 .background(.gray)
             
                 .background(.gray)
-            GeometryReader {geometry in
-                ScrollView(.horizontal,showsIndicators: false){
+            ScrollView(.horizontal,showsIndicators: false){
+                GeometryReader {geometry in
                     HStack {
-                        Spacer().frame(width: Const.width * 0.2)
                         ForEach(Const.anonimFilters,id: \.id){filter in
                             cardView(filter.title, filter.subTitle ,filter.color, filter.icon)
                         }
+
                     }
                 }
-                .content.offset(x: self.scrollOffset)
-            }
-            .frame(height: Const.height * 0.12)
+                
+            }.content.offset(x: self.scrollOffset)
+            .frame(height: Const.height * 0.1)
             .gesture(DragGesture().onChanged({ value in
                 dragDirection = value.translation.width > 1 ? .left : .right
             })
@@ -42,7 +42,7 @@ struct CategoryFilterBottomSheet: View {
                     if dragDirection == .right{
                         if self.selectedFilterIndex < 2 {
                             self.selectedFilterIndex += 1
-                            self.scrollOffset -= Const.width * 0.7
+                            self.scrollOffset -= Const.width
                         }
                         else{
                             selectedFilterIndex = 0
@@ -52,7 +52,7 @@ struct CategoryFilterBottomSheet: View {
                     }
                         else if dragDirection == .left{
                         if self.selectedFilterIndex > 0{
-                            self.scrollOffset += Const.width * 0.7
+                            self.scrollOffset += Const.width
                             self.selectedFilterIndex -= 1
                         }
                        
@@ -64,6 +64,54 @@ struct CategoryFilterBottomSheet: View {
                 })
             )
             .padding(.top,10)
+            .overlay {
+                HStack{
+                    Button(action: {
+                        withAnimation(.snappy){
+                            if self.selectedFilterIndex > 0{
+                                self.scrollOffset += Const.width
+                                self.selectedFilterIndex -= 1
+                            }
+                            else{
+                                self.scrollOffset = -(2 * Const.width)
+                                self.selectedFilterIndex = 2
+                            }
+                        }
+                        
+                    }, label: {
+                        Image.iconManager(.back, size: 20, weight: .bold, color: .black)
+                            .padding(5)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .stroke(Color.black, lineWidth: 1)
+                            }
+                    })
+                    .padding(5)
+                    Spacer()
+                    Button(action: {
+                        withAnimation(.snappy){
+                            if self.selectedFilterIndex < 2 {
+                                self.selectedFilterIndex += 1
+                                self.scrollOffset -= Const.width
+                            }
+                            else{
+                                selectedFilterIndex = 0
+                                self.scrollOffset = 0
+                            }
+                        }
+                        
+                    }, label: {
+                        Image.iconManager(.next, size: 20, weight: .bold, color: .black)
+                            .padding(5)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .stroke(Color.black, lineWidth: 1)
+                            }
+                    })
+                    .padding(5)
+                    
+                }
+            }
             Divider().frame(height: 1)
                 .background(.black)
             Text("Kategori Filtrele")
@@ -179,9 +227,10 @@ func cardView(_ title:String,_ caption:String,_ color:Color,_ icon:String) -> so
                 }
             }
     }
-    .frame(width: Const.width * 0.5, height:Const.width * 0.15)
+    .frame(width: Const.width * 0.6, height:Const.width * 0.2)
     .clipShape(.rect(cornerRadius: 20))
-    .padding(.horizontal,30)
+    .padding(.horizontal,Const.width * 0.19)
+
 }
 
 struct anonimFilter: Identifiable{
