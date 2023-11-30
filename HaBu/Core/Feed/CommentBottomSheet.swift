@@ -48,7 +48,7 @@ struct CommentViewCell : View {
             }
             Text("benim şahane ötesi fikirlerimi beğenip beğenmemek size mi düştü arkadaşlar ben istediğimi yazar çizerim bu size alakadar etmez anladınız mı")
                 .font(.caption)
-                .fontWeight(.bold)
+                .fontWeight(.medium)
                 .padding(.horizontal)
                 .padding(.vertical,5)
         }
