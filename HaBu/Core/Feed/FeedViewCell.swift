@@ -22,7 +22,7 @@ struct FeedViewCell: View {
         NavigationStack {
             VStack{
                 //User Info
-                UserInfo(user: user, imageSize: .small)
+                UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
                 .padding(.horizontal)
                 
                 //ımage ?? nil

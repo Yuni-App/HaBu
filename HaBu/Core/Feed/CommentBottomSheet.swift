@@ -21,10 +21,8 @@ struct CommentBottomSheet: View {
                 .modifier(IGTextFieldModifier())
             Button(action: {
             }, label: {
-                Image(systemName: "paperplane.circle.fill")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .padding(.trailing,10)
+                Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)
+                    .padding(10)
             })
         }
     }
@@ -42,20 +40,8 @@ struct CommentViewCell : View {
         VStack{
             //User Info
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .small)
-                    .padding(.horizontal,10)
-                VStack(alignment:.leading){
-                    Text(user.username)
-                        .fontWeight(.semibold)
-                        .font(.subheadline)
-                        
-                    Text("\(user.name) \(user.surName)").font(.caption2).fontWeight(.semibold)
-                }
-                Text("4h")
-                    .opacity(0.6)
-                    .font(.footnote)
-                    .padding(.horizontal,5)
-                Spacer()
+                UserInfo(user: user, imageSize: .xsmall)
+                    .padding(10)
                 ActionButton(button: .liked, number: 10, action: {})
                     .padding(.all,10)
                 

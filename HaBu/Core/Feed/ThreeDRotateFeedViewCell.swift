@@ -70,7 +70,7 @@ struct ThreeDRotateFeedViewCell: View {
                 axis: (x: 0.0, y: 1.0, z: 0.0)
             )
             .gesture(DragGesture().onChanged({ value in
-                var direction: DragDirection = value.translation.width > 200 ? .right : .left
+                let direction: DragDirection = value.translation.width > 200 ? .right : .left
                 withAnimation(.smooth){
                     dragDirection = direction
                     degrees += (value.translation.width / 100)
