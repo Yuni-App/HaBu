@@ -46,9 +46,9 @@ struct SerachView: View {
                     }
                 }
                 .padding(.top, 15)
-                .searchable(text: $searchText, prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
-                    isSearchBar = newValue != ""
-                }
+                .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
+                                    isSearchBar = newValue != ""
+                                }
             }
             .navigationTitle("Arama")
             .navigationBarTitleDisplayMode(.inline)
