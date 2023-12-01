@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
-
-struct ActionButton: View {
-    let button : actionButtons
+/*
+struct asctionButton: View {
+    let button : ActionButtons
     var number = ""
     var action: () -> Void
-    init(button: actionButtons,action : @escaping () -> Void) {
+    init(button: ActionButtons,action : @escaping () -> Void) {
         self.button = button
         self.action = action
     }
-    init(button:actionButtons,number:Int?,action : @escaping () -> Void) {
+    init(button:ActionButtons,number:Int?,action : @escaping () -> Void) {
         self.button = button
         if let number = number {
             self.number = String(number)
@@ -42,49 +42,8 @@ struct ActionButton: View {
 }
 
 #Preview {
-    ActionButton(button: .unLike) {
+    asctionButton(button: .unLike) {
         
     }
 }
-
-enum actionButtons {
-    case unLike
-    case liked
-    case bubble
-    case send
-    case savePost
-    case savedPost
-    var icon : UIImage{
-        switch self {
-        case .unLike:
-            return UIImage(systemName: "heart")!
-        case .liked:
-            return UIImage(systemName: "heart.fill")!.tinted(with: Const.primaryUiColor)!
-        case .bubble:
-           return UIImage(systemName: "bubble.right")!
-        case .send:
-           return UIImage(systemName: "paperplane")!
-        case .savePost:
-            return UIImage(systemName: "bookmark")!
-        case .savedPost:
-            return UIImage(systemName: "bookmark.fill")!
-        }
-    }
-    
-    var text : String{
-        switch self{
-        case .unLike:
-            return "like"
-        case .liked:
-            return "like"
-        case .bubble:
-            return "yorum"
-        case .send:
-            return "send"
-        case .savePost:
-            return "kaydet"
-        case .savedPost:
-            return "kaydet"
-        }
-    }
-}
+ */

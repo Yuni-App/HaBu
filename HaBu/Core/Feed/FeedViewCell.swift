@@ -9,8 +9,8 @@ import SwiftUI
 import Kingfisher
 struct FeedViewCell: View {
     @State private var showingComment = false
-    @State private var savePost = actionButtons.savePost
-    @State private var likePost = actionButtons.unLike
+    @State private var savePost = ActionButtons.savePost
+    @State private var likePost = ActionButtons.unLike
     
     let post : Post
     var user : User
@@ -51,34 +51,34 @@ struct FeedViewCell: View {
                 .padding()
                 //action buttons
                 HStack{
-                    ActionButton(button: likePost,number: 20) {
+                    
+                    Buttons.actionButton(buttonType: likePost,action: {
                         if likePost == .unLike{
                             likePost = .liked
                         }
                         else{
                             likePost = .unLike
                         }
-                    }
-                    ActionButton(button: .bubble, number: 10) {
+                    },getNumber: 20)
+                    Buttons.actionButton(buttonType:.bubble, action: {
                         showingComment = true
                         print("comment")
-                    }
+                    }, getNumber: 10)
                     .sheet(isPresented: $showingComment) {
                         CommentBottomSheet()
                             .presentationDetents([.large,.medium])
                     }
-                    ActionButton(button: .send) {
-                        print("gönder")
+                    Buttons.actionButton(buttonType: .send) {
+                        print("send")
                     }
                     Spacer()
-                        ActionButton(button: savePost) {
-                            if savePost == .savePost{
-                                savePost = .savedPost
-                            }
-                            else{
-                                savePost = .savePost
-                            }
-                                                
+                    Buttons.actionButton(buttonType: savePost) {
+                        if savePost == .savePost{
+                            savePost = .savedPost
+                        }
+                        else{
+                            savePost = .savePost
+                        }
                     }
                 }
                 .padding()

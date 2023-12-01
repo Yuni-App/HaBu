@@ -42,8 +42,10 @@ struct CommentViewCell : View {
             HStack {
                 UserInfo(user: user, imageSize: .xsmall)
                     .padding(10)
-                ActionButton(button: .liked, number: 10, action: {})
-                    .padding(.all,10)
+                Buttons.actionButton(buttonType: .liked, action: {
+                    
+                }, getNumber: 10)
+                .padding(.all,10)
                 
             }
             Text("benim şahane ötesi fikirlerimi beğenip beğenmemek size mi düştü arkadaşlar ben istediğimi yazar çizerim bu size alakadar etmez anladınız mı")
