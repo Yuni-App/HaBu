@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct SerachView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
@@ -36,46 +38,12 @@ struct SerachView: View {
         }
     }
     var body: some View {
-        NavigationStack{
-            ScrollView{
-                LazyVStack(spacing:15){
-                    //User.MockData = filtereduser
-                    ForEach(filteredUser, id : \.id){user in
-                        NavigationLink(destination: Text("ProfileView"),
-                                       label: {
-                            HStack(){
-                                CircleProfileImage(userIamgeUrl: "", size: .small)
-                                VStack (alignment:.leading){
-                                    Text(user.username).fontWeight(.semibold).opacity(0.85)
-                                    Text("\(user.name) \(user.surName)")
-                                        .opacity(0.6)
-                                        .font(.footnote)
-                                }
-                                Spacer()
-                                
-                                HStack {
-                                    switch (ratingSorted, user.rating) {
-                                    case (false, 20...30):
-                                        Image(systemName:"star.fill").background(Color.white)
-                                            .foregroundColor(Color.cyan)
-                                    case(false, 30...40):
-                                        Image(systemName:"star.fill").background(Color.white)
-                                            .foregroundColor(Color.yellow)
-                                    case (false, 40...):
-                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
-                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
-                                    default:
-                                        Image(systemName: "star")
-                                                    .foregroundColor(Color.gray)
-                                    }                                }
-                                
-                            }
-                            .frame(width: Const.width * 0.9,alignment: .leading)
-                            .foregroundStyle(.black)
-                            .padding(.leading,8)
-                        })
+        NavigationStack {
+            ScrollView {
+                LazyVStack(spacing: 15) {
+                    ForEach(filteredUser, id: \.id) { user in
+                        SearchItem(user: user, ratingSorted: ratingSorted)
                     }
-                }
                 .padding(.top,15)
               /*  .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
                     isSearchBar = newValue != ""
@@ -86,6 +54,8 @@ struct SerachView: View {
         }
     }
 }
+
+
 
 #Preview {
     SerachView()
