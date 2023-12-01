@@ -59,3 +59,19 @@ extension Image {
         return self.foregroundStyle(condition ? Color.white : Color.black) as! Image
     }
 }
+extension Image {
+    static func iconManager(_ iconManager: AppIcon, size: CGFloat, weight: Font.Weight, color: Color) -> some View {
+        Image(systemName: iconManager.rawValue)
+            .font(Font.system(size: size, weight: weight))
+            .foregroundColor(color)
+            .scaledToFit()
+    }
+}
+extension [LayoutSubviews.Element]{
+    func maxHeight(_ proposal: ProposedViewSize) -> CGFloat{
+        return self.compactMap { view in
+            return view.sizeThatFits(proposal).height
+        }.max() ?? 0
+    }
+}
+
