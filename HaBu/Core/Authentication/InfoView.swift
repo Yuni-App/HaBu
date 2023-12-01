@@ -11,33 +11,34 @@ struct InfoView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                    VStack {
-                        CustomImageRectangle(width: Const.width, height: Const.height/2, imagePath: ImageManager.registerThirdVector)
-                        ZStack{
-                            Image("")
-                                .frame(width: 330, height: 250)
-                                .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
-                                .cornerRadius(10)
-                                .shadow(color: Color.black.opacity(1), radius: 5, x: 4, y:4)
-                            VStack{
-                                CustomImageRectangle(width: 330, height: 90, imagePath: ImageManager.habuLogo)
-                                CustomLinkButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                                    print("login button")
-                                }, destinaiton: AnyView(LoginView()), size: CustomButtonSize.small)
-                                CustomLinkButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
-                                    print("register view")
-                                },destinaiton: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
-                            }
-                        }
-                    }
-                    .padding()
-                
-            }
-            .frame(width: 430, height: 932)
-            .background(
-            BackgroundLinearColor()
-        )
+                VStack {
+                    CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
+                    
+                    VStack{
+                        CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
+                        CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                            true
+                        }, destination: AnyView(LoginView()), size: CustomButtonSize.small).padding()
+                        
+                        CustomButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
+                            true
+                        },destination: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
+                        
+                    }.frame(width: Const.width*0.85,height: Const.height * 0.35)
+                        .background(
+                            RectangleBlur(color: Const.primaryColor))
+                }
+                .frame(width: Const.width , height: Const.height)
+                .padding()
+            }.background(
+                BackgroundLinearColor()
+            )
+            
+            
         }
+        
+        
+        
     }
 }
 #Preview {

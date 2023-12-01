@@ -44,11 +44,10 @@ struct SerachView: View {
                     ForEach(filteredUser, id: \.id) { user in
                         SearchItem(user: user, ratingSorted: ratingSorted)
                     }
-                }
-                .padding(.top, 15)
-                .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
-                                    isSearchBar = newValue != ""
-                                }
+                .padding(.top,15)
+              /*  .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
+                    isSearchBar = newValue != ""
+                }*/
             }
             .navigationTitle("Arama")
             .navigationBarTitleDisplayMode(.inline)

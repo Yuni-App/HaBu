@@ -14,4 +14,12 @@ class Const{
     static let primaryUiColor = UIColor(hex: "55BCB6")
     static let thirColor = Color(uiColor: UIColor(hex: "5B8291"))
     static let secondaryColor = Color(uiColor : UIColor(hex:"68E4DD"))
+    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer","Mert","Yusuf"]
+    static var anonimFilters: [anonimFilter]=[
+        .init(id: 0, color: .blue, title: "Hepsi", subTitle: "Bütün Gönderiler ", icon: "anonim"),
+        .init(id: 1, color:.blue, title: "Anonim", subTitle: "Sadece Anonim Gönderiler", icon: "anonim"),
+        .init(id: 2, color: .blue, title: "Normal", subTitle: "Sadece Normal Gönderiler", icon: "nonAnonim")
+    ]
+
 }
+
