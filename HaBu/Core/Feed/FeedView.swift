@@ -14,8 +14,6 @@ struct FeedView: View {
             VStack {
                 CustomTollbar(showCategoryFilter: $showCategoryFilter)
                 HStack{
-                    Buttons.slidableButton(destination: AnyView(AddPostView(imageList: [])), startPosition: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
-                        .padding(.top,50)
                     SlidableButton(destination: AnyView(AddPostView(imageList: [])), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
                         .padding(.top,50)
                 }
