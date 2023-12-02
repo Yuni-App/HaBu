@@ -27,11 +27,11 @@ struct BlockedUserListTile: View {
                 }
                 .foregroundStyle(.black)
                 Spacer()
-                CustomButton(title: "Kaldır", backgroundColor: Const.primaryColor, action: {
+                CustomButton(title: "Kaldır", backgroundColor: Const.primaryButtonColor, action: {
                     false
                 } ,size: CustomButtonSize.xxxsmall)
-               
-            }
+            }.padding(.horizontal ,15)
+            .padding(.vertical,5)
         }
     }
 }
