@@ -11,18 +11,14 @@ struct AddPostView: View {
     @State private var text : String = ""
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
-  
-   
+    
     var body: some View {
-        
         NavigationStack{
             ZStack{
                 AddPostBackground()
-                
                 VStack{
                     AddPostAppBar()
                     VStack {
-                        
                         TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
                             .padding()
                             .lineLimit(9...)
@@ -40,7 +36,7 @@ struct AddPostView: View {
                                 .foregroundColor(Color.white))
                         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
                     
-        
+                    
                     HStack{
                         Toggle("Anonim Yorum", isOn: $isAnonimComment)
                             .fontWeight(.bold)
@@ -49,6 +45,7 @@ struct AddPostView: View {
                             .foregroundColor(Color.white))
                         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
                     AddPostMedia()
+                   
                     Spacer()
                 }.padding()
                 
@@ -62,51 +59,56 @@ struct AddPostView: View {
     AddPostView()
 }
 
-struct AddPostAppBar: View {
-    var body: some View {
-        HStack{
+
+@ViewBuilder
+func AddPostAppBar()-> some View{
+    HStack{
+        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
             Image(systemName: "arrow.left.circle")
                 .resizable()
                 .frame(width: 35, height: 35)
                 .foregroundColor(.white)
-                .frame(width: Const.width/7)
-            Spacer()
-            Text("Gönderi Oluştur")
-                .foregroundColor(.white)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            Spacer()
+                .frame(width: Const.width / 7)
+        }
+        Spacer()
+        Text("Gönderi Oluştur")
+            .foregroundColor(.white)
+            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+        Spacer()
+        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
             Text("Paylaş")
                 .foregroundColor(.green)
                 .fontWeight(.bold)
                 .frame(width: Const.width/7)
-        }.padding(.top , 25)
+        }
+        
+    }.padding(.top , 25)
+}
+
+@ViewBuilder
+func AddPostBackground()-> some View {
+    VStack(spacing: 0) {
+        Rectangle()
+            .foregroundColor(.clear)
+            .frame(height: Const.height * 2.5 / 10)
+            .background(
+                LinearGradient(
+                    stops: [
+                        Gradient.Stop(color: Color(UIColor(hex: "04243E")), location: 0.00),
+                        Gradient.Stop(color: Color(UIColor(hex: "100F42")).opacity(0.49), location: 0.51),
+                        Gradient.Stop(color: Color(UIColor(hex: "100F34")).opacity(0.89), location: 1.00),
+                    ],
+                    startPoint: UnitPoint(x: 0.5, y: 0),
+                    endPoint: UnitPoint(x: 0.5, y: 1)
+                )
+            )
+            .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+        
+        Color(UIColor(hex: "F3F3F3"))
+            .frame(height: Const.height * 7.6 / 10)
     }
 }
 
-struct AddPostBackground: View {
-    var body: some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(height: Const.height * 2.5 / 10)
-                .background(
-                    LinearGradient(
-                        stops: [
-                            Gradient.Stop(color: Color(UIColor(hex: "04243E")), location: 0.00),
-                            Gradient.Stop(color: Color(UIColor(hex: "100F42")).opacity(0.49), location: 0.51),
-                            Gradient.Stop(color: Color(UIColor(hex: "100F34")).opacity(0.89), location: 1.00),
-                        ],
-                        startPoint: UnitPoint(x: 0.5, y: 0),
-                        endPoint: UnitPoint(x: 0.5, y: 1)
-                    )
-                )
-                .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-            
-            Color(UIColor(hex: "F3F3F3"))
-                .frame(height: Const.height * 7.6 / 10)
-        }
-    }
-}
 
 struct AddPostCategory: View {
     @State var SelectedTags:[String] = []
@@ -164,47 +166,46 @@ struct AddPostCategory: View {
     }
 }
 
-struct AddPostMedia: View {
-    var imageList  : [String] = ["Mert","Mert"]
-    var body: some View {
-        VStack{
-            HStack{
-                Text("Medya")
-                    .foregroundColor(.black)
-                    .fontWeight(.bold)
+@ViewBuilder
+func AddPostMedia(imageList : [String] = ["Mert","Mert"] )-> some View {
+    VStack{
+        HStack{
+            Text("Medya")
+                .foregroundColor(.black)
+                .fontWeight(.bold)
+            Spacer()
+        }
+        HStack{
+            if imageList.isEmpty {
+                GenerateImageBox(image: "AddPhoto" )
                 Spacer()
             }
-            HStack{
-                if imageList.isEmpty {
-                    GenerateImageBox(buttonsheet: false, image: "AddPhoto" )
-                    Spacer()
-                }
-                if imageList.count == 3 {
-                    ForEach(imageList, id: \.self) { userImage in
-                        //Image box
-                        GenerateImageBox(buttonsheet: false, image: userImage)
-                        Spacer()
-                    }
-                }
-                if imageList.count == 2 {
-                    ForEach(imageList, id: \.self) { userImage in
-                        //Image box
-                        GenerateImageBox(buttonsheet: false, image: userImage)
-                        Spacer()
-                        
-                    }
-                    GenerateImageBox(buttonsheet: true, image: "AddPhoto")
-                    Spacer()
-                }
-                if imageList.count == 1 {
-                    ForEach(imageList, id: \.self) { userImage in
-                        //Image box
-                        GenerateImageBox(buttonsheet: false, image: userImage)
-                    }
-                    GenerateImageBox(buttonsheet: true, image: "AddPhoto")
+            if imageList.count == 3 {
+                ForEach(imageList, id: \.self) { userImage in
+                    //Image box
+                    GenerateImageBox( image: userImage)
                     Spacer()
                 }
             }
-        }.padding(.bottom, 30)
-    }
+            if imageList.count == 2 {
+                ForEach(imageList, id: \.self) { userImage in
+                    //Image box
+                    GenerateImageBox( image: userImage)
+                    Spacer()
+                    
+                }
+                GenerateImageBox(image: "AddPhoto")
+                Spacer()
+            }
+            if imageList.count == 1 {
+                ForEach(imageList, id: \.self) { userImage in
+                    //Image box
+                    GenerateImageBox(image: userImage)
+                }
+                GenerateImageBox(image: "AddPhoto")
+                Spacer()
+            }
+        }
+    }.padding(.bottom, 30)
 }
+
