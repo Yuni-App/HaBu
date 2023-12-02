@@ -11,68 +11,18 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                ExtractedView()
-                VStack{
+                SettingsAppBar()
                     ScrollView{
-                        VStack{
-                            Text("Kullanıcı Bilgileri").frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.black.opacity(0.7))
-                                .fontWeight(.bold)
-                            VStack{
-                                SettingsTile(image: "person.crop.circle", text: "Profili Düzenle")
-                                Divider().frame(width: Const.width * 0.84)
-                                SettingsTile(image: "person.crop.circle", text: "Profili Düzenle")
-                                Divider().frame(width: Const.width * 0.84)
-                                SettingsTile(image: "person.crop.circle", text: "Profili Düzenle")
-                                Divider().frame(width: Const.width * 0.84)
-                                SettingsTile(image: "person.crop.circle", text: "Profili Düzenle")
-                            }.frame(maxWidth: .infinity, alignment: .leading)
-                                .background(
-                                    .white
-                                ).cornerRadius(7)
-                              
-
-                        }.shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
-                        VStack{
-                            Text("Bilgi").frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.black.opacity(0.7))
-                                .fontWeight(.bold)
-                            VStack{
-                                SettingsTile(image: "person.crop.circle", text: "Geri Bildirim")
-                                Divider().frame(width: Const.width * 0.84)
-                                SettingsTile(image: "person.crop.circle", text: "Gizlilik Sözleşmesi")
-                            }.frame(maxWidth: .infinity, alignment: .leading)
-                                .background(
-                                    .white
-                                ).cornerRadius(7)
-                        }  .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
-                            .padding(.top , 5)
-                        VStack{
-                            Text("Diğer").frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.black.opacity(0.7))
-                                .fontWeight(.bold)
-                            VStack{
-                                SettingsTile(image: "person.crop.circle", text: "Çıkış Yap")
-                                Divider().frame(width: Const.width * 0.84)
-                                SettingsTile(image: "person.crop.circle", text: "Hesabı Sil")
-                            }.frame(maxWidth: .infinity, alignment: .leading)
-                                .background(
-                                    .white
-                                ).cornerRadius(7)
-                                .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
-                        }.padding(.top , 5)
-                       
+                        UserAboutBox()
+                        AppAboutBox()
+                        OtherBox()
+                        Text("Uygulama Sürümü 1.0.0").foregroundColor(.black.opacity(0.3))
                     }
-                }
                 .padding()
                 .frame(width: Const.width)
                 .background(
-                    Color(UIColor(hex: "F3F3F3"))
+                    Const.primaryBackGroundColor
                 )
-                
-                
-                
-                
             }
         }
     }
@@ -82,24 +32,20 @@ struct SettingsView: View {
     SettingsView()
 }
 
-struct ExtractedView: View {
+struct SettingsAppBar: View {
     var body: some View {
-        HStack{
-            NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
-                Image(systemName: "arrow.left.circle")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-                    .foregroundColor(.black)
-                
+        ZStack{
+            HStack{
+                NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
+                    Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .black)
+                }
+                Spacer()
             }
-            
             Text("Ayarlar")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 25))
+                .frame(maxWidth: .infinity, alignment: .center)
             Spacer()
-            
-            
-            
         }.background(
             .white
         )
@@ -107,22 +53,85 @@ struct ExtractedView: View {
     }
 }
 
+
 struct SettingsTile: View {
-    var image : String
+    var icon : AppIcon
     var text : String
+    var destination: any View
     var body: some View {
-        HStack{
-            Image(systemName: image)
-                .resizable()
-                .frame(width: 30, height: 30)
-                .foregroundColor(.black)
-            Text(text).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            Spacer()
-            Image(systemName: "chevron.forward")
-                .resizable()
-                .frame(width: 25, height: 25)
-                .foregroundColor(.black)
-        }.padding(10)
+        NavigationLink {
+          AnyView(destination).navigationBarBackButtonHidden(true)
+        } label: {
+            HStack{
+                Image.iconManager(icon, size: 30, weight: .bold, color: .black)
+                Text(text).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).foregroundColor(.black)
+                Spacer()
+                Image.iconManager(AppIcon.next, size: 30, weight: .bold, color: .black)
+            }.padding(10)
+        }
+
     }
 }
 
+
+struct UserAboutBox: View {
+    var body: some View {
+        VStack{
+            Text("Kullanıcı Bilgileri").frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.black.opacity(0.7))
+                .fontWeight(.bold)
+            VStack{
+                SettingsTile(icon: AppIcon.person, text: "Profili Düzenle", destination: AnyView(EditProfileView(user: User.MockData[0])))
+                Divider().frame(width: Const.width * 0.84)
+                SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(BlockedUsers()))
+                Divider().frame(width: Const.width * 0.84)
+                SettingsTile(icon: AppIcon.point, text: "Puanlarım",destination: AnyView(BlockedUsers()))
+                Divider().frame(width: Const.width * 0.84)
+                SettingsTile(icon: AppIcon.blocked, text: "Engellenen Kullanıcılar",destination: AnyView(BlockedUsers()))
+            }.frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    .white
+                ).cornerRadius(7)
+                .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
+        }
+    }
+}
+
+struct AppAboutBox: View {
+    var body: some View {
+        VStack{
+            Text("Uygulama Hakkında").frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.black.opacity(0.7))
+                .fontWeight(.bold)
+            VStack{
+                SettingsTile(icon: AppIcon.feedBack, text: "Geri Bildirim",destination: AnyView(BlockedUsers()))
+                Divider().frame(width: Const.width * 0.84)
+                SettingsTile(icon: AppIcon.book, text: "Gizlilik Sözleşmesi",destination: AnyView(BlockedUsers()))
+            }.frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    .white
+                ).cornerRadius(7)
+                .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
+        }
+        .padding(.top , 5)
+    }
+}
+
+struct OtherBox: View {
+    var body: some View {
+        VStack{
+            Text("Diğer").frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.black.opacity(0.7))
+                .fontWeight(.bold)
+            VStack{
+                SettingsTile(icon: AppIcon.logout, text: "Çıkış Yap",destination: AnyView(InfoView()))
+                Divider().frame(width: Const.width * 0.84)
+                SettingsTile(icon: AppIcon.trash, text: "Hesabı Sil",destination: AnyView(BlockedUsers()))
+            }.frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    .white
+                ).cornerRadius(7)
+                .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
+        }.padding(.top , 5)
+    }
+}

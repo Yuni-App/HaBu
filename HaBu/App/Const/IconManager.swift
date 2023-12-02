@@ -23,5 +23,13 @@ enum AppIcon: String{
     case filter = "line.horizontal.3.decrease"
     case paperplane = "paperplane.circle.fill"
     case back = "chevron.backward"
-    case next = "chevron.forward"
+    case next = "chevron.forward" //edit
+    case logout = "figure.run" //edit
+    case feedBack = "scope" //edit
+    case point = "character.book.closed.fill.ja" //edit
+    case book = "book.pages"
+    case trash = "trash"
+    case blocked = "batteryblock" //edit
+
 }
+
