@@ -11,27 +11,37 @@ struct FeedViewCell: View {
     @State var showingComment : Bool
     @State private var savePost = ActionButtons.savePost
     @State private var likePost = ActionButtons.unLike
-    
+    private var backButton : Bool
     let post : Post
     var user : User
     init(post: Post,user:User) {
         self.post = post
         self.user = user
         self.showingComment = false
+        self.backButton = false
     }
-    init(withComment post: Post,user:User) {
+    init(navigatedWithComment post: Post,user:User) {
         self.post = post
         self.user = user
         self.showingComment = true
+        self.backButton = true
+    }
+    init(navigated post:Post,user:User){
+        self.post = post
+        self.user = user
+        self.showingComment = false
+        self.backButton = true
     }
     var body: some View {
         NavigationStack {
             VStack(alignment:.leading){
-            
-                Buttons.backButton {
-                    print("back")
+                if backButton {
+                    Buttons.backButton {
+                            
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                
                 Spacer()
                 //User Info
                 NavigationLink{
