@@ -68,7 +68,7 @@ func AddPostAppBar()-> some View{
                 .resizable()
                 .frame(width: 35, height: 35)
                 .foregroundColor(.white)
-                .frame(width: Const.width / 7)
+           
         }
         Spacer()
         Text("Gönderi Oluştur")
