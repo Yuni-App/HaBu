@@ -11,7 +11,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                SettingsAppBar()
+                CustomSettingsTollBar(title: "Ayarlar", destinaiton: AnyView(TabbarView()))
                     ScrollView{
                         UserAboutBox()
                         AppAboutBox()
@@ -32,25 +32,6 @@ struct SettingsView: View {
     SettingsView()
 }
 
-@ViewBuilder
-func SettingsAppBar() -> some View {
-    ZStack{
-        HStack{
-            NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
-                Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .black)
-            }
-            Spacer()
-        }
-        Text("Ayarlar")
-            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            .font(.system(size: 25))
-            .frame(maxWidth: .infinity, alignment: .center)
-        Spacer()
-    }.background(
-        .white
-    )
-    .padding(.horizontal , 10)
-}
 
 @ViewBuilder
 func SettingsTile(icon : AppIcon , text : String , destination : AnyView)->some View {
