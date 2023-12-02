@@ -35,29 +35,30 @@ struct SerachView: View {
         NavigationStack {
             SearchBar(searchText: $searchText, isEditing: $isSearchBar)
                 .padding(.top, 8)
-            ScrollView {
-                VStack {
-                    LazyVStack(spacing: 15) {
-                        ForEach(filteredUsers, id: \.id) { user in
-                            SearchItem(user: user, ratingSorted: ratingSorted)
-                        }
-                        .padding(.top,15)
-                    }
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack{
-                            Spacer()
-                            ForEach(filteredUsers2, id: \.id) { user in
-                                SearchItem2(user: user, ratingSorted: ratingSorted)
+             
+                ScrollView {
+                    VStack {
+                            ForEach(filteredUsers, id: \.id) { user in
+                                SearchItem(user: user, ratingSorted: ratingSorted)
                             }
                             .padding(.top,15)
-                            Spacer()
-                        }.frame(height: Const.height * 0.25)
+                        
+                        ScrollView(.horizontal){
+                            HStack{
+                                Spacer()
+                                ForEach(filteredUsers2, id: \.id) { user in
+                                    SearchItem2(user: user, ratingSorted: ratingSorted)
+                                }
+                                .padding(.top,15)
+                                Spacer()
+                            }.frame(height: Const.height * 0.25)
+                        }
                     }
                 }
             }
         }
     }
-}
+
 struct SearchBar: View {
     @Binding var searchText: String
     @Binding var isEditing: Bool
