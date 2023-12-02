@@ -11,49 +11,45 @@ import SwiftUI
 struct AddImageBottomSheet: View {
     var body: some View {
         ZStack {
-            Image("")
-            .frame(width: Const.width , height: 300)
-            .background(Const.primaryColor.opacity(0.4))
-            .cornerRadius(10)
-            
-
-            VStack{
-                Button(action: {}, label: {
-                    HStack{
-                        Image(systemName: "camera")
-                            .font(.system(size: 30))
-                            .foregroundColor(.black)
-                        Text("Kamera")
-                            .foregroundColor(.black)
-                            .fontWeight(.bold)
-                            .font(.system(size: 25))
-                    }
-                    .frame(width: Const.width,height: Const.height/14)
-                    .background(.gray.opacity(0.1))
-                    
-                    
-                }
+            Rectangle()
+                .foregroundColor(.clear)
+                .frame(height: Const.height * 4 / 10)
+                .background(
+                    Color.white
                 )
-                Button(action: {}, label: {
-                    HStack{
-                        Image(systemName: "photo.on.rectangle")
-                            .font(.system(size: 30))
-                            .foregroundColor(.black)
-                        Text("Galeri")
-                            .foregroundColor(.black)
-                            .fontWeight(.bold)
-                            .font(.system(size: 25))
-                    }
-                    .frame(width: Const.width,height: Const.height/14)
-                    .background(.gray.opacity(0.1))
-                    
-                    
+            HStack{
+                Spacer()
+                VStack{
+                    Image(systemName: "camera")
+                        .font(.system(size: 40))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color(UIColor(hex: "04243E")))
+                        .cornerRadius(7)
+                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                    Text("Kamera")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .font(.system(size: 25))
                 }
-                )
+                Spacer()
+                VStack{
+                    Image(systemName: "photo.on.rectangle")
+                        .font(.system(size: 40))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color(UIColor(hex: "04243E")))
+                        .cornerRadius(7)
+                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                    Text("Galeri")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .font(.system(size: 25))
+                }
+                Spacer()
             }
-            
             .frame(width: Const.width)
-        .presentationDetents([.height(CGFloat(Const.height/5)),.height(CGFloat(Const.height/6))])
+        .presentationDetents([.height(CGFloat(Const.height/4)),.height(CGFloat(Const.height/6))])
         }
     }
     

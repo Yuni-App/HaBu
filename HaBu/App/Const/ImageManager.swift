@@ -14,7 +14,4 @@ class ImageManager {
     static let RegisterSecondVector = "RegisterSecondVector"
     static let registerThirdVector = "RegisterThirdVector"
     static let loginVector = "LoginVector"
-  
-    
-
 }

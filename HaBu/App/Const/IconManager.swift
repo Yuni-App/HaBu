@@ -21,4 +21,7 @@ enum AppIcon: String{
     case tray = "tray.fill"
     case circleFill = "circle.fill"
     case filter = "line.horizontal.3.decrease"
+    case paperplane = "paperplane.circle.fill"
+    case back = "chevron.backward"
+    case next = "chevron.forward"
 }
