@@ -24,7 +24,7 @@ struct ProfileUserView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: getHeaderHeight(),alignment:.bottom)
                     .background(
-                        Const.primaryColor,
+                        Const.thirColor,
                         in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
                     
                     )
@@ -114,7 +114,7 @@ struct Tabbar:View {
             HStack{
                 //Image and picker
                 VStack {
-                    CircleProfileImage(userIamgeUrl:images[imageCount] , size: .xlage)
+                    CircleProfileImage(userIamgeUrl:images[imageCount], size: .xlage)
                     .padding(.leading,10)
                     .gesture(DragGesture().onEnded({ value in
                         if value.translation.width < 1 {

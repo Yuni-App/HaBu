@@ -21,10 +21,8 @@ struct CommentBottomSheet: View {
                 .modifier(IGTextFieldModifier())
             Button(action: {
             }, label: {
-                Image(systemName: "paperplane.circle.fill")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .padding(.trailing,10)
+                Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)
+                    .padding(10)
             })
         }
     }
@@ -42,27 +40,17 @@ struct CommentViewCell : View {
         VStack{
             //User Info
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .small)
-                    .padding(.horizontal,10)
-                VStack(alignment:.leading){
-                    Text(user.username)
-                        .fontWeight(.semibold)
-                        .font(.subheadline)
-                        
-                    Text("\(user.name) \(user.surName)").font(.caption2).fontWeight(.semibold)
-                }
-                Text("4h")
-                    .opacity(0.6)
-                    .font(.footnote)
-                    .padding(.horizontal,5)
-                Spacer()
-                ActionButton(button: .liked, number: 10, action: {})
-                    .padding(.all,10)
+                UserInfo(user: user, imageSize: .xsmall)
+                    .padding(10)
+                Buttons.actionButton(buttonType: .liked, action: {
+                    
+                }, getNumber: 10)
+                .padding(.all,10)
                 
             }
             Text("benim şahane ötesi fikirlerimi beğenip beğenmemek size mi düştü arkadaşlar ben istediğimi yazar çizerim bu size alakadar etmez anladınız mı")
                 .font(.caption)
-                .fontWeight(.bold)
+                .fontWeight(.medium)
                 .padding(.horizontal)
                 .padding(.vertical,5)
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1686232B1A218200A20636 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1686222B1A218200A20636 /* Buttons.swift */; };
 		5C1FCA132B0F6F8F00A3ED5B /* CustomTextField2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */; };
 		5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583D2B03B430008BEB6D /* HaBuApp.swift */; };
 		5C2658402B03B430008BEB6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583F2B03B430008BEB6D /* ContentView.swift */; };
@@ -28,6 +29,7 @@
 		5C7E55E82B0FBD60008AE5A1 /* SlidableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */; };
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5C9420B12B063460004F9A17 /* CategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420B02B063460004F9A17 /* CategoryFilter.swift */; };
+		5CACE42A2B18B70A00658FEF /* CustomTollbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CACE4292B18B70A00658FEF /* CustomTollbar.swift */; };
 		5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01922B135144007F9022 /* OffsetModifier.swift */; };
 		5CBA01952B13520E007F9022 /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01942B13520E007F9022 /* ProfileUserView.swift */; };
 		5CD3D3FD2B14CF0F00C4A944 /* ScrollableTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3D3FC2B14CF0F00C4A944 /* ScrollableTabView.swift */; };
@@ -68,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C1686222B1A218200A20636 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField2.swift; sourceTree = "<group>"; };
 		5C26583A2B03B430008BEB6D /* HaBu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaBu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C26583D2B03B430008BEB6D /* HaBuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaBuApp.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidableButton.swift; sourceTree = "<group>"; };
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5C9420B02B063460004F9A17 /* CategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilter.swift; sourceTree = "<group>"; };
+		5CACE4292B18B70A00658FEF /* CustomTollbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTollbar.swift; sourceTree = "<group>"; };
 		5CBA01922B135144007F9022 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 		5CBA01942B13520E007F9022 /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
 		5CD3D3FC2B14CF0F00C4A944 /* ScrollableTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableTabView.swift; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 				5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */,
 				5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */,
 				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
+				5CACE4292B18B70A00658FEF /* CustomTollbar.swift */,
+				5C1686222B1A218200A20636 /* Buttons.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -538,6 +544,7 @@
 				9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */,
 				887CD10B2B064CBC00D7C8DC /* SideMenu.swift in Sources */,
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,
+				5C1686232B1A218200A20636 /* Buttons.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				5C7E55E82B0FBD60008AE5A1 /* SlidableButton.swift in Sources */,
@@ -585,6 +592,7 @@
 				94BDAD672B07AC1A00F66312 /* BlockedUserListTile.swift in Sources */,
 				5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */,
 				949E2A0F2B04D4E200DF967E /* CustomTextField.swift in Sources */,
+				5CACE42A2B18B70A00658FEF /* CustomTollbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@ struct FeedView: View {
     var body: some View {
         NavigationStack{
             VStack {
+                CustomTollbar(showCategoryFilter: $showCategoryFilter)
                 HStack{
                     SlidableButton(destination: AnyView(AddPostView(imageList: [])), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
                         .padding(.top,50)
@@ -29,47 +30,7 @@ struct FeedView: View {
                     CategoryFilterBottomSheet()
                         .presentationDetents([.large,.large])
                 }
-                .toolbar{
-                    ToolbarItem(placement:.topBarLeading){
-                        NavigationLink {
-                        // CreatePost()
-                        } label: {
-                            Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
-                        }
-                    } // App Icon
-                    ToolbarItem(placement: .topBarTrailing){
-                        Button(action: {
-                            // -> MessageBox View
-                            
-                        }, label: {
-                            ZStack{
-                                Image.iconManager(.tray, size: 20, weight: .bold, color: .black)
-                                Image.iconManager(.circleFill, size:15 , weight: .bold, color: .red)
-                                    .padding(.leading,25)
-                                    .padding(.bottom,25)
-                                Text("5")
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .padding(.leading,25)
-                                    .padding(.bottom,25)
-                                    .foregroundStyle(.white)
-                                
-                                
-                            }
-                            
-                        })
-                    } // MessageBox
-                    ToolbarItem(){
-                        Button(action: {
-                            showCategoryFilter = true
-                            
-                        }, label: {
-                            Image.iconManager(.filter, size: 20, weight: .bold, color: .black)
-                        })
-                        
-                    } //filter
-                    
-            }
+               
             }
         }
     }
