@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 struct FeedViewCell: View {
-    @State private var showingComment = false
+    @State var showingComment : Bool
     @State private var savePost = ActionButtons.savePost
     @State private var likePost = ActionButtons.unLike
     
@@ -17,10 +17,22 @@ struct FeedViewCell: View {
     init(post: Post,user:User) {
         self.post = post
         self.user = user
+        self.showingComment = false
+    }
+    init(withComment post: Post,user:User) {
+        self.post = post
+        self.user = user
+        self.showingComment = true
     }
     var body: some View {
         NavigationStack {
-            VStack{
+            VStack(alignment:.leading){
+            
+                Buttons.backButton {
+                    print("back")
+                }
+                .padding(.horizontal)
+                Spacer()
                 //User Info
                 NavigationLink{
                     ProfileView(user: user)
@@ -89,10 +101,12 @@ struct FeedViewCell: View {
                     }
                 }
                 .padding()
+                Spacer()
             }
         }
        
         Divider()
+        
     }
 }
 #Preview {
