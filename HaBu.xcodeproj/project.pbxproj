@@ -51,6 +51,7 @@
 		943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */; };
 		944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C97A32B1B4240005F8E96 /* AddPostView.swift */; };
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
+		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */; };
 		94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */; };
 		949016E02B041EBD00164405 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016DF2B041EBD00164405 /* InfoView.swift */; };
@@ -116,6 +117,7 @@
 		943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCreatePasswordBottomSheet.swift; sourceTree = "<group>"; };
 		944C97A32B1B4240005F8E96 /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageBottomSheet.swift; sourceTree = "<group>"; };
 		94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageBox.swift; sourceTree = "<group>"; };
 		949016DF2B041EBD00164405 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -406,9 +408,18 @@
 		9470799F2B1B8C750005C4CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				947079A22B1BCE230005C4CB /* Agreement */,
 				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		947079A22B1BCE230005C4CB /* Agreement */ = {
+			isa = PBXGroup;
+			children = (
+				947079A32B1BCE500005C4CB /* AgreementView.swift */,
+			);
+			path = Agreement;
 			sourceTree = "<group>";
 		};
 		94808CCF2B0CE5CA00CC51FD /* AddPost */ = {
@@ -557,6 +568,7 @@
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */,
 				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
+				947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */,
 				9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */,
 				887CD10B2B064CBC00D7C8DC /* SideMenu.swift in Sources */,
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,

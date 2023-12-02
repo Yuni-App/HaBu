@@ -99,7 +99,7 @@ func AppAboutBox() ->some View {
         VStack{
             SettingsTile(icon: AppIcon.feedBack, text: "Geri Bildirim",destination: AnyView(BlockedUsers()))
             Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.book, text: "Gizlilik Sözleşmesi",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.book, text: "Gizlilik Sözleşmesi",destination: AnyView(AgreementView()))
         }.frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 .white
