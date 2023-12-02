@@ -22,7 +22,6 @@ struct FeedView: View {
                     ForEach(Post.MockData , id: \.id){post in
                         FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
                         Divider()
-
                     }
                 }
                 .padding(.top,50)

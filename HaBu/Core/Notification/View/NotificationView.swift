@@ -9,33 +9,77 @@ import SwiftUI
 
 struct NotificationView: View {
     var body: some View {
-        NavigationStack{
-            VStack {
-                HStack {
-                    Text("Bildirimler").font(.title).bold()
-                        .frame(width: Const.width * 0.4)
-                    Spacer()
+        VStack {
+            HStack{
+                Text("Bildirimler")
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+            ZStack {
+                ScrollView{
+                    HStack(){
+                        Image(systemName: "horn.blast.fill")
+                            .foregroundStyle(.red)
+                        Text("3 Bildirim")
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    .padding(.horizontal,15)
+                
+                    
+                    ForEach(0..<3){i in
+                        NotificationCell(notification: Notification.MOCK_DATA[i])
+                    Divider()
+
+                    }
+                    
+                    HStack{
+                        Image(systemName: "clock.fill")
+                            .foregroundStyle(.blue)
+                        Text("Eski Bildirimler")
+                        Spacer()
+                    }
+                    .padding(.horizontal,15)
+                    ForEach(0..<7){i in
+                        NotificationCell(notification: Notification.MOCK_DATA[i])
+                    Divider()
+
+                    }
+                    
+                    
+                }
+                .zIndex(1)
+                Const.backgroundColor.zIndex(0)
+            }
+        }
+       
+    }
+    @ViewBuilder
+    func NotificationCell(notification:Notification)-> some View{
+        HStack{
+            CircleProfileImage(userIamgeUrl: "", size: .small)
+            Text(notification.caption).font(.headline).fontWeight(.bold)
+            Spacer()
+            VStack{
+                HStack{
+                    Image(systemName: "clock.fill")
+                        .font(.caption2)
+                        .foregroundStyle(.gray)
+                    Text(notification.createdAt)
+                        .font(.caption2)
+                        .foregroundStyle(.black)
                 }
                 Spacer()
-                ScrollView {
-                    ForEach(Notification.MockData, id : \.id){notification in
-                        NavigationLink(destination: Text("ProfileView, myPostView, otherPostView"),
-                                       label: {
-                            HStack(){
-                                CircleProfileImage(userIamgeUrl: "\(notification.userProfileImageUrl)", size: .xsmall)
-                                Text("\(notification.userName) \(notification.status)")
-                                Spacer()
-                                
-                            }
-                            .frame(width: Const.width * 0.9)
-                            .foregroundStyle(.black)
-                        })
-                    }
-                }
-                
             }
+            .padding(3)
             
         }
+        .padding(.horizontal,10)
+        .frame(width: Const.width * 0.95,height: Const.height * 0.1)
+        .background(Color.white)
+        .clipShape(.rect(cornerRadius: 5, style: .circular))
+        .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
+
     }
 }
 
@@ -43,3 +87,5 @@ struct NotificationView: View {
 #Preview {
     NotificationView()
 }
+
+

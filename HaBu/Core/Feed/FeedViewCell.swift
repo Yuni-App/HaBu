@@ -22,7 +22,14 @@ struct FeedViewCell: View {
         NavigationStack {
             VStack{
                 //User Info
-                UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
+                NavigationLink{
+                    ProfileView(user: user)
+                }label: {
+                    UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
+                        .foregroundStyle(.black)
+
+                }
+                .navigationBarBackButtonHidden()
                 .padding(.horizontal)
                 
                 //ımage ?? nil

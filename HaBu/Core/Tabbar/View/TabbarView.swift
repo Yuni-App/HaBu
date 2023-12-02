@@ -13,7 +13,6 @@ struct TabbarView: View {
             FeedView().tabItem {
                 Image(systemName: "house.fill")
             }
-            
             SerachView().tabItem {
                 Image(systemName: "magnifyingglass")
             }

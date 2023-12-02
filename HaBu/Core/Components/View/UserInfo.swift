@@ -24,10 +24,7 @@ struct UserInfo: View {
     var body: some View {
         NavigationStack {
             HStack {
-                VStack{
-                    NavigationLink{
-                        ProfileView(user: User.MockData[0])
-                    }label: {
+               
                         CircleProfileImage(userIamgeUrl: "", size: imageSize)
                         
                         VStack{
@@ -40,9 +37,8 @@ struct UserInfo: View {
                                 .font(.caption2)
                         }
                         .foregroundStyle(.black)
-                    }
                     
-                }
+                    
                 Spacer()
                 if timeStamp != nil{
                 Text("4s")
