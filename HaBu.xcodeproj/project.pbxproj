@@ -39,6 +39,8 @@
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B85B332B06348200D03ED9 /* EditProfileView.swift */; };
 		88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F552B1B3DB3005BE291 /* SearchItem.swift */; };
+		88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F592B1B5B63005BE291 /* SecondSearchView.swift */; };
+		88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */; };
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
 		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
 		9411AA8C2B050EDB0042A354 /* BackgroundLinearColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */; };
@@ -103,6 +105,8 @@
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		88B85B332B06348200D03ED9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		88D69F552B1B3DB3005BE291 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
+		88D69F592B1B5B63005BE291 /* SecondSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSearchView.swift; sourceTree = "<group>"; };
+		88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem2.swift; sourceTree = "<group>"; };
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLinearColor.swift; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 			children = (
 				5C2DAB522B050F7900C6E145 /* SerachView.swift */,
 				88D69F552B1B3DB3005BE291 /* SearchItem.swift */,
+				88D69F592B1B5B63005BE291 /* SecondSearchView.swift */,
+				88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				94808CD62B0CE63D00CC51FD /* AddPostView.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
 				88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */,
+				88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
 				94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */,
 				5CBA01952B13520E007F9022 /* ProfileUserView.swift in Sources */,
@@ -572,6 +579,7 @@
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */,
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
+				88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */,
 				5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */,
 				5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */,
 				5CD3D3FD2B14CF0F00C4A944 /* ScrollableTabView.swift in Sources */,
