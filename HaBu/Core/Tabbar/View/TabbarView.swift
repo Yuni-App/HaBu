@@ -63,7 +63,7 @@ private struct CustomTabbarView:View {
     var body: some View {
         HStack(spacing:0){
             ForEach(Const.tabBarItems,id: \.self){image in
-                CustomTabButton(badge: image == "Notification" ? 15:0, image: image, currentTab: $currentTab)
+                CustomTabButton(badge: image == "Notification" ? 5:0, image: image, currentTab: $currentTab)
             }
             .background(.white)
             
@@ -89,7 +89,7 @@ private struct CustomTabButton:View {
                 .aspectRatio(contentMode: .fit)
                 .padding(.top,10)
                 .frame(width: 35,height: 35)
-                .foregroundStyle(currentTab == image ? Color.green:Color.gray)
+                .foregroundStyle(currentTab == image ? Const.primaryColor:Color.gray)
                 .overlay(
                     Text("\(badge<100 ? badge: 99)+")
                         .font(.caption)

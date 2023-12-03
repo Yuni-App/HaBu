@@ -10,6 +10,7 @@ import SwiftUI
 struct FeedView: View {
     @State var showCategoryFilter = false
     var bottomEdge:CGFloat
+    @State var messageBox = 20
     var topEdge: CGFloat
     @Binding var hideTab:Bool
    @State var offset:CGFloat = 0
@@ -59,7 +60,7 @@ struct FeedView: View {
                 } 
                 .coordinateSpace(name:"SCROLL")
                 .overlay(
-                    FeedViewTollBar(showCategoryFilter: $showCategoryFilter, topEdge: topEdge)
+                    FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: topEdge)
                         .background(.white)
                         .offset(y:hideTab ? (-15 - 70 - topEdge) :0)
                     ,alignment: .top
@@ -95,10 +96,50 @@ struct FeedView: View {
 
 struct FeedViewTollBar:View {
     @Binding var showCategoryFilter:Bool
+    @Binding var messageBox : Int
+    @Environment(\.colorScheme) var sheme
      var topEdge:CGFloat
     var body: some View {
         VStack{
-            CustomTollbar(showCategoryFilter: $showCategoryFilter)
+            HStack{
+                Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
+                    .padding(10)
+                Spacer()
+                
+                Button(action: {
+                    showCategoryFilter = true
+                    
+                }, label: {
+                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black)
+                })
+                
+                Button(action: {
+                    // -> MessageBox View
+                    
+                }, label: {
+                    Image.iconManager(.tray, size: 25, weight: .bold, color: .black)
+                        .padding(.top,10)
+                        .overlay(
+                            Text("\(messageBox < 100 ? messageBox: 99)+")
+                                .font(.caption2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(sheme == .dark ? .black : .white)
+                                .padding(.vertical,2)
+                                .padding(.horizontal,3)
+                                .background(.red, in: Capsule())
+                                .background(
+                                    Capsule().stroke(sheme == .dark ? .black:.white,lineWidth:2)
+                                )
+                            
+                            ,alignment: .topTrailing
+                        )
+                        .padding(20)
+                    
+                }
+            )
+              
+                
+            }
         }
         .padding(.top,15)
         .padding(.top,topEdge)
