@@ -58,7 +58,7 @@ func UserAboutBox() ->some View {
         VStack{
             SettingsTile(icon: AppIcon.person, text: "Profili Düzenle", destination: AnyView(EditProfileView(user: User.MockData[0])))
             Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(ChangePasswordView()))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.point, text: "Puanlarım",destination: AnyView(BlockedUsers()))
             Divider().frame(width: Const.width * 0.84)

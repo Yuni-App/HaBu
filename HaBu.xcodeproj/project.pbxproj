@@ -53,6 +53,8 @@
 		9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */; };
 		9452D2FC2B1C6C3F005E2A3B /* CustomTextField3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FB2B1C6C3F005E2A3B /* CustomTextField3.swift */; };
 		9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */; };
+		9452D3002B1C8130005E2A3B /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */; };
+		9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */; };
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
@@ -123,6 +125,8 @@
 		9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountPasswordView.swift; sourceTree = "<group>"; };
 		9452D2FB2B1C6C3F005E2A3B /* CustomTextField3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField3.swift; sourceTree = "<group>"; };
 		9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountCodeView.swift; sourceTree = "<group>"; };
+		9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordSuccessView.swift; sourceTree = "<group>"; };
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
@@ -446,6 +450,8 @@
 		947079A82B1BD4060005C4CB /* ChangePassword */ = {
 			isa = PBXGroup;
 			children = (
+				9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */,
+				9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */,
 			);
 			path = ChangePassword;
 			sourceTree = "<group>";
@@ -644,6 +650,7 @@
 				5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */,
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
+				9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */,
@@ -661,6 +668,7 @@
 				5C6F523F2B128CF000D79208 /* TagLayout.swift in Sources */,
 				949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */,
 				5CE5AB9C2B056D3C00502D9F /* UserInfo.swift in Sources */,
+				9452D3002B1C8130005E2A3B /* ChangePasswordView.swift in Sources */,
 				947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */,
 				884E8CF92B09F2E7001BADDF /* Notification.swift in Sources */,
 				94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */,

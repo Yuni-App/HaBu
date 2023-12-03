@@ -21,7 +21,7 @@ struct DeleteAccountCodeView: View {
             CustomButton(title: "Hesabı Sil", backgroundColor: Const.secondaryButtonColor, action: {
                 true
                //delete account
-            }, destination: AnyView(InfoView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
+            }, destination: AnyView(InfoView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
         }.frame(width: Const.width)
             .background(
                 Const.primaryBackGroundColor

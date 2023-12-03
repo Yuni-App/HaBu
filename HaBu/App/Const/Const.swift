@@ -17,6 +17,7 @@ class Const{
     static let primaryBackGroundColor = Color(UIColor(hex: "F3F3F3"))
     static let primaryButtonColor = Color(UIColor(hex: "04243E"))
     static let secondaryButtonColor = Color(UIColor(hex: "B70404"))
+    static let textColorSecondary = Color(UIColor(hex: "5B8291"))
     
     
 

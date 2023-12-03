@@ -34,7 +34,7 @@ enum AppIcon: String{
     case gallery = "photo.on.rectangle"
     case warning = "exclamationmark.transmission"
     case code = "qrcode"
-
+    case info = "info.square"
 
 }
 
