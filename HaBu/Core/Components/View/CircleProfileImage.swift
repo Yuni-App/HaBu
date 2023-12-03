@@ -99,9 +99,9 @@ struct CircleProfileImage: View {
             else{
                 Image("profil1")
                     .resizable()
-                    .clipShape(.rect(cornerRadius: 30))
+                    .clipShape(.rect(cornerRadius: 15))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 30)
+                        RoundedRectangle(cornerRadius: 15)
                             .stroke(Color.white, lineWidth: 2)
                     )
                     .frame(width: size.deminsion ,height: size.deminsion)
@@ -111,9 +111,9 @@ struct CircleProfileImage: View {
             let value = ImageLocationAndSize.fromRawValue(index)
             Image(userIamgeUrl)
                 .resizable()
-                .clipShape(.rect(cornerRadius: 30))
+                .clipShape(.rect(cornerRadius: 15))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 30)
+                    RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.white, lineWidth: 1)
                 )
                 .frame(width: value!.size, height: value!.size)
@@ -126,5 +126,5 @@ struct CircleProfileImage: View {
 }
 
 #Preview {
-    EditProfileView(user: User.MockData[0])
+    CircleProfileImage(userIamgeUrl: "", size: .medium)
 }

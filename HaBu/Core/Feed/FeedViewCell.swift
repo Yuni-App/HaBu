@@ -8,21 +8,55 @@
 import SwiftUI
 import Kingfisher
 struct FeedViewCell: View {
-    @State private var showingComment = false
-    @State private var savePost = actionButtons.savePost
-    @State private var likePost = actionButtons.unLike
-    
+    @State var showingComment : Bool
+    @State private var savePost = ActionButtons.savePost
+    @State private var likePost = ActionButtons.unLike
+    @Binding var hideTab:Bool
+    private var backButton : Bool
     let post : Post
     var user : User
-    init(post: Post,user:User) {
+    init(post: Post,user:User,hideTab:Binding<Bool>) {
         self.post = post
         self.user = user
+        self.showingComment = false
+        self.backButton = false
+        _hideTab = hideTab
+    }
+    init(navigatedWithComment post: Post,user:User) {
+        self.post = post
+        self.user = user
+        self.showingComment = true
+        self.backButton = true
+        _hideTab = .constant(false)
+    }
+    init(navigated post:Post,user:User){
+        self.post = post
+        self.user = user
+        self.showingComment = false
+        self.backButton = true
+        _hideTab = .constant(false)
+
     }
     var body: some View {
         NavigationStack {
-            VStack{
+            VStack(alignment:.center){
+                if backButton {
+                    Buttons.backButton {
+                            
+                    }
+                    .padding(.horizontal)
+                }
+                
+                Spacer()
                 //User Info
-                UserInfo(user: user, imageSize: .small)
+                NavigationLink{
+                    ProfileView(hideTab: $hideTab, user: user)
+                }label: {
+                    UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
+                        .foregroundStyle(.black)
+
+                }
+                .navigationBarBackButtonHidden()
                 .padding(.horizontal)
                 
                 //ımage ?? nil
@@ -51,43 +85,45 @@ struct FeedViewCell: View {
                 .padding()
                 //action buttons
                 HStack{
-                    ActionButton(button: likePost,number: 20) {
+                    
+                    Buttons.actionButton(buttonType: likePost,action: {
                         if likePost == .unLike{
                             likePost = .liked
                         }
                         else{
                             likePost = .unLike
                         }
-                    }
-                    ActionButton(button: .bubble, number: 10) {
+                    },getNumber: 20)
+                    Buttons.actionButton(buttonType:.bubble, action: {
                         showingComment = true
                         print("comment")
-                    }
+                    }, getNumber: 10)
                     .sheet(isPresented: $showingComment) {
                         CommentBottomSheet()
                             .presentationDetents([.large,.medium])
                     }
-                    ActionButton(button: .send) {
-                        print("gönder")
+                    Buttons.actionButton(buttonType: .send) {
+                        print("send")
                     }
                     Spacer()
-                        ActionButton(button: savePost) {
-                            if savePost == .savePost{
-                                savePost = .savedPost
-                            }
-                            else{
-                                savePost = .savePost
-                            }
-                                                
+                    Buttons.actionButton(buttonType: savePost) {
+                        if savePost == .savePost{
+                            savePost = .savedPost
+                        }
+                        else{
+                            savePost = .savePost
+                        }
                     }
                 }
                 .padding()
+                Spacer()
             }
         }
        
         Divider()
+        
     }
 }
 #Preview {
-    FeedViewCell(post: Post.MockData[1], user:  User.MockData[0])
+    FeedViewCell(post: Post.MockData[0], user:  User.MockData[0], hideTab: .constant(false))
 }

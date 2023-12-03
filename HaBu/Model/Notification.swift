@@ -9,40 +9,33 @@ import Foundation
 
 struct Notification: Identifiable, Codable{
     let id: String
-    let postId: String
-    let commentId: String
-    let userId: String
-    let userName: String
-    let status: String
-    let userProfileImageUrl: String
+    let type: NotificationType
+    let userId:String
+    let targetId:String
+    let caption:String
+    let createdAt:String
 }
-//id: Bildirimin benzersiz kimliği.
-//postId: Bildirimin ilgili olduğu gönderi.
-//commentId: Bildirimin ilgili olduğu yorumu.
-//userId: Bildirimi gönderen kullanıcı.
-//userName: Bildirimi gönderen kullanıcının adı.
-//status: Bildirim türü
-//userProfileImageUrl: Bildirimi gönderen kullanıcının profil resminin URL'si.
 
 
-extension Notification{
-    static var MockData: [Notification] = [
-        .init(id: "0", postId: "1", commentId: "12", userId: "456", userName: "yusuf", status: "yorumunuzu begendi", userProfileImageUrl: "https://instagram.fsaw1-11.fna.fbcdn.net/v/t51.2885-19/300941828_733875135020076_8974027012574327300_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fsaw1-11.fna.fbcdn.net&_nc_cat=100&_nc_ohc=_O6ogk8VBg0AX9da5Bf&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfBuqcMn7fAgXOYBWpsSHNA3znfg5NFjNz9olIvEBR877w&oe=655E8D22&_nc_sid=8b3546"),
-        .init(id: "1", postId: "2", commentId: "13", userId: "789", userName: "ahmet", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "2", postId: "3", commentId: "14", userId: "123", userName: "mehmet", status: "gönderinize yorum attı", userProfileImageUrl: ""),
-        .init(id: "3", postId: "4", commentId: "15", userId: "567", userName: "serkan", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "4", postId: "5", commentId: "16", userId: "987", userName: "ali", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "5", postId: "6", commentId: "17", userId: "321", userName: "veli", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "6", postId: "7", commentId: "18", userId: "654", userName: "fatma", status: "gönderinize yorum attı", userProfileImageUrl: ""),
-        .init(id: "7", postId: "8", commentId: "19", userId: "234", userName: "hatice", status: "yorumunuzu beğendi", userProfileImageUrl: ""),
-        .init(id: "8", postId: "9", commentId: "20", userId: "890", userName: "ayse", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "9", postId: "10", commentId: "21", userId: "098", userName: "ibrahim", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "10", postId: "11", commentId: "22", userId: "901", userName: "melike", status: "gönderinize yorum attı", userProfileImageUrl: ""),
-        .init(id: "11", postId: "12", commentId: "23", userId: "102", userName: "osman", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "12", postId: "13", commentId: "24", userId: "203", userName: "elif", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "13", postId: "14", commentId: "25", userId: "304", userName: "emir", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "14", postId: "15", commentId: "26", userId: "405", userName: "zeynep", status: "gönderinize yorum attı", userProfileImageUrl: ""),
-        .init(id: "15", postId: "16", commentId: "27", userId: "506", userName: "berk", status: "gönderinizi beğendi", userProfileImageUrl: ""),
-        .init(id: "16", postId: "17", commentId: "28", userId: "607", userName: "ece", status: "gönderinizi beğendi", userProfileImageUrl: "")
+extension Notification {
+    static var MOCK_DATA: [Notification] = [
+        Notification(id: "0", type: .commentLike, userId: "0", targetId: "0", caption: "Gönderinizi beğendi", createdAt: "5s"),
+        Notification(id: "1", type:.postComment, userId: "1", targetId: "1", caption: "Yorum yaptı", createdAt: "10s"),
+        Notification(id: "2", type: .postLike, userId: "2", targetId: "2", caption: "Gönderinizi beğendi", createdAt: "15s"),
+        Notification(id: "3", type: .postComment, userId: "3", targetId: "3", caption: "Takip etti", createdAt: "20s"),
+        Notification(id: "4", type: .postComment, userId: "4", targetId: "4", caption: "Gönderinizi beğendi", createdAt: "25s"),
+        Notification(id: "5", type: .postLike, userId: "5", targetId: "5", caption: "Yorum yaptı", createdAt: "30s"),
+        Notification(id: "6", type: .postComment, userId: "6", targetId: "6", caption: "Gönderinizi beğendi", createdAt: "35s"),
+        Notification(id: "7", type: .commentLike, userId: "7", targetId: "7", caption: "Takip etti", createdAt: "40s"),
+        Notification(id: "8", type: .postComment, userId: "8", targetId: "8", caption: "Gönderinizi beğendi", createdAt: "45s"),
+        Notification(id: "9", type: .postComment, userId: "9", targetId: "9", caption: "Yorum yaptı", createdAt: "50s")
     ]
+
+}
+
+enum NotificationType:Int,Codable{
+    case postLike = 0
+    case postComment = 1
+    case commentLike = 2
+    
 }

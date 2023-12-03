@@ -10,8 +10,8 @@ import Kingfisher
 
 struct ThreeDRotateFeedViewCell: View {
     @State private var showingComment = false
-    @State private var savePost = actionButtons.savePost
-    @State private var likePost = actionButtons.unLike
+    @State private var savePost = ActionButtons.savePost
+    @State private var likePost = ActionButtons.unLike
     @State private var degrees: Double = 0.0
     @State private var isFlipped: Bool = false
    @State private var dragDirection: DragDirection = .none
@@ -70,7 +70,7 @@ struct ThreeDRotateFeedViewCell: View {
                 axis: (x: 0.0, y: 1.0, z: 0.0)
             )
             .gesture(DragGesture().onChanged({ value in
-                var direction: DragDirection = value.translation.width > 200 ? .right : .left
+                let direction: DragDirection = value.translation.width > 200 ? .right : .left
                 withAnimation(.smooth){
                     dragDirection = direction
                     degrees += (value.translation.width / 100)
@@ -92,35 +92,34 @@ struct ThreeDRotateFeedViewCell: View {
                 )
             )
             HStack{
-                ActionButton(button: likePost,number: 20) {
+             
+                Buttons.actionButton(buttonType: likePost,action: {
                     if likePost == .unLike{
                         likePost = .liked
                     }
                     else{
                         likePost = .unLike
                     }
-                }
-                ActionButton(button: .bubble, number: 10) {
+                },getNumber: 20)
+                Buttons.actionButton(buttonType:.bubble, action: {
                     showingComment = true
                     print("comment")
-                    
-                }
+                }, getNumber: 10)
                 .sheet(isPresented: $showingComment) {
                     CommentBottomSheet()
                         .presentationDetents([.large,.medium])
                 }
-                ActionButton(button: .send) {
-                    print("gönder")
+                Buttons.actionButton(buttonType: .send) {
+                    print("send")
                 }
                 Spacer()
-                    ActionButton(button: savePost) {
-                        if savePost == .savePost{
-                            savePost = .savedPost
-                        }
-                        else{
-                            savePost = .savePost
-                        }
-                                            
+                Buttons.actionButton(buttonType: savePost) {
+                    if savePost == .savePost{
+                        savePost = .savedPost
+                    }
+                    else{
+                        savePost = .savePost
+                    }
                 }
             }
             .padding()

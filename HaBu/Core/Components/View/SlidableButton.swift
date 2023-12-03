@@ -87,22 +87,6 @@ struct SlidableButton: View {
 }
 
 #Preview {
-    SlidableButton(destination: AnyView(ProfileView(user: User.MockData[0])), position: CGPoint(x:Const.width / 3 , y:Const.height / 3 ), dragDirection: .left, text: "Deneme", color: Const.primaryColor, textColor: .white)
+    SlidableButton(destination: AnyView(TabbarView()), position: CGPoint(x:Const.width / 3 , y:Const.height / 3 ), dragDirection: .left, text: "Deneme", color: Const.primaryColor, textColor: .white)
 }
 
-enum DragDirection {
-    case none
-    case right
-    case left
-    
-    var padding:Edge.Set{
-        switch self {
-        case .none:
-            return .trailing
-        case .right:
-            return .leading
-        case .left:
-            return .trailing
-        }
-    }
-}

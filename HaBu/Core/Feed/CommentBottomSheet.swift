@@ -10,24 +10,38 @@ import SwiftUI
 struct CommentBottomSheet: View {
     @State private var commentText = ""
     var body: some View {
-        ScrollView {
-            ForEach(0..<4){_ in
-                CommentViewCell(user: User.MockData[0])
+        ZStack {
+            ScrollView {
+                HStack{
+                    Text("Yorumlar")
+                        .font(.title3)
+                        .bold()
+                    Spacer()
+                    Text("4 yorum")
+                }
+                .padding(.horizontal,20)
+                ForEach(0..<4){_ in
+                    CommentViewCell(user: User.MockData[0])
+                }
             }
+            .padding(10)
+            .zIndex(1)
+            
+            Const.backgroundColor
+                .zIndex(0)
+                .ignoresSafeArea(.all)
         }
-        .padding(.vertical,20)
         HStack{
             TextField("Yorum...", text: $commentText)
                 .modifier(IGTextFieldModifier())
             Button(action: {
             }, label: {
-                Image(systemName: "paperplane.circle.fill")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .padding(.trailing,10)
+                Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)
+                    .padding(10)
             })
         }
     }
+  
 }
 
 #Preview {
@@ -42,34 +56,27 @@ struct CommentViewCell : View {
         VStack{
             //User Info
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .small)
-                    .padding(.horizontal,10)
-                VStack(alignment:.leading){
-                    Text(user.username)
-                        .fontWeight(.semibold)
-                        .font(.subheadline)
-                        
-                    Text("\(user.name) \(user.surName)").font(.caption2).fontWeight(.semibold)
-                }
-                Text("4h")
-                    .opacity(0.6)
-                    .font(.footnote)
-                    .padding(.horizontal,5)
-                Spacer()
-                ActionButton(button: .liked, number: 10, action: {})
-                    .padding(.all,10)
+                UserInfo(user: user, imageSize: .xsmall)
+                    .padding(10)
+                Buttons.actionButton(buttonType: .liked, action: {
+                    
+                }, getNumber: 10)
+                .padding(.all,10)
                 
             }
             Text("benim şahane ötesi fikirlerimi beğenip beğenmemek size mi düştü arkadaşlar ben istediğimi yazar çizerim bu size alakadar etmez anladınız mı")
                 .font(.caption)
-                .fontWeight(.bold)
+                .fontWeight(.medium)
                 .padding(.horizontal)
                 .padding(.vertical,5)
         }
         .frame(width: Const.width * 0.95)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.black, lineWidth: 0.5)
-        )
+        .background(Color.white)
+        .clipShape(.rect(cornerRadius: 5, style: .circular))
+        .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
+        .padding(.vertical,3)
+
+
+        
     }
 }

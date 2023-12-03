@@ -9,12 +9,10 @@ import SwiftUI
 
 struct GenerateImageBox: View {
     @State private var addPhotoBottomSheet: Bool = false
-    let buttonsheet : Bool
     let image: String
-
     var body: some View {
-        if (buttonsheet) { Button(action:
-        {
+        if (image=="AddPhoto") {
+            Button(action:{
             addPhotoBottomSheet = true
         }, label: {
             VStack{
@@ -22,28 +20,25 @@ struct GenerateImageBox: View {
                     AddImageBottomSheet()
                 }
                 Text(" ")
-                .font(.system(size: 15))
-
+                    .font(.system(size: 15))
             }
-           
         })}else{
             VStack{
                 ImageBox(image: image)
                 Button(action: {
                     //image delete
                 }, label: {
-                    Text("kaldır")
+                    Text("Kaldır")
                         .foregroundColor(.black)
-                    .font(.system(size: 15))
+                        .font(.system(size: 15))
                 })
-           
             }
         }
     }
 }
 
 #Preview {
-    GenerateImageBox(buttonsheet: false, image: "Mert")
+    GenerateImageBox(image: "Mert")
 }
 
 struct ImageBox: View {
@@ -57,11 +52,11 @@ struct ImageBox: View {
                     Image(image)
                         .resizable()
                         .foregroundColor(.white)
-                        .background(Color(red: 0.65, green: 0.65, blue: 0.65).opacity(0.1))
-                        .cornerRadius(6)
+                        .background(Color(UIColor(hex: "A7A7A7")).opacity(0.1))
+                        .cornerRadius(7)
                         .shadow(color: Color.black.opacity(1), radius: 5, x: 3, y: 3)
                 )
-          
+            
         }
     }
 }
