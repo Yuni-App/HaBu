@@ -30,6 +30,10 @@ enum AppIcon: String{
     case book = "book.pages"
     case trash = "trash"
     case blocked = "batteryblock" //edit
+    case camera = "camera"
+    case gallery = "photo.on.rectangle"
+    case warning = "exclamationmark.transmission"
+
 
 }
 

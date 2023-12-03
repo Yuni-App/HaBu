@@ -16,10 +16,10 @@ class Const{
     static let secondaryColor = Color(uiColor : UIColor(hex:"68E4DD"))
     static let primaryBackGroundColor = Color(UIColor(hex: "F3F3F3"))
     static let primaryButtonColor = Color(UIColor(hex: "04243E"))
+    static let secondaryButtonColor = Color(UIColor(hex: "B70404"))
     
     
-    
-    
+
     static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer","Mert","Yusuf"]
     static var anonimFilters: [anonimFilter]=[
         .init(id: 0, color: .blue, title: "Hepsi", subTitle: "Bütün Gönderiler ", icon: "anonim"),

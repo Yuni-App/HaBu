@@ -103,7 +103,7 @@ func OtherBox() -> some View {
         VStack{
             SettingsTile(icon: AppIcon.logout, text: "Çıkış Yap",destination: AnyView(InfoView()))
             Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.trash, text: "Hesabı Sil",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.trash, text: "Hesabı Sil",destination: AnyView(DeleteAccountPasswordView()))
         }.frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 .white

@@ -64,11 +64,7 @@ struct AddPostView: View {
 func AddPostAppBar()-> some View{
     HStack{
         NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
-            Image(systemName: "arrow.left.circle")
-                .resizable()
-                .frame(width: 35, height: 35)
-                .foregroundColor(.white)
-           
+            Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .white)
         }
         Spacer()
         Text("Gönderi Oluştur")
