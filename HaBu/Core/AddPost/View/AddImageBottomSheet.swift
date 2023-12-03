@@ -20,10 +20,7 @@ struct AddImageBottomSheet: View {
             HStack{
                 Spacer()
                 VStack{
-                    Image(systemName: "camera")
-                        .font(.system(size: 40))
-                        .foregroundColor(.white)
-                        .padding()
+                    Image.iconManager(AppIcon.camera, size: 50, weight: .bold, color: .white).padding()
                         .background(Color(UIColor(hex: "04243E")))
                         .cornerRadius(7)
                         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
@@ -34,13 +31,11 @@ struct AddImageBottomSheet: View {
                 }
                 Spacer()
                 VStack{
-                    Image(systemName: "photo.on.rectangle")
-                        .font(.system(size: 40))
-                        .foregroundColor(.white)
-                        .padding()
+                    Image.iconManager(AppIcon.gallery, size: 50, weight: .bold, color: .white).padding()
                         .background(Color(UIColor(hex: "04243E")))
                         .cornerRadius(7)
                         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                 
                     Text("Galeri")
                         .foregroundColor(.black)
                         .fontWeight(.bold)
