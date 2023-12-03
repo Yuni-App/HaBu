@@ -87,6 +87,6 @@ struct SlidableButton: View {
 }
 
 #Preview {
-    SlidableButton(destination: AnyView(ProfileView(user: User.MockData[0])), position: CGPoint(x:Const.width / 3 , y:Const.height / 3 ), dragDirection: .left, text: "Deneme", color: Const.primaryColor, textColor: .white)
+    SlidableButton(destination: AnyView(TabbarView()), position: CGPoint(x:Const.width / 3 , y:Const.height / 3 ), dragDirection: .left, text: "Deneme", color: Const.primaryColor, textColor: .white)
 }
 

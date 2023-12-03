@@ -53,6 +53,17 @@ class Buttons{
         }
     }
 
+    @ViewBuilder
+    static func backButton( action: @escaping ()-> Void) -> some View{
+        Button(action: {
+        action()
+        }, label: {
+            Image.iconManager(.back, size: 25, weight: .bold, color: .black)
+        })
+       
+    }
+    
+    
     //slidableButton
     /*@State private var shouldNavigate = false
      var destinaiton : AnyView
