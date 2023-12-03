@@ -20,7 +20,7 @@ struct TabbarView: View {
             let topEdge = proxy.safeAreaInsets.leading
             
             TabView(selection:$currentTab){
-                FeedView(bottomEdge: bottomEdge, hideTab: $hideBar)
+                FeedView(bottomEdge: bottomEdge, topEdge: topEdge, hideTab: $hideBar)
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background(Color.primary.opacity(0.1))
                     .tag("Feed")
@@ -48,6 +48,7 @@ struct TabbarView: View {
                     .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
                 ,alignment: .bottom
             )
+          
             
         }
     }
@@ -109,3 +110,5 @@ private struct CustomTabButton:View {
         })
     }
 }
+
+

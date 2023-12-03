@@ -10,25 +10,21 @@ import SwiftUI
 struct FeedView: View {
     @State var showCategoryFilter = false
     var bottomEdge:CGFloat
+    var topEdge: CGFloat
     @Binding var hideTab:Bool
    @State var offset:CGFloat = 0
    @State var lastOffset:CGFloat = 0
     var body: some View {
         NavigationStack{
             VStack {
-                CustomTollbar(showCategoryFilter: $showCategoryFilter)
-                HStack{
-                    SlidableButton(destination: AnyView(AddPostView(imageList: [])), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
-                        .padding(.top,50)
-                }
-                .frame(maxHeight:.ulpOfOne)
-                ScrollView{
-                    VStack {
+                ScrollView(.vertical,showsIndicators: false){
+                    VStack (alignment:.leading){
                         ForEach(Post.MockData , id: \.id){post in
                             FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
                             Divider()
                         }
                     }
+                    .padding(.top,100)
                     .overlay(
                         GeometryReader{proxy -> Color in
                             let minY = proxy.frame(in: .named("SCROLL")).minY
@@ -56,12 +52,28 @@ struct FeedView: View {
                             return Color.clear
 
                         }
+
                     )
                     .padding()
                     .padding(.bottom,15 + bottomEdge + 35)
-                }
+                } 
                 .coordinateSpace(name:"SCROLL")
-                .padding(.top,50)
+                .overlay(
+                    FeedViewTollBar(showCategoryFilter: $showCategoryFilter, topEdge: topEdge)
+                        .background(.white)
+                        .offset(y:hideTab ? (-15 - 70 - topEdge) :0)
+                    ,alignment: .top
+                )
+                .ignoresSafeArea(.all,edges: .all)
+                .overlay(
+                    SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 0, y: 30), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                        .offset(x:hideTab ? -150 : 0)
+                        
+                )
+            
+
+                
+               
                 .sheet(isPresented: $showCategoryFilter) {
                     CategoryFilterBottomSheet()
                         .presentationDetents([.large,.large])
@@ -69,6 +81,7 @@ struct FeedView: View {
                 
             }
         }
+        
       
        
     }
@@ -77,4 +90,17 @@ struct FeedView: View {
 
 #Preview {
     TabbarView()
+}
+
+
+struct FeedViewTollBar:View {
+    @Binding var showCategoryFilter:Bool
+     var topEdge:CGFloat
+    var body: some View {
+        VStack{
+            CustomTollbar(showCategoryFilter: $showCategoryFilter)
+        }
+        .padding(.top,15)
+        .padding(.top,topEdge)
+    }
 }
