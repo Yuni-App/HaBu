@@ -7,82 +7,85 @@
 
 import SwiftUI
 
+
 struct SerachView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
     @State private var ratingSorted = false
     
     //filtered user "name" or "userName"
-    var filteredUser: [User]{
-        if isSearchBar{
+    var filteredUsers: [User] {
+        if isSearchBar {
             return User.MockData.filter {
                 $0.name.localizedCaseInsensitiveContains(searchText) ||
                 $0.username.localizedCaseInsensitiveContains(searchText)
             }
-        }else {
-            return User.MockData.filter { $0.rating > 20 }.sorted { $0.rating > $1.rating }
+        } else {
+            let sortedUsers = User.MockData.filter { $0.rating > 0 }.sorted { $0.rating > $1.rating }
+            return Array(sortedUsers.prefix(3))
         }
     }
-    
-    var ratingSort: [User]{
-        if ratingSorted{
-            return User.MockData.filter {
-                $0.rating >= 20 && $0.rating <= 30
-            }
-        }else{
-            return User.MockData.filter {
-                $0.rating > 40
-            }
-        }
+    var filteredUsers2: [User] {
+        let sortedUsers2 = User.MockData.filter { $0.rating > 0 }.sorted { $0.rating > $1.rating }
+        let startIndex = 3
+        let endIndex = min(sortedUsers2.count, 10)
+        return Array(sortedUsers2[startIndex..<endIndex])
     }
     var body: some View {
-        NavigationStack{
-            ScrollView{
-                LazyVStack(spacing:15){
-                    //User.MockData = filtereduser
-                    ForEach(filteredUser, id : \.id){user in
-                        NavigationLink(destination: Text("ProfileView"),
-                                       label: {
-                            HStack(){
-                                CircleProfileImage(userIamgeUrl: "", size: .small)
-                                VStack (alignment:.leading){
-                                    Text(user.username).fontWeight(.semibold).opacity(0.85)
-                                    Text("\(user.name) \(user.surName)")
-                                        .opacity(0.6)
-                                        .font(.footnote)
-                                }
-                                Spacer()
-                                
-                                HStack {
-                                    switch (ratingSorted, user.rating) {
-                                    case (false, 20...30):
-                                        Image(systemName:"star.fill").background(Color.white)
-                                            .foregroundColor(Color.cyan)
-                                    case(false, 30...40):
-                                        Image(systemName:"star.fill").background(Color.white)
-                                            .foregroundColor(Color.yellow)
-                                    case (false, 40...):
-                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
-                                        Image(systemName: "star.fill").background(Color.white).foregroundStyle(Color.yellow)
-                                    default:
-                                        Image(systemName: "star")
-                                                    .foregroundColor(Color.gray)
-                                    }                                }
-                                
+        NavigationStack {
+            SearchBar(searchText: $searchText, isEditing: $isSearchBar)
+                .padding(.top, 8)
+             
+                ScrollView {
+                    VStack {
+                            ForEach(filteredUsers, id: \.id) { user in
+                                SearchItem(user: user, ratingSorted: ratingSorted)
                             }
-                            .frame(width: Const.width * 0.9,alignment: .leading)
-                            .foregroundStyle(.black)
-                            .padding(.leading,8)
-                        })
+                            .padding(.top,15)
+                        
+                        ScrollView(.horizontal){
+                            HStack{
+                                Spacer()
+                                ForEach(filteredUsers2, id: \.id) { user in
+                                    SearchItem2(user: user, ratingSorted: ratingSorted)
+                                }
+                                .padding(.top,15)
+                                Spacer()
+                            }.frame(height: Const.height * 0.25)
+                        }
                     }
                 }
-                .padding(.top,15)
-              /*  .searchable(text: $searchText,prompt: "Arama...").onChange(of: searchText) { oldValue, newValue in
-                    isSearchBar = newValue != ""
-                }*/
             }
-            .navigationTitle("Arama")
-            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+
+struct SearchBar: View {
+    @Binding var searchText: String
+    @Binding var isEditing: Bool
+    
+    var body: some View {
+        NavigationStack {
+            HStack {
+                TextField("Ara...", text: $searchText)
+                    .padding(8)
+                    .padding(.horizontal, 24)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        isEditing = true
+                    }
+                if isEditing {
+                    Button(action: {
+                        searchText = ""
+                        isEditing = false
+                    }) {
+                        Image(systemName: "multiply.circle.fill")
+                            .foregroundColor(.gray)
+                            .padding(8)
+                    }
+                }
+            }
+            .padding(.horizontal)
         }
     }
 }
