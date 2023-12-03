@@ -75,7 +75,7 @@ struct AddFilterView: View {
             }.toolbar{
                 NavigationStack{
                     NavigationLink {
-                        FeedView().navigationBarBackButtonHidden(true)
+                       TabbarView().navigationBarBackButtonHidden(true)
                     } label: {
                         HStack{
                             Text("Paylaş")

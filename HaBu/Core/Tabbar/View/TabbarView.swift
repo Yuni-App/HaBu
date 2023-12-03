@@ -20,7 +20,7 @@ struct TabbarView: View {
             let topEdge = proxy.safeAreaInsets.leading
             
             TabView(selection:$currentTab){
-                FeedView()
+                FeedView(bottomEdge: bottomEdge, hideTab: $hideBar)
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background(Color.primary.opacity(0.1))
                     .tag("Feed")
@@ -63,8 +63,8 @@ private struct CustomTabbarView:View {
         HStack(spacing:0){
             ForEach(Const.tabBarItems,id: \.self){image in
                 CustomTabButton(badge: image == "Notification" ? 15:0, image: image, currentTab: $currentTab)
-                
             }
+            .background(.white)
             
         }
     }
