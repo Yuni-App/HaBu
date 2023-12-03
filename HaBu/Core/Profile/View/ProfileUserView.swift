@@ -9,91 +9,130 @@ import SwiftUI
 
 struct ProfileUserView: View {
     @Binding var isShowingSideMenu:Bool
+    @Binding var hideTab:Bool
     let topEdge:CGFloat
     let maxHeight = UIScreen.main.bounds.height / 2.7
     var user:User
-    
-    @State var offset : CGFloat = 0
+    @State var offset: CGFloat = 0
+    @State var lastOffset: CGFloat = 0
+    @State var TollBarOffset : CGFloat = 0
     
     var body: some View {
-        ScrollView(.vertical,showsIndicators: false){
-            VStack(spacing:15){
-                GeometryReader{proxy in
-                    Tabbar(user:user, topEdge: topEdge,offset: $offset,maxHeight:maxHeight)
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: getHeaderHeight(),alignment:.bottom)
-                    .background(
-                        Const.thirColor,
-                        in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
-                    
-                    )
-                    .overlay(
-                        HStack(spacing:10){
-                            HStack {
-                                Image("profil1")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 20,height: 20)
-                                .clipShape(.circle)
-                                Text(user.username)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.primary)
-                            }
-                            .opacity(topBarTitleOpacity())
-                           
-                            Spacer()
-                            Button(action: {
-                                isShowingSideMenu = true
-                                
-                            }, label: {
-                                Image(systemName: "line.3.horizontal.decrease")
-                                    .font(.body.bold())
-                            })
-                          
-                        }
-                            .padding(.horizontal,10)
-                            .frame(height:40)
-                            .foregroundStyle(.white)
-                            .padding(.top,topEdge)
-                        ,alignment: .top
-                        
-                    )
-                }
-                .frame(height: maxHeight)
-                .offset(y:-offset)
-                .zIndex(2)
+        GeometryReader{proxy in
+            let bottomEdge = proxy.safeAreaInsets.bottom
+            ScrollView(.vertical,showsIndicators: false){
                 VStack(spacing:15){
-                    ForEach(Post.MockData){post in
-                        FeedViewCell(post: post, user: user)
+                    GeometryReader{proxy in
+                        Tabbar(user:user, topEdge: topEdge,offset: $TollBarOffset,maxHeight:maxHeight)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: getHeaderHeight(),alignment:.bottom)
+                        .background(
+                            Const.thirColor,
+                            in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
+                        
+                        )
+                        .overlay(
+                            HStack(spacing:10){
+                                HStack {
+                                    Image("profil1")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 20,height: 20)
+                                    .clipShape(.circle)
+                                    Text(user.username)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.primary)
+                                }
+                                .opacity(topBarTitleOpacity())
+                               
+                                Spacer()
+                                Button(action: {
+                                    isShowingSideMenu = true
+                                    
+                                }, label: {
+                                    Image(systemName: "line.3.horizontal.decrease")
+                                        .font(.body.bold())
+                                })
+                              
+                            }
+                                .padding(.horizontal,10)
+                                .frame(height:40)
+                                .foregroundStyle(.white)
+                                .padding(.top,topEdge)
+                            ,alignment: .top
+                            
+                        )
                     }
+                    .frame(height: maxHeight)
+                    .offset(y:-TollBarOffset)
+                    .zIndex(2)
+                    VStack(spacing:15){
+                        ForEach(Post.MockData){post in
+                            FeedViewCell(post: post, user: user, hideTab: $hideTab)
+                        }
+                    }
+                    .zIndex(1)
+                    
                 }
-                .zIndex(1)
+                .overlay(
+                    GeometryReader{proxy -> Color in
+                        let minY = proxy.frame(in: .named("SCROLL")).minY
+                        let durationOffset: CGFloat = 35
+                        DispatchQueue.main.async {
+                            if minY < offset{
+                                if offset < 0 && -minY > (lastOffset + durationOffset){
+                                    withAnimation(.easeOut .speed(1.5)){
+                                        print(minY)
+                                        hideTab = true
+                                    }
+                                    lastOffset = -offset
+                                }
+                                
+                            }
+                            if minY > offset && -minY < (lastOffset - durationOffset){
+                                withAnimation(.easeOut .speed(1.5)){
+                                    hideTab = false
+                                }
+                                lastOffset = -offset
+                                
+                            }
+                            self.offset = minY
+                        }
+                        return Color.clear
+                        
+                    }
+                    
+                )
+                .padding(.bottom,15 + bottomEdge + 35)
                 
+                .modifier(OffsetModifier(offset: $TollBarOffset))
             }
-            .modifier(OffsetModifier(offset: $offset))
+          
         }
         .ignoresSafeArea(.all)
+      
+       
     }
     func getHeaderHeight() -> CGFloat{
-        let topHeight = maxHeight + offset
+        let topHeight = maxHeight + TollBarOffset
         return topHeight > (80 + topEdge) ? topHeight - 40 : (40 + topEdge)
     }
     func getCornerRadius()-> CGFloat{
-        let progress = -offset / (maxHeight - (40 + topEdge))
+        let progress = -TollBarOffset / (maxHeight - (40 + topEdge))
         let value =  1 - progress
         let radius = value * 40
-        return offset < 0 ? radius : 25
+        return TollBarOffset < 0 ? radius : 25
     }
     func topBarTitleOpacity()-> CGFloat{
-        let progress = -(offset) / ((maxHeight-40) - (40 + topEdge))
+        let progress = -(TollBarOffset) / ((maxHeight-40) - (40 + topEdge))
         return progress
         
         
     }
 }
 #Preview {
-    ProfileUserView(isShowingSideMenu: .constant(false), topEdge: 50, user: User.MockData[0])
+    ProfileUserView(isShowingSideMenu: .constant(false), hideTab: .constant(false), topEdge: 50, user: User.MockData[0])
 }
 
 struct Tabbar:View {

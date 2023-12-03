@@ -11,30 +11,35 @@ struct FeedViewCell: View {
     @State var showingComment : Bool
     @State private var savePost = ActionButtons.savePost
     @State private var likePost = ActionButtons.unLike
+    @Binding var hideTab:Bool
     private var backButton : Bool
     let post : Post
     var user : User
-    init(post: Post,user:User) {
+    init(post: Post,user:User,hideTab:Binding<Bool>) {
         self.post = post
         self.user = user
         self.showingComment = false
         self.backButton = false
+        _hideTab = hideTab
     }
     init(navigatedWithComment post: Post,user:User) {
         self.post = post
         self.user = user
         self.showingComment = true
         self.backButton = true
+        _hideTab = .constant(false)
     }
     init(navigated post:Post,user:User){
         self.post = post
         self.user = user
         self.showingComment = false
         self.backButton = true
+        _hideTab = .constant(false)
+
     }
     var body: some View {
         NavigationStack {
-            VStack(alignment:.leading){
+            VStack(alignment:.center){
                 if backButton {
                     Buttons.backButton {
                             
@@ -45,7 +50,7 @@ struct FeedViewCell: View {
                 Spacer()
                 //User Info
                 NavigationLink{
-                    ProfileView(user: user)
+                    ProfileView(hideTab: $hideTab, user: user)
                 }label: {
                     UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
                         .foregroundStyle(.black)
@@ -120,5 +125,5 @@ struct FeedViewCell: View {
     }
 }
 #Preview {
-    FeedViewCell(post: Post.MockData[1], user:  User.MockData[0])
+    FeedViewCell(post: Post.MockData[0], user:  User.MockData[0], hideTab: .constant(false))
 }

@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct TabbarView: View {
-    @State var currentTab = "Feed"
+    @State var currentTab : String = "Feed"
     @State var hideBar = false
     init() {
+        UITableView.appearance().isHidden = true
+    
+    }
+    init(currentTab:String) {
         UITableView.appearance().isHidden = true
     
     }
@@ -20,7 +24,7 @@ struct TabbarView: View {
             let topEdge = proxy.safeAreaInsets.leading
             
             TabView(selection:$currentTab){
-                FeedView(bottomEdge: bottomEdge, topEdge: topEdge, hideTab: $hideBar)
+                FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background(Color.primary.opacity(0.1))
                     .tag("Feed")
@@ -35,7 +39,7 @@ struct TabbarView: View {
                     .background(Color.primary.opacity(0.1))
                     .tag("Notification")
                     .toolbar(.hidden, for: .tabBar)
-                ProfileView(user: User.MockData[0])
+                ProfileView(hideTab: $hideBar, user: User.MockData[0])
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background(Color.primary.opacity(0.1))
                     .tag("Profile")

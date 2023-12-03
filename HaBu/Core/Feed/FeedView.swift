@@ -10,18 +10,19 @@ import SwiftUI
 struct FeedView: View {
     @State var showCategoryFilter = false
     var bottomEdge:CGFloat
+    
+    @Binding var hideTab:Bool
+    @State var offset:CGFloat = 0
+    @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
     var topEdge: CGFloat
-    @Binding var hideTab:Bool
-   @State var offset:CGFloat = 0
-   @State var lastOffset:CGFloat = 0
     var body: some View {
         NavigationStack{
             VStack {
                 ScrollView(.vertical,showsIndicators: false){
                     VStack (alignment:.leading){
                         ForEach(Post.MockData , id: \.id){post in
-                            FeedViewCell(post: post,user: User.MockData[Int(post.userId)!])
+                            FeedViewCell(post: post,user: User.MockData[Int(post.userId)!], hideTab: $hideTab)
                             Divider()
                         }
                     }
@@ -51,13 +52,13 @@ struct FeedView: View {
                                 self.offset = minY
                             }
                             return Color.clear
-
+                            
                         }
-
+                        
                     )
                     .padding()
                     .padding(.bottom,15 + bottomEdge + 35)
-                } 
+                }
                 .coordinateSpace(name:"SCROLL")
                 .overlay(
                     FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: topEdge)
@@ -69,12 +70,12 @@ struct FeedView: View {
                 .overlay(
                     SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 0, y: 30), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
                         .offset(x:hideTab ? -150 : 0)
-                        
+                    
                 )
-            
-
                 
-               
+                
+                
+                
                 .sheet(isPresented: $showCategoryFilter) {
                     CategoryFilterBottomSheet()
                         .presentationDetents([.large,.large])
@@ -83,8 +84,8 @@ struct FeedView: View {
             }
         }
         
-      
-       
+        
+        
     }
 }
 
@@ -98,7 +99,7 @@ struct FeedViewTollBar:View {
     @Binding var showCategoryFilter:Bool
     @Binding var messageBox : Int
     @Environment(\.colorScheme) var sheme
-     var topEdge:CGFloat
+    var topEdge:CGFloat
     var body: some View {
         VStack{
             HStack{
@@ -136,8 +137,8 @@ struct FeedViewTollBar:View {
                         .padding(20)
                     
                 }
-            )
-              
+                )
+                
                 
             }
         }
