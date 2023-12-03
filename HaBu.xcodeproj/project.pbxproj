@@ -430,10 +430,8 @@
 		9470799F2B1B8C750005C4CB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				947079AA2B1BD4600005C4CB /* FeedBack */,
 				947079A92B1BD4360005C4CB /* DeleteAccount */,
 				947079A82B1BD4060005C4CB /* ChangePassword */,
-				947079A72B1BD3A30005C4CB /* Blocked */,
 				947079A22B1BCE230005C4CB /* Agreement */,
 				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
 			);
@@ -446,13 +444,6 @@
 				947079A32B1BCE500005C4CB /* AgreementView.swift */,
 			);
 			path = Agreement;
-			sourceTree = "<group>";
-		};
-		947079A72B1BD3A30005C4CB /* Blocked */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Blocked;
 			sourceTree = "<group>";
 		};
 		947079A82B1BD4060005C4CB /* ChangePassword */ = {
@@ -473,13 +464,6 @@
 			path = DeleteAccount;
 			sourceTree = "<group>";
 		};
-		947079AA2B1BD4600005C4CB /* FeedBack */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FeedBack;
-			sourceTree = "<group>";
-		};
 		94808CCF2B0CE5CA00CC51FD /* AddPost */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,7 +475,6 @@
 		94808CD02B0CE5E400CC51FD /* View */ = {
 			isa = PBXGroup;
 			children = (
-
 				944C97A32B1B4240005F8E96 /* AddPostView.swift */,
 				94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */,
 				94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */,
