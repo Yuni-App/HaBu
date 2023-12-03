@@ -27,7 +27,7 @@ struct ChangePasswordView: View {
                     TextFieldStack(title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
                 }.padding()
             }
-            CustomButton(title: "Değiştir", backgroundColor: Const.secondaryButtonColor, action: {
+            CustomButton(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {
                 true
                 //send kode
             }, destination: AnyView(ChangePasswordSuccessView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
