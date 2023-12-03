@@ -14,7 +14,7 @@ struct FeedView: View {
             VStack {
                 CustomTollbar(showCategoryFilter: $showCategoryFilter)
                 HStack{
-                    SlidableButton(destination: AnyView(SettingsView().navigationBarBackButtonHidden(true)), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
+                    SlidableButton(destination: AnyView(AddPostView().navigationBarBackButtonHidden(true)), position: CGPoint(x: 0, y: 0), dragDirection: .right,text: "Post Ekle",color: Const.primaryColor,textColor:.white)
                         .padding(.top,50)
                 }
                 .frame(maxHeight:.ulpOfOne)
