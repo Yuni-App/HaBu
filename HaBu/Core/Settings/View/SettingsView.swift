@@ -40,7 +40,7 @@ private func SettingsTile(icon : AppIcon , text : String , destination : AnyView
     } label: {
         HStack{
             Image.iconManager(icon, size: 30, weight: .bold, color: .black)
-            Text(text).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).foregroundColor(.black)
+            Text(text).fontWeight(.bold).foregroundColor(.black)
             Spacer()
             Image.iconManager(AppIcon.next, size: 30, weight: .bold, color: .black)
         }.padding(10)

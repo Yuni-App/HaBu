@@ -63,6 +63,7 @@
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
 		94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */; };
 		94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */; };
+		948338622B1DC0ED006964BB /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948338612B1DC0ED006964BB /* TextFields.swift */; };
 		949016E02B041EBD00164405 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016DF2B041EBD00164405 /* InfoView.swift */; };
 		949016E22B041EF400164405 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E12B041EF400164405 /* LoginView.swift */; };
 		949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */; };
@@ -137,6 +138,7 @@
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
 		94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageBottomSheet.swift; sourceTree = "<group>"; };
 		94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageBox.swift; sourceTree = "<group>"; };
+		948338612B1DC0ED006964BB /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		949016DF2B041EBD00164405 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		949016E12B041EF400164405 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildFirstView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				5C1686222B1A218200A20636 /* Buttons.swift */,
 				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				9452D2FB2B1C6C3F005E2A3B /* CustomTextField3.swift */,
+				948338612B1DC0ED006964BB /* TextFields.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */,
 				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
+				948338622B1DC0ED006964BB /* TextFields.swift in Sources */,
 				947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */,
 				9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */,
 				887CD10B2B064CBC00D7C8DC /* SideMenu.swift in Sources */,

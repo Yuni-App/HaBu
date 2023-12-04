@@ -21,6 +21,7 @@ class Const{
     static let primaryButtonColor = Color(UIColor(hex: "04243E"))
     static let secondaryButtonColor = Color(UIColor(hex: "B70404"))
     static let textColorSecondary = Color(UIColor(hex: "5B8291"))
+    static let textFieldColor = Color(UIColor(hex: "13446C"))
   
     static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer","Mert","Yusuf"]
     static var anonimFilters: [anonimFilter]=[
