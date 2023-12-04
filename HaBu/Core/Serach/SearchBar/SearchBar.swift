@@ -16,7 +16,14 @@ struct SearchBar: View {
             HStack {
                 TextField("Ara...", text: $searchText)
                     .padding(8)
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 35)
+                    .overlay(
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .padding(.leading, 8)
+                            .frame(alignment: .leading),
+                        alignment: .leading
+                    )
                     .background(Color(.systemGray6))
                     .cornerRadius(8)
                     .onTapGesture {
@@ -37,7 +44,7 @@ struct SearchBar: View {
                     }
                 }
             }
-            .animation(.easeInOut)
+            .animation(.bouncy(duration: 0.9))
             .padding(.horizontal)
         }
     }

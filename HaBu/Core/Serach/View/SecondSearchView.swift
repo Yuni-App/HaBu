@@ -25,10 +25,10 @@ struct SecondSearchView: View {
         }
     }
     var body: some View {
-        VStack {
-            NavigationStack {
+        NavigationStack {
+            VStack{
                 HStack{
-                    CustomSearchBar(destinaiton: AnyView(SerachView()))
+                    CustomSearchBar(destinaiton: AnyView(TabbarView()))
                     SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                         .frame(width: Const.width * 0.85)
                 }
@@ -38,10 +38,13 @@ struct SecondSearchView: View {
                     }.transition(.opacity)
                     
                 }.padding()
-                .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
-                .animation(.easeInOut)
-                .navigationBarBackButtonHidden()
-            }
+                    .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
+                    .animation(.easeInOut)
+                    .navigationBarBackButtonHidden()
+                    
+                
+            }.frame(width: Const.width).background(Const.primaryBackGroundColor)
+            
         }
     }
 }

@@ -31,7 +31,6 @@ struct SerachView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Image("Search").resizable().frame(width: Const.width * 0.06, height: Const.height * 0.03)
                     SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
                         .padding(.top, 1)
                 }.frame(width: Const.width * 0.9)
@@ -54,11 +53,14 @@ struct SerachView: View {
                                     .padding(.top,15)
                                     Spacer()
                                 }.frame(height: Const.height * 0.25)
-                            }
+                                
+                            }.background(Color.white).padding(.top, 17)
                         }
-                    }                }
+                    }
+                }
                 
-            }.background(
+            }.frame(width: Const.width).background(Const.primaryBackGroundColor)
+            .background(
                 NavigationLink(destination: SecondSearchView(), isActive: $isSecondSearchViewActive) {
                     EmptyView()
                 }
