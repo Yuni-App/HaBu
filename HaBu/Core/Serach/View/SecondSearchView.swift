@@ -26,8 +26,11 @@ struct SecondSearchView: View {
     var body: some View {
         VStack {
             NavigationStack {
-                SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
-                    .padding(.top, 8)
+                HStack{
+                    CustomSearchBar(destinaiton: AnyView(SerachView()))
+                    SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
+                        .frame(width: Const.width * 0.85)
+                }
                 ScrollView {
                     
                     ForEach(users) { user in
