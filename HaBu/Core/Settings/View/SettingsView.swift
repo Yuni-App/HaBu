@@ -34,7 +34,7 @@ struct SettingsView: View {
 
 
 @ViewBuilder
-func SettingsTile(icon : AppIcon , text : String , destination : AnyView)->some View {
+private func SettingsTile(icon : AppIcon , text : String , destination : AnyView)->some View {
     NavigationLink {
       AnyView(destination).navigationBarBackButtonHidden(true)
     } label: {
@@ -49,8 +49,8 @@ func SettingsTile(icon : AppIcon , text : String , destination : AnyView)->some 
 }
 
 
-@ViewBuilder
-func UserAboutBox() ->some View {
+ @ViewBuilder
+private func UserAboutBox() ->some View {
     VStack{
         Text("Kullanıcı Bilgileri").frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.black.opacity(0.7))
@@ -60,7 +60,7 @@ func UserAboutBox() ->some View {
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(ChangePasswordView()))
             Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.point, text: "Puanlarım",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.point, text: "Puanlarım",destination: AnyView(RankView()))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.blocked, text: "Engellenen Kullanıcılar",destination: AnyView(BlockedUsers()))
         }.frame(maxWidth: .infinity, alignment: .leading)
@@ -72,7 +72,7 @@ func UserAboutBox() ->some View {
 }
 
 @ViewBuilder
-func AppAboutBox() ->some View {
+private func AppAboutBox() ->some View {
     VStack{
         Text("Uygulama Hakkında").frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.black.opacity(0.7))
@@ -95,7 +95,7 @@ func AppAboutBox() ->some View {
 
 
 @ViewBuilder
-func OtherBox() -> some View {
+private func OtherBox() -> some View {
     VStack{
         Text("Diğer").frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.black.opacity(0.7))

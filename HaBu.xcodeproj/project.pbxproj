@@ -72,7 +72,6 @@
 		949E2A0F2B04D4E200DF967E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E2A0E2B04D4E200DF967E /* CustomTextField.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsers.swift */; };
-		94BDAD672B07AC1A00F66312 /* BlockedUserListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
@@ -147,7 +146,6 @@
 		949E2A0E2B04D4E200DF967E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsers.swift; sourceTree = "<group>"; };
-		94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserListTile.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlur.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 		88A44A982B04FAE700F47BF8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				94BDAD622B07A9AA00F66312 /* Detail */,
 				88A44A992B04FAFC00F47BF8 /* View */,
 			);
 			path = Profile;
@@ -430,6 +427,8 @@
 		9470799F2B1B8C750005C4CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9483385E2B1DB159006964BB /* Rank */,
+				9483385D2B1DB109006964BB /* BlockedUsers */,
 				947079A92B1BD4360005C4CB /* DeleteAccount */,
 				947079A82B1BD4060005C4CB /* ChangePassword */,
 				947079A22B1BCE230005C4CB /* Agreement */,
@@ -482,6 +481,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9483385D2B1DB109006964BB /* BlockedUsers */ = {
+			isa = PBXGroup;
+			children = (
+				94BDAD642B07AA1000F66312 /* BlockedUsers.swift */,
+			);
+			path = BlockedUsers;
+			sourceTree = "<group>";
+		};
+		9483385E2B1DB159006964BB /* Rank */ = {
+			isa = PBXGroup;
+			children = (
+				5CD553492B1CC61E0070F102 /* RankView.swift */,
+			);
+			path = Rank;
+			sourceTree = "<group>";
+		};
 		949016D32B04189C00164405 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,24 +505,6 @@
 				949016DF2B041EBD00164405 /* InfoView.swift */,
 			);
 			path = Authentication;
-			sourceTree = "<group>";
-		};
-		94BDAD622B07A9AA00F66312 /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				94BDAD632B07A9FF00F66312 /* View */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
-		94BDAD632B07A9FF00F66312 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				94BDAD642B07AA1000F66312 /* BlockedUsers.swift */,
-				94BDAD662B07AC1A00F66312 /* BlockedUserListTile.swift */,
-				5CD553492B1CC61E0070F102 /* RankView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		94CCABE52B03C7AD00DCFB51 /* Components */ = {
@@ -669,7 +666,6 @@
 				947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */,
 				884E8CF92B09F2E7001BADDF /* Notification.swift in Sources */,
 				94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */,
-				94BDAD672B07AC1A00F66312 /* BlockedUserListTile.swift in Sources */,
 				9452D2FC2B1C6C3F005E2A3B /* CustomTextField3.swift in Sources */,
 				5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */,
 				949E2A0F2B04D4E200DF967E /* CustomTextField.swift in Sources */,
