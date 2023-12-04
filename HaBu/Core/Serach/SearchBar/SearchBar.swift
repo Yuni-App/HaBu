@@ -31,10 +31,13 @@ struct SearchBar: View {
                     }) {
                         Image(systemName: "multiply.circle.fill")
                             .foregroundColor(.gray)
-                            .padding(8)
+                            .padding(8).onTapGesture {
+                                searchText = ""
+                            }
                     }
                 }
             }
+            .animation(.easeInOut)
             .padding(.horizontal)
         }
     }

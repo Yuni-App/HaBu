@@ -12,6 +12,7 @@ struct SecondSearchView: View {
     @State private var isSearchBar = false
     @State private var isSecondSearchViewActive: Bool = true
     
+    //SearchFilter name , surname and username
     var users: [User]{
         if isSearchBar{
             return User.MockData.filter {
@@ -32,29 +33,16 @@ struct SecondSearchView: View {
                         .frame(width: Const.width * 0.85)
                 }
                 ScrollView {
-                    
                     ForEach(users) { user in
-                        HStack {
-                            CircleProfileImage(userIamgeUrl: "Mert", size: .xsmall)
-                            VStack {
-                                HStack {
-                                    Text("\(user.name) \(user.surName)").fontWeight(.semibold)
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("\(user.department)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color(UIColor(hex: "777777")))
-                                    Spacer()
-                                }
-                            }
-                        }.padding()
-                            .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(UIColor(hex: "F0F0F0"))).cornerRadius(3)
-                    }
+                        SearchItem3(user: user)
+                    }.transition(.opacity)
                     
-                }
+                }.padding()
+                .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
+                .animation(.easeInOut)
                 .navigationBarBackButtonHidden()
             }
         }
-        
     }
 }
 
