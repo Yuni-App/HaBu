@@ -15,6 +15,11 @@ struct ProfileView : View {
     @State private var shouldNavigate = false
     @State private var selectedIndex = 0
     
+    @Binding var hideTab:Bool
+    @State var offset:CGFloat = 0
+    @State var lastOffset:CGFloat = 0
+    @State var messageBox = 20
+
     let user : User
     var images = [
         "profil1",
@@ -32,7 +37,7 @@ struct ProfileView : View {
         ZStack {
             GeometryReader{proxy in
                     let topEdge = proxy.safeAreaInsets.top
-                ProfileUserView(isShowingSideMenu: $showMenu, topEdge: topEdge, user: user)
+                ProfileUserView(isShowingSideMenu: $showMenu, hideTab: $hideTab, topEdge: topEdge, user: user)
             }
             GeometryReader { _ in
             HStack {
@@ -45,8 +50,6 @@ struct ProfileView : View {
             
             }
         }
-            
-        
         /*  var body: some View {
          NavigationStack {
          ZStack {
@@ -273,5 +276,5 @@ struct PopUpImageView: View {
 
 
 #Preview {
-    ProfileView( user: User.MockData[1])
+    ProfileView(hideTab: .constant(true), user: User.MockData[0])
 }

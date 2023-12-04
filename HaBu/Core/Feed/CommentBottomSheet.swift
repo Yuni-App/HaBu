@@ -10,12 +10,27 @@ import SwiftUI
 struct CommentBottomSheet: View {
     @State private var commentText = ""
     var body: some View {
-        ScrollView {
-            ForEach(0..<4){_ in
-                CommentViewCell(user: User.MockData[0])
+        ZStack {
+            ScrollView {
+                HStack{
+                    Text("Yorumlar")
+                        .font(.title3)
+                        .bold()
+                    Spacer()
+                    Text("4 yorum")
+                }
+                .padding(.horizontal,20)
+                ForEach(0..<4){_ in
+                    CommentViewCell(user: User.MockData[0])
+                }
             }
+            .padding(10)
+            .zIndex(1)
+            
+            Const.backgroundColor
+                .zIndex(0)
+                .ignoresSafeArea(.all)
         }
-        .padding(.vertical,20)
         HStack{
             TextField("Yorum...", text: $commentText)
                 .modifier(IGTextFieldModifier())
@@ -26,6 +41,7 @@ struct CommentBottomSheet: View {
             })
         }
     }
+  
 }
 
 #Preview {
@@ -55,9 +71,12 @@ struct CommentViewCell : View {
                 .padding(.vertical,5)
         }
         .frame(width: Const.width * 0.95)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.black, lineWidth: 0.5)
-        )
+        .background(Color.white)
+        .clipShape(.rect(cornerRadius: 5, style: .circular))
+        .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
+        .padding(.vertical,3)
+
+
+        
     }
 }

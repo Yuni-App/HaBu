@@ -38,6 +38,6 @@ struct CustomButton: View {
 }
 
 #Preview {
-    CustomButton(title: "Giriş", backgroundColor: Const.primaryColor, action: {4>3}, destination: AnyView(FeedView()), size: CustomButtonSize.medium)
+    CustomButton(title: "Giriş", backgroundColor: Const.primaryColor, action: {4>3}, destination: AnyView(TabbarView()), size: CustomButtonSize.medium)
 }
 
