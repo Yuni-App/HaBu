@@ -26,7 +26,7 @@ struct FeedView: View {
                             Divider()
                         }
                     }
-                    .padding(.top,100)
+                    .padding(.top,Const.height * 0.12)
                     .overlay(
                         GeometryReader{proxy -> Color in
                             let minY = proxy.frame(in: .named("SCROLL")).minY
