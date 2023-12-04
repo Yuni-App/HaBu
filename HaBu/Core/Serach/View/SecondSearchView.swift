@@ -10,13 +10,23 @@ import SwiftUI
 struct SecondSearchView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
+    @State private var isSecondSearchViewActive: Bool = true
     
-    var users: [User] = User.MockData
+    var users: [User]{
+        if isSearchBar{
+            return User.MockData.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText) ||
+                $0.surName.localizedCaseInsensitiveContains(searchText) ||
+                $0.username.localizedCaseInsensitiveContains(searchText)
+            }
+        }else {
+            return []
+        }
+    }
     var body: some View {
-        
         VStack {
             NavigationStack {
-                SearchBar(searchText: $searchText, isEditing: $isSearchBar)
+                SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                     .padding(.top, 8)
                 ScrollView {
                     
@@ -38,6 +48,7 @@ struct SecondSearchView: View {
                     }
                     
                 }
+                .navigationBarBackButtonHidden()
             }
         }
         
