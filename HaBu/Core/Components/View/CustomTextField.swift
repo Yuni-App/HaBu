@@ -25,7 +25,7 @@ struct CustomTextField: View {
                     
                     TextField("", text: $text)
                         .foregroundColor(.white)
-                    
+
                 }
             }
             .frame(height: 40)

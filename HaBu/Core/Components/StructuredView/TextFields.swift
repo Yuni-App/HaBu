@@ -9,6 +9,27 @@ import Foundation
 import SwiftUI
 
 class TextFields {
+    //comment text field modifier
+    
+   //?????
+    
+    
+    
+    
+    
+    //add post text field
+    @ViewBuilder
+    static func LineLimitTextField()-> some View{
+        @State var text: String = ""
+        VStack {
+           TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
+               .padding()
+               .lineLimit(9...)
+               .background(Color.white)
+               .cornerRadius(7)
+               .shadow(color: Color.black.opacity(0.4), radius: 4, x: 1, y: 2)
+       }   .padding(7)
+    }
     
     //settings text field
     @ViewBuilder

@@ -18,14 +18,8 @@ struct AddPostView: View {
                 AddPostBackground()
                 VStack{
                     AddPostAppBar()
-                    VStack {
-                        TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
-                            .padding()
-                            .lineLimit(9...)
-                            .background(Color.white)
-                            .cornerRadius(7)
-                            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 1, y: 2)
-                    }   .padding(7)
+                    TextFields.LineLimitTextField()
+                   
                     AddPostCategory()
                     HStack{
                         Toggle("Anonim Gönderi", isOn: $isAnonimPost)
