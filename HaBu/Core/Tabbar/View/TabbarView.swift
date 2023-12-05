@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabbarView: View {
+    @StateObject var navigation = NavigationStateManager()
     @State var currentTab : String = "Feed"
     @State var hideBar = false
     init() {
@@ -23,35 +24,38 @@ struct TabbarView: View {
             let bottomEdge = proxy.safeAreaInsets.bottom
             let topEdge = proxy.safeAreaInsets.leading
             
-            TabView(selection:$currentTab){
-                FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
-                    .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
-                    .tag("Feed")
-                    .toolbar(.hidden, for: .tabBar)
-                SerachView()
-                    .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
-                    .tag("Search")
-                    .toolbar(.hidden, for: .tabBar)
-                NotificationView()
-                    .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
-                    .tag("Notification")
-                    .toolbar(.hidden, for: .tabBar)
-                ProfileView(hideTab: $hideBar, user: User.MockData[0])
-                    .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
-                    .tag("Profile")
-                    .toolbar(.hidden, for: .tabBar)
-            }
-            .overlay(
-                VStack{
-                  CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
+            NavigationStack(path:$navigation.path) {
+                TabView(selection:$navigation.selection){
+                    FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
+                        .frame(maxWidth: .infinity,maxHeight: .infinity)
+                        .background(Color.primary.opacity(0.1))
+                        .tag("Feed")
+                        .toolbar(.hidden, for: .tabBar)
+                    SerachView()
+                        .frame(maxWidth: .infinity,maxHeight: .infinity)
+                        .background(Color.primary.opacity(0.1))
+                        .tag("Search")
+                        .toolbar(.hidden, for: .tabBar)
+                    NotificationView()
+                        .frame(maxWidth: .infinity,maxHeight: .infinity)
+                        .background(Color.primary.opacity(0.1))
+                        .tag("Notification")
+                        .toolbar(.hidden, for: .tabBar)
+                    ProfileView(hideTab: $hideBar, user: User.MockData[0])
+                        .frame(maxWidth: .infinity,maxHeight: .infinity)
+                        .background(Color.primary.opacity(0.1))
+                        .tag("Profile")
+                        .toolbar(.hidden, for: .tabBar)
                 }
-                    .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
-                ,alignment: .bottom
+                .overlay(
+                    VStack{
+                        CustomTabbarView(currentTab: $navigation.selection, bottomEdge: bottomEdge)
+                    }
+                        .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
+                    ,alignment: .bottom
             )
+            }
+            .environmentObject(navigation)
           
             
         }

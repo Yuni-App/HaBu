@@ -115,6 +115,9 @@ struct ProfileUserView: View {
        
     }
     func getHeaderHeight() -> CGFloat{
+        
+      
+
         let topHeight = maxHeight + TollBarOffset
         return topHeight > (80 + topEdge) ? topHeight - 40 : (40 + topEdge)
     }
