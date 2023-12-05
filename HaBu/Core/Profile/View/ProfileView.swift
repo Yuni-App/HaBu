@@ -34,7 +34,7 @@ struct ProfileView : View {
     ]
     
     var body: some View{
-        ZStack {
+       
             GeometryReader{proxy in
                     let topEdge = proxy.safeAreaInsets.top
                 ProfileUserView(isShowingSideMenu: $showMenu, hideTab: $hideTab, topEdge: topEdge, user: user)
@@ -48,7 +48,7 @@ struct ProfileView : View {
             }
             }.background(Color.gray.opacity(showMenu ? 0.3: 0))
             
-            }
+            
         }
         /*  var body: some View {
          NavigationStack {

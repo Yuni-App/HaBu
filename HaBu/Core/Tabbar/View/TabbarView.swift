@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabbarView: View {
-    @StateObject var navigation = NavigationStateManager()
+    @EnvironmentObject var navigation : NavigationStateManager
     @State var currentTab : String = "Feed"
     @State var hideBar = false
     init() {

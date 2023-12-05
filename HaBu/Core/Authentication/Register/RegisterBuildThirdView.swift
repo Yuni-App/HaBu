@@ -10,7 +10,6 @@ import SwiftUI
 struct RegisterBuildThirdView: View {
     @State private var isChecked: Bool = false
     var body: some View {
-        NavigationStack{
             ZStack {
                 VStack{
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
@@ -35,7 +34,7 @@ struct RegisterBuildThirdView: View {
                         Text("Onaylayınız").foregroundStyle(.black).font(.system(size: 14))
                     }}.frame(width: Const.width , height: Const.height+100)
             }.background(BackgroundLinearColor())
-        }
+        
     }
 }
 

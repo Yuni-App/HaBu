@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RegisterBuildFirstView: View {
     var body: some View {
-        NavigationStack{
             ZStack {
                 VStack{
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.RegisterSecondVector)
@@ -31,8 +30,6 @@ struct RegisterBuildFirstView: View {
             }.background(
                 BackgroundLinearColor()
             )
-            
-        }
     }
 }
 

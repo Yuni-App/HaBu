@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FeedView: View {
     @State var showCategoryFilter = false
+    @EnvironmentObject private var navigation:NavigationStateManager
+
     var bottomEdge:CGFloat
     
     @Binding var hideTab:Bool

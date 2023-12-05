@@ -9,7 +9,6 @@ import SwiftUI
 
 struct InfoView: View {
     var body: some View {
-        NavigationStack {
             ZStack {
                 VStack {
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
@@ -35,7 +34,7 @@ struct InfoView: View {
             )
             
             
-        }
+        
         
         
         

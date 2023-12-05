@@ -38,7 +38,6 @@ struct FeedViewCell: View {
 
     }
     var body: some View {
-        NavigationStack {
             VStack(alignment:.center){
                 if backButton {
                     Buttons.backButton {
@@ -118,9 +117,6 @@ struct FeedViewCell: View {
                 .padding()
                 Spacer()
             }
-        }
-       
-        Divider()
         
     }
 }

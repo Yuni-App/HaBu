@@ -12,7 +12,6 @@ struct LoginView: View {
    
     
     var body: some View {
-        NavigationStack{
             ZStack {
                 VStack{
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
@@ -58,9 +57,6 @@ struct LoginView: View {
             }.background(
                 BackgroundLinearColor()
             )
-
-
-        }
         
     }
 }
