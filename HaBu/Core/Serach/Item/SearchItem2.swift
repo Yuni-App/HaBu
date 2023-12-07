@@ -30,7 +30,6 @@ struct SearchItem2: View {
                     Text("\(user.rating, specifier: "%.0f")").foregroundStyle(Color.black)
                 }
             }
-            .background()
             .frame(width: Const.width * 0.3, height: Const.height * 0.18)
         }
     }}

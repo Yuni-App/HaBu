@@ -48,11 +48,10 @@ struct SearchItem: View {
             .background(
                 LinearGradient(
                     stops: [
-                        Gradient.Stop(color: Color(red: 0.02, green: 0.14, blue: 0.24), location: 0.00),
-                        Gradient.Stop(color: Color(red: 0.02, green: 0.14, blue: 0.24).opacity(0.77), location: 0.44),
-                        Gradient.Stop(color: Color(red: 0.02, green: 0.14, blue: 0.24).opacity(0.43), location: 0.89),
-                        Gradient.Stop(color: Color(red: 0.02, green: 0.14, blue: 0.25).opacity(0.73), location: 1.00),
-                    ],
+                        Gradient.Stop(color: Color(UIColor(hex: "0x041D3D")), location: 0.00),
+                        Gradient.Stop(color: Color(UIColor(hex: "0x041D3D")).opacity(0.77), location: 0.44),
+                        Gradient.Stop(color: Color(UIColor(hex: "0x041D3D")).opacity(0.43), location: 0.89),
+                        Gradient.Stop(color: Color(UIColor(hex: "0x041E40")).opacity(0.73), location: 1.00),],
                     startPoint: UnitPoint(x: 0.5, y: 0),
                     endPoint: UnitPoint(x: 0.5, y: 1)
                 )).cornerRadius(10)
