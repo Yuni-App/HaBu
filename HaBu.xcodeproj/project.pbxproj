@@ -239,9 +239,7 @@
 		5C26585A2B03C45F008BEB6D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */,
 				9411AA8D2B0510F80042A354 /* CustomImage.swift */,
-				94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
@@ -254,6 +252,8 @@
 				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */,
 				9452D2FB2B1C6C3F005E2A3B /* CustomTextField3.swift */,
+				9411AA8B2B050EDB0042A354 /* BackgroundLinearColor.swift */,
+				94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

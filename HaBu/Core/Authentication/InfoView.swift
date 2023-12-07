@@ -25,8 +25,8 @@ struct InfoView: View {
                         },destination: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
                         
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
-                        .background(
-                            RectangleBlur(color: Const.primaryColor))
+                        .modifier(BlurModifier(color: Const.primaryColor))
+                      
                 }
                 .frame(width: Const.width , height: Const.height)
                 .padding()

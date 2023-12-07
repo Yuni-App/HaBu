@@ -22,6 +22,15 @@ class Const{
     static let secondaryButtonColor = Color(UIColor(hex: "B70404"))
     static let textColorSecondary = Color(UIColor(hex: "5B8291"))
     static let textFieldColor = Color(UIColor(hex: "13446C"))
+    static let authBackGroundColor =  LinearGradient(
+        stops: [
+        Gradient.Stop(color: Color(UIColor(hex: "55BDB7")), location: 0.00),
+        Gradient.Stop(color: Color(UIColor(hex: "40908C")), location: 0.48),
+        Gradient.Stop(color: Color(UIColor(hex: "13446C")), location: 1.00),
+        ],
+        startPoint: UnitPoint(x: 0.5, y: 0),
+        endPoint: UnitPoint(x: 0.5, y: 1)
+        )
   
     static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer","Mert","Yusuf"]
     static var anonimFilters: [anonimFilter]=[
