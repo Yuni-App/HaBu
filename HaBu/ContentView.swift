@@ -5,7 +5,6 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $navigation.path) {
             InfoView()
-               
         }
         .environmentObject(navigation)
         .navigationDestination(for: PathCases.self) { path in

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 enum PathCases: Hashable {
     case auth(Auth)
     case feed(Feed)
@@ -17,6 +18,7 @@ enum PathCases: Hashable {
     case settings(Settings)
     case profile(Profile)
     case tabbar
+    
     
     var view: any View {
         switch self {
@@ -39,9 +41,9 @@ enum PathCases: Hashable {
         case .feed(let feed):
             switch feed {
             case .feedCell:
-                return TabbarView()
+                return FeedView()
             case .feedView:
-                return TabbarView()
+                return FeedView()
             }
         case .search(let search):
             switch search {
@@ -125,6 +127,7 @@ extension PathCases {
     }
 
     enum Profile: Hashable {
+    
         case profile
         case editProfile
     }
@@ -134,6 +137,9 @@ extension PathCases {
 class NavigationStateManager : ObservableObject{
     @Published var path : [PathCases] = []
     @Published var selection : String = "Feed"
+    @Published var hideTabBar = false
+    @Published var bottomEdge :CGFloat = 0
+    @Published var topEdge: CGFloat = 0
     
     func pop(_ selection:String? = nil){
         if !path.isEmpty{

@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ProfileUserView: View {
+    @EnvironmentObject var navigate : NavigationStateManager
+    
+    
     @Binding var isShowingSideMenu:Bool
-    @Binding var hideTab:Bool
     let topEdge:CGFloat
     let maxHeight = UIScreen.main.bounds.height / 2.7
     var user:User
@@ -69,7 +71,7 @@ struct ProfileUserView: View {
                     .zIndex(2)
                     VStack(spacing:15){
                         ForEach(Post.MockData){post in
-                            FeedViewCell(post: post, user: user, hideTab: $hideTab)
+                            FeedViewCell(data:.init(post: post, user: user))
                         }
                     }
                     .zIndex(1)
@@ -84,7 +86,7 @@ struct ProfileUserView: View {
                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                     withAnimation(.easeOut .speed(1.5)){
                                         print(minY)
-                                        hideTab = true
+                                        navigate.hideTabBar = true
                                     }
                                     lastOffset = -offset
                                 }
@@ -92,7 +94,7 @@ struct ProfileUserView: View {
                             }
                             if minY > offset && -minY < (lastOffset - durationOffset){
                                 withAnimation(.easeOut .speed(1.5)){
-                                    hideTab = false
+                                    navigate.hideTabBar = false
                                 }
                                 lastOffset = -offset
                                 
@@ -135,7 +137,7 @@ struct ProfileUserView: View {
     }
 }
 #Preview {
-    ProfileUserView(isShowingSideMenu: .constant(false), hideTab: .constant(false), topEdge: 50, user: User.MockData[0])
+    ProfileUserView(isShowingSideMenu: .constant(false), topEdge: 50, user: User.MockData[0])
 }
 
 struct Tabbar:View {

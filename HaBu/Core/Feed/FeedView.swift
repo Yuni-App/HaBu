@@ -10,20 +10,16 @@ import SwiftUI
 struct FeedView: View {
     @State var showCategoryFilter = false
     @EnvironmentObject private var navigation:NavigationStateManager
-
-    var bottomEdge:CGFloat
-    
-    @Binding var hideTab:Bool
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
-    var topEdge: CGFloat
+
     var body: some View {
         VStack {
             ScrollView(.vertical,showsIndicators: false){
                 VStack (alignment:.leading){
                     ForEach(Post.MockData , id: \.id){post in
-                        FeedViewCell(post: post,user: User.MockData[Int(post.userId)!], hideTab: $hideTab)
+                        FeedViewCell(data:.init(post: post,user: User.MockData[Int(post.userId)!]))
                         Divider()
                     }
                 }
@@ -37,7 +33,7 @@ struct FeedView: View {
                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                     withAnimation(.easeOut .speed(1.5)){
                                         print(minY)
-                                        hideTab = true
+                                        navigation.hideTabBar = true
                                     }
                                     lastOffset = -offset
                                 }
@@ -45,7 +41,7 @@ struct FeedView: View {
                             }
                             if minY > offset && -minY < (lastOffset - durationOffset){
                                 withAnimation(.easeOut .speed(1.5)){
-                                    hideTab = false
+                                    navigation.hideTabBar = false
                                 }
                                 lastOffset = -offset
                                 
@@ -58,25 +54,21 @@ struct FeedView: View {
                     
                 )
                 .padding()
-                .padding(.bottom,15 + bottomEdge + 35)
+                .padding(.bottom,15 + navigation.bottomEdge + 35)
             }
             .coordinateSpace(name:"SCROLL")
             .overlay(
-                FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: topEdge)
+                FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: navigation.topEdge)
                     .background(.white)
-                    .offset(y:hideTab ? (-15 - 70 - topEdge) :0)
+                    .offset(y:navigation.hideTabBar ? (-15 - 70 - navigation.topEdge) :0)
                 ,alignment: .top
             )
             .ignoresSafeArea(.all,edges: .all)
             .overlay(
                 SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 0, y: 30), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                    .offset(x:hideTab ? -150 : 0)
+                    .offset(x:navigation.hideTabBar ? -150 : 0)
                 
             )
-            
-            
-            
-            
             .sheet(isPresented: $showCategoryFilter) {
                 CategoryFilterBottomSheet()
                     .presentationDetents([.large,.large])
@@ -88,7 +80,7 @@ struct FeedView: View {
 
 
 #Preview {
-    TabbarView()
+    ContentView()
 }
 
 
@@ -103,7 +95,6 @@ struct FeedViewTollBar:View {
                 Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
                     .padding(10)
                 Spacer()
-                
                 Button(action: {
                     showCategoryFilter = true
                     
@@ -135,8 +126,6 @@ struct FeedViewTollBar:View {
                     
                 }
                 )
-                
-                
             }
         }
         .padding(.top,15)

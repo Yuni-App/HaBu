@@ -9,24 +9,14 @@ import SwiftUI
 
 struct TabbarView: View {
     @EnvironmentObject var navigation : NavigationStateManager
-    @State var currentTab : String = "Feed"
-    @State var hideBar = false
-    init() {
-        UITableView.appearance().isHidden = true
-    
-    }
-    init(currentTab:String) {
-        UITableView.appearance().isHidden = true
-    
-    }
     var body: some View {
         GeometryReader{proxy in
-            let bottomEdge = proxy.safeAreaInsets.bottom
+           let bottomEdge = proxy.safeAreaInsets.bottom
             let topEdge = proxy.safeAreaInsets.leading
             
             NavigationStack(path:$navigation.path) {
                 TabView(selection:$navigation.selection){
-                    FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
+                    FeedView()
                         .frame(maxWidth: .infinity,maxHeight: .infinity)
                         .background(Color.primary.opacity(0.1))
                         .tag("Feed")
@@ -41,17 +31,21 @@ struct TabbarView: View {
                         .background(Color.primary.opacity(0.1))
                         .tag("Notification")
                         .toolbar(.hidden, for: .tabBar)
-                    ProfileView(hideTab: $hideBar, user: User.MockData[0])
+                    ProfileView(user: User.MockData[0])
                         .frame(maxWidth: .infinity,maxHeight: .infinity)
                         .background(Color.primary.opacity(0.1))
                         .tag("Profile")
                         .toolbar(.hidden, for: .tabBar)
                 }
+                .task {
+                    navigation.bottomEdge = bottomEdge
+                    navigation.topEdge = topEdge
+                }
                 .overlay(
                     VStack{
                         CustomTabbarView(currentTab: $navigation.selection, bottomEdge: bottomEdge)
                     }
-                        .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
+                        .offset(y:navigation.hideTabBar ? (15 + 35 + bottomEdge):0)
                     ,alignment: .bottom
             )
             }
@@ -63,7 +57,7 @@ struct TabbarView: View {
 }
 
 #Preview {
-    TabbarView()
+    ContentView()
 }
 private struct CustomTabbarView:View {
     @Binding var currentTab:String
