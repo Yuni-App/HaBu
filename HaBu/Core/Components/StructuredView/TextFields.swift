@@ -9,13 +9,19 @@ import Foundation
 import SwiftUI
 
 class TextFields {
+    
+    
+    
+    
     //comment text field modifier
-    
-   //?????
-    
-    
-    
-    
+    @ViewBuilder
+    static func CommentTextField()-> some View{
+        @State var commentText: String = ""
+        VStack{
+            TextField("Yorum...", text: $commentText)
+                .modifier(IGTextFieldModifier())
+        }
+    }
     
     //add post text field
     @ViewBuilder

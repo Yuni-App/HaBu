@@ -36,5 +36,5 @@ struct CustomSettingsTollBar: View {
 }
 
 #Preview {
-    CustomSettingsTollBar(title: "baslık", destinaiton: AnyView(TabbarView()))
+    CustomSettingsTollBar(title: "Baslık", destinaiton: AnyView(TabbarView()))
 }
