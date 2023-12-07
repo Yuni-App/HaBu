@@ -24,7 +24,7 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
             }.padding(30)
                 .frame(width: Const.width , height: Const.height)
                 .background(
-                    BackgroundLinearColor()
+                    Const.authBackGroundColor
                 )
         }
     }

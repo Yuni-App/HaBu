@@ -12,7 +12,8 @@ struct BlockedUsers: View {
     var body: some View {
         NavigationStack{
             VStack{
-                BlockedViewAppBar(blockedList: blockedList)
+                CustomSettingsTollBar(title: "Engellenenler", destinaiton: AnyView( SettingsView().navigationBarBackButtonHidden(true)),blockedCount: blockedList.count)
+
                 ScrollView{
                     VStack{
                         if blockedList.count == 0 {
@@ -40,22 +41,28 @@ struct BlockedUsers: View {
 }
 
 @ViewBuilder
-func BlockedViewAppBar(blockedList : [User])->some View {
-    ZStack{
-        HStack{
-            NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)) {
-                Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .black)
+private func BlockedUserListTile(user : User)->some View {
+    NavigationStack{
+        HStack {
+            CircleProfileImage(userIamgeUrl: "", size: .small)
+            VStack{
+                Text("\(user.name) \(user.surName)")
+                    .fontWeight(.semibold)
+                    .font(.caption)
+                Text("\(user.username)")
+                    .opacity(0.5)
+                    .fontWeight(.semibold)
+                    .font(.caption2)
             }
+            .foregroundStyle(.black)
             Spacer()
-            Text("\(String(blockedList.count)) Kişi ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-        }
-        Text("Engellenenler")
-            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            .font(.system(size: 25))
-            .frame(maxWidth: .infinity, alignment: .center)
-        Spacer()
-    }.background(
-        .white
-    )
-    .padding(.horizontal , 10)
+            CustomButton(title: "Kaldır", backgroundColor: Const.primaryButtonColor, action: {
+                false
+            } ,size: CustomButtonSize.xxxsmall)
+        }.padding(.horizontal ,15)
+        .padding(.vertical,5)
+    }
 }
+
+
+

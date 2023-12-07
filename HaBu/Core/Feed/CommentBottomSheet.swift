@@ -32,8 +32,7 @@ struct CommentBottomSheet: View {
                 .ignoresSafeArea(.all)
         }
         HStack{
-            TextField("Yorum...", text: $commentText)
-                .modifier(IGTextFieldModifier())
+            TextFields.CommentTextField()
             Button(action: {
             }, label: {
                 Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)

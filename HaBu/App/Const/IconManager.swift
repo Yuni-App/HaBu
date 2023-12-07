@@ -35,6 +35,8 @@ enum AppIcon: String{
     case warning = "exclamationmark.transmission"
     case code = "qrcode"
     case info = "info.square"
+    case checkSquare = "checkmark.square.fill"
+    case square = "square"
  
 
 }
