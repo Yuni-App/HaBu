@@ -48,7 +48,7 @@ private func ChangeTextField(title : String , placeHolder : String)->some View{
             Text(title).fontWeight(.bold)
             Spacer()
         }
-        CustomTextField3(icon: .key, placeHolder: placeHolder)
+        TextFields.CustomTextField3(icon: .key, placeHolder: placeHolder)
     }.padding(.vertical , 7)
  
     

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct BlurModifier: ViewModifier {
+struct RectangleBlurModifier: ViewModifier {
     var color : Color
     func body(content: Content) -> some View {
         content

@@ -25,13 +25,14 @@ struct InfoView: View {
                         },destination: AnyView(RegisterBuildFirstView()),size: CustomButtonSize.small , textColor: .black)
                         
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
-                        .modifier(BlurModifier(color: Const.primaryColor))
+                        .background(
+                            RectangleBlur(color: Const.primaryColor))
                       
                 }
                 .frame(width: Const.width , height: Const.height)
                 .padding()
             }.background(
-                BackgroundLinearColor()
+                Const.authBackGroundColor
             )
             
             
