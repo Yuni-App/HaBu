@@ -38,12 +38,13 @@ struct FeedBackSuccess: View {
                       .frame(width: Const.width * 0.7, alignment: .center)
                     
                     Spacer()
-                    NavigationLink(destination: TabbarView()) {
+                    NavigationLink(destination: TabbarView().navigationBarBackButtonHidden()) {
                         Text("Ana Sayfaya Dön").fontWeight(.semibold)
                             .frame(width: Const.width * 0.5, height: Const.height * 0.05, alignment: .center)
                             .foregroundColor(.white)
                             .background(Const.primaryButtonColor)
                             .cornerRadius(8)
+                            
                     }
                     
                 }
