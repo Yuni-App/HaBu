@@ -46,7 +46,7 @@ struct TabbarView: View {
                         VStack{
                             CustomTabbarView(currentTab: $navigation.selection, bottomEdge: bottomEdge)
                         }
-                            .offset(y:navigation.hideTabBar ? (15 + 35 + bottomEdge):0)
+                         .offset(y:navigation.hideTabBar ? (15 + 35 + bottomEdge):0)
                         ,alignment: .bottom
                 )
                 .navigationBarBackButtonHidden(true)

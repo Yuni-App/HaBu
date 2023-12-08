@@ -13,7 +13,7 @@ struct FeedView: View {
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
-
+    @State var postButtonPoint:CGPoint = .init(x: 0, y: 30)
     var body: some View {
         VStack {
             ScrollView(.vertical,showsIndicators: false){
@@ -26,7 +26,7 @@ struct FeedView: View {
                 .padding(.top,Const.height * 0.12)
                 .overlay(
                     GeometryReader{proxy -> Color in
-                        let minY = proxy.frame(in: .named("SCROLL")).minY
+                        let minY = proxy.frame(in: .named("SCROLLFeed")).minY
                         let durationOffset: CGFloat = 35
                         DispatchQueue.main.async {
                             if minY < offset{
@@ -48,7 +48,7 @@ struct FeedView: View {
                             }
                             self.offset = minY
                         }
-                        return Color.clear
+                      return  Color.clear
                         
                     }
                     
@@ -56,18 +56,19 @@ struct FeedView: View {
                 .padding()
                 .padding(.bottom,15 + navigation.bottomEdge + 35)
             }
-            .coordinateSpace(name:"SCROLL")
+            .coordinateSpace(name:"SCROLLFeed")
             .overlay(
                 FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: navigation.topEdge)
+                    .padding(.horizontal,20)
                     .background(.white)
                     .offset(y:navigation.hideTabBar ? (-15 - 70 - navigation.topEdge) :0)
                 ,alignment: .top
             )
             .ignoresSafeArea(.all,edges: .all)
             .overlay(
-                SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 0, y: 30), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                Buttons.slidableButton(page: .addPost, startPosition: CGPoint(x: 0, y: 30), position: $postButtonPoint, dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white,navigator:_navigation)
+                    .padding(.horizontal,20)
                     .offset(x:navigation.hideTabBar ? -150 : 0)
-                
             )
             .sheet(isPresented: $showCategoryFilter) {
                 CategoryFilterBottomSheet()
@@ -80,7 +81,7 @@ struct FeedView: View {
 
 
 #Preview {
-    FeedView()
+    InfoView()
 }
 
 

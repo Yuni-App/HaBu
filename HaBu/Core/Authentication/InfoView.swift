@@ -39,7 +39,7 @@ struct InfoView: View {
                     .frame(width: Const.width , height: Const.height)
                     .padding()
                 }
-                .background(BackgroundLinearColor())
+            .background(Const.authBackGroundColor)
                 .navigationDestination(for: PathCases.self) { path in
                 AnyView(path.getView())
             }

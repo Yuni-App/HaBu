@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 class Buttons{
-    
     //customButton1
     @ViewBuilder
    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Bool) ,destination:AnyView?,size:CustomButtonSize,textColor:Color?) -> some View{
@@ -82,6 +81,59 @@ class Buttons{
          self.color = color
          self.textColor = textColor
      }*/
+    
+    @ViewBuilder
+    static func slidableButton( page:PathCases,startPosition:CGPoint,position:Binding<CGPoint>,dragDirection:DragDirection,text:String,color:Color,textColor:Color,navigator:EnvironmentObject<NavigationStateManager>)-> some View{
+        
+        HStack{
+            if dragDirection == .left {
+                Image(systemName:"chevron.left")
+                    .fontWeight(.bold)
+                    .font(.subheadline)
+            }
+            Text(text)
+                .font(.title3)
+                .fontWeight(.semibold)
+            if dragDirection == .right{
+                Image(systemName:"chevron.right")
+                    .fontWeight(.bold)
+                    .font(.subheadline)
+            }
+        }
+        
+        .padding(.vertical,5)
+        .padding(.horizontal,10)
+        .padding(dragDirection.padding,110)
+        .background(color)
+        .foregroundStyle(textColor)
+        .clipShape(
+            .rect(
+                topLeadingRadius: dragDirection == .left ? 20 : 0,
+                bottomLeadingRadius:  dragDirection == .left ? 20 : 0,
+                bottomTrailingRadius:  dragDirection == .left ? 0 : 20,
+                topTrailingRadius:  dragDirection == .left ? 0 : 20
+            )
+        )
+        
+        .position(position.wrappedValue)
+        .gesture(DragGesture().onChanged({ value in
+            if value.translation.width > 0 && value.translation.width < 50 && dragDirection == .right{
+                print(value.translation)
+                position.wrappedValue = CGPoint(x: startPosition.x + value.translation.width, y :startPosition.y)
+            }
+            else if value.translation.width < 0 && value.translation.width > -50 && dragDirection == .left{
+                print(value.translation)
+                position.wrappedValue = CGPoint(x: startPosition.x + value.translation.width, y :startPosition.y)
+            }
+        })
+            .onEnded({ _ in
+                position.wrappedValue  = CGPoint(x:startPosition.x, y :startPosition.y)
+                navigator.wrappedValue.push(page)
+            })
+        )
+        
+        
+    }
 }
 
 

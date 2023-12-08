@@ -28,7 +28,6 @@ struct SerachView: View {
         //start 4. USER to 10
     }
     var body: some View {
-        NavigationStack {
             VStack {
                 HStack {
                     SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
@@ -57,35 +56,6 @@ struct SerachView: View {
                             }.background(Color.white).padding(.top, 17)
                         }
                     }
-                
-            }
-        }
-    }
-
-struct SearchBar: View {
-    @Binding var searchText: String
-    @Binding var isEditing: Bool
-    
-    var body: some View {
-       
-            HStack {
-                TextField("Ara...", text: $searchText)
-                    .padding(8)
-                    .padding(.horizontal, 24)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .onTapGesture {
-                        isEditing = true
-                    }
-                if isEditing {
-                    Button(action: {
-                        searchText = ""
-                        isEditing = false
-                    }) {
-                        Image(systemName: "multiply.circle.fill")
-                            .foregroundColor(.gray)
-                            .padding(8)
-                    }
                 }
                 
             }.frame(width: Const.width).background(Const.primaryBackGroundColor)
@@ -95,7 +65,6 @@ struct SearchBar: View {
                 }
                 .hidden()
             )
-        }
     }
 }
 

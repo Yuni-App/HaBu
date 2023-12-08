@@ -37,7 +37,8 @@ struct RegisterBuildThirdView: View {
             }.background(Const.authBackGroundColor)
         }
     }
-}
+
+
 
 #Preview {
     RegisterBuildThirdView()
