@@ -14,14 +14,15 @@ struct RegisterBuildThirdView: View {
                 VStack{
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
                     VStack{
-                        CustomTextField(icon: "person.fill", placeHolder: "Fakülte")
-                        CustomTextField(icon: "person.fill", placeHolder: "Bölüm")
-                        CustomTextField(icon: "calendar", placeHolder: "Giriş Yılı")
+                        TextFields.CustomTextField(icon: .blocked, placeHolder: "Fakülte")
+                        TextFields.CustomTextField(icon: .blocked, placeHolder: "Bölüm")
+                        TextFields.CustomTextField(icon: .blocked, placeHolder: "Giriş Yılı")
                         CustomButton(title: "Tamamla", backgroundColor: Const.primaryColor, action: {true
                         }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
                         
                     }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
-                    .background(RectangleBlur(color: Const.primaryColor))
+                        .background(
+                            RectangleBlur(color: Const.primaryColor))
                     HStack{
                         CheckBoxView(checked: isChecked){
                         }
@@ -33,8 +34,8 @@ struct RegisterBuildThirdView: View {
                         }
                         Text("Onaylayınız").foregroundStyle(.black).font(.system(size: 14))
                     }}.frame(width: Const.width , height: Const.height+100)
-            }.background(BackgroundLinearColor())
-        
+            }.background(Const.authBackGroundColor)
+        }
     }
 }
 

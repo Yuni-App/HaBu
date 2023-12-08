@@ -21,9 +21,10 @@ struct CheckBoxView: View {
             action()
             checked.toggle()
         }) {
-            Image(systemName: checked ? "checkmark.square.fill" : "square")
-                .foregroundColor(checked ? .blue : .black)
-                .frame(width: 24, height: 24)
+            if  (checked) {Image.iconManager(AppIcon.checkSquare, size: 24, weight: .bold, color: Const.primaryColor)}
+            else {
+                Image.iconManager(AppIcon.square, size: 24, weight: .bold, color: .black)
+            }
         }
     }
 }

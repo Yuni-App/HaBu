@@ -22,9 +22,9 @@ struct ChangePasswordView: View {
                         Text("Şifre nasıl olmalıdır ? ").fontWeight(.bold).foregroundColor(Const.textColorSecondary)
                         Spacer()
                     }.padding(.vertical , 15)
-                    TextFieldStack(title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
-                    TextFieldStack(title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
-                    TextFieldStack(title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
+                    ChangeTextField(title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
+                    ChangeTextField(title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
+                    ChangeTextField(title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
                 }.padding()
             }
             CustomButton(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {
@@ -41,14 +41,14 @@ struct ChangePasswordView: View {
 #Preview {
     ChangePasswordView()
 }
-@ViewBuilder
-func TextFieldStack(title : String , placeHolder : String)->some View{
+ @ViewBuilder
+private func ChangeTextField(title : String , placeHolder : String)->some View{
     VStack {
         HStack{
             Text(title).fontWeight(.bold)
             Spacer()
         }
-        CustomTextField3(icon: .key, placeHolder: placeHolder)
+        TextFields.CustomTextField3(icon: .key, placeHolder: placeHolder)
     }.padding(.vertical , 7)
  
     

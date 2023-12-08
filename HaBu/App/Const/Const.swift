@@ -17,10 +17,20 @@ class Const{
     static let backgroundColor = Color(uiColor: UIColor(hex: "E9E9E9"))
     static let tabBarItems = ["Feed","Search","Notification","Profile"]
     static let fourthColor = Color(uiColor: UIColor(hex: "5E77F9"))
-    static let primaryBackGroundColor = Color(UIColor(hex: "F3F3F3"))
+    static let primaryBackGroundColor = Color(UIColor(hex: "d1d1d1")).opacity(0.6)
     static let primaryButtonColor = Color(UIColor(hex: "04243E"))
     static let secondaryButtonColor = Color(UIColor(hex: "B70404"))
     static let textColorSecondary = Color(UIColor(hex: "5B8291"))
+    static let textFieldColor = Color(UIColor(hex: "13446C"))
+    static let authBackGroundColor =  LinearGradient(
+        stops: [
+        Gradient.Stop(color: Color(UIColor(hex: "55BDB7")), location: 0.00),
+        Gradient.Stop(color: Color(UIColor(hex: "40908C")), location: 0.48),
+        Gradient.Stop(color: Color(UIColor(hex: "13446C")), location: 1.00),
+        ],
+        startPoint: UnitPoint(x: 0.5, y: 0),
+        endPoint: UnitPoint(x: 0.5, y: 1)
+        )
   
     static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer","Mert","Yusuf"]
     static var anonimFilters: [anonimFilter]=[

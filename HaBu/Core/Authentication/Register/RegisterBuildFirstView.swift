@@ -13,12 +13,13 @@ struct RegisterBuildFirstView: View {
                 VStack{
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.RegisterSecondVector)
                         VStack{
-                            CustomTextField(icon: "envelope", placeHolder: "e-posta")
-                            CustomTextField(icon: "key", placeHolder: "Şifre")
-                            CustomTextField(icon: "key", placeHolder: "Şifre Tekrar")
+                            TextFields.CustomTextField(icon: .mail, placeHolder: "e-posta")
+                            TextFields.CustomTextField(icon: .key, placeHolder: "Şifre")
+                            TextFields.CustomTextField(icon: .key, placeHolder: "Şifre Tekrar")
                             CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildSecondView()), size: CustomButtonSize.small)
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
-                        .background(RectangleBlur(color: Const.primaryColor))
+                        .background(
+                            RectangleBlur(color: Const.primaryColor))
                                         HStack{
                         Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
                         NavigationLink {
@@ -28,7 +29,7 @@ struct RegisterBuildFirstView: View {
                         }
                 }}.frame(width: Const.width , height: Const.height+100)
             }.background(
-                BackgroundLinearColor()
+                Const.authBackGroundColor
             )
     }
 }

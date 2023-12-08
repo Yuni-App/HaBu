@@ -12,47 +12,49 @@ struct SerachView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
     @State private var ratingSorted = false
+    @State private var isSecondSearchViewActive: Bool = false
     
-    //filtered user "name" or "userName"
-    var filteredUsers: [User] {
-        if isSearchBar {
-            return User.MockData.filter {
-                $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.username.localizedCaseInsensitiveContains(searchText)
-            }
-        } else {
-            let sortedUsers = User.MockData.filter { $0.rating > 0 }.sorted { $0.rating > $1.rating }
-            return Array(sortedUsers.prefix(3))
-        }
+    //filtered user
+    //vertical
+    var filteredUsers1: [User]{
+        let sortedUser = User.MockData.filter { $0.rating > 0}.sorted {$0.rating > $1.rating}
+        return Array(sortedUser.prefix(3))
+        // first three User
     }
+    //horizontal
     var filteredUsers2: [User] {
         let sortedUsers2 = User.MockData.filter { $0.rating > 0 }.sorted { $0.rating > $1.rating }
-        let startIndex = 3
-        let endIndex = min(sortedUsers2.count, 10)
-        return Array(sortedUsers2[startIndex..<endIndex])
+        return Array(sortedUsers2.dropFirst(3).prefix(7))
+        //start 4. USER to 10
     }
     var body: some View {
-     
-           
-                ScrollView {
-                    SearchBar(searchText: $searchText, isEditing: $isSearchBar)
-                        .padding(.top, 8)
-                     
-                    VStack {
-                            ForEach(filteredUsers, id: \.id) { user in
+        NavigationStack {
+            VStack {
+                HStack {
+                    SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
+                        .padding(.top, 1)
+                }.frame(width: Const.width * 0.9)
+                
+                
+                if !isSecondSearchViewActive{
+                    ScrollView {
+                        VStack {
+                            ForEach(filteredUsers1, id: \.id) { user in
                                 SearchItem(user: user, ratingSorted: ratingSorted)
                             }
                             .padding(.top,15)
-                        
-                        ScrollView(.horizontal){
-                            HStack{
-                                Spacer()
-                                ForEach(filteredUsers2, id: \.id) { user in
-                                    SearchItem2(user: user, ratingSorted: ratingSorted)
-                                }
-                                .padding(.top,15)
-                                Spacer()
-                            }.frame(height: Const.height * 0.25)
+                            
+                            ScrollView(.horizontal){
+                                HStack{
+                                    Spacer()
+                                    ForEach(filteredUsers2, id: \.id) { user in
+                                        SearchItem2(user: user, ratingSorted: ratingSorted)
+                                    }
+                                    .padding(.top,15)
+                                    Spacer()
+                                }.frame(height: Const.height * 0.25)
+                                
+                            }.background(Color.white).padding(.top, 17)
                         }
                     }
                 
@@ -85,11 +87,18 @@ struct SearchBar: View {
                             .padding(8)
                     }
                 }
-            }
-            .padding(.horizontal)
-        
+                
+            }.frame(width: Const.width).background(Const.primaryBackGroundColor)
+            .background(
+                NavigationLink(destination: SecondSearchView(), isActive: $isSecondSearchViewActive) {
+                    EmptyView()
+                }
+                .hidden()
+            )
+        }
     }
 }
+
 
 #Preview {
     SerachView()

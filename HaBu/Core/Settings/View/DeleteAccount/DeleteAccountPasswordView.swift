@@ -14,7 +14,7 @@ struct DeleteAccountPasswordView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek için Şifrenizi Giriniz ").fontWeight(.bold)
-                    CustomTextField3(icon: .key, placeHolder: "şifre")
+                    TextFields.CustomTextField3(icon: .key, placeHolder: "şifre")
                 }.padding()
                 WarningText()
             }

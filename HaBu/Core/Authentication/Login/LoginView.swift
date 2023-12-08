@@ -16,8 +16,8 @@ struct LoginView: View {
                 VStack{
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
                         VStack{
-                            CustomTextField(icon: "mail", placeHolder: "e-posta")
-                            CustomTextField(icon: "key", placeHolder: "Şifre")
+                            TextFields.CustomTextField(icon: .mail, placeHolder: "e-posta")
+                            TextFields.CustomTextField(icon: .key, placeHolder: "Şifre")
                             HStack{
                                 Spacer()
                                 Text("Şifremi unuttum.")
@@ -55,7 +55,7 @@ struct LoginView: View {
                     
                     
             }.background(
-                BackgroundLinearColor()
+                Const.authBackGroundColor
             )
         
     }
