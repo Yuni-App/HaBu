@@ -32,11 +32,12 @@ struct SerachView: View {
         return Array(sortedUsers2[startIndex..<endIndex])
     }
     var body: some View {
-        NavigationStack {
-            SearchBar(searchText: $searchText, isEditing: $isSearchBar)
-                .padding(.top, 8)
-             
+     
+           
                 ScrollView {
+                    SearchBar(searchText: $searchText, isEditing: $isSearchBar)
+                        .padding(.top, 8)
+                     
                     VStack {
                             ForEach(filteredUsers, id: \.id) { user in
                                 SearchItem(user: user, ratingSorted: ratingSorted)
@@ -54,7 +55,7 @@ struct SerachView: View {
                             }.frame(height: Const.height * 0.25)
                         }
                     }
-                }
+                
             }
         }
     }
@@ -64,7 +65,7 @@ struct SearchBar: View {
     @Binding var isEditing: Bool
     
     var body: some View {
-        NavigationStack {
+       
             HStack {
                 TextField("Ara...", text: $searchText)
                     .padding(8)
@@ -86,7 +87,7 @@ struct SearchBar: View {
                 }
             }
             .padding(.horizontal)
-        }
+        
     }
 }
 

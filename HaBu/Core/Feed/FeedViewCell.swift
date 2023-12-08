@@ -30,9 +30,14 @@ struct FeedViewCell: View {
         
     }
     var body: some View {
-            VStack(alignment:.center){
-               //Task : Back Button
-                
+        VStack(alignment:.leading){
+               //Task : need Update
+            if navigation.path.last != .tabbar {
+                    Buttons.backButton {
+                        print(navigation.path)
+                        navigation.pop()
+                    }
+                }
                 
                 Spacer()
                 //User Info
@@ -52,6 +57,7 @@ struct FeedViewCell: View {
                         .resizable()
                         .frame(width: Const.width * 0.95,height: Const.height * 0.35)
                         .scaledToFill()
+                        .padding(.horizontal,Const.width * 0.025)
                 }
                 // caption
                 HStack {
@@ -109,5 +115,5 @@ struct FeedViewCell: View {
     }
 }
 #Preview {
-    FeedViewCell(data:FeedViewCellData(post: Post.MockData[0], user:  User.MockData[0]))
+   ContentView()
 }

@@ -41,14 +41,7 @@ struct ProfileView : View {
                     let topEdge = proxy.safeAreaInsets.top
                 ProfileUserView(isShowingSideMenu: $showMenu, topEdge: topEdge, user: user)
             }
-            GeometryReader { _ in
-            HStack {
-            Spacer()
-            SideMenu(isShowingSideMenu: $showMenu)
-            .offset(x: showMenu ? 0: UIScreen.main.bounds.width)
-            .animation(.easeInOut(duration: 0.2), value: showMenu)
-            }
-            }.background(Color.gray.opacity(showMenu ? 0.3: 0))
+          
             
             
         }
@@ -278,5 +271,5 @@ struct PopUpImageView: View {
 
 
 #Preview {
-    ProfileView(user: User.MockData[0])
+    InfoView()
 }

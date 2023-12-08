@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FeedView: View {
     @State var showCategoryFilter = false
-    @EnvironmentObject private var navigation:NavigationStateManager
+    @EnvironmentObject var navigation : NavigationStateManager
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
@@ -80,7 +80,7 @@ struct FeedView: View {
 
 
 #Preview {
-    ContentView()
+    FeedView()
 }
 
 

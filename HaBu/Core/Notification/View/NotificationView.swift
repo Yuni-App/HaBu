@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct NotificationView: View {
+    @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
-        NavigationStack {
             VStack {
                 HStack{
                     Text("Bildirimler")
@@ -51,26 +51,31 @@ struct NotificationView: View {
                     Const.backgroundColor.zIndex(0)
                 }
             }
-        }
         
     }
     @ViewBuilder
     func NotificationCell(notification:Notification)-> some View{
         
-        NavigationLink{
+        Button{
             if let postId = Int(notification.targetId){
                 if let userId = Int(notification.userId){
                     if notification.type == .postLike{
-                        FeedViewCell(data:.init(post: Post.MockData[0], user: User.MockData[0]))
+                       // navigation.push(.feed(.feedCell(.init(post: Post.MockData[0], user: User.MockData[0]))))
+                        navigation.push(.settings(.settings))
                     }
                     else if notification.type == .postComment {
-                        FeedViewCell(data:.init(post: Post.MockData[0], user: User.MockData[0],showComment: true))
+                       // navigation.push(.feed(.feedCell(.init(post: Post.MockData[0], user: User.MockData[0],showComment: true))))
+                        navigation.push(.settings(.settings))
+
                     }
                     else if notification.type == .commentLike{
-                        FeedViewCell(data:.init(post: Post.MockData[0], user: User.MockData[0],showComment: true))
+                      //  navigation.push(.feed(.feedCell(.init(post: Post.MockData[0], user: User.MockData[0],showComment: true))))
+                        navigation.push(.settings(.settings))
+
                     }
                 }
             }
+          
         }label: {
             HStack{
                 CircleProfileImage(userIamgeUrl: "", size: .small)

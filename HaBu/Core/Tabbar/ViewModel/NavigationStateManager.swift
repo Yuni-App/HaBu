@@ -20,7 +20,7 @@ enum PathCases: Hashable {
     case tabbar
     
     
-    var view: any View {
+    func getView()-> any View {
         switch self {
         case .auth(let auth):
             switch auth {
@@ -40,10 +40,10 @@ enum PathCases: Hashable {
             }
         case .feed(let feed):
             switch feed {
-            case .feedCell:
-                return FeedView()
+            case .feedCell(let data):
+                return FeedViewCell(data: data)
             case .feedView:
-                return FeedView()
+                return AnyView(FeedView())
             }
         case .search(let search):
             switch search {
@@ -80,8 +80,8 @@ enum PathCases: Hashable {
             switch profile {
             case .profile:
                 return TabbarView()
-            case .editProfile:
-                return TabbarView()
+            case .editProfile(let data):
+                return EditProfileView(data: data)
             }
         case .tabbar:
             return TabbarView()
@@ -103,7 +103,7 @@ extension PathCases {
     }
 
     enum Feed: Hashable {
-        case feedCell
+        case feedCell(FeedViewCellData)
         case feedView
     }
 
@@ -129,7 +129,7 @@ extension PathCases {
     enum Profile: Hashable {
     
         case profile
-        case editProfile
+        case editProfile(EditProfileData)
     }
 }
 
@@ -159,7 +159,8 @@ class NavigationStateManager : ObservableObject{
         }
     }
     func push(_ push:PathCases){
-        path.append(.addPost)
+        path.append(push)
+        print(path)
     }
     func pushArray(_ push:[PathCases]){
         path += push

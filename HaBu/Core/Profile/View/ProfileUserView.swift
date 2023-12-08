@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ProfileUserView: View {
     @EnvironmentObject var navigate : NavigationStateManager
-    
-    
+
     @Binding var isShowingSideMenu:Bool
     let topEdge:CGFloat
     let maxHeight = UIScreen.main.bounds.height / 2.7
@@ -107,9 +106,12 @@ struct ProfileUserView: View {
                     
                 )
                 .padding(.bottom,15 + bottomEdge + 35)
-                
                 .modifier(OffsetModifier(offset: $TollBarOffset))
+                .coordinateSpace(name:"SCROLL")
+
             }
+            
+           
           
         }
         .ignoresSafeArea(.all)
@@ -117,9 +119,7 @@ struct ProfileUserView: View {
        
     }
     func getHeaderHeight() -> CGFloat{
-        
       
-
         let topHeight = maxHeight + TollBarOffset
         return topHeight > (80 + topEdge) ? topHeight - 40 : (40 + topEdge)
     }
@@ -137,7 +137,7 @@ struct ProfileUserView: View {
     }
 }
 #Preview {
-    ProfileUserView(isShowingSideMenu: .constant(false), topEdge: 50, user: User.MockData[0])
+   ContentView()
 }
 
 struct Tabbar:View {
@@ -217,7 +217,7 @@ struct Tabbar:View {
                 }
             }
             .padding(.top,maxHeight * 0.25)
-            SlidableButton(destination: AnyView(EditProfileView(user: User.MockData[0])), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
+            SlidableButton(destination: AnyView(EditProfileView(data: .init(user: User.MockData[0]))), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
         }
         .padding()
         .opacity(getOpacity())
