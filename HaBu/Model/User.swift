@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct User : Identifiable,Codable{
+struct User : Identifiable,Codable,Hashable{
     //--USER INFO
     let id : String
     let email : String
@@ -24,7 +24,7 @@ struct User : Identifiable,Codable{
     
 }
  
-struct UniInfo :Identifiable,Codable {
+struct UniInfo :Identifiable,Codable ,Hashable{
     let id : String
     let faculty : String
     let depertmant : String

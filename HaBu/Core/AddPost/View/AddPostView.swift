@@ -13,7 +13,7 @@ struct AddPostView: View {
     @State private var isAnonimComment  = false
     
     var body: some View {
-        NavigationStack{
+       
             ZStack{
                 AddPostBackground()
                 VStack{
@@ -45,7 +45,7 @@ struct AddPostView: View {
                 
             }
             
-        }
+        
     }
 }
 

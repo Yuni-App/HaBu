@@ -12,7 +12,6 @@ struct SearchBar: View {
     @Binding var isEditing: Bool
     @Binding var isSecondSearchViewActive: Bool
     var body: some View {
-        NavigationStack {
             HStack {
                 TextField("Ara...", text: $searchText)
                     .padding(8)
@@ -46,7 +45,6 @@ struct SearchBar: View {
             }
             .animation(.bouncy(duration: 0.9))
             .padding(.horizontal)
-        }
     }
 }
 
