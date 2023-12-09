@@ -11,16 +11,13 @@ import SwiftUI
 class Buttons{
     //customButton1
     @ViewBuilder
-   static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Bool) ,destination:AnyView?,size:CustomButtonSize,textColor:Color?) -> some View{
-        @State var isActiveDestination: Bool = false
-        NavigationLink(
-            destination: destination ?? AnyView(EmptyView()),
-            isActive: $isActiveDestination,
-            label: {})
+    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Bool) ,destination:PathCases,size:CustomButtonSize,textColor:Color?,navigation:EnvironmentObject<NavigationStateManager>) -> some View{
         
         Button(action:{
-            isActiveDestination = action()
-           
+            if action() == true{
+                navigation.wrappedValue.push(destination)
+            }
+
         }, label: {
             Text(title)
                 .padding()
@@ -63,24 +60,6 @@ class Buttons{
     }
     
     
-    //slidableButton
-    /*@State private var shouldNavigate = false
-     var destinaiton : AnyView
-     @State var position : CGPoint
-     let dragDirection : DragDirection
-     let startPosition:CGPoint
-     let text : String
-     let color:Color
-     let textColor:Color
-     init(destination :AnyView, position: CGPoint,dragDirection:DragDirection,text: String,color:Color,textColor:Color) {
-         self.destinaiton = destination
-         self.position = position
-         self.startPosition = position
-         self.dragDirection = dragDirection
-         self.text = text
-         self.color = color
-         self.textColor = textColor
-     }*/
     
     @ViewBuilder
     static func slidableButton( page:PathCases,startPosition:CGPoint,position:Binding<CGPoint>,dragDirection:DragDirection,text:String,color:Color,textColor:Color,navigator:EnvironmentObject<NavigationStateManager>)-> some View{
@@ -134,6 +113,9 @@ class Buttons{
         
         
     }
+    
+    
+    
 }
 
 
