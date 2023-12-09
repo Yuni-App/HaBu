@@ -7,8 +7,13 @@
 
 import SwiftUI
 
-struct EditProfileView: View {
+struct EditProfileData:Hashable{
     var user : User
+}
+
+struct EditProfileView: View {
+    @EnvironmentObject var navigation: NavigationStateManager
+    @State var data : EditProfileData
     @State var name : String = ""
     @State var surName : String = ""
     @State var email : String = ""
@@ -22,9 +27,6 @@ struct EditProfileView: View {
         "profil2",
         "profil3"
     ]
-    init(user:User){
-        self.user = user
-    }
     var body: some View {
         
         VStack {
@@ -48,7 +50,7 @@ struct EditProfileView: View {
                                 .font(.title3)
                                 .fontWeight(.semibold)
                         }
-                        Text(user.username)
+                        Text(data.user.username)
                         
                             .foregroundStyle(.white)
                             .font(.title3)
@@ -119,7 +121,7 @@ struct EditProfileView: View {
 
 
 #Preview {
-    EditProfileView(user: User.MockData[0])
+    EditProfileView(data:.init(user: User.MockData[0]))
 }
 
 private func incrementImageIndices(_ indices: inout [Int],shouldIncrement: Bool) {

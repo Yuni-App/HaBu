@@ -22,7 +22,7 @@ struct UserInfo: View {
         self.imageSize = imageSize
     }
     var body: some View {
-        NavigationStack {
+        
             HStack {
                
                         CircleProfileImage(userIamgeUrl: "", size: imageSize)
@@ -55,7 +55,7 @@ struct UserInfo: View {
                 })
             }
             }
-        }
+        
     }
 }
 

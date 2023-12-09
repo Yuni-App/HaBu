@@ -56,7 +56,7 @@ private func UserAboutBox() ->some View {
             .foregroundColor(.black.opacity(0.7))
             .fontWeight(.bold)
         VStack{
-            SettingsTile(icon: AppIcon.person, text: "Profili Düzenle", destination: AnyView(EditProfileView(user: User.MockData[0])))
+            SettingsTile(icon: AppIcon.person, text: "Profili Düzenle", destination: AnyView(EditProfileView(data: .init(user: User.MockData[0]))))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(ChangePasswordView()))
             Divider().frame(width: Const.width * 0.84)
