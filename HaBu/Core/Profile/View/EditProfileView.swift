@@ -75,13 +75,13 @@ struct EditProfileView: View {
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
                 
                //isim
-                CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $name, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
+                TextFields.CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $name, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
                  //soyisim
-                CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $surName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
+                TextFields.CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $surName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
                 //email
-                CustomTextField2(headline: "Email", color: .white, islocked: true, text: $email, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
+                TextFields.CustomTextField2(headline: "Email", color: .white, islocked: true, text: $email, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
                 //bio
-                CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $biyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
+                TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $biyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     false

@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct DeleteAccountCodeView: View {
+    @State var text: String = ""
+    
     var body: some View {
         VStack{
           CustomSettingsTollBar(title: "Hesabı Sil",destinaiton: AnyView(SettingsView()))
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek İçin Mailinize Gelen Kodu Giriniz").fontWeight(.bold)
-                    TextFields.CustomTextField3(icon: .code, placeHolder: "Kod")
+                    TextFields.CustomTextField3(text: $text,icon: .code, placeHolder: "Kod")
                 }.padding()
                 WarningText()
             }

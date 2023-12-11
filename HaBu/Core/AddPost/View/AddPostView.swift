@@ -18,8 +18,7 @@ struct AddPostView: View {
                 AddPostBackground()
                 VStack{
                     AddPostAppBar()
-                    TextFields.LineLimitTextField()
-                   
+                    TextFields.LineLimitTextField(text: $text)
                     AddPostCategory()
                     HStack{
                         Toggle("Anonim Gönderi", isOn: $isAnonimPost)
