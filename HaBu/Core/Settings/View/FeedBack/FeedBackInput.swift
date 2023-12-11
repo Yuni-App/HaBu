@@ -12,6 +12,7 @@ struct FeedBackInput: View {
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
     @State private var selectedRating: Int = 0
+    @EnvironmentObject var navigation:NavigationStateManager
     
     var body: some View {
         NavigationView{
@@ -57,10 +58,12 @@ struct FeedBackInput: View {
 
 @ViewBuilder
 func FeedBackBar() -> some View {
+    @EnvironmentObject var navigation: NavigationStateManager
     HStack {
-        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
-            Image.iconManager(AppIcon.back, size: 30, weight: .bold, color: .white)
-        }.frame(width: Const.width * 0.05)
+        Buttons.backButton {
+            navigation.pop()
+        }
+        
         Spacer()
         Text("Geri Bildirim")
             .foregroundColor(.white)
@@ -73,12 +76,10 @@ func FeedBackBar() -> some View {
 
 @ViewBuilder
 func SendButton(text: String) -> some View {
+    @EnvironmentObject var navigation: NavigationStateManager
     HStack {
         if !text.isEmpty {
-            
-            
-            NavigationLink(destination: FeedBackSuccess())
-            {
+        
                 Text("GÖNDER")
                     .fontWeight(.semibold)
                     .frame(width: Const.width * 0.5, height: Const.height * 0.05, alignment: .center)
@@ -86,9 +87,13 @@ func SendButton(text: String) -> some View {
                     .background(Const.primaryButtonColor)
                     .cornerRadius(8)
                     .opacity(text.isEmpty ? 0.7 : 1.0)
-            }.padding(.bottom, 35)
+                    .onTapGesture {
+                        navigation.push(.settings(.feedBackSuccess))
+                    }
+                    
+            }
         }
-    }
+    
 }
 
 

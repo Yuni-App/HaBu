@@ -11,6 +11,7 @@ struct SecondSearchView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
     @State private var isSecondSearchViewActive: Bool = true
+    @EnvironmentObject var navigation: NavigationStateManager
     
     //SearchFilter name , surname and username
     var users: [User]{
@@ -25,29 +26,31 @@ struct SecondSearchView: View {
         }
     }
     var body: some View {
-        NavigationStack {
             VStack{
+                Spacer()
                 HStack{
-                    CustomSearchBar(destinaiton: AnyView(TabbarView()))
+                    Buttons.backButton {
+                        navigation.pop()
+                    }
                     SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                         .frame(width: Const.width * 0.85)
                 }
+                
                 ScrollView {
                     ForEach(users) { user in
                         SearchItem3(user: user)
                     }.transition(.opacity)
                     
-                }.padding()
+                }.frame(width: Const.width * 0.9, height: Const.height * 0.85)
+                    .padding()
                     .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
                     .animation(.easeInOut)
                     .navigationBarBackButtonHidden()
-                    
                 
-            }.frame(width: Const.width).background(Const.primaryBackGroundColor)
-            
+            }.frame(width: Const.width, height: Const.height).background(Const.primaryBackGroundColor)
         }
     }
-}
+
 
 #Preview {
     SecondSearchView()
