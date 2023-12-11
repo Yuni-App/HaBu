@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct DeleteAccountPasswordView: View {
-    @State var text: String = ""
+   
+    @State private var textPassword : String = ""
+
 
     var body: some View {
         VStack{
@@ -16,7 +18,7 @@ struct DeleteAccountPasswordView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek için Şifrenizi Giriniz ").fontWeight(.bold)
-                    TextFields.CustomTextField3(text : $text ,icon: .key, placeHolder: "şifre")
+                    TextFields.CustomTextField3(text : $textPassword ,icon: .key, placeHolder: "şifre")
                 }.padding()
                 WarningText()
             }

@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ChangePasswordView: View {
-    @State var text: String = ""
+    @State private var textPassword: String = ""
+    @State private var textNewPassword : String = ""
+    @State private var textNewPasswordAgain : String = ""
+
+
     var body: some View {
         VStack{
           CustomSettingsTollBar(title: "Şifre Değiştir",destinaiton: AnyView(SettingsView()))
@@ -23,9 +27,9 @@ struct ChangePasswordView: View {
                         Text("Şifre nasıl olmalıdır ? ").fontWeight(.bold).foregroundColor(Const.textColorSecondary)
                         Spacer()
                     }.padding(.vertical , 15)
-                    ChangeTextField(text: $text, title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
-                    ChangeTextField(text: $text,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
-                    ChangeTextField(text: $text,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
+                    ChangeTextField(text: $textPassword, title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
+                    ChangeTextField(text: $textNewPassword,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
+                    ChangeTextField(text: $textNewPasswordAgain,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
                 }.padding()
             }
             CustomButton(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {

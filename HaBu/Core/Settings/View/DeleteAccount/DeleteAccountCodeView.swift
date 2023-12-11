@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DeleteAccountCodeView: View {
-    @State var text: String = ""
+    @State private var textCode: String = ""
     
     var body: some View {
         VStack{
@@ -16,7 +16,7 @@ struct DeleteAccountCodeView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek İçin Mailinize Gelen Kodu Giriniz").fontWeight(.bold)
-                    TextFields.CustomTextField3(text: $text,icon: .code, placeHolder: "Kod")
+                    TextFields.CustomTextField3(text: $textCode,icon: .code, placeHolder: "Kod")
                 }.padding()
                 WarningText()
             }

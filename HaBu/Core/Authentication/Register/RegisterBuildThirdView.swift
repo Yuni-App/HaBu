@@ -9,10 +9,10 @@ import SwiftUI
 
 struct RegisterBuildThirdView: View {
     @State private var isChecked: Bool = false
-    @State var textFaculty: String = ""
-    @State var textDepartment : String = ""
-    @State var textYear : String  = ""
-
+    @State private var textFaculty: String = ""
+    @State private var textDepartment : String = ""
+    @State private var textYear : String  = ""
+    
     @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
             ZStack {
