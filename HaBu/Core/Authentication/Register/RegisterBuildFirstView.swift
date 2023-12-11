@@ -9,6 +9,9 @@ import SwiftUI
 
 struct RegisterBuildFirstView: View {
     @EnvironmentObject var navigation:NavigationStateManager
+    @State private var textEmail : String = ""
+    @State private var textPassword : String = ""
+    @State private var textPasswordAgain : String = ""
     var body: some View {
         ZStack {
             VStack{
@@ -19,9 +22,9 @@ struct RegisterBuildFirstView: View {
                 
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.RegisterSecondVector)
                 VStack{
-                    TextFields.CustomTextField(icon: .mail, placeHolder: "e-posta")
-                    TextFields.CustomTextField(icon: .key, placeHolder: "Şifre")
-                    TextFields.CustomTextField(icon: .key, placeHolder: "Şifre Tekrar")
+                    TextFields.CustomTextField(text: $textEmail, icon: .mail, placeHolder: "e-posta")
+                    TextFields.CustomTextField(text :$textPassword ,icon: .key, placeHolder: "Şifre")
+                    TextFields.CustomTextField(text : $textPasswordAgain , icon: .key, placeHolder: "Şifre Tekrar")
                     
                     Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
                         navigation.push(.auth(.register(.second)))

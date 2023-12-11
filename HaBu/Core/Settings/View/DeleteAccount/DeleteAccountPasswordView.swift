@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct DeleteAccountPasswordView: View {
+    @State private var textPassword : String = ""
     var body: some View {
         VStack{
           CustomSettingsTollBar(title: "Hesabı Sil",destinaiton: AnyView(SettingsView()))
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek için Şifrenizi Giriniz ").fontWeight(.bold)
-                    TextFields.CustomTextField3(icon: .key, placeHolder: "şifre")
+                    TextFields.CustomTextField3(text : $textPassword ,icon: .key, placeHolder: "şifre")
                 }.padding()
                 WarningText()
             }

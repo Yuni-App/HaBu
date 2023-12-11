@@ -9,6 +9,10 @@ import SwiftUI
 
 struct RegisterBuildThirdView: View {
     @State private var isChecked: Bool = false
+    @State private var textFaculty: String = ""
+    @State private var textDepartment : String = ""
+    @State private var textYear : String  = ""
+    
     @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
             ZStack {
@@ -19,9 +23,9 @@ struct RegisterBuildThirdView: View {
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
                     VStack{
-                        TextFields.CustomTextField(icon: .blocked, placeHolder: "Fakülte")
-                        TextFields.CustomTextField(icon: .blocked, placeHolder: "Bölüm")
-                        TextFields.CustomTextField(icon: .blocked, placeHolder: "Giriş Yılı")
+                        TextFields.CustomTextField(text: $textFaculty, icon: .blocked, placeHolder: "Fakülte")
+                        TextFields.CustomTextField(text: $textDepartment ,icon: .blocked, placeHolder: "Bölüm")
+                        TextFields.CustomTextField(text: $textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
                         Buttons.customButton1(title:"Tamamla", backgroundColor: Const.primaryColor, action: {
                             navigation.push(.tabbar)
                         }, size: .small, textColor: .white)
