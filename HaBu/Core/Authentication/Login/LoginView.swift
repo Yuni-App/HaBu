@@ -15,6 +15,10 @@ struct LoginView: View {
     var body: some View {
             ZStack {
                 VStack{
+                    Buttons.backButton {
+                        navigation.pop()
+                    }
+                    .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
                         VStack{
                             TextFields.CustomTextField(icon: .mail, placeHolder: "e-posta")
@@ -48,7 +52,13 @@ struct LoginView: View {
                         Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                         
                         Button(action: {
-                            navigation.push(.auth(.register(.first)))
+                            if navigation.path.last != .auth(.infoView)
+                            {
+                                navigation.pop()
+                            }
+                            else{
+                                navigation.push(.auth(.register(.first)))
+                            }
                         }, label: {
                             Text("Kayıt Ol").fontWeight(.bold)
                         })
@@ -62,6 +72,7 @@ struct LoginView: View {
             }.background(
                 Const.authBackGroundColor
             )
+            .navigationBarBackButtonHidden(true)
         
     }
 }
