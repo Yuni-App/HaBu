@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SecondSearchView: View {
     @State private var searchText = ""
-    @State private var isSearchBar = false
-    @State private var isSecondSearchViewActive: Bool = true
+    @State private var isSearchBar = true
+    
     @EnvironmentObject var navigation: NavigationStateManager
     
     //SearchFilter name , surname and username
