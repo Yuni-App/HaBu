@@ -20,6 +20,7 @@ struct InfoView: View {
                         }, label: {
                             Text("Go to feed")
                         })
+                        
                         CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
                         
                         VStack{
