@@ -9,89 +9,79 @@ import SwiftUI
 
 struct FeedView: View {
     @State var showCategoryFilter = false
-    var bottomEdge:CGFloat
-    
-    @Binding var hideTab:Bool
+    @EnvironmentObject var navigation : NavigationStateManager
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
-    var topEdge: CGFloat
+    @State var postButtonPoint:CGPoint = .init(x: 0, y: 30)
     var body: some View {
-        NavigationStack{
-            VStack {
-                ScrollView(.vertical,showsIndicators: false){
-                    VStack (alignment:.leading){
-                        ForEach(Post.MockData , id: \.id){post in
-                            FeedViewCell(post: post,user: User.MockData[Int(post.userId)!], hideTab: $hideTab)
-                            Divider()
-                        }
+        VStack {
+            ScrollView(.vertical,showsIndicators: false){
+                VStack (alignment:.leading){
+                    ForEach(Post.MockData , id: \.id){post in
+                        FeedViewCell(data:.init(post: post,user: User.MockData[Int(post.userId)!]))
+                        Divider()
                     }
-                    .padding(.top,100)
-                    .overlay(
-                        GeometryReader{proxy -> Color in
-                            let minY = proxy.frame(in: .named("SCROLL")).minY
-                            let durationOffset: CGFloat = 35
-                            DispatchQueue.main.async {
-                                if minY < offset{
-                                    if offset < 0 && -minY > (lastOffset + durationOffset){
-                                        withAnimation(.easeOut .speed(1.5)){
-                                            print(minY)
-                                            hideTab = true
-                                        }
-                                        lastOffset = -offset
-                                    }
-                                    
-                                }
-                                if minY > offset && -minY < (lastOffset - durationOffset){
+                }
+                .padding(.top,Const.height * 0.12)
+                .overlay(
+                    GeometryReader{proxy -> Color in
+                        let minY = proxy.frame(in: .named("SCROLLFeed")).minY
+                        let durationOffset: CGFloat = 35
+                        DispatchQueue.main.async {
+                            if minY < offset{
+                                if offset < 0 && -minY > (lastOffset + durationOffset){
                                     withAnimation(.easeOut .speed(1.5)){
-                                        hideTab = false
+                                        print(minY)
+                                        navigation.hideTabBar = true
                                     }
                                     lastOffset = -offset
-                                    
                                 }
-                                self.offset = minY
+                                
                             }
-                            return Color.clear
-                            
+                            if minY > offset && -minY < (lastOffset - durationOffset){
+                                withAnimation(.easeOut .speed(1.5)){
+                                    navigation.hideTabBar = false
+                                }
+                                lastOffset = -offset
+                                
+                            }
+                            self.offset = minY
                         }
+                      return  Color.clear
                         
-                    )
-                    .padding()
-                    .padding(.bottom,15 + bottomEdge + 35)
-                }
-                .coordinateSpace(name:"SCROLL")
-                .overlay(
-                    FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: topEdge)
-                        .background(.white)
-                        .offset(y:hideTab ? (-15 - 70 - topEdge) :0)
-                    ,alignment: .top
-                )
-                .ignoresSafeArea(.all,edges: .all)
-                .overlay(
-                    SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 0, y: 30), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                        .offset(x:hideTab ? -150 : 0)
+                    }
                     
                 )
-                
-                
-                
-                
-                .sheet(isPresented: $showCategoryFilter) {
-                    CategoryFilterBottomSheet()
-                        .presentationDetents([.large,.large])
-                }
-                
+                .padding()
+                .padding(.bottom,15 + navigation.bottomEdge + 35)
             }
+            .coordinateSpace(name:"SCROLLFeed")
+            .overlay(
+                FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: navigation.topEdge)
+                    .padding(.horizontal,20)
+                    .background(.white)
+                    .offset(y:navigation.hideTabBar ? (-15 - 70 - navigation.topEdge) :0)
+                ,alignment: .top
+            )
+            .ignoresSafeArea(.all,edges: .all)
+            .overlay(
+                Buttons.slidableButton(page: .addPost, startPosition: CGPoint(x: 0, y: 30), position: $postButtonPoint, dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white,navigator:_navigation)
+                    .padding(.horizontal,20)
+                    .offset(x:navigation.hideTabBar ? -150 : 0)
+            )
+            .sheet(isPresented: $showCategoryFilter) {
+                CategoryFilterBottomSheet()
+                    .presentationDetents([.large,.large])
+            }
+            
         }
-        
-        
-        
     }
 }
 
 
 #Preview {
-    TabbarView()
+    InfoView()
 }
 
 
@@ -106,7 +96,6 @@ struct FeedViewTollBar:View {
                 Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
                     .padding(10)
                 Spacer()
-                
                 Button(action: {
                     showCategoryFilter = true
                     
@@ -138,8 +127,6 @@ struct FeedViewTollBar:View {
                     
                 }
                 )
-                
-                
             }
         }
         .padding(.top,15)

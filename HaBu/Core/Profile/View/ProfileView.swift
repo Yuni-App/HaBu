@@ -9,13 +9,14 @@ import SwiftUI
 
 
 struct ProfileView : View {
+    @EnvironmentObject var navigate:NavigationStateManager
+    
     @State private var showMenu: Bool = false
     @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     @State private var isShowingPopUp = false
     @State private var shouldNavigate = false
     @State private var selectedIndex = 0
     
-    @Binding var hideTab:Bool
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
@@ -34,21 +35,15 @@ struct ProfileView : View {
     ]
     
     var body: some View{
-        ZStack {
+       
             GeometryReader{proxy in
+                
                     let topEdge = proxy.safeAreaInsets.top
-                ProfileUserView(isShowingSideMenu: $showMenu, hideTab: $hideTab, topEdge: topEdge, user: user)
+                ProfileUserView(isShowingSideMenu: $showMenu, topEdge: topEdge, user: user)
             }
-            GeometryReader { _ in
-            HStack {
-            Spacer()
-            SideMenu(isShowingSideMenu: $showMenu)
-            .offset(x: showMenu ? 0: UIScreen.main.bounds.width)
-            .animation(.easeInOut(duration: 0.2), value: showMenu)
-            }
-            }.background(Color.gray.opacity(showMenu ? 0.3: 0))
+          
             
-            }
+            
         }
         /*  var body: some View {
          NavigationStack {
@@ -276,5 +271,5 @@ struct PopUpImageView: View {
 
 
 #Preview {
-    ProfileView(hideTab: .constant(true), user: User.MockData[0])
+    InfoView()
 }

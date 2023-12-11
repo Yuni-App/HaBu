@@ -31,7 +31,7 @@ struct SideMenu: View {
             }
             Spacer()
             NavigationLink {
-                EditProfileView(user:User.MockData[0])
+                EditProfileView(data:.init(user:User.MockData[0]))
             } label: {
                 Text("Ayarlar").foregroundColor(.white)
                     .font(.title3)
@@ -39,7 +39,7 @@ struct SideMenu: View {
             .frame(height: 50)
             myDivider()
             NavigationLink {
-                EditProfileView(user:User.MockData[0])
+                EditProfileView(data:.init(user:User.MockData[0]))
             } label: {
                 Text("Engellene kullanıcılar").foregroundColor(.white)
                     .font(.title3)
@@ -47,7 +47,7 @@ struct SideMenu: View {
             .frame(height: 50)
             myDivider()
             NavigationLink {
-                EditProfileView(user:User.MockData[0])
+                EditProfileView(data:.init(user:User.MockData[0]))
             } label: {
                 Text("Puanlarım").foregroundColor(.white)
                     .font(.title2)
@@ -55,7 +55,7 @@ struct SideMenu: View {
             .frame(height: 50)
             myDivider()
             NavigationLink {
-                EditProfileView(user:User.MockData[0])
+                EditProfileView(data:.init(user:User.MockData[0]))
             } label: {
                 Text("Geri Bildirim").foregroundColor(.white)
                     .font(.title2)
@@ -64,7 +64,7 @@ struct SideMenu: View {
             .frame(height: 50)
             myDivider()
             NavigationLink {
-                EditProfileView(user:User.MockData[0])
+                EditProfileView(data:.init(user:User.MockData[0]))
             } label: {
                 Text("Çıkış Yap").foregroundColor(.white)
                     .font(.title2)

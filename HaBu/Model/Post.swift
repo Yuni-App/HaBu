@@ -9,7 +9,7 @@ import Foundation
 
 
 
-struct Post : Identifiable,Codable{
+struct Post : Identifiable,Codable,Hashable{
     let id : String
     let userId : String
     let caption : String

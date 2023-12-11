@@ -28,7 +28,6 @@ struct SerachView: View {
         //start 4. USER to 10
     }
     var body: some View {
-        NavigationStack {
             VStack {
                 HStack {
                     SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
@@ -66,7 +65,6 @@ struct SerachView: View {
                 }
                 .hidden()
             )
-        }
     }
 }
 

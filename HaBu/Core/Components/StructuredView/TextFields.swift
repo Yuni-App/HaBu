@@ -60,7 +60,46 @@ class TextFields {
         }
     }
     
-    
+    struct DCustomTextField2: View {
+        let headline : String
+        let color: Color
+        let islocked : Bool
+        var icon: AppIcon?
+        var iconColor:Color?
+        @Binding var text: String
+        var placeHolder : String
+        var contentType : UITextContentType
+        var keybordType : UIKeyboardType
+        var body: some View {
+            HStack {
+                VStack {
+                    HStack {
+                        Text(headline)
+                            .foregroundColor(color)
+                            .fontWeight(.bold)
+                            .font(.headline)
+                        if let icon = icon{
+                            Image.iconManager(icon, size: 16, weight: .semibold, color: iconColor ?? .white)
+                        }
+                        Spacer()
+                    }
+                    HStack {
+                        if islocked == true{
+                            Image.iconManager(.lock, size: 16, weight: .semibold, color: iconColor ?? .white)
+                        }
+                        TextField(placeHolder, text: $text)
+                            .textContentType(contentType)
+                            .keyboardType(keybordType)
+                        .disabled(islocked)
+                    }
+                    Divider().frame(width: 330).background(Color.black)
+                }
+                .frame(width: Const.width * 0.85)
+                .padding()
+            }
+        }
+    }
+
     //edit profile text field
     @ViewBuilder
     static func CustomTextField2(headline : String , color : Color , islocked : Bool , icon : AppIcon? , iconColor : Color? , placeHolder : String , contentType :UITextContentType, keybordType : UIKeyboardType )-> some View {
