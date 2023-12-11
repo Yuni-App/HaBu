@@ -10,7 +10,6 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var searchText = ""
-    @State private var isSearchBar = false
     @State private var ratingSorted = false
     @State private var isSecondSearchViewActive: Bool = false
     @EnvironmentObject var navigation : NavigationStateManager
@@ -31,12 +30,11 @@ struct SerachView: View {
     var body: some View {
         VStack {
             HStack {
-                SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
+                SearchBar(searchText: .constant(""), isEditing: .constant(false))
                     .onTapGesture {
-                        navigation.push(.search(.searchSecond))
-                    }
-                    .padding(.top, 1)
-            }.frame(width: Const.width * 0.9)
+                    navigation.push(.search(.searchSecond))
+                }
+            }.frame(width: Const.width * 0.97)
             
             
             if !isSecondSearchViewActive{
