@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {   
     @State private var showingForgotPassword = false
+    @EnvironmentObject var navigation : NavigationStateManager
    
     
     var body: some View {
@@ -33,9 +34,11 @@ struct LoginView: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 12))
                             }
-                            CustomButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                               true
-                            }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
+                            Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                                navigation.push(.tabbar)
+                            }, size: .small, textColor: .white)
+                            
+                          
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                         .background(
                             RectangleBlur(color: Const.primaryColor))
@@ -43,11 +46,13 @@ struct LoginView: View {
                     
                     HStack{
                         Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
-                        NavigationLink {
-                            RegisterBuildFirstView()
-                        } label: {
-                            HStack{  Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
-                        }
+                        
+                        Button(action: {
+                            navigation.push(.auth(.register(.first)))
+                        }, label: {
+                            Text("Kayıt Ol").fontWeight(.bold)
+                        })
+                        
                     }
                     //TODO : update 100
                 } .frame(width: Const.width , height: Const.height+100)
