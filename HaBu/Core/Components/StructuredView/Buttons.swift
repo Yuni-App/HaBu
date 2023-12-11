@@ -11,13 +11,10 @@ import SwiftUI
 class Buttons{
     //customButton1
     @ViewBuilder
-    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Bool) ,destination:PathCases,size:CustomButtonSize,textColor:Color?,navigation:EnvironmentObject<NavigationStateManager>) -> some View{
+    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?) -> some View{
         
         Button(action:{
-            if action() == true{
-                navigation.wrappedValue.push(destination)
-            }
-
+            action()
         }, label: {
             Text(title)
                 .padding()
