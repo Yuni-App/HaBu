@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct RegisterBuildSecondView: View {
+    @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
             ZStack {
                 VStack{
+                    Buttons.backButton {
+                        navigation.pop()
+                    }
+                    .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
                         VStack{
                             TextFields.CustomTextField(icon: .blocked, placeHolder: "Ad")
@@ -18,7 +23,11 @@ struct RegisterBuildSecondView: View {
                             TextFields.CustomTextField(icon: .blocked, placeHolder: "Kullanıcı Adı")
                             TextFields.CustomTextField(icon: .blocked, placeHolder: "Yaş")
                             TextFields.CustomTextField(icon: .blocked, placeHolder: "Bio")
-                            CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildThirdView()), size: CustomButtonSize.small)
+                            
+                            
+                            Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
+                                navigation.push(.auth(.register(.third)))
+                            }, size: .small, textColor: .white)
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
                         .background(
                             RectangleBlur(color: Const.primaryColor))
@@ -27,13 +36,11 @@ struct RegisterBuildSecondView: View {
                         Text("Bir hesabınız var mı?")
                             .foregroundStyle(.black)
                             .font(.system(size: 14))
-                        NavigationLink {
-                            LoginView()
-                        } label: {
-                            HStack{  Text("Giriş Yap")
-                                .foregroundStyle(.blue)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
-                        }
+                        Button(action: {
+                            navigation.push(.auth(.loginView))
+                        }, label: {
+                            Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
+                        })
                     }}.frame(width: Const.width , height: Const.height+100)
                     .padding()
     
@@ -41,6 +48,8 @@ struct RegisterBuildSecondView: View {
             .background(
                 Const.authBackGroundColor
             )
+            .navigationBarBackButtonHidden(true)
+
     }
 }
 
