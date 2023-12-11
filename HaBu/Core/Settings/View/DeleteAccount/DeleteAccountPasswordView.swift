@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct DeleteAccountPasswordView: View {
-   
     @State private var textPassword : String = ""
-
-
     var body: some View {
         VStack{
           CustomSettingsTollBar(title: "Hesabı Sil",destinaiton: AnyView(SettingsView()))
