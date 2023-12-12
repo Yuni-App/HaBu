@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct ProfileUserView: View {
-    @EnvironmentObject var navigate : NavigationStateManager
-
     @Binding var isShowingSideMenu:Bool
+    @Binding var hideTab:Bool
     let topEdge:CGFloat
-    let maxHeight = UIScreen.main.bounds.height / 2.5
+    let maxHeight = UIScreen.main.bounds.height / 2.7
     var user:User
     @State var offset: CGFloat = 0
     @State var lastOffset: CGFloat = 0
@@ -28,6 +27,11 @@ struct ProfileUserView: View {
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: getHeaderHeight(),alignment:.bottom)
+                        .background(
+                            Const.thirColor,
+                            in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
+                        
+                        )
                         .overlay(
                             HStack(spacing:10){
                                 HStack {
@@ -59,36 +63,40 @@ struct ProfileUserView: View {
                             ,alignment: .top
                             
                         )
-                        .background(
-                            Const.thirColor,
-                            in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
-                        
-                        )
-                        
-
-
                     }
-                  
                     .frame(height: maxHeight)
                     .offset(y:-TollBarOffset)
                     .zIndex(2)
                     VStack(spacing:15){
                         ForEach(Post.MockData){post in
-                            FeedViewCell(data:.init(post: post, user: user))
+                            FeedViewCell(post: post, user: user, hideTab: $hideTab)
                         }
                     }
                     .zIndex(1)
                     
                 }
-                .modifier(OffsetModifier(offset: $TollBarOffset))
-              
-                
-                //BottomBar
                 .overlay(
                     GeometryReader{proxy -> Color in
-                        let minY = proxy.frame(in:.global).minY
+                        let minY = proxy.frame(in: .named("SCROLL")).minY
+                        let durationOffset: CGFloat = 35
                         DispatchQueue.main.async {
-                           
+                            if minY < offset{
+                                if offset < 0 && -minY > (lastOffset + durationOffset){
+                                    withAnimation(.easeOut .speed(1.5)){
+                                        print(minY)
+                                        hideTab = true
+                                    }
+                                    lastOffset = -offset
+                                }
+                                
+                            }
+                            if minY > offset && -minY < (lastOffset - durationOffset){
+                                withAnimation(.easeOut .speed(1.5)){
+                                    hideTab = false
+                                }
+                                lastOffset = -offset
+                                
+                            }
                             self.offset = minY
                         }
                         return Color.clear
@@ -96,22 +104,17 @@ struct ProfileUserView: View {
                     }
                     
                 )
-              
                 .padding(.bottom,15 + bottomEdge + 35)
-               
-
-
+                
+                .modifier(OffsetModifier(offset: $TollBarOffset))
             }
-           
-
+          
         }
-        .coordinateSpace(name:"SCROLL")
         .ignoresSafeArea(.all)
       
        
     }
     func getHeaderHeight() -> CGFloat{
-      
         let topHeight = maxHeight + TollBarOffset
         return topHeight > (80 + topEdge) ? topHeight - 40 : (40 + topEdge)
     }
@@ -129,7 +132,7 @@ struct ProfileUserView: View {
     }
 }
 #Preview {
-   ContentView()
+    ProfileUserView(isShowingSideMenu: .constant(false), hideTab: .constant(false), topEdge: 50, user: User.MockData[0])
 }
 
 struct Tabbar:View {
@@ -209,14 +212,14 @@ struct Tabbar:View {
                 }
             }
             .padding(.top,maxHeight * 0.25)
-            SlidableButton(destination: AnyView(EditProfileView(data: .init(user: User.MockData[0]))), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
+            Buttons.slidableButton(startPosition: editButtonPosition, position: $editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black, destination: AnyView(EditProfileView(user: User.MockData[0])))
         }
         .padding()
         .opacity(getOpacity())
     }
     
     func getOpacity()->CGFloat{
-        let progress = -offset / 12
+        let progress = -offset / 70
         let opacity = 1 - progress
         return offset > 0 ? 1 : opacity
     }

@@ -9,12 +9,10 @@ import SwiftUI
 
 struct RegisterBuildThirdView: View {
     @State private var isChecked: Bool = false
-    @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
-                        navigation.pop()
                     }
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
@@ -23,8 +21,7 @@ struct RegisterBuildThirdView: View {
                         TextFields.CustomTextField(icon: .blocked, placeHolder: "Bölüm")
                         TextFields.CustomTextField(icon: .blocked, placeHolder: "Giriş Yılı")
                         Buttons.customButton1(title:"Tamamla", backgroundColor: Const.primaryColor, action: {
-                            navigation.push(.tabbar)
-                        }, size: .small, textColor: .white)
+                        }, size: .small, textColor: .white, destination: AnyView(TabbarView()))
                     }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                         .background(
                             RectangleBlur(color: Const.primaryColor))

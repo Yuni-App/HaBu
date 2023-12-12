@@ -11,20 +11,20 @@ import SwiftUI
 class Buttons{
     //customButton1
     @ViewBuilder
-    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?) -> some View{
-        
-        Button(action:{
-            action()
-        }, label: {
+    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?,destination:AnyView) -> some View{
+        NavigationLink {
+            destination
+        } label: {
             Text(title)
                 .padding()
                 .frame(width: size.width , height: size.height)
                 .background(backgroundColor)
                 .foregroundColor(textColor ?? .white)
                 .cornerRadius(4)
-        })
+        }
+        
     }
-   
+    
     
     //actionButton
     @ViewBuilder
@@ -45,22 +45,22 @@ class Buttons{
                 .font(.caption2)
         }
     }
-
+    
     @ViewBuilder
     static func backButton( action: @escaping ()-> Void) -> some View{
         Button(action: {
-        action()
+            action()
         }, label: {
             Image.iconManager(.back, size: 25, weight: .bold, color: .black)
         })
-       
+        
     }
     
     
     
     @ViewBuilder
-    static func slidableButton( page:PathCases,startPosition:CGPoint,position:Binding<CGPoint>,dragDirection:DragDirection,text:String,color:Color,textColor:Color,navigator:EnvironmentObject<NavigationStateManager>)-> some View{
-        
+    static func slidableButton( startPosition:CGPoint,position:Binding<CGPoint>,dragDirection:DragDirection,text:String,color:Color,textColor:Color,destination:AnyView)-> some View{
+        @State var navigate = false
         HStack{
             if dragDirection == .left {
                 Image(systemName:"chevron.left")
@@ -76,7 +76,6 @@ class Buttons{
                     .font(.subheadline)
             }
         }
-        
         .padding(.vertical,5)
         .padding(.horizontal,10)
         .padding(dragDirection.padding,110)
@@ -90,7 +89,6 @@ class Buttons{
                 topTrailingRadius:  dragDirection == .left ? 0 : 20
             )
         )
-        
         .position(position.wrappedValue)
         .gesture(DragGesture().onChanged({ value in
             if value.translation.width > 0 && value.translation.width < 50 && dragDirection == .right{
@@ -104,9 +102,14 @@ class Buttons{
         })
             .onEnded({ _ in
                 position.wrappedValue  = CGPoint(x:startPosition.x, y :startPosition.y)
-                navigator.wrappedValue.push(page)
+                navigate = true
             })
+        
         )
+        .navigationDestination(isPresented: $navigate) {
+            AnyView(destination)
+        }
+        
         
         
     }
@@ -180,9 +183,9 @@ enum ActionButtons {
         case .liked:
             return UIImage(systemName: "heart.fill")!.tinted(with: Const.primaryUiColor)!
         case .bubble:
-           return UIImage(systemName: "bubble.right")!
+            return UIImage(systemName: "bubble.right")!
         case .send:
-           return UIImage(systemName: "paperplane")!
+            return UIImage(systemName: "paperplane")!
         case .savePost:
             return UIImage(systemName: "bookmark")!
         case .savedPost:

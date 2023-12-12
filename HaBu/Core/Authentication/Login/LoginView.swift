@@ -9,14 +9,14 @@ import SwiftUI
 
 struct LoginView: View {   
     @State private var showingForgotPassword = false
-    @EnvironmentObject var navigation : NavigationStateManager
-   
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
-                        navigation.pop()
+                        
+                        
                     }
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
@@ -30,6 +30,7 @@ struct LoginView: View {
                                     .onTapGesture {
                                         showingForgotPassword = true
                                         print("Şifremi unuttum ")
+                                       
                                     }
                                     .sheet(isPresented: $showingForgotPassword) {
                                         ForgotPasswordMailBottomSheet(showSheet: $showingForgotPassword )
@@ -39,8 +40,8 @@ struct LoginView: View {
                                     .font(.system(size: 12))
                             }
                             Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                                navigation.push(.tabbar)
-                            }, size: .small, textColor: .white)
+                                
+                            }, size: .small, textColor: .white, destination:AnyView(TabbarView()))
                             
                           
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
@@ -52,13 +53,7 @@ struct LoginView: View {
                         Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                         
                         Button(action: {
-                            if navigation.path.last != .auth(.infoView)
-                            {
-                                navigation.pop()
-                            }
-                            else{
-                                navigation.push(.auth(.register(.first)))
-                            }
+                           
                         }, label: {
                             Text("Kayıt Ol").fontWeight(.bold)
                         })
@@ -71,7 +66,9 @@ struct LoginView: View {
                     
             }.background(
                 Const.authBackGroundColor
+                
             )
+          
             .navigationBarBackButtonHidden(true)
         
     }

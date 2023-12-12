@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct RegisterBuildFirstView: View {
-    @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
         ZStack {
             VStack{
                 Buttons.backButton {
-                    navigation.pop()
                 }
                 .padding(.trailing,Const.width * 0.9)
                 
@@ -24,8 +22,7 @@ struct RegisterBuildFirstView: View {
                     TextFields.CustomTextField(icon: .key, placeHolder: "Şifre Tekrar")
                     
                     Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                        navigation.push(.auth(.register(.second)))
-                    }, size: .small, textColor: .white)
+                    }, size: .small, textColor: .white, destination: AnyView(RegisterBuildSecondView()))
                     
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                     .background(
@@ -34,7 +31,7 @@ struct RegisterBuildFirstView: View {
                     Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
                     
                     Button(action: {
-                        navigation.push(.auth(.loginView))
+                        
                     }, label: {
                         Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
                     })

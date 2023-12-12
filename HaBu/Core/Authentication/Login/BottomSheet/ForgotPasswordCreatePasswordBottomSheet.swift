@@ -18,8 +18,8 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
                 TextFields.CustomTextField(icon:  .key, placeHolder: "şifre tekrar")
                 CustomButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
                     showSheet = false
-               
                     return false
+                    
                 }, size: CustomButtonSize.small)
             }.padding(30)
                 .frame(width: Const.width , height: Const.height)

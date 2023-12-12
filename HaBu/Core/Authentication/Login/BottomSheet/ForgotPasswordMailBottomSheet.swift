@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ForgotPasswordMailBottomSheet: View {
     @Binding var showSheet: Bool
-    @EnvironmentObject var navigation:NavigationStateManager
-
     var body: some View {
         NavigationStack{
             VStack{

@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct RegisterBuildSecondView: View {
-    @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
-                        navigation.pop()
                     }
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
@@ -26,8 +24,7 @@ struct RegisterBuildSecondView: View {
                             
                             
                             Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                                navigation.push(.auth(.register(.third)))
-                            }, size: .small, textColor: .white)
+                            }, size: .small, textColor: .white, destination: AnyView(RegisterBuildThirdView()))
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
                         .background(
                             RectangleBlur(color: Const.primaryColor))
@@ -37,7 +34,6 @@ struct RegisterBuildSecondView: View {
                             .foregroundStyle(.black)
                             .font(.system(size: 14))
                         Button(action: {
-                            navigation.push(.auth(.loginView))
                         }, label: {
                             Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
                         })
