@@ -24,7 +24,6 @@
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
 		5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F523C2B128CC700D79208 /* CategoryFilterBottomSheet.swift */; };
 		5C6F523F2B128CF000D79208 /* TagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F523E2B128CF000D79208 /* TagLayout.swift */; };
-		5C7E55E82B0FBD60008AE5A1 /* SlidableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */; };
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01922B135144007F9022 /* OffsetModifier.swift */; };
 		5CBA01952B13520E007F9022 /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01942B13520E007F9022 /* ProfileUserView.swift */; };
@@ -71,13 +70,12 @@
 		949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E52B041F3000164405 /* RegisterBuildSecondView.swift */; };
 		949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E72B041F4900164405 /* RegisterBuildThirdView.swift */; };
 		949016EA2B04275F00164405 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomButton.swift */; };
-		94A06ACA2B22124000814CD6 /* BlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* BlurModifier.swift */; };
+		94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsers.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
-		94DEF7A22B0E8E3C00C4C98D /* RectangleBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,7 +98,6 @@
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		5C6F523C2B128CC700D79208 /* CategoryFilterBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterBottomSheet.swift; sourceTree = "<group>"; };
 		5C6F523E2B128CF000D79208 /* TagLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLayout.swift; sourceTree = "<group>"; };
-		5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidableButton.swift; sourceTree = "<group>"; };
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5CBA01922B135144007F9022 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 		5CBA01942B13520E007F9022 /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
@@ -147,12 +144,11 @@
 		949016E52B041F3000164405 /* RegisterBuildSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildSecondView.swift; sourceTree = "<group>"; };
 		949016E72B041F4900164405 /* RegisterBuildThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildThirdView.swift; sourceTree = "<group>"; };
 		949016E92B04275F00164405 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		94A06AC92B22124000814CD6 /* BlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurModifier.swift; sourceTree = "<group>"; };
+		94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlurModifier.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsers.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlur.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,10 +240,7 @@
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
 				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
-				5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */,
-				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
 				949016E92B04275F00164405 /* CustomButton.swift */,
-				94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */,
 				8821E50B2B1DC900003089B6 /* CustomSearchBar.swift */,
 			);
 			path = View;
@@ -554,7 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
-				94A06AC92B22124000814CD6 /* BlurModifier.swift */,
+				94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */,
+				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -673,10 +667,8 @@
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */,
-				5C7E55E82B0FBD60008AE5A1 /* SlidableButton.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
 				943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */,
-				94DEF7A22B0E8E3C00C4C98D /* RectangleBlur.swift in Sources */,
 				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
 				943B9CE42B06912500067376 /* LikesListTile.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
@@ -694,7 +686,7 @@
 				5CBA01952B13520E007F9022 /* ProfileUserView.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
 				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
-				94A06ACA2B22124000814CD6 /* BlurModifier.swift in Sources */,
+				94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */,
 				5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */,
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,

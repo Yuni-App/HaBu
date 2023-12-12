@@ -209,8 +209,9 @@ struct Tabbar:View {
                 }
             }
             .padding(.top,maxHeight * 0.25)
-            SlidableButton(destination: AnyView(EditProfileView(data: .init(user: User.MockData[0]))), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
-        }
+            //Ömer update
+ /*           SlidableButton(destination: AnyView(EditProfileView(data: .init(user: User.MockData[0]))), position:editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
+*/        }
         .padding()
         .opacity(getOpacity())
     }

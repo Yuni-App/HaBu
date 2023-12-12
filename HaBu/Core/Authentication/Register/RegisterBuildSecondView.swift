@@ -35,8 +35,7 @@ struct RegisterBuildSecondView: View {
                                 navigation.push(.auth(.register(.third)))
                             }, size: .small, textColor: .white)
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
-                        .background(
-                            RectangleBlur(color: Const.primaryColor))
+                        .modifier(RectangleBlurModifier(color: Const.primaryColor))
                         
                     HStack{
                         Text("Bir hesabınız var mı?")
