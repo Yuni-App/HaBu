@@ -23,24 +23,22 @@ struct UserInfo: View {
     }
     var body: some View {
         
-            HStack {
-               
-                        CircleProfileImage(userIamgeUrl: "", size: imageSize)
-                        
-                        VStack{
-                            Text("\(user.name) \(user.surName)")
-                                .fontWeight(.semibold)
-                                .font(.caption)
-                            Text("\(user.username)")
-                                .opacity(0.5)
-                                .fontWeight(.semibold)
-                                .font(.caption2)
-                        }
-                        .foregroundStyle(.black)
-                    
-                    
-                Spacer()
-                if timeStamp != nil{
+        HStack {
+            CircleProfileImage(userIamgeUrl: "", size: imageSize)
+            VStack{
+                Text("\(user.name) \(user.surName)")
+                    .fontWeight(.semibold)
+                    .font(.caption)
+                Text("\(user.username)")
+                    .opacity(0.5)
+                    .fontWeight(.semibold)
+                    .font(.caption2)
+            }
+            .foregroundStyle(.black)
+            
+            
+            Spacer()
+            if timeStamp != nil{
                 Text("4s")
                     .opacity(0.6)
                     .font(.footnote)
@@ -54,7 +52,7 @@ struct UserInfo: View {
                         .padding(.horizontal)
                 })
             }
-            }
+        }
         
     }
 }
