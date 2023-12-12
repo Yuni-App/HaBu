@@ -9,13 +9,13 @@ import SwiftUI
 
 struct LoginView: View {   
     @State private var showingForgotPassword = false
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dissmis
     
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
-                        
+                        dissmis()
                         
                     }
                     .padding(.trailing,Const.width * 0.9)
@@ -52,11 +52,12 @@ struct LoginView: View {
                     HStack{
                         Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                         
-                        Button(action: {
-                           
-                        }, label: {
-                            Text("Kayıt Ol").fontWeight(.bold)
-                        })
+                        NavigationLink {
+                            LoginView()
+                        } label: {
+                            Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(.bold)
+
+                        }
                         
                     }
                     //TODO : update 100

@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct RegisterBuildSecondView: View {
+    @Environment(\.dismiss) var dissmis
+
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
+                        dissmis()
                     }
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
@@ -33,10 +36,12 @@ struct RegisterBuildSecondView: View {
                         Text("Bir hesabınız var mı?")
                             .foregroundStyle(.black)
                             .font(.system(size: 14))
-                        Button(action: {
-                        }, label: {
+                        NavigationLink {
+                            LoginView()
+                        } label: {
                             Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
-                        })
+
+                        }
                     }}.frame(width: Const.width , height: Const.height+100)
                     .padding()
     

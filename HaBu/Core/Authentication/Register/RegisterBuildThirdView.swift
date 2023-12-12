@@ -9,10 +9,13 @@ import SwiftUI
 
 struct RegisterBuildThirdView: View {
     @State private var isChecked: Bool = false
+    @Environment(\.dismiss) var dissmis
+
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
+                        dissmis()
                     }
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)

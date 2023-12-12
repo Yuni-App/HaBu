@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct RegisterBuildFirstView: View {
+    @Environment(\.dismiss) var dissmis
+
     var body: some View {
         ZStack {
             VStack{
                 Buttons.backButton {
+                    dissmis()
                 }
                 .padding(.trailing,Const.width * 0.9)
                 
@@ -30,11 +33,13 @@ struct RegisterBuildFirstView: View {
                 HStack{
                     Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
                     
-                    Button(action: {
-                        
-                    }, label: {
+                    NavigationLink {
+                        LoginView()
+                    } label: {
                         Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
-                    })
+
+                    }
+
                     
                 }}.frame(width: Const.width , height: Const.height+100)
         }.background(
