@@ -389,7 +389,6 @@
 			children = (
 				5CBA01942B13520E007F9022 /* ProfileUserView.swift */,
 				5CE5AB992B056BDC00502D9F /* ProfileView.swift */,
-				88B85B332B06348200D03ED9 /* EditProfileView.swift */,
 				887CD10A2B064CBC00D7C8DC /* SideMenu.swift */,
 				5CD3D3FC2B14CF0F00C4A944 /* ScrollableTabView.swift */,
 			);
@@ -462,6 +461,7 @@
 		9470799F2B1B8C750005C4CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				949505CF2B27E7B000C37CC7 /* EditProfile */,
 				883CD06F2B20E01500E0B757 /* FeedBack */,
 				9483385E2B1DB159006964BB /* Rank */,
 				9483385D2B1DB109006964BB /* BlockedUsers */,
@@ -541,6 +541,14 @@
 				949016DF2B041EBD00164405 /* InfoView.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		949505CF2B27E7B000C37CC7 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				88B85B332B06348200D03ED9 /* EditProfileView.swift */,
+			);
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		94A06AC82B22059400814CD6 /* Modifiers */ = {
