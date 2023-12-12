@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct AddPostView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var textContent : String = ""
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
     
     var body: some View {
-       
             ZStack{
                 AddPostBackground()
                 VStack{
-                    AddPostAppBar()
+                    AddPostAppBar {
+                        dismiss()
+                    }
                     TextFields.LineLimitTextField(text: $textContent)
                     AddPostCategory()
                     HStack{
@@ -28,17 +30,14 @@ struct AddPostView: View {
                             RoundedRectangle(cornerRadius: 7)
                                 .foregroundColor(Color.white))
                         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-                    
-                    
                     HStack{
                         Toggle("Anonim Yorum", isOn: $isAnonimComment)
                             .fontWeight(.bold)
                     }.padding()
-                        .background( RoundedRectangle(cornerRadius: 7)
+                        .background(RoundedRectangle(cornerRadius: 7)
                             .foregroundColor(Color.white))
                         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
                     AddPostMedia()
-                   
                     Spacer()
                 }.padding()
                 
@@ -51,13 +50,12 @@ struct AddPostView: View {
 #Preview {
     AddPostView()
 }
-
-
 @ViewBuilder
-func AddPostAppBar()-> some View{
+func AddPostAppBar(action : @escaping()->Void) -> some View{
+    
     HStack{
-        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
-            Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .white)
+        Buttons.backButton {
+                action()
         }
         Spacer()
         Text("Gönderi Oluştur")
@@ -70,7 +68,6 @@ func AddPostAppBar()-> some View{
                 .fontWeight(.bold)
                 .frame(width: Const.width/7)
         }
-        
     }.padding(.top , 25)
 }
 
@@ -81,19 +78,11 @@ func AddPostBackground()-> some View {
             .foregroundColor(.clear)
             .frame(height: Const.height * 2.5 / 10)
             .background(
-                LinearGradient(
-                    stops: [
-                        Gradient.Stop(color: Color(UIColor(hex: "04243E")), location: 0.00),
-                        Gradient.Stop(color: Color(UIColor(hex: "100F42")).opacity(0.49), location: 0.51),
-                        Gradient.Stop(color: Color(UIColor(hex: "100F34")).opacity(0.89), location: 1.00),
-                    ],
-                    startPoint: UnitPoint(x: 0.5, y: 0),
-                    endPoint: UnitPoint(x: 0.5, y: 1)
-                )
+                Const.LinearBackGroundColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
         
-        Color(UIColor(hex: "F3F3F3"))
+        Const.primaryBackGroundColor
             .frame(height: Const.height * 7.6 / 10)
     }
 }
