@@ -11,9 +11,7 @@ struct FeedBackInput: View {
     @State private var text : String = ""
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
-    @State private var selectedRating: Int = 0
-    @EnvironmentObject var navigation:NavigationStateManager
-    
+    @State private var selectedRating: Int = 0    
     var body: some View {
         NavigationView{
             ZStack{
@@ -58,10 +56,8 @@ struct FeedBackInput: View {
 
 @ViewBuilder
 func FeedBackBar() -> some View {
-    @EnvironmentObject var navigation: NavigationStateManager
     HStack {
         Buttons.backButton {
-            navigation.pop()
         }
         
         Spacer()
@@ -76,7 +72,6 @@ func FeedBackBar() -> some View {
 
 @ViewBuilder
 func SendButton(text: String) -> some View {
-    @EnvironmentObject var navigation: NavigationStateManager
     HStack {
         if !text.isEmpty {
         
@@ -88,7 +83,6 @@ func SendButton(text: String) -> some View {
                     .cornerRadius(8)
                     .opacity(text.isEmpty ? 0.7 : 1.0)
                     .onTapGesture {
-                        navigation.push(.settings(.feedBackSuccess))
                     }
                     
             }

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RegisterBuildFirstView: View {
-    @EnvironmentObject var navigation:NavigationStateManager
+    @Environment(\.dismiss) var dissmis
+
+
     @State private var textEmail : String = ""
     @State private var textPassword : String = ""
     @State private var textPasswordAgain : String = ""
@@ -16,7 +18,7 @@ struct RegisterBuildFirstView: View {
         ZStack {
             VStack{
                 Buttons.backButton {
-                    navigation.pop()
+                    dissmis()
                 }
                 .padding(.trailing,Const.width * 0.9)
                 
@@ -27,19 +29,20 @@ struct RegisterBuildFirstView: View {
                     TextFields.CustomTextField(text : $textPasswordAgain , icon: .key, placeHolder: "Şifre Tekrar")
                     
                     Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                        navigation.push(.auth(.register(.second)))
-                    }, size: .small, textColor: .white)
+                    }, size: .small, textColor: .white, destination: AnyView(RegisterBuildSecondView()))
                     
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                     .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 HStack{
                     Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
                     
-                    Button(action: {
-                        navigation.push(.auth(.loginView))
-                    }, label: {
+                    NavigationLink {
+                        LoginView()
+                    } label: {
                         Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
-                    })
+
+                    }
+
                     
                 }}.frame(width: Const.width , height: Const.height+100)
         }.background(

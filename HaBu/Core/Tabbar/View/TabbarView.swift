@@ -8,60 +8,58 @@
 import SwiftUI
 
 struct TabbarView: View {
-    @EnvironmentObject var navigation : NavigationStateManager
+    @State var currentTab : String = "Feed"
+    @State var hideBar = false
+    init() {
+        UITableView.appearance().isHidden = true
+    
+    }
+    init(currentTab:String) {
+        UITableView.appearance().isHidden = true
+    
+    }
     var body: some View {
-        VStack {
-            GeometryReader{proxy in
-               let bottomEdge = proxy.safeAreaInsets.bottom
-                let topEdge = proxy.safeAreaInsets.leading
-                
-              
-                    TabView(selection:$navigation.selection){
-                        FeedView()
-                            .frame(maxWidth: .infinity,maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.1))
-                            .tag("Feed")
-                            .toolbar(.hidden, for: .tabBar)
-                        SerachView()
-                            .frame(maxWidth: .infinity,maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.1))
-                            .tag("Search")
-                            .toolbar(.hidden, for: .tabBar)
-                        NotificationView()
-                            .frame(maxWidth: .infinity,maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.1))
-                            .tag("Notification")
-                            .toolbar(.hidden, for: .tabBar)
-                        ProfileView(user: User.MockData[0])
-                            .frame(maxWidth: .infinity,maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.1))
-                            .tag("Profile")
-                            .toolbar(.hidden, for: .tabBar)
-                    }
-                    .task {
-                        navigation.bottomEdge = bottomEdge
-                        navigation.topEdge = topEdge
-                    }
-                    .overlay(
-                        VStack{
-                            CustomTabbarView(currentTab: $navigation.selection, bottomEdge: bottomEdge)
-                        }
-                         .offset(y:navigation.hideTabBar ? (15 + 35 + bottomEdge):0)
-                        ,alignment: .bottom
-                )
-                .navigationBarBackButtonHidden(true)
-                
-                
-              
-                
+        GeometryReader{proxy in
+            let bottomEdge = proxy.safeAreaInsets.bottom
+            let topEdge = proxy.safeAreaInsets.leading
+            
+            TabView(selection:$currentTab){
+                FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
+                    .frame(maxWidth: .infinity,maxHeight: .infinity)
+                    .background(Color.primary.opacity(0.1))
+                    .tag("Feed")
+                    .toolbar(.hidden, for: .tabBar)
+                SerachView()
+                    .frame(maxWidth: .infinity,maxHeight: .infinity)
+                    .background(Color.primary.opacity(0.1))
+                    .tag("Search")
+                    .toolbar(.hidden, for: .tabBar)
+                NotificationView()
+                    .frame(maxWidth: .infinity,maxHeight: .infinity)
+                    .background(Color.primary.opacity(0.1))
+                    .tag("Notification")
+                    .toolbar(.hidden, for: .tabBar)
+                ProfileView(hideTab: $hideBar, user: User.MockData[0])
+                    .frame(maxWidth: .infinity,maxHeight: .infinity)
+                    .background(Color.primary.opacity(0.1))
+                    .tag("Profile")
+                    .toolbar(.hidden, for: .tabBar)
             }
+            .overlay(
+                VStack{
+                  CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
+                }
+                    .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
+                ,alignment: .bottom
+            )
+          
+            
         }
-        .environmentObject(navigation)
     }
 }
 
 #Preview {
-    ContentView()
+    TabbarView()
 }
 private struct CustomTabbarView:View {
     @Binding var currentTab:String
@@ -116,5 +114,4 @@ private struct CustomTabButton:View {
         })
     }
 }
-
 

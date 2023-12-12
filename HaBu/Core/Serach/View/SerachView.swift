@@ -12,7 +12,6 @@ struct SerachView: View {
     @State private var searchText = ""
     @State private var ratingSorted = false
     @State private var isSecondSearchViewActive: Bool = false
-    @EnvironmentObject var navigation : NavigationStateManager
     
     //filtered user
     //vertical
@@ -32,7 +31,6 @@ struct SerachView: View {
             HStack {
                 SearchBar(searchText: .constant(""), isEditing: .constant(false))
                     .onTapGesture {
-                    navigation.push(.search(.searchSecond))
                 }
             }.frame(width: Const.width * 0.97)
             

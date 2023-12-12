@@ -11,7 +11,6 @@ struct SecondSearchView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
     @State private var isSecondSearchViewActive: Bool = true
-    @EnvironmentObject var navigation: NavigationStateManager
     
     //SearchFilter name , surname and username
     var users: [User]{
@@ -30,7 +29,6 @@ struct SecondSearchView: View {
             Spacer()
             HStack{
                 Buttons.backButton {
-                    navigation.pop()
                 }
                 SearchBar(searchText: $searchText, isEditing: $isSearchBar)
                     .frame(width: Const.width * 0.85)

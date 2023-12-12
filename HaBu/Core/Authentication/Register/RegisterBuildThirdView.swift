@@ -9,16 +9,16 @@ import SwiftUI
 
 struct RegisterBuildThirdView: View {
     @State private var isChecked: Bool = false
+    @Environment(\.dismiss) var dissmis
     @State private var textFaculty: String = ""
     @State private var textDepartment : String = ""
     @State private var textYear : String  = ""
-    
-    @EnvironmentObject var navigation:NavigationStateManager
+
     var body: some View {
             ZStack {
                 VStack{
                     Buttons.backButton {
-                        navigation.pop()
+                        dissmis()
                     }
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
@@ -27,8 +27,7 @@ struct RegisterBuildThirdView: View {
                         TextFields.CustomTextField(text: $textDepartment ,icon: .blocked, placeHolder: "Bölüm")
                         TextFields.CustomTextField(text: $textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
                         Buttons.customButton1(title:"Tamamla", backgroundColor: Const.primaryColor, action: {
-                            navigation.push(.tabbar)
-                        }, size: .small, textColor: .white)
+                        }, size: .small, textColor: .white, destination: AnyView(TabbarView()))
                     }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                     HStack{
