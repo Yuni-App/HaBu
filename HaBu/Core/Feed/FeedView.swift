@@ -100,9 +100,12 @@ struct FeedViewTollBar:View {
                     showCategoryFilter = true
                     
                 }, label: {
-                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black)
+                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black)     .padding(20)
                 })
                 
+                //message icon
+                //this will active at next version
+                /*
                 Button(action: {
                     // -> MessageBox View
                     
@@ -126,7 +129,9 @@ struct FeedViewTollBar:View {
                         .padding(20)
                     
                 }
-                )
+                )*/
+                
+                
             }
         }
         .padding(.top,15)

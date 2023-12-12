@@ -30,8 +30,7 @@ struct RegisterBuildThirdView: View {
                             navigation.push(.tabbar)
                         }, size: .small, textColor: .white)
                     }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
-                        .background(
-                            RectangleBlur(color: Const.primaryColor))
+                        .modifier(RectangleBlurModifier(color: Const.primaryColor))
                     HStack{
                         CheckBoxView(checked: isChecked){
                         }

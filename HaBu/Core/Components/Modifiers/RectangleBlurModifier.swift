@@ -14,12 +14,10 @@ struct RectangleBlurModifier: ViewModifier {
         content
             .font(.caption2)
             .padding(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(color.opacity(0.1))
-                    .cornerRadius(10)
-                    .shadow(color: Color.black.opacity(1), radius: 2, x: 2, y:2)
-            )
+            .background( RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(color.opacity(0.1))
+                .cornerRadius(10)
+                .shadow(color: Color.black.opacity(1), radius: 2, x: 2, y:2))
             .foregroundColor(Color.blue)
     }
 }
