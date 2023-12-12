@@ -147,7 +147,9 @@ struct Tabbar:View {
     var topEdge: CGFloat
     @Binding var offset:CGFloat
     var maxHeight:CGFloat
+   
     var body: some View {
+       
         VStack{
             Spacer()
             HStack{
@@ -214,6 +216,7 @@ struct Tabbar:View {
             .padding(.top,maxHeight * 0.25)
             Buttons.slidableButton(startPosition: editButtonPosition, position: $editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black, destination: AnyView(EditProfileView(user: User.MockData[0])))
         }
+       
         .padding()
         .opacity(getOpacity())
     }

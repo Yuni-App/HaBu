@@ -68,8 +68,8 @@ struct FeedView: View {
                 )
                 .ignoresSafeArea(.all,edges: .all)
                 .overlay(
-                    SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 0, y: 30), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                        .offset(x:hideTab ? -150 : 0)
+                    //Slidable Button
+                    Text("slidable")
                     
                 )
                 
@@ -111,8 +111,11 @@ struct FeedViewTollBar:View {
                     showCategoryFilter = true
                     
                 }, label: {
-                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black)
+                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black)     .padding(20)
                 })
+                
+                //message icon
+                //this will active at next version
                 
                 Button(action: {
                     // -> MessageBox View
@@ -137,8 +140,10 @@ struct FeedViewTollBar:View {
                         .padding(20)
                     
                 }
+
                 )
                 
+ 
                 
             }
         }

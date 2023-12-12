@@ -10,7 +10,6 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var searchText = ""
-    @State private var isSearchBar = false
     @State private var ratingSorted = false
     @State private var isSecondSearchViewActive: Bool = false
     
@@ -28,43 +27,37 @@ struct SerachView: View {
         //start 4. USER to 10
     }
     var body: some View {
-            VStack {
-                HStack {
-                    SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
-                        .padding(.top, 1)
-                }.frame(width: Const.width * 0.9)
-                
-                
-                if !isSecondSearchViewActive{
-                    ScrollView {
-                        VStack {
-                            ForEach(filteredUsers1, id: \.id) { user in
-                                SearchItem(user: user, ratingSorted: ratingSorted)
-                            }
-                            .padding(.top,15)
-                            
-                            ScrollView(.horizontal){
-                                HStack{
-                                    Spacer()
-                                    ForEach(filteredUsers2, id: \.id) { user in
-                                        SearchItem2(user: user, ratingSorted: ratingSorted)
-                                    }
-                                    .padding(.top,15)
-                                    Spacer()
-                                }.frame(height: Const.height * 0.25)
-                                
-                            }.background(Color.white).padding(.top, 17)
+        VStack {
+            HStack {
+                SearchBar(searchText: .constant(""), isEditing: .constant(false))
+                    .onTapGesture {
+                }
+            }.frame(width: Const.width * 0.97)
+            
+            
+            if !isSecondSearchViewActive{
+                ScrollView {
+                    VStack {
+                        ForEach(filteredUsers1, id: \.id) { user in
+                            SearchItem(user: user, ratingSorted: ratingSorted)
                         }
+                        .padding(.top,15)
+                        
+                        ScrollView(.horizontal){
+                            HStack{
+                                Spacer()
+                                ForEach(filteredUsers2, id: \.id) { user in
+                                    SearchItem2(user: user, ratingSorted: ratingSorted)
+                                }
+                                .padding(.top,15)
+                                Spacer()
+                            }.frame(height: Const.height * 0.25)
+                            
+                        }.background(Color.white).padding(.top, 17)
                     }
                 }
-                
-            }.frame(width: Const.width).background(Const.primaryBackGroundColor)
-            .background(
-                NavigationLink(destination: SecondSearchView(), isActive: $isSecondSearchViewActive) {
-                    EmptyView()
-                }
-                .hidden()
-            )
+            }
+        }.frame(width: Const.width).background(Const.primaryBackGroundColor)
     }
 }
 

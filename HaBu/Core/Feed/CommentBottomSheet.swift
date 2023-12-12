@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CommentBottomSheet: View {
-    @State private var commentText = ""
+    @State private var commentText  : String = ""
+
     var body: some View {
         ZStack {
             ScrollView {
@@ -32,7 +33,7 @@ struct CommentBottomSheet: View {
                 .ignoresSafeArea(.all)
         }
         HStack{
-            TextFields.CommentTextField()
+            TextFields.CommentTextField(commentText: $commentText)
             Button(action: {
             }, label: {
                 Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)

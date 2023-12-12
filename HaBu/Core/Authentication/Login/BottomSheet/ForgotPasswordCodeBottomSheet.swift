@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ForgotPasswordCodeBottomSheet: View {
     @Binding var showSheet: Bool
-   
+    @State private var textCode: String = ""
+
 
     var body: some View {
         NavigationStack{  VStack{
             Text("Lütfen kodu  giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
-            TextFields.CustomTextField(icon: .key, placeHolder: "kod")
+            TextFields.CustomTextField(text: $textCode, icon: .key, placeHolder: "kod")
             CustomButton(title: "Onayla", backgroundColor: Const.primaryColor, action: {
                 true
             },destination: AnyView(ForgotPasswordCreatePasswordBottomSheet(showSheet: $showSheet).navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)

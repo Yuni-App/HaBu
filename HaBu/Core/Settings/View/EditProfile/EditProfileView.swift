@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    var user : User
-    @State var name : String = ""
-    @State var surName : String = ""
-    @State var email : String = ""
-    @State var biyografi : String = ""
-    @State var password: String = ""
+    var user: User
+    @State private var textName : String = ""
+    @State private var textSurName : String = ""
+    @State private var textEmail : String = ""
+    @State private var textBiyografi : String = ""
+    @State private var textPassword: String = ""
     @State private var dragDirection: DragDirection = .none
     @State private var imageIndices = [0, 1, 2]
-    @State var imagePickerPresented = false
+    @State private var imagePickerPresented = false
     var images = [
         "profil1",
         "profil2",
@@ -73,13 +73,13 @@ struct EditProfileView: View {
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
                 
                //isim
-                CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $name, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
+                TextFields.CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $textName, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
                  //soyisim
-                CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $surName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
+                TextFields.CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $textSurName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
                 //email
-                CustomTextField2(headline: "Email", color: .white, islocked: true, text: $email, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
+                TextFields.CustomTextField2(headline: "Email", color: .white, islocked: true, text: $textEmail, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
                 //bio
-                CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $biyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
+                TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $textBiyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     false

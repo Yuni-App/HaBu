@@ -10,6 +10,10 @@ import SwiftUI
 struct RegisterBuildFirstView: View {
     @Environment(\.dismiss) var dissmis
 
+
+    @State private var textEmail : String = ""
+    @State private var textPassword : String = ""
+    @State private var textPasswordAgain : String = ""
     var body: some View {
         ZStack {
             VStack{
@@ -20,16 +24,15 @@ struct RegisterBuildFirstView: View {
                 
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.RegisterSecondVector)
                 VStack{
-                    TextFields.CustomTextField(icon: .mail, placeHolder: "e-posta")
-                    TextFields.CustomTextField(icon: .key, placeHolder: "Şifre")
-                    TextFields.CustomTextField(icon: .key, placeHolder: "Şifre Tekrar")
+                    TextFields.CustomTextField(text: $textEmail, icon: .mail, placeHolder: "e-posta")
+                    TextFields.CustomTextField(text :$textPassword ,icon: .key, placeHolder: "Şifre")
+                    TextFields.CustomTextField(text : $textPasswordAgain , icon: .key, placeHolder: "Şifre Tekrar")
                     
                     Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
                     }, size: .small, textColor: .white, destination: AnyView(RegisterBuildSecondView()))
                     
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
-                    .background(
-                        RectangleBlur(color: Const.primaryColor))
+                    .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 HStack{
                     Text("Bir hesabınız var mı?").foregroundStyle(.black).font(.system(size: 14))
                     

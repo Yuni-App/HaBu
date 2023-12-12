@@ -50,7 +50,7 @@ enum PathCases: Hashable {
             case .searchView:
                 return SerachView()
             case .searchSecond:
-                return SerachView()
+                return SecondSearchView()
             }
         case .notification(let notification):
             switch notification {
@@ -75,6 +75,8 @@ enum PathCases: Hashable {
                 return DeleteAccountCodeView()
             case .deleteAccountCode:
                 return DeleteAccountCodeView()
+            case .feedBackSuccess:
+                return FeedBackSuccess()
             }
         case .profile(let profile):
             switch profile {
@@ -86,6 +88,7 @@ enum PathCases: Hashable {
         case .tabbar:
             return TabbarView()
         }
+    
     }
 }
 
@@ -124,6 +127,7 @@ extension PathCases {
         case changePasswordSuccess
         case deleteAccountPassword
         case deleteAccountCode
+        case feedBackSuccess
     }
 
     enum Profile: Hashable {

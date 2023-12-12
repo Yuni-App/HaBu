@@ -10,7 +10,8 @@ import SwiftUI
 struct LoginView: View {   
     @State private var showingForgotPassword = false
     @Environment(\.dismiss) var dissmis
-    
+    @State private var textEmail : String = ""
+    @State private var textPassword : String = ""    
     var body: some View {
             ZStack {
                 VStack{
@@ -21,8 +22,8 @@ struct LoginView: View {
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
                         VStack{
-                            TextFields.CustomTextField(icon: .mail, placeHolder: "e-posta")
-                            TextFields.CustomTextField(icon: .key, placeHolder: "Şifre")
+                            TextFields.CustomTextField(text: $textEmail, icon: .mail, placeHolder: "e-posta")
+                            TextFields.CustomTextField(text: $textPassword , icon: .key, placeHolder: "Şifre")
                             HStack{
                                 Spacer()
                                 Text("Şifremi unuttum.")
@@ -45,8 +46,7 @@ struct LoginView: View {
                             
                           
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
-                        .background(
-                            RectangleBlur(color: Const.primaryColor))
+                        .modifier(RectangleBlurModifier(color: Const.primaryColor))
                        
                     
                     HStack{

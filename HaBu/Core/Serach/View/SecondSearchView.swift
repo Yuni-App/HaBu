@@ -25,29 +25,29 @@ struct SecondSearchView: View {
         }
     }
     var body: some View {
-        NavigationStack {
-            VStack{
-                HStack{
-                    CustomSearchBar(destinaiton: AnyView(TabbarView()))
-                    SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
-                        .frame(width: Const.width * 0.85)
+        VStack{
+            Spacer()
+            HStack{
+                Buttons.backButton {
                 }
-                ScrollView {
-                    ForEach(users) { user in
-                        SearchItem3(user: user)
-                    }.transition(.opacity)
-                    
-                }.padding()
-                    .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
-                    .animation(.easeInOut)
-                    .navigationBarBackButtonHidden()
-                    
-                
-            }.frame(width: Const.width).background(Const.primaryBackGroundColor)
+                SearchBar(searchText: $searchText, isEditing: $isSearchBar)
+                    .frame(width: Const.width * 0.85)
+            }
             
-        }
+            ScrollView {
+                ForEach(users) { user in
+                    SearchItem3(user: user)
+                }.transition(.opacity)
+                
+            }.frame(width: Const.width * 0.9, height: Const.height * 0.85)
+                .padding()
+                .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
+                .animation(.easeInOut)
+                .navigationBarBackButtonHidden()
+        }.frame(width: Const.width, height: Const.height).background(Const.primaryBackGroundColor)
     }
 }
+
 
 #Preview {
     SecondSearchView()
