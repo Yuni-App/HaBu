@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct InfoView: View {
-    @StateObject var navigation = NavigationStateManager()
     
     var body: some View {
         
-        NavigationStack(path:$navigation.path ) {
+        NavigationStack {
             ZStack {
                 VStack {
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
@@ -20,15 +19,14 @@ struct InfoView: View {
                     VStack{
                         CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
                         
-                        Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                            navigation.push(.auth(.loginView))
+                        Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action:{
                             
-                        }, size: .small, textColor: .white)
+                            
+                        }, size: .small, textColor: .white, destination: AnyView(LoginView()))
                         .padding()
                         
                         Buttons.customButton1(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
-                            navigation.push(.auth(.register(.first)))
-                        }, size: .small, textColor: .black)
+                        }, size: .small, textColor: .black, destination: AnyView(RegisterBuildFirstView()))
                         
                         
                         
@@ -39,12 +37,10 @@ struct InfoView: View {
                 .padding()
             }
             .background(Const.authBackGroundColor)
-            .navigationDestination(for: PathCases.self) { path in
-                AnyView(path.getView())
-            }
+           
             
             
-        }  .environmentObject(navigation)
+        }
         
             .navigationBarBackButtonHidden(true)
         

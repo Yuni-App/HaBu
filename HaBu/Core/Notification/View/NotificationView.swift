@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct NotificationView: View {
-    @EnvironmentObject var navigation:NavigationStateManager
     var body: some View {
+        NavigationStack {
             VStack {
                 HStack{
                     Text("Bildirimler")
@@ -51,31 +51,26 @@ struct NotificationView: View {
                     Const.backgroundColor.zIndex(0)
                 }
             }
+        }
         
     }
     @ViewBuilder
     func NotificationCell(notification:Notification)-> some View{
         
-        Button{
+        NavigationLink{
             if let postId = Int(notification.targetId){
                 if let userId = Int(notification.userId){
                     if notification.type == .postLike{
-                       // navigation.push(.feed(.feedCell(.init(post: Post.MockData[0], user: User.MockData[0]))))
-                        navigation.push(.settings(.settings))
+                        FeedViewCell(navigated : Post.MockData[postId], user: User.MockData[userId])
                     }
                     else if notification.type == .postComment {
-                       // navigation.push(.feed(.feedCell(.init(post: Post.MockData[0], user: User.MockData[0],showComment: true))))
-                        navigation.push(.settings(.settings))
-
+                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
                     }
                     else if notification.type == .commentLike{
-                      //  navigation.push(.feed(.feedCell(.init(post: Post.MockData[0], user: User.MockData[0],showComment: true))))
-                        navigation.push(.settings(.settings))
-
+                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
                     }
                 }
             }
-          
         }label: {
             HStack{
                 CircleProfileImage(userIamgeUrl: "", size: .small)
@@ -114,5 +109,4 @@ struct NotificationView: View {
 #Preview {
     NotificationView()
 }
-
 

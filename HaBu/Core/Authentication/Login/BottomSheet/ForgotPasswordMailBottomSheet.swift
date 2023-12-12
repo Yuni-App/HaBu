@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ForgotPasswordMailBottomSheet: View {
     @Binding var showSheet: Bool
-    @EnvironmentObject var navigation:NavigationStateManager
     @State private var textEmail : String = ""
-
-
     var body: some View {
         NavigationStack{
             VStack{
