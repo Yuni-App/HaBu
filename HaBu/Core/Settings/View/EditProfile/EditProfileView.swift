@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
+    @Environment(\.dismiss) private var dismiss
     var user: User
     @State private var textName : String = ""
     @State private var textSurName : String = ""
@@ -41,7 +42,15 @@ struct EditProfileView: View {
                         .shadow(color: Color.black.opacity(0.4), radius: 7, x: 5, y:20)
                     
                     VStack{
-                        Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
+                        ZStack {
+                            HStack{
+                                Buttons.backButton {
+                                    dismiss()
+                                }.padding(.leading , 15)
+                                Spacer()
+                            }
+                            Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
+                        }
                         HStack {
                             Image("star")
                             Text("150")
