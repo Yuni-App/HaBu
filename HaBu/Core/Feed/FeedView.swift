@@ -10,14 +10,13 @@ import SwiftUI
 struct FeedView: View {
     @State var showCategoryFilter = false
     var bottomEdge:CGFloat
-    
     @Binding var hideTab:Bool
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
+    @State var addPostButtonPosition = CGPoint(x: 10, y: 20)
     var topEdge: CGFloat
     var body: some View {
-        NavigationStack{
             VStack {
                 ScrollView(.vertical,showsIndicators: false){
                     VStack (alignment:.leading){
@@ -68,8 +67,8 @@ struct FeedView: View {
                 )
                 .ignoresSafeArea(.all,edges: .all)
                 .overlay(
-                    //Slidable Button
-                    Text("slidable")
+                    Buttons.SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                        .offset(x:hideTab ? -Const.width * 0.5:0)
                     
                 )
                 
@@ -78,13 +77,10 @@ struct FeedView: View {
                 
                 .sheet(isPresented: $showCategoryFilter) {
                     CategoryFilterBottomSheet()
-                        .presentationDetents([.large,.large])
+                        .presentationDetents([.height(Const.height * 0.6),.large])
                 }
                 
             }
-        }
-        
-        
         
     }
 }
@@ -147,7 +143,7 @@ struct FeedViewTollBar:View {
                 
             }
         }
-        .padding(.top,15)
+        .padding(.horizontal,15)
         .padding(.top,topEdge)
     }
 }
