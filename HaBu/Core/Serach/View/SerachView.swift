@@ -11,6 +11,8 @@ import SwiftUI
 struct SerachView: View {
     @State private var searchText = ""
     @State private var ratingSorted = false
+    @State private var isEditing = false
+    @State private var isSearchBar = false
     @State private var isSecondSearchViewActive: Bool = false
     
     //filtered user
@@ -29,9 +31,9 @@ struct SerachView: View {
     var body: some View {
         VStack {
             HStack {
-                SearchBar(searchText: .constant(""), isEditing: .constant(false))
-                    .onTapGesture {
-                }
+
+                SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
+
             }.frame(width: Const.width * 0.97)
             
             
@@ -58,6 +60,12 @@ struct SerachView: View {
                 }
             }
         }.frame(width: Const.width).background(Const.primaryBackGroundColor)
+            .background(
+                            NavigationLink(destination: SecondSearchView(), isActive: $isSecondSearchViewActive) {
+                                EmptyView()
+                            }
+                            .hidden()
+                        )
     }
 }
 

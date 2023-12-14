@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
@@ -19,6 +20,7 @@ struct TabbarView: View {
     
     }
     var body: some View {
+        
         GeometryReader{proxy in
             let bottomEdge = proxy.safeAreaInsets.bottom
             let topEdge = proxy.safeAreaInsets.leading
@@ -45,6 +47,8 @@ struct TabbarView: View {
                     .tag("Profile")
                     .toolbar(.hidden, for: .tabBar)
             }
+            
+            .navigationBarBackButtonHidden(true)
             .overlay(
                 VStack{
                   CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
@@ -52,8 +56,6 @@ struct TabbarView: View {
                     .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
                 ,alignment: .bottom
             )
-          
-            
         }
     }
 }

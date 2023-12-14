@@ -8,43 +8,41 @@
 import SwiftUI
 import Kingfisher
 struct FeedViewCell: View {
-    @State var showingComment : Bool
+    @Environment(\.dismiss) var dissmis
     @State private var savePost = ActionButtons.savePost
     @State private var likePost = ActionButtons.unLike
     @Binding var hideTab:Bool
     private var backButton : Bool
+   @State private var showingComment = false
     let post : Post
     var user : User
     init(post: Post,user:User,hideTab:Binding<Bool>) {
         self.post = post
         self.user = user
-        self.showingComment = false
         self.backButton = false
         _hideTab = hideTab
     }
     init(navigatedWithComment post: Post,user:User) {
         self.post = post
         self.user = user
-        self.showingComment = true
         self.backButton = true
         _hideTab = .constant(false)
+        self.showingComment = true
     }
     init(navigated post:Post,user:User){
         self.post = post
         self.user = user
-        self.showingComment = false
         self.backButton = true
         _hideTab = .constant(false)
 
     }
     var body: some View {
-        NavigationStack {
             VStack(alignment:.center){
                 if backButton {
                     Buttons.backButton {
-                            
+                        dissmis()
                     }
-                    .padding(.horizontal)
+                    .padding(.trailing,Const.width * 0.9)
                 }
                 
                 Spacer()
@@ -56,15 +54,17 @@ struct FeedViewCell: View {
                         .foregroundStyle(.black)
 
                 }
-                .navigationBarBackButtonHidden()
                 .padding(.horizontal)
                 
                 //ımage ?? nil
                 if let imageUrl = post.imageUrl{
-                    KFImage(URL(string: imageUrl))
-                        .resizable()
-                        .frame(width: Const.width * 0.95,height: Const.height * 0.35)
+                    HStack {
+                        KFImage(URL(string: imageUrl))
+                            .resizable()
+                            .frame(width: Const.width * 0.95,height: Const.height * 0.35)
                         .scaledToFill()
+                    }
+                    .frame(width: Const.width)
                 }
                 // caption
                 HStack {
@@ -117,13 +117,13 @@ struct FeedViewCell: View {
                 }
                 .padding()
                 Spacer()
+                Divider()
+
             }
-        }
-       
-        Divider()
+            .navigationBarBackButtonHidden(true)
         
     }
 }
 #Preview {
-    FeedViewCell(post: Post.MockData[0], user:  User.MockData[0], hideTab: .constant(false))
+    FeedViewCell(navigatedWithComment: Post.MockData[0], user: User.MockData[0])
 }

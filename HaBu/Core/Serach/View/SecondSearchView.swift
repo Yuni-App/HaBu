@@ -29,8 +29,11 @@ struct SecondSearchView: View {
             Spacer()
             HStack{
                 Buttons.backButton {
+
+                    //
+
                 }
-                SearchBar(searchText: $searchText, isEditing: $isSearchBar)
+                SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                     .frame(width: Const.width * 0.85)
             }
             
