@@ -8,20 +8,32 @@
 import SwiftUI
 
 struct RegisterBuildSecondView: View {
+    @Environment(\.dismiss) var dissmis
+    @State private var textName  : String = ""
+    @State private var textSurname : String = ""
+    @State private var textUserName : String = ""
+    @State private var textAge : String = ""
+    @State private var textBio : String = ""
     var body: some View {
             ZStack {
                 VStack{
+                    Buttons.backButton {
+                        dissmis()
+                    }
+                    .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
                         VStack{
-                            TextFields.CustomTextField(icon: .blocked, placeHolder: "Ad")
-                            TextFields.CustomTextField(icon: .blocked, placeHolder: "Soy Ad")
-                            TextFields.CustomTextField(icon: .blocked, placeHolder: "Kullanıcı Adı")
-                            TextFields.CustomTextField(icon: .blocked, placeHolder: "Yaş")
-                            TextFields.CustomTextField(icon: .blocked, placeHolder: "Bio")
-                            CustomButton(title: "Devam Et", backgroundColor: Const.primaryColor, action: {true}, destination: AnyView(RegisterBuildThirdView()), size: CustomButtonSize.small)
+                            TextFields.CustomTextField(text: $textName, icon: .blocked, placeHolder: "Ad")
+                            TextFields.CustomTextField(text: $textSurname, icon: .blocked, placeHolder: "Soy Ad")
+                            TextFields.CustomTextField(text : $textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
+                            TextFields.CustomTextField(text: $textAge, icon: .blocked, placeHolder: "Yaş")
+                            TextFields.CustomTextField(text: $textBio, icon: .blocked, placeHolder: "Bio")
+                            
+                            
+                            Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
+                            }, size: .small, textColor: .white, destination: AnyView(RegisterBuildThirdView()))
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
-                        .background(
-                            RectangleBlur(color: Const.primaryColor))
+                        .modifier(RectangleBlurModifier(color: Const.primaryColor))
                         
                     HStack{
                         Text("Bir hesabınız var mı?")
@@ -30,9 +42,8 @@ struct RegisterBuildSecondView: View {
                         NavigationLink {
                             LoginView()
                         } label: {
-                            HStack{  Text("Giriş Yap")
-                                .foregroundStyle(.blue)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)}
+                            Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
+
                         }
                     }}.frame(width: Const.width , height: Const.height+100)
                     .padding()
@@ -41,6 +52,8 @@ struct RegisterBuildSecondView: View {
             .background(
                 Const.authBackGroundColor
             )
+            .navigationBarBackButtonHidden(true)
+
     }
 }
 

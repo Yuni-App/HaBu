@@ -7,26 +7,25 @@
 
 import SwiftUI
 
-struct EditProfileData:Hashable{
-    var user : User
-}
-
 struct EditProfileView: View {
-    @EnvironmentObject var navigation: NavigationStateManager
-    @State var data : EditProfileData
-    @State var name : String = ""
-    @State var surName : String = ""
-    @State var email : String = ""
-    @State var biyografi : String = ""
-    @State var password: String = ""
+    @Environment(\.dismiss) private var dismiss
+    var user: User
+    @State private var textName : String = ""
+    @State private var textSurName : String = ""
+    @State private var textEmail : String = ""
+    @State private var textBiyografi : String = ""
+    @State private var textPassword: String = ""
     @State private var dragDirection: DragDirection = .none
     @State private var imageIndices = [0, 1, 2]
-    @State var imagePickerPresented = false
+    @State private var imagePickerPresented = false
     var images = [
         "profil1",
         "profil2",
         "profil3"
     ]
+    init(user:User){
+        self.user = user
+    }
     var body: some View {
         
         VStack {
@@ -43,14 +42,22 @@ struct EditProfileView: View {
                         .shadow(color: Color.black.opacity(0.4), radius: 7, x: 5, y:20)
                     
                     VStack{
-                        Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
+                        ZStack {
+                            HStack{
+                                Buttons.backButton {
+                                    dismiss()
+                                }.padding(.leading , 15)
+                                Spacer()
+                            }
+                            Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
+                        }
                         HStack {
                             Image("star")
                             Text("150")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                         }
-                        Text(data.user.username)
+                        Text(user.username)
                         
                             .foregroundStyle(.white)
                             .font(.title3)
@@ -75,13 +82,13 @@ struct EditProfileView: View {
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
                 
                //isim
-                CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $name, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
+                TextFields.CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $textName, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
                  //soyisim
-                CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $surName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
+                TextFields.CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $textSurName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
                 //email
-                CustomTextField2(headline: "Email", color: .white, islocked: true, text: $email, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
+                TextFields.CustomTextField2(headline: "Email", color: .white, islocked: true, text: $textEmail, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
                 //bio
-                CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $biyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
+                TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $textBiyografi, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 CustomButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
                     false
@@ -121,7 +128,7 @@ struct EditProfileView: View {
 
 
 #Preview {
-    EditProfileView(data:.init(user: User.MockData[0]))
+    EditProfileView(user: User.MockData[0])
 }
 
 private func incrementImageIndices(_ indices: inout [Int],shouldIncrement: Bool) {
@@ -139,4 +146,3 @@ private func incrementImageIndices(_ indices: inout [Int],shouldIncrement: Bool)
            }
        }
 }
-

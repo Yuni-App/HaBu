@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        NavigationStack{
             VStack{
-                CustomSettingsTollBar(title: "Ayarlar", destinaiton: AnyView(TabbarView()))
+                CustomSettingsTollBar(action: {
+                    dismiss()
+                }, title: "Ayarlar")
                     ScrollView{
                         UserAboutBox()
                         AppAboutBox()
@@ -24,7 +26,7 @@ struct SettingsView: View {
                     Const.primaryBackGroundColor
                 )
             }
-        }
+        
     }
 }
 
@@ -56,11 +58,9 @@ private func UserAboutBox() ->some View {
             .foregroundColor(.black.opacity(0.7))
             .fontWeight(.bold)
         VStack{
-            SettingsTile(icon: AppIcon.person, text: "Profili Düzenle", destination: AnyView(EditProfileView(data: .init(user: User.MockData[0]))))
+            SettingsTile(icon: AppIcon.person, text: "Profili Düzenle", destination: AnyView(EditProfileView(user: User.MockData[0])))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(ChangePasswordView()))
-            Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.point, text: "Puanlarım",destination: AnyView(RankView()))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.blocked, text: "Engellenen Kullanıcılar",destination: AnyView(BlockedUsers()))
         }.frame(maxWidth: .infinity, alignment: .leading)
@@ -78,7 +78,7 @@ private func AppAboutBox() ->some View {
             .foregroundColor(.black.opacity(0.7))
             .fontWeight(.bold)
         VStack{
-            SettingsTile(icon: AppIcon.feedBack, text: "Geri Bildirim",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.feedBack, text: "Geri Bildirim",destination: AnyView(FeedBackInput()))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.book, text: "Gizlilik Sözleşmesi",destination: AnyView(AgreementView()))
         }.frame(maxWidth: .infinity, alignment: .leading)

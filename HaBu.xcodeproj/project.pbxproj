@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5C1686232B1A218200A20636 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1686222B1A218200A20636 /* Buttons.swift */; };
-		5C1FCA132B0F6F8F00A3ED5B /* CustomTextField2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */; };
 		5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583D2B03B430008BEB6D /* HaBuApp.swift */; };
 		5C2658402B03B430008BEB6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583F2B03B430008BEB6D /* ContentView.swift */; };
 		5C2658422B03B431008BEB6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2658412B03B431008BEB6D /* Assets.xcassets */; };
@@ -23,10 +22,8 @@
 		5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */; };
 		5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
-		5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133C02B04EFD3006F29AF /* ActionButton.swift */; };
 		5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F523C2B128CC700D79208 /* CategoryFilterBottomSheet.swift */; };
 		5C6F523F2B128CF000D79208 /* TagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F523E2B128CF000D79208 /* TagLayout.swift */; };
-		5C7E55E82B0FBD60008AE5A1 /* SlidableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */; };
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01922B135144007F9022 /* OffsetModifier.swift */; };
 		5CBA01952B13520E007F9022 /* ProfileUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01942B13520E007F9022 /* ProfileUserView.swift */; };
@@ -73,18 +70,16 @@
 		949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E52B041F3000164405 /* RegisterBuildSecondView.swift */; };
 		949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E72B041F4900164405 /* RegisterBuildThirdView.swift */; };
 		949016EA2B04275F00164405 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomButton.swift */; };
-		94A06ACA2B22124000814CD6 /* BlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* BlurModifier.swift */; };
+		94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsers.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
-		94DEF7A22B0E8E3C00C4C98D /* RectangleBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5C1686222B1A218200A20636 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
-		5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField2.swift; sourceTree = "<group>"; };
 		5C26583A2B03B430008BEB6D /* HaBu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaBu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C26583D2B03B430008BEB6D /* HaBuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaBuApp.swift; sourceTree = "<group>"; };
 		5C26583F2B03B430008BEB6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,10 +96,8 @@
 		5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBottomSheet.swift; sourceTree = "<group>"; };
 		5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextFieldModifier.swift; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
-		5C4133C02B04EFD3006F29AF /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		5C6F523C2B128CC700D79208 /* CategoryFilterBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterBottomSheet.swift; sourceTree = "<group>"; };
 		5C6F523E2B128CF000D79208 /* TagLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLayout.swift; sourceTree = "<group>"; };
-		5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidableButton.swift; sourceTree = "<group>"; };
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5CBA01922B135144007F9022 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 		5CBA01942B13520E007F9022 /* ProfileUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserView.swift; sourceTree = "<group>"; };
@@ -151,12 +144,11 @@
 		949016E52B041F3000164405 /* RegisterBuildSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildSecondView.swift; sourceTree = "<group>"; };
 		949016E72B041F4900164405 /* RegisterBuildThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildThirdView.swift; sourceTree = "<group>"; };
 		949016E92B04275F00164405 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		94A06AC92B22124000814CD6 /* BlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurModifier.swift; sourceTree = "<group>"; };
+		94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlurModifier.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsers.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlur.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,15 +238,8 @@
 				9411AA8D2B0510F80042A354 /* CustomImage.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
-				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
-				5C7E55E72B0FBD60008AE5A1 /* SlidableButton.swift */,
-				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
-				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
-				5C4133C02B04EFD3006F29AF /* ActionButton.swift */,
 				949016E92B04275F00164405 /* CustomButton.swift */,
-				5C1FCA122B0F6F8F00A3ED5B /* CustomTextField2.swift */,
-				94DEF7A12B0E8E3C00C4C98D /* RectangleBlur.swift */,
 				8821E50B2B1DC900003089B6 /* CustomSearchBar.swift */,
 			);
 			path = View;
@@ -363,33 +348,33 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-        8821E50A2B1DA619003089B6 /* Item */ = {
-            isa = PBXGroup;
-            children = (
-                88D69F552B1B3DB3005BE291 /* SearchItem.swift */,
-                88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */,
-                8821E5102B1DDCC1003089B6 /* SearchItem3.swift */,
-            );
-            path = Item;
-            sourceTree = "<group>";
-        };
-        8821E50D2B1DCAE3003089B6 /* SearchBar */ = {
-            isa = PBXGroup;
-            children = (
-                8821E50E2B1DCAFB003089B6 /* SearchBar.swift */,
-            );
-            path = SearchBar;
-            sourceTree = "<group>";
-        };
-        883CD06F2B20E01500E0B757 /* FeedBack */ = {
-            isa = PBXGroup;
-            children = (
-                883CD0702B20E03200E0B757 /* FeedBackInput.swift */,
-                883CD0722B20E04100E0B757 /* FeedBackSuccess.swift */,
-            );
-            path = FeedBack;
-            sourceTree = "<group>";
-        };
+		8821E50A2B1DA619003089B6 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				88D69F552B1B3DB3005BE291 /* SearchItem.swift */,
+				88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */,
+				8821E5102B1DDCC1003089B6 /* SearchItem3.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		8821E50D2B1DCAE3003089B6 /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				8821E50E2B1DCAFB003089B6 /* SearchBar.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		883CD06F2B20E01500E0B757 /* FeedBack */ = {
+			isa = PBXGroup;
+			children = (
+				883CD0702B20E03200E0B757 /* FeedBackInput.swift */,
+				883CD0722B20E04100E0B757 /* FeedBackSuccess.swift */,
+			);
+			path = FeedBack;
+			sourceTree = "<group>";
+		};
 		88A44A982B04FAE700F47BF8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,7 +388,6 @@
 			children = (
 				5CBA01942B13520E007F9022 /* ProfileUserView.swift */,
 				5CE5AB992B056BDC00502D9F /* ProfileView.swift */,
-				88B85B332B06348200D03ED9 /* EditProfileView.swift */,
 				887CD10A2B064CBC00D7C8DC /* SideMenu.swift */,
 				5CD3D3FC2B14CF0F00C4A944 /* ScrollableTabView.swift */,
 			);
@@ -476,6 +460,7 @@
 		9470799F2B1B8C750005C4CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				949505CF2B27E7B000C37CC7 /* EditProfile */,
 				883CD06F2B20E01500E0B757 /* FeedBack */,
 				9483385E2B1DB159006964BB /* Rank */,
 				9483385D2B1DB109006964BB /* BlockedUsers */,
@@ -483,6 +468,7 @@
 				947079A82B1BD4060005C4CB /* ChangePassword */,
 				947079A22B1BCE230005C4CB /* Agreement */,
 				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
+				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,10 +543,20 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		949505CF2B27E7B000C37CC7 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				88B85B332B06348200D03ED9 /* EditProfileView.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
 		94A06AC82B22059400814CD6 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
-				94A06AC92B22124000814CD6 /* BlurModifier.swift */,
+				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
+				94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */,
+				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -679,10 +675,8 @@
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */,
-				5C7E55E82B0FBD60008AE5A1 /* SlidableButton.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
 				943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */,
-				94DEF7A22B0E8E3C00C4C98D /* RectangleBlur.swift in Sources */,
 				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
 				943B9CE42B06912500067376 /* LikesListTile.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
@@ -690,7 +684,6 @@
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */,
 				947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */,
-				5C4133C12B04EFD3006F29AF /* ActionButton.swift in Sources */,
 				943FB8E02B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift in Sources */,
 				949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
@@ -701,8 +694,7 @@
 				5CBA01952B13520E007F9022 /* ProfileUserView.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
 				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
-				5C1FCA132B0F6F8F00A3ED5B /* CustomTextField2.swift in Sources */,
-				94A06ACA2B22124000814CD6 /* BlurModifier.swift in Sources */,
+				94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */,
 				5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */,
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,

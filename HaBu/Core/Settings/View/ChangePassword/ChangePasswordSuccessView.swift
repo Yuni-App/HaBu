@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChangePasswordSuccessView: View {
+    
     var body: some View {
         VStack{
             Spacer()
@@ -18,7 +19,6 @@ struct ChangePasswordSuccessView: View {
             Spacer()
             CustomButton(title: "Ana Sayfaya Dön", backgroundColor: Const.primaryButtonColor, action: {
                 true
-          
             }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
         }.frame(width: Const.width)
             .background(Const.primaryBackGroundColor

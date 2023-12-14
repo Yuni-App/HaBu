@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddPostView: View {
-    @State private var text : String = ""
+    @State private var textContent : String = ""
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
     
@@ -18,8 +18,7 @@ struct AddPostView: View {
                 AddPostBackground()
                 VStack{
                     AddPostAppBar()
-                    TextFields.LineLimitTextField()
-                   
+                    TextFields.LineLimitTextField(text: $textContent)
                     AddPostCategory()
                     HStack{
                         Toggle("Anonim Gönderi", isOn: $isAnonimPost)

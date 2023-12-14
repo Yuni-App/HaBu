@@ -7,68 +7,75 @@
 
 import SwiftUI
 import Kingfisher
-
-struct FeedViewCellData:Hashable {
-    var post:Post
-    var user:User
-    var showComment = false
-}
-
 struct FeedViewCell: View {
     @State var showingComment : Bool
     @State private var savePost = ActionButtons.savePost
     @State private var likePost = ActionButtons.unLike
-    @EnvironmentObject var navigation:NavigationStateManager
-    @State var data : FeedViewCellData
-   
-    
-    init(data:FeedViewCellData) {
-        self.data = data
-        showingComment = data.showComment
-       
-       
-        
+    @Binding var hideTab:Bool
+    private var backButton : Bool
+    let post : Post
+    var user : User
+    init(post: Post,user:User,hideTab:Binding<Bool>) {
+        self.post = post
+        self.user = user
+        self.showingComment = false
+        self.backButton = false
+        _hideTab = hideTab
+    }
+    init(navigatedWithComment post: Post,user:User) {
+        self.post = post
+        self.user = user
+        self.showingComment = true
+        self.backButton = true
+        _hideTab = .constant(false)
+    }
+    init(navigated post:Post,user:User){
+        self.post = post
+        self.user = user
+        self.showingComment = false
+        self.backButton = true
+        _hideTab = .constant(false)
+
     }
     var body: some View {
-        VStack(alignment:.leading){
-               //Task : need Update
-            if navigation.path.last != .tabbar {
+        NavigationStack {
+            VStack(alignment:.center){
+                if backButton {
                     Buttons.backButton {
-                        print(navigation.path)
-                        navigation.pop()
+                            
                     }
+                    .padding(.horizontal)
                 }
                 
                 Spacer()
                 //User Info
-                Button(action: {
-                    navigation.push(.profile(.profile))
-                    
-                }, label: {
-                    UserInfo(withTime: data.user, imageSize: .small, timeStamp: "5")
+                NavigationLink{
+                    ProfileView(hideTab: $hideTab, user: user)
+                }label: {
+                    UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
                         .foregroundStyle(.black)
-                })
+
+                }
                 .navigationBarBackButtonHidden()
                 .padding(.horizontal)
                 
                 //ımage ?? nil
-                if let imageUrl = data.post.imageUrl{
+                if let imageUrl = post.imageUrl{
                     KFImage(URL(string: imageUrl))
                         .resizable()
                         .frame(width: Const.width * 0.95,height: Const.height * 0.35)
                         .scaledToFill()
-                        .padding(.horizontal,Const.width * 0.025)
                 }
                 // caption
                 HStack {
-                    if let _ =  data.post.imageUrl {
-                        Text("\(data.user.username ): ")
+                    if let _ =  post.imageUrl {
+                        Text("\(user.username ): ")
                             .fontWeight(.bold)
                             .font(.subheadline)
-                        +  Text(data.post.caption)
+                        +  Text(post.caption)
                     }
                     else{
-                        Text(data.post.caption)
+                        Text(post.caption)
                     }
                      
                     Spacer()
@@ -111,9 +118,12 @@ struct FeedViewCell: View {
                 .padding()
                 Spacer()
             }
+        }
+       
+        Divider()
         
     }
 }
 #Preview {
-   ContentView()
+    FeedViewCell(post: Post.MockData[0], user:  User.MockData[0], hideTab: .constant(false))
 }

@@ -31,7 +31,9 @@ struct SerachView: View {
     var body: some View {
         VStack {
             HStack {
+
                 SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
+
             }.frame(width: Const.width * 0.97)
             
             

@@ -4,7 +4,7 @@
 //
 //  Created by OmerErbalta on 5.12.2023.
 //
-
+/*
 import Foundation
 import SwiftUI
 
@@ -174,3 +174,4 @@ class NavigationStateManager : ObservableObject{
         
     }
 }
+*/
