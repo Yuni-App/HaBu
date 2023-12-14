@@ -81,3 +81,10 @@ import SwiftUI
         }
 }
 
+
+
+#Preview {
+    CategoryFilterBottomSheet()
+}
+
+
