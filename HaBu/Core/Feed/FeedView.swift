@@ -17,7 +17,6 @@ struct FeedView: View {
     @State var addPostButtonPosition = CGPoint(x: 10, y: 20)
     var topEdge: CGFloat
     var body: some View {
-        NavigationStack{
             VStack {
                 ScrollView(.vertical,showsIndicators: false){
                     VStack (alignment:.leading){
@@ -82,10 +81,6 @@ struct FeedView: View {
                 }
                 
             }
-            
-        }
-        
-        
         
     }
 }
@@ -148,7 +143,7 @@ struct FeedViewTollBar:View {
                 
             }
         }
-        .padding(.top,15)
+        .padding(.horizontal,15)
         .padding(.top,topEdge)
     }
 }

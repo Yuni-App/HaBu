@@ -37,7 +37,7 @@ enum AppIcon: String{
     case info = "info.square"
     case checkSquare = "checkmark.square.fill"
     case square = "square"
- 
+    case settings = "gear"
 
 }
 

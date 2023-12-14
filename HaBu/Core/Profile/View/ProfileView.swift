@@ -63,12 +63,12 @@ struct ProfileView : View {
                                         .opacity(topBarTitleOpacity())
                                        
                                         Spacer()
-                                        Button(action: {
-                                            
-                                        }, label: {
-                                            Image(systemName: "line.3.horizontal.decrease")
-                                                .font(.body.bold())
-                                        })
+                                        NavigationLink {
+                                            SettingsView()
+                                        } label: {
+                                            Image.iconManager(.settings, size: 20, weight: .black, color: .white)
+                                        }
+
                                       
                                     }
                                         .padding(.horizontal,10)
@@ -84,7 +84,9 @@ struct ProfileView : View {
                             .zIndex(2)
                             VStack(spacing:15){
                                    
-                                ScrollableTabView(posts: Post.MockData,saves: Post.MockData, hideTab: $hideTab)
+                                ForEach(Post.MockData){post in
+                                    FeedViewCell(post: post, user: User.MockData[0], hideTab: $hideTab)
+                                }
                             }
                             .zIndex(1)
                             

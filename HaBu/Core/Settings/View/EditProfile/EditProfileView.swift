@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
+    @Environment(\.dismiss) var dissmis
     var user: User
     @State private var textName : String = ""
     @State private var textSurName : String = ""
@@ -41,7 +42,23 @@ struct EditProfileView: View {
                         .shadow(color: Color.black.opacity(0.4), radius: 7, x: 5, y:20)
                     
                     VStack{
-                        Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
+                        HStack {
+                            Buttons.backButton {
+                                dissmis()
+                            }
+                            .padding(.leading)
+                            Spacer()
+                            Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
+                                .padding(.trailing)
+                            Spacer()
+                            NavigationLink {
+                                SettingsView()
+                                
+                            } label: {
+                                Image.iconManager(.settings, size:25, weight: .bold, color: .white)
+                            }
+
+                        }
                         HStack {
                             Image("star")
                             Text("150")
@@ -87,6 +104,7 @@ struct EditProfileView: View {
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     private var dragGesture: some Gesture {

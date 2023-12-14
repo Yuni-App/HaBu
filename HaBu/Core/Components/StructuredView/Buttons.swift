@@ -51,7 +51,7 @@ class Buttons{
         Button(action: {
             action()
         }, label: {
-            Image.iconManager(.back, size: 25, weight: .bold, color: .black)
+            Image.iconManager(.back, size: 25, weight: .bold, color: .white)
         })
         
     }
