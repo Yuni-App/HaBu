@@ -44,7 +44,7 @@ struct EditProfileView: View {
                     VStack{
                         HStack {
                             Buttons.backButton {
-                                dissmis()
+                                dismiss()
                             }
                             .padding(.leading)
                             Spacer()

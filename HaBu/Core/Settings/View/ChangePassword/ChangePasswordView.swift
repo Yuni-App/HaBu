@@ -39,7 +39,7 @@ struct ChangePasswordView: View {
                 true
                 //send kode
             }, destination: AnyView(ChangePasswordSuccessView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
-        }
+        }   .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor
             )
