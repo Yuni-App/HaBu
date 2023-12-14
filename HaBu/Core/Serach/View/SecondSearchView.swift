@@ -9,9 +9,8 @@ import SwiftUI
 
 struct SecondSearchView: View {
     @State private var searchText = ""
-    @State private var isSearchBar = true
-    
-    @EnvironmentObject var navigation: NavigationStateManager
+    @State private var isSearchBar = false
+    @State private var isSecondSearchViewActive: Bool = true
     
     //SearchFilter name , surname and username
     var users: [User]{
@@ -30,9 +29,9 @@ struct SecondSearchView: View {
             Spacer()
             HStack{
                 Buttons.backButton {
-                    navigation.pop()
+                    //
                 }
-                SearchBar(searchText: $searchText, isEditing: $isSearchBar)
+                SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                     .frame(width: Const.width * 0.85)
             }
             
