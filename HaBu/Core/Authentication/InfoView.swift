@@ -37,19 +37,9 @@ struct InfoView: View {
                 .padding()
             }
             .background(Const.authBackGroundColor)
-           
-            
-            
         }
         
-            .navigationBarBackButtonHidden(true)
-        
-        
-        
-        
-        
-        
-        
+        .navigationBarBackButtonHidden(true)
         
     }
 }

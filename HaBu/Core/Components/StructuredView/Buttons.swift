@@ -51,74 +51,89 @@ class Buttons{
         Button(action: {
             action()
         }, label: {
-            Image.iconManager(.back, size: 25, weight: .bold, color: .black)
+            Image.iconManager(.back, size: 25, weight: .bold, color: .white)
         })
         
     }
     
     
-    
-    @ViewBuilder
-    static func slidableButton( startPosition:CGPoint,position:Binding<CGPoint>,dragDirection:DragDirection,text:String,color:Color,textColor:Color,destination:AnyView)-> some View{
-        @State var navigate = false
-        HStack{
-            if dragDirection == .left {
-                Image(systemName:"chevron.left")
-                    .fontWeight(.bold)
-                    .font(.subheadline)
-            }
-            Text(text)
-                .font(.title3)
-                .fontWeight(.semibold)
-            if dragDirection == .right{
-                Image(systemName:"chevron.right")
-                    .fontWeight(.bold)
-                    .font(.subheadline)
-            }
+    struct SlidableButton: View {
+        @State private var shouldNavigate = false
+        var destinaiton : AnyView
+        @State var position : CGPoint
+        let dragDirection : DragDirection
+        let startPosition:CGPoint
+        let text : String
+        let color:Color
+        let textColor:Color
+        init(destination :AnyView, position: CGPoint,dragDirection:DragDirection,text: String,color:Color,textColor:Color) {
+            self.destinaiton = destination
+            self.position = position
+            self.startPosition = position
+            self.dragDirection = dragDirection
+            self.text = text
+            self.color = color
+            self.textColor = textColor
         }
-        .padding(.vertical,5)
-        .padding(.horizontal,10)
-        .padding(dragDirection.padding,110)
-        .background(color)
-        .foregroundStyle(textColor)
-        .clipShape(
-            .rect(
-                topLeadingRadius: dragDirection == .left ? 20 : 0,
-                bottomLeadingRadius:  dragDirection == .left ? 20 : 0,
-                bottomTrailingRadius:  dragDirection == .left ? 0 : 20,
-                topTrailingRadius:  dragDirection == .left ? 0 : 20
+        
+        
+        var body: some View {
+            HStack{
+                if dragDirection == .left {
+                    Image(systemName:"chevron.left")
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                }
+                Text(text)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                if dragDirection == .right{
+                    Image(systemName:"chevron.right")
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                }
+            }
+            .padding(.vertical,5)
+            .padding(.horizontal,10)
+            .padding(dragDirection.padding,110)
+            .background(color)
+            .foregroundStyle(textColor)
+            .background(
+                NavigationLink(destination:AnyView(destinaiton), isActive: $shouldNavigate) {
+                    EmptyView()
+                }
+                    .hidden()
             )
-        )
-        .position(position.wrappedValue)
-        .gesture(DragGesture().onChanged({ value in
-            if value.translation.width > 0 && value.translation.width < 50 && dragDirection == .right{
-                print(value.translation)
-                position.wrappedValue = CGPoint(x: startPosition.x + value.translation.width, y :startPosition.y)
-            }
-            else if value.translation.width < 0 && value.translation.width > -50 && dragDirection == .left{
-                print(value.translation)
-                position.wrappedValue = CGPoint(x: startPosition.x + value.translation.width, y :startPosition.y)
-            }
-        })
-            .onEnded({ _ in
-                position.wrappedValue  = CGPoint(x:startPosition.x, y :startPosition.y)
-                navigate = true
+            .clipShape(
+                .rect(
+                    topLeadingRadius: dragDirection == .left ? 20 : 0,
+                    bottomLeadingRadius:  dragDirection == .left ? 20 : 0,
+                    bottomTrailingRadius:  dragDirection == .left ? 0 : 20,
+                    topTrailingRadius:  dragDirection == .left ? 0 : 20
+                )
+            )
+            .position(position)
+            .gesture(DragGesture().onChanged({ value in
+                if value.translation.width > 0 && value.translation.width < 50 && dragDirection == .right{
+                    print(value.translation)
+                    position = CGPoint(x: startPosition.x + value.translation.width, y :startPosition.y)
+                }
+                else if value.translation.width < 0 && value.translation.width > -50 && dragDirection == .left{
+                    print(value.translation)
+                    position = CGPoint(x: startPosition.x + value.translation.width, y :startPosition.y)
+                }
             })
-        
-        )
-        .navigationDestination(isPresented: $navigate) {
-            AnyView(destination)
+                .onEnded({ _ in
+                    position = CGPoint(x:startPosition.x, y :startPosition.y)
+                    shouldNavigate = true
+                    
+                })
+            )
         }
-        
-        
-        
     }
-    
-    
-    
+
+
 }
-
-
 enum CustomButtonSize{
     case xxxsmall
     case xxsmall

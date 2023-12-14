@@ -15,13 +15,6 @@ struct CategoryFilterBottomSheet: View {
     @Namespace private var animation
     var body: some View {
         VStack {
-            Text("Gönderi Filtresi ")
-                .font(.title3.bold())
-                .padding(.top,10)
-            Divider().frame(height: 1)
-                .background(.gray)
-            
-                .background(.gray)
             ScrollView(.horizontal,showsIndicators: false){
                 GeometryReader {geometry in
                     HStack {
@@ -114,19 +107,13 @@ struct CategoryFilterBottomSheet: View {
             }
             Divider().frame(height: 1)
                 .background(.black)
-            Text("Kategori Filtrele")
-                .font(.title3.bold())
-                .padding(.top,10)
-            Divider()
-                .frame(height: 1)
-                .background(.gray)
             ScrollView(.horizontal,showsIndicators: false) {
-                HStack(spacing: 10){
+                HStack(spacing: 5){
                     ForEach(SelectedTags ,id: \.self){tag in
                         TagView(tag, Const.thirColor, "checkmark")
                             .matchedGeometryEffect(id: tag, in: animation)
                             .onTapGesture {
-                                withAnimation(.snappy){
+                                withAnimation(.bouncy){
                                     SelectedTags.removeAll(where: {$0 == tag})
                                 }
                             }
@@ -134,7 +121,7 @@ struct CategoryFilterBottomSheet: View {
                     }
                 }
                 .padding(.horizontal,15)
-                .frame(height: 35)
+                .frame(height: 30)
                 .padding(.vertical,15)
             }
             .overlay {
@@ -159,8 +146,9 @@ struct CategoryFilterBottomSheet: View {
                             }
                     }
                 }
-                .padding(15)
+                .padding(10)
             }
+            .frame(height:CGFloat(Const.categoryTags.count) * 20)
             .scrollIndicators(.hidden)
             .background(.black.opacity(0.07))
             .zIndex(0)
@@ -202,9 +190,9 @@ func TagView(_ tag:String ,_ color: Color, _ icon:String)->some View{
             .fontWeight(.semibold)
         Image(systemName:icon)
     }
-    .frame(height: 35)
+    .frame(height: 25)
     .foregroundStyle(.white)
-    .padding(.horizontal,15)
+    .padding(.horizontal,10)
     .background(
         Capsule().fill(color.gradient)
     )
@@ -227,7 +215,7 @@ func cardView(_ title:String,_ caption:String,_ color:Color,_ icon:String) -> so
                 }
             }
     }
-    .frame(width: Const.width * 0.6, height:Const.width * 0.2)
+    .frame(width: Const.width * 0.6, height:Const.width * 0.15)
     .clipShape(.rect(cornerRadius: 20))
     .padding(.horizontal,Const.width * 0.19)
 
