@@ -10,41 +10,45 @@ import SwiftUI
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var textContent : String = ""
-    @State  var share : Bool = true
+    @State  var isShareActive : Bool = false
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
     
     var body: some View {
+        VStack {
             ZStack{
-                AddPostBackground()
-                VStack{
-                    AddPostAppBar(action: {
-                        dismiss()
-                    }, share: $share)
-                    TextFields.LineLimitTextField(text: $textContent)
-                    AddPostCategory()
-                    HStack{
-                        Toggle("Anonim Gönderi", isOn: $isAnonimPost)
-                            .fontWeight(.bold)
-                    }.padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 7)
+                    AddPostBackground()
+                    VStack{
+                        AddPostAppBar(action: {
+                            dismiss()
+                        }, isShareActive: $isShareActive)
+                        TextFields.LineLimitTextField(text: $textContent)
+                        AddPostCategory()
+                        HStack{
+                            Toggle("Anonim Gönderi", isOn: $isAnonimPost)
+                                .fontWeight(.bold)
+                        }.padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 7)
+                                    .foregroundColor(Color.white))
+                            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
+                        HStack{
+                            Toggle("Anonim Yorum", isOn: $isAnonimComment)
+                                .fontWeight(.bold)
+                        }.padding()
+                            .background(RoundedRectangle(cornerRadius: 7)
                                 .foregroundColor(Color.white))
-                        .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-                    HStack{
-                        Toggle("Anonim Yorum", isOn: $isAnonimComment)
-                            .fontWeight(.bold)
+                            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
+                        AddPostMedia()
+                        Spacer()
                     }.padding()
-                        .background(RoundedRectangle(cornerRadius: 7)
-                            .foregroundColor(Color.white))
-                        .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-                    AddPostMedia()
-                    Spacer()
-                }.padding()
-                
+                    
             }
-            
-        
+            NavigationLink(
+                            destination: TabbarView(),
+                            isActive: $isShareActive,
+                            label: { EmptyView() })
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
@@ -52,8 +56,7 @@ struct AddPostView: View {
     AddPostView()
 }
 @ViewBuilder
-func AddPostAppBar(action : @escaping()->Void ,share : Binding<Bool>) -> some View{
-    
+func AddPostAppBar(action : @escaping()->Void ,isShareActive : Binding<Bool>) -> some View{
     HStack{
         Buttons.backButton {
                 action()
@@ -63,9 +66,8 @@ func AddPostAppBar(action : @escaping()->Void ,share : Binding<Bool>) -> some Vi
             .foregroundColor(.white)
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
         Spacer()
-            NavigationLink("", destination: TabbarView().navigationBarBackButtonHidden(true), isActive: share )
         Button(action: {
-            share.wrappedValue = true
+            isShareActive.wrappedValue = true
         }, label: {
             Text("Paylaş")
                 .foregroundColor(.green)
@@ -85,7 +87,6 @@ func AddPostBackground()-> some View {
                 Const.LinearBackGroundColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-        
         Const.primaryBackGroundColor
             .frame(height: Const.height * 7.6 / 10)
     }
@@ -149,7 +150,7 @@ struct AddPostCategory: View {
 }
 
 @ViewBuilder
-func AddPostMedia(imageList : [String] = ["Mert","Mert"] )-> some View {
+func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
     VStack{
         HStack{
             Text("Medya")
@@ -159,7 +160,7 @@ func AddPostMedia(imageList : [String] = ["Mert","Mert"] )-> some View {
         }
         HStack{
             if imageList.isEmpty {
-                GenerateImageBox(image: "AddPhoto" )
+                GenerateImageBox(image: .addPhoto )
                 Spacer()
             }
             if imageList.count == 3 {
@@ -174,17 +175,15 @@ func AddPostMedia(imageList : [String] = ["Mert","Mert"] )-> some View {
                     //Image box
                     GenerateImageBox( image: userImage)
                     Spacer()
-                    
                 }
-                GenerateImageBox(image: "AddPhoto")
+                GenerateImageBox(image: .addPhoto)
                 Spacer()
             }
             if imageList.count == 1 {
                 ForEach(imageList, id: \.self) { userImage in
-                    //Image box
                     GenerateImageBox(image: userImage)
                 }
-                GenerateImageBox(image: "AddPhoto")
+                GenerateImageBox(image: .addPhoto)
                 Spacer()
             }
         }

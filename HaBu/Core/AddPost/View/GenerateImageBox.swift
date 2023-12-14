@@ -9,9 +9,9 @@ import SwiftUI
 
 struct GenerateImageBox: View {
     @State private var addPhotoBottomSheet: Bool = false
-    let image: String
+    let image: AppImage
     var body: some View {
-        if (image=="AddPhoto") {
+        if (image==(.addPhoto)) {
             Button(action:{
             addPhotoBottomSheet = true
         }, label: {
@@ -38,20 +38,20 @@ struct GenerateImageBox: View {
 }
 
 #Preview {
-    GenerateImageBox(image: "Mert")
+    GenerateImageBox(image: .mert)
 }
 
 struct ImageBox: View {
-    let image: String
+    let image:AppImage
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(width: Const.width/4, height: Const.width/4)
                 .background(
-                    Image.imageManager(.addPhoto)
+                    Image.imageManager(image:image ,radius: 7 ,backgroundColor: Color(UIColor(hex: "A7A7A7")),shadow: Color.black)
+                   
                 )
-            
         }
     }
 }

@@ -68,13 +68,14 @@ extension Image {
     }
 }
 extension Image {
-    static func imageManager(_ imageManager: AppImage) -> some View {
-        Image(imageManager.rawValue)
+    static func imageManager(image: AppImage , radius : CGFloat? = nil , backgroundColor : Color? = nil  , shadow : Color? = nil,width : CGFloat? = nil  , height : CGFloat? = nil
+    ) -> some View {
+        Image(image.rawValue)
             .resizable()
-            .foregroundColor(.white)
-            .background(Color(UIColor(hex: "A7A7A7")).opacity(0.1))
-            .cornerRadius(7)
-            .shadow(color: Color.black.opacity(1), radius: 5, x: 3, y: 3)
+            .frame(width: width,height : height)
+            .background(backgroundColor?.opacity(0.1) ?? Color.clear)
+            .cornerRadius(radius ?? 0)
+            .shadow(color: (shadow?.opacity(1) ?? Color.clear), radius: 5, x: 3, y: 3)
     }
 }
 extension [LayoutSubviews.Element]{
