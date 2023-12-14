@@ -236,7 +236,6 @@
 				9411AA8D2B0510F80042A354 /* CustomImage.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
-				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
 				949016E92B04275F00164405 /* CustomButton.swift */,
 				8821E50B2B1DC900003089B6 /* CustomSearchBar.swift */,
@@ -466,6 +465,7 @@
 				947079A82B1BD4060005C4CB /* ChangePassword */,
 				947079A22B1BCE230005C4CB /* Agreement */,
 				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
+				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

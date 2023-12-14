@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @Environment(\.dismiss) var dissmis
+    @Environment(\.dismiss) private var dismiss
     var user: User
     @State private var textName : String = ""
     @State private var textSurName : String = ""

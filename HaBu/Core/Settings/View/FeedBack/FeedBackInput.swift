@@ -50,7 +50,7 @@ struct FeedBackInput: View {
 
 
 #Preview {
-    FeedBackInput()
+    SettingsView()
 }
 
 

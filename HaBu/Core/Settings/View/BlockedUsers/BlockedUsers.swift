@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct BlockedUsers: View {
+    @Environment(\.dismiss) private var dismiss
     let blockedList : [User] = User.MockData
     var body: some View {
-        NavigationStack{
             VStack{
-                CustomSettingsTollBar(title: "Engellenenler", destinaiton: AnyView( SettingsView().navigationBarBackButtonHidden(true)),blockedCount: blockedList.count)
-
+                CustomSettingsTollBar(action: {
+                    dismiss()
+                }, title: "Engellenenler", blockedCount:  blockedList.count)
                 ScrollView{
                     VStack{
                         if blockedList.count == 0 {
@@ -28,10 +29,8 @@ struct BlockedUsers: View {
                 }.frame(width: Const.width)
                     .background(
                         Const.primaryBackGroundColor
-                    )
+                )
             }
-        }
-       
     }
 }
 
@@ -42,7 +41,6 @@ struct BlockedUsers: View {
 
 @ViewBuilder
 private func BlockedUserListTile(user : User)->some View {
-    NavigationStack{
         HStack {
             CircleProfileImage(userIamgeUrl: "", size: .small)
             VStack{
@@ -61,7 +59,7 @@ private func BlockedUserListTile(user : User)->some View {
             } ,size: CustomButtonSize.xxxsmall)
         }.padding(.horizontal ,15)
         .padding(.vertical,5)
-    }
+    
 }
 
 
