@@ -10,6 +10,7 @@ import SwiftUI
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var textContent : String = ""
+    @State  var share : Bool = true
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
     
@@ -17,9 +18,9 @@ struct AddPostView: View {
             ZStack{
                 AddPostBackground()
                 VStack{
-                    AddPostAppBar {
+                    AddPostAppBar(action: {
                         dismiss()
-                    }
+                    }, share: $share)
                     TextFields.LineLimitTextField(text: $textContent)
                     AddPostCategory()
                     HStack{
@@ -51,7 +52,7 @@ struct AddPostView: View {
     AddPostView()
 }
 @ViewBuilder
-func AddPostAppBar(action : @escaping()->Void) -> some View{
+func AddPostAppBar(action : @escaping()->Void ,share : Binding<Bool>) -> some View{
     
     HStack{
         Buttons.backButton {
@@ -62,12 +63,15 @@ func AddPostAppBar(action : @escaping()->Void) -> some View{
             .foregroundColor(.white)
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
         Spacer()
-        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
+            NavigationLink("", destination: TabbarView().navigationBarBackButtonHidden(true), isActive: share )
+        Button(action: {
+            share.wrappedValue = true
+        }, label: {
             Text("Paylaş")
                 .foregroundColor(.green)
                 .fontWeight(.bold)
                 .frame(width: Const.width/7)
-        }
+        })
     }.padding(.top , 25)
 }
 

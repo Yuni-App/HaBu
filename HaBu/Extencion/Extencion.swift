@@ -67,6 +67,16 @@ extension Image {
             .scaledToFit()
     }
 }
+extension Image {
+    static func imageManager(_ imageManager: AppImage) -> some View {
+        Image(imageManager.rawValue)
+            .resizable()
+            .foregroundColor(.white)
+            .background(Color(UIColor(hex: "A7A7A7")).opacity(0.1))
+            .cornerRadius(7)
+            .shadow(color: Color.black.opacity(1), radius: 5, x: 3, y: 3)
+    }
+}
 extension [LayoutSubviews.Element]{
     func maxHeight(_ proposal: ProposedViewSize) -> CGFloat{
         return self.compactMap { view in

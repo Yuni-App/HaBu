@@ -53,7 +53,7 @@ struct LoginView: View {
                         Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                         
                         NavigationLink {
-                            LoginView()
+                            RegisterBuildFirstView().navigationBarBackButtonHidden(true)
                         } label: {
                             Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(.bold)
 

@@ -49,12 +49,7 @@ struct ImageBox: View {
                 .foregroundColor(.clear)
                 .frame(width: Const.width/4, height: Const.width/4)
                 .background(
-                    Image(image)
-                        .resizable()
-                        .foregroundColor(.white)
-                        .background(Color(UIColor(hex: "A7A7A7")).opacity(0.1))
-                        .cornerRadius(7)
-                        .shadow(color: Color.black.opacity(1), radius: 5, x: 3, y: 3)
+                    Image.imageManager(.addPhoto)
                 )
             
         }
