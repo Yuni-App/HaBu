@@ -12,39 +12,33 @@ struct SerachView: View {
     @State private var searchText = ""
     @State private var ratingSorted = false
     @State private var isEditing = false
-    @State private var isSearchBar = false
     @State private var isSecondSearchViewActive: Bool = false
-    
-    //filtered user
-    //vertical
-    var filteredUsers1: [User]{
-        let sortedUser = User.MockData.filter { $0.rating > 0}.sorted {$0.rating > $1.rating}
+
+    var filteredUsers1: [User] {
+        let sortedUser = User.MockData.filter { $0.rating > 0 }.sorted { $0.rating > $1.rating }
         return Array(sortedUser.prefix(3))
-        // first three User
     }
-    //horizontal
+
     var filteredUsers2: [User] {
         let sortedUsers2 = User.MockData.filter { $0.rating > 0 }.sorted { $0.rating > $1.rating }
         return Array(sortedUsers2.dropFirst(3).prefix(7))
-        //start 4. USER to 10
     }
+
     var body: some View {
         VStack {
-            HStack {
-
-                SearchBar(searchText: .constant(""), isEditing: .constant(false), isSecondSearchViewActive: $isSecondSearchViewActive)
-
-            }.frame(width: Const.width * 0.97)
-            
-            
-            if !isSecondSearchViewActive{
+            if isSecondSearchViewActive {
+                SecondSearchView()
+            } else {
+                HStack {
+                    SearchBar(searchText: $searchText, isEditing: $isEditing, isSecondSearchViewActive: $isSecondSearchViewActive)
+                }.frame(width: Const.width * 0.97)
                 ScrollView {
                     VStack {
                         ForEach(filteredUsers1, id: \.id) { user in
                             SearchItem(user: user, ratingSorted: ratingSorted)
                         }
                         .padding(.top,15)
-                        
+
                         ScrollView(.horizontal){
                             HStack{
                                 Spacer()
@@ -54,21 +48,13 @@ struct SerachView: View {
                                 .padding(.top,15)
                                 Spacer()
                             }.frame(height: Const.height * 0.25)
-                            
                         }.background(Color.white).padding(.top, 17)
                     }
                 }
             }
         }.frame(width: Const.width).background(Const.primaryBackGroundColor)
-            .background(
-                            NavigationLink(destination: SecondSearchView(), isActive: $isSecondSearchViewActive) {
-                                EmptyView()
-                            }
-                            .hidden()
-                        )
     }
 }
-
 
 #Preview {
     SerachView()
