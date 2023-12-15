@@ -11,15 +11,13 @@ struct FeedBackInput: View {
     @State private var text : String = ""
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
-    @State private var selectedRating: Int = 0    
+    @State private var selectedRating: Int = 0
     var body: some View {
         NavigationView{
             ZStack{
                 AddPostBackground()
-                VStack{
-                    FeedBackBar().frame(height: Const.height * 0.1)
-                    
                     VStack {
+                        FeedBackBar().frame(height: Const.height * 0.15)
                         Image("Feed 1")
                             .padding()
                         TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
@@ -29,52 +27,43 @@ struct FeedBackInput: View {
                             .cornerRadius(7)
                             .shadow(color: Color.black.opacity(0.4), radius: 4, x: 1, y: 2)
                         Spacer()
-                    }.padding(7)
-                    VStack{
                         Rate(selectedRating: $selectedRating)
-                    }
-                    .frame(width: Const.width * 0.9, height: Const.height * 0.3)
-                    
-                    
-                    VStack {
-                        SendButton(text: text)
-                    }.padding()
-                        .frame(width: Const.width * 0.4)
-                    
-                }.padding()
-                Spacer()
+                        Spacer()
+                        SendButton(text: text).padding(.bottom, Const.height * 0.05)
+                    }.frame(width: Const.width * 0.95)
+                
             }
-        }
+        }.frame(height: Const.height * 1)
     }
 }
 
 
 #Preview {
-    SettingsView()
+    FeedBackInput()
 }
 
 
 @ViewBuilder
 func FeedBackBar() -> some View {
     HStack {
-        Buttons.backButton {
+        NavigationLink {
+            SettingsView().navigationBarBackButtonHidden()
+        } label: {
+            Image(systemName: AppIcon.back.rawValue).resizable().frame(width: Const.width * 0.03, height: Const.height * 0.025).foregroundStyle(Color.black)
         }
-        
-        Spacer()
-        Text("Geri Bildirim")
-            .foregroundColor(.white)
-            .fontWeight(.semibold)
-            .frame(width: Const.width * 0.5)
-        Spacer()
-    }
-    .padding(.top, 55)
+            Text("Geri Bildirim")
+                .foregroundColor(.white)
+                .fontWeight(.semibold)
+                .frame(width: Const.width * 0.9)
+    }.frame(width: Const.width * 1)
 }
 
 @ViewBuilder
 func SendButton(text: String) -> some View {
     HStack {
-        if !text.isEmpty {
-        
+        NavigationLink(
+            destination: FeedBackSuccess().navigationBarBackButtonHidden(),
+            label: {
                 Text("GÖNDER")
                     .fontWeight(.semibold)
                     .frame(width: Const.width * 0.5, height: Const.height * 0.05, alignment: .center)
@@ -82,12 +71,10 @@ func SendButton(text: String) -> some View {
                     .background(Const.primaryButtonColor)
                     .cornerRadius(8)
                     .opacity(text.isEmpty ? 0.7 : 1.0)
-                    .onTapGesture {
-                    }
-                    
             }
-        }
-    
+        )
+        .disabled(text.isEmpty)
+    }
 }
 
 
