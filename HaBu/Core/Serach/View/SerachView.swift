@@ -48,7 +48,7 @@ struct SerachView: View {
                                 .padding(.top,15)
                                 Spacer()
                             }.frame(height: Const.height * 0.25)
-                        }.background(Color.white).padding(.top, 17)
+                        }.padding(.top, 17)
                     }
                 }
             }
