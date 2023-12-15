@@ -47,11 +47,11 @@ class Buttons{
     }
     
     @ViewBuilder
-    static func backButton( action: @escaping ()-> Void) -> some View{
+    static func backButton( action: @escaping ()-> Void,color:Color = .white) -> some View{
         Button(action: {
             action()
         }, label: {
-            Image.iconManager(.back, size: 25, weight: .bold, color: .white)
+            Image.iconManager(.back, size: 25, weight: .bold, color: color)
         })
         
     }
