@@ -98,7 +98,7 @@ struct ProfileView : View {
                                 DispatchQueue.main.async {
                                     if minY < offset{
                                         if offset < 0 && -minY > (lastOffset + durationOffset){
-                                            withAnimation(.easeOut .speed(1.5)){
+                                            withAnimation(.easeOut .speed(1.2)){
                                                 print(minY)
                                                 hideTab = true
                                             }
@@ -231,7 +231,7 @@ struct Tabbar:View {
             }
             .padding(.top,maxHeight * 0.25)
            
-            Buttons.SlidableButton(destination: AnyView(EditProfileView(user: User.MockData[0])), position: editButtonPosition, dragDirection: .left, text: "Edit", color: .white, textColor: .black)
+            Buttons.SlidableButton(destination:AnyView(EditProfileView(user: User.MockData[0])), position: editButtonPosition, dragDirection: .left, text: user == User.MockData[0] ?  "Edit" : "Mesaj", color: .white, textColor: .black)
         }
        
         .padding()

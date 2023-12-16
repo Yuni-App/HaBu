@@ -28,7 +28,7 @@ class Buttons{
     
     //actionButton
     @ViewBuilder
-    static func actionButton(buttonType: ActionButtons, action: @escaping () -> Void, getNumber: Int? = nil) -> some View {
+    static func actionButton(buttonType: ActionButtons, action: @escaping () -> Void, getNumber: Int? = nil ,textAction: @escaping () -> Void = {} ) -> some View {
         let number = getNumber != nil ? String(getNumber!) : " "
         VStack {
             Button(action: {
@@ -39,19 +39,25 @@ class Buttons{
                     .scaledToFit()
                     .frame(width: 20, height: 20)
             })
+            
             Text("\(number) \(buttonType.text)")
                 .foregroundColor(.black)
                 .fontWeight(.semibold)
                 .font(.caption2)
+                .onTapGesture {
+                    textAction()
+                }
+           
+            
         }
     }
     
     @ViewBuilder
-    static func backButton( action: @escaping ()-> Void) -> some View{
+    static func backButton( action: @escaping ()-> Void,color:Color = .white) -> some View{
         Button(action: {
             action()
         }, label: {
-            Image.iconManager(.back, size: 25, weight: .bold, color: .white)
+            Image.iconManager(.back, size: 25, weight: .bold, color: color)
         })
         
     }

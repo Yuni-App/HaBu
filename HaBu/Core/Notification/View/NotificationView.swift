@@ -74,10 +74,16 @@ struct NotificationView: View {
         }label: {
             HStack{
                 CircleProfileImage(userIamgeUrl: "", size: .small)
-                Text(notification.caption)
-                    .font(.headline)
-                    .fontWeight(.semibold)
+                VStack (alignment:.leading){
+                    Text(User.MockData[0].username)
+                        .foregroundStyle(.black.opacity(0.7))
+                        .font(.footnote)
+                        .fontWeight(.bold)
+                    Text(notification.caption)
+                        .font(.headline)
+                        .fontWeight(.semibold)
                     .foregroundStyle(.black)
+                }
                 
                 Spacer()
                 VStack{
