@@ -20,6 +20,7 @@ struct FeedBackInput: View {
                         FeedBackBar().frame(height: Const.height * 0.15)
                         Image("Feed 1")
                             .padding()
+                        //PopUp(size: .lage, backgroundColor: .brown, contents: "merhaba", btnOpen: "aç", btnClose: "kapat")
                         TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
                             .padding()
                             .lineLimit(9...)
