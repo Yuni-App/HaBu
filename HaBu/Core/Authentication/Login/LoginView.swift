@@ -15,7 +15,7 @@ struct LoginView: View {
     var body: some View {
             ZStack {
                 VStack{
-                    Buttons.backButton {
+                    Buttons.backButton{
                         dissmis()
                         
                     }

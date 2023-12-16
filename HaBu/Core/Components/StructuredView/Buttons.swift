@@ -28,7 +28,7 @@ class Buttons{
     
     //actionButton
     @ViewBuilder
-    static func actionButton(buttonType: ActionButtons, action: @escaping () -> Void, getNumber: Int? = nil) -> some View {
+    static func actionButton(buttonType: ActionButtons, action: @escaping () -> Void, getNumber: Int? = nil ,textAction: @escaping () -> Void = {} ) -> some View {
         let number = getNumber != nil ? String(getNumber!) : " "
         VStack {
             Button(action: {
@@ -39,19 +39,25 @@ class Buttons{
                     .scaledToFit()
                     .frame(width: 20, height: 20)
             })
+            
             Text("\(number) \(buttonType.text)")
                 .foregroundColor(.black)
                 .fontWeight(.semibold)
                 .font(.caption2)
+                .onTapGesture {
+                    textAction()
+                }
+           
+            
         }
     }
     
     @ViewBuilder
-    static func backButton( action: @escaping ()-> Void) -> some View{
+    static func backButton( action: @escaping ()-> Void,color:Color = .white) -> some View{
         Button(action: {
             action()
         }, label: {
-            Image.iconManager(.back, size: 25, weight: .bold, color: .white)
+            Image.iconManager(.back, size: 25, weight: .bold, color: color)
         })
         
     }
@@ -238,6 +244,49 @@ enum DragDirection {
             return .leading
         case .left:
             return .trailing
+        }
+    }
+}
+
+
+enum PopUpScreen{
+    
+    case xsmall
+    case small
+    case medium
+    case lage
+    case xlage
+    case xxlage
+    var width : CGFloat{
+        switch self {
+        case .xsmall:
+            return Const.width * 0.6
+        case .small:
+            return Const.width * 0.65
+        case .medium:
+            return Const.width * 0.7
+        case .lage:
+            return Const.width * 0.8
+        case .xlage:
+            return Const.width * 0.9
+        case .xxlage:
+            return Const.width * 0.95
+        }
+    }
+    var height : CGFloat{
+        switch self {
+        case .xsmall:
+            return Const.height * 0.3
+        case .small:
+            return Const.height * 0.35
+        case .medium:
+            return Const.height * 0.4
+        case .lage:
+            return Const.height * 0.4
+        case .xlage:
+            return Const.height * 0.6
+        case .xxlage:
+            return Const.height * 0.7
         }
     }
 }

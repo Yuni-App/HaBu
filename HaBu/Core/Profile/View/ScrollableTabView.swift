@@ -13,7 +13,7 @@ struct ScrollableTabView: View {
     var posts : [Post]
     var saves : [Post]?
     @State var selectedFilterIndex = 0
-    @State private var scrollOffset: CGFloat = 0
+    @State private var scrollOffset: CGFloat =  Const.width / 2
     @State private var dragDirection: DragDirection = .left
     @Binding var hideTab:Bool
     var body: some View {

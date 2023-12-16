@@ -25,29 +25,32 @@ struct SecondSearchView: View {
         }
     }
     var body: some View {
-        VStack{
-            Spacer()
-            HStack{
-                Buttons.backButton {
-
-                    //
-
+        NavigationView {
+            VStack{
+                Spacer()
+                HStack{
+                    NavigationLink {
+                        SerachView().navigationBarBackButtonHidden()
+                    } label: {
+                        Image(systemName: AppIcon.back.rawValue).resizable().frame(width: Const.width * 0.03, height: Const.height * 0.025).foregroundStyle(Color.black)
+                    }
+                    
+                    SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
+                        .frame(width: Const.width * 0.85)
                 }
-                SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
-                    .frame(width: Const.width * 0.85)
-            }
-            
-            ScrollView {
-                ForEach(users) { user in
-                    SearchItem3(user: user)
-                }.transition(.opacity)
                 
-            }.frame(width: Const.width * 0.9, height: Const.height * 0.85)
-                .padding()
-                .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
-                .animation(.easeInOut)
-                .navigationBarBackButtonHidden()
-        }.frame(width: Const.width, height: Const.height).background(Const.primaryBackGroundColor)
+                ScrollView {
+                    ForEach(users) { user in
+                        SearchItem3(user: user)
+                    }.transition(.opacity)
+                    
+                }.frame(width: Const.width * 0.9, height: Const.height * 0.85)
+                    .padding()
+                    .opacity(users.isEmpty ? 0 : 1) // Hide if there are no results
+                    .animation(.easeInOut)
+                    .navigationBarBackButtonHidden()
+            }.frame(width: Const.width, height: Const.height).background(Const.primaryBackGroundColor)
+        }
     }
 }
 
