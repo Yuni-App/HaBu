@@ -17,7 +17,7 @@ struct ProfileView : View {
     @State var lastOffset:CGFloat = 0
     @State var messageBox = 20
     @State var TollBarOffset : CGFloat = 0
-    @State var topEdge:CGFloat = Const.height * 0.05
+    @State var topEdge:CGFloat = Const.height * 0.03
     let maxHeight = UIScreen.main.bounds.height / 2.7
     let user : User
     var images = [
@@ -81,14 +81,14 @@ struct ProfileView : View {
                             }
                             .frame(height: maxHeight)
                             .offset(y:-TollBarOffset)
-                            .zIndex(2)
+                            .zIndex(1)
                             VStack(spacing:15){
                                    
                                 ForEach(Post.MockData){post in
                                     FeedViewCell(post: post, user: User.MockData[0], hideTab: $hideTab)
                                 }
                             }
-                            .zIndex(1)
+                            .zIndex(0)
                             
                         }
                         .overlay(
@@ -154,7 +154,7 @@ struct ProfileView : View {
 struct Tabbar:View {
     @State var editButtonPosition = CGPoint(x:Const.width, y:0)
     let user:User
-    var images = [
+    let images = [
         "profil1",
         "profil2",
         "profil3"

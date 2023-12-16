@@ -59,6 +59,7 @@ struct FeedView: View {
                     .padding(.bottom,15 + bottomEdge + 35)
                 }
                 .coordinateSpace(name:"SCROLL")
+                //TollBar
                 .overlay(
                     FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox, topEdge: topEdge)
                         .background(.white)
@@ -66,6 +67,7 @@ struct FeedView: View {
                     ,alignment: .top
                 )
                 .ignoresSafeArea(.all,edges: .all)
+                //Slidable Button
                 .overlay(
                     Buttons.SlidableButton(destination: AnyView(AddPostView()), position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
                         .offset(x:hideTab ? -Const.width * 0.5:0)
@@ -99,7 +101,7 @@ struct FeedViewTollBar:View {
     var body: some View {
         VStack{
             HStack{
-                Text("HaBu!").foregroundStyle(Const.primaryColor).font(.custom("IrishGrover-Regular", size: 35))
+                Text("Yuni").foregroundStyle(Const.primaryColor).font(.custom("Kodchasan-Bold", size: 40))
                     .padding(10)
                 Spacer()
                 
@@ -107,7 +109,7 @@ struct FeedViewTollBar:View {
                     showCategoryFilter = true
                     
                 }, label: {
-                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black)     .padding(20)
+                    Image.iconManager(.filter, size: 20, weight: .bold, color: .black).padding(20)
                 })
                 
                 //message icon
@@ -142,9 +144,15 @@ struct FeedViewTollBar:View {
  
                 
             }
+            
         }
         
         .padding(.horizontal,15)
         .padding(.top,topEdge + 15)
+        .overlay(
+            Rectangle()
+                .stroke().opacity(0.3)
+                .background(Color.clear)
+        )
     }
 }

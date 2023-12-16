@@ -38,6 +38,10 @@ enum AppIcon: String{
     case checkSquare = "checkmark.square.fill"
     case square = "square"
     case settings = "gear"
+}
 
+@ViewBuilder
+func getLogo(size:CGFloat)-> some View{
+    Text("Y").foregroundStyle(Const.primaryColor).font(.custom("Kodchasan-Bold", size: size))
 }
 

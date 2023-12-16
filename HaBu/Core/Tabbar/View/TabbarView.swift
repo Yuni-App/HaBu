@@ -28,22 +28,18 @@ struct TabbarView: View {
             TabView(selection:$currentTab){
                 FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
                     .tag("Feed")
                     .toolbar(.hidden, for: .tabBar)
                 SerachView()
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
                     .tag("Search")
                     .toolbar(.hidden, for: .tabBar)
                 NotificationView()
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
                     .tag("Notification")
                     .toolbar(.hidden, for: .tabBar)
                 ProfileView(hideTab: $hideBar, user: User.MockData[0])
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(Color.primary.opacity(0.1))
                     .tag("Profile")
                     .toolbar(.hidden, for: .tabBar)
             }
@@ -89,7 +85,9 @@ private struct CustomTabButton:View {
                 
             }
         }, label: {
-                Image(image)
+            
+            
+               Image(image)
                 .renderingMode(.template)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
