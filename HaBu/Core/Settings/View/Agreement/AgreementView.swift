@@ -22,7 +22,7 @@ struct AgreementView: View {
                 .background(
                     Const.primaryBackGroundColor
                 )
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

@@ -23,6 +23,7 @@ struct ChangePasswordSuccessView: View {
         }.frame(width: Const.width)
             .background(Const.primaryBackGroundColor
         )
+            .navigationBarBackButtonHidden(true)
      
     }
 }

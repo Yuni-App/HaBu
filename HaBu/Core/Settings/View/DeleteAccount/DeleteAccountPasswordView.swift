@@ -25,8 +25,8 @@ struct DeleteAccountPasswordView: View {
             CustomButton(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
                 true
                 //send kode
-            }, destination: AnyView(DeleteAccountCodeView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
-        }
+            }, destination: AnyView(DeleteAccountCodeView()), size: CustomButtonSize.medium)
+        }    .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor
             )
