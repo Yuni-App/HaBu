@@ -21,12 +21,7 @@ struct FeedBackInput: View {
                         Image("Feed 1")
                             .padding()
                         //PopUp(size: .lage, backgroundColor: .brown, contents: "merhaba", btnOpen: "aç", btnClose: "kapat")
-                        TextField("Ne düşünüyorsunuz?", text: $text, axis: .vertical)
-                            .padding()
-                            .lineLimit(9...)
-                            .background(Color.white)
-                            .cornerRadius(7)
-                            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 1, y: 2)
+                        TextFields.LineLimitTextField(text: $text)
                         Spacer()
                         Rate(selectedRating: $selectedRating)
                         Spacer()
@@ -47,11 +42,9 @@ struct FeedBackInput: View {
 @ViewBuilder
 func FeedBackBar() -> some View {
     HStack {
-        NavigationLink {
-            SettingsView().navigationBarBackButtonHidden()
-        } label: {
-            Image(systemName: AppIcon.back.rawValue).resizable().frame(width: Const.width * 0.03, height: Const.height * 0.025).foregroundStyle(Color.black)
-        }
+            Buttons.backButton(action: {
+                //
+            })
             Text("Geri Bildirim")
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
