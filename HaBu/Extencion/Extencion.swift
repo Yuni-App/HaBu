@@ -86,3 +86,19 @@ extension [LayoutSubviews.Element]{
     }
 }
 
+
+extension View {
+    func popup<PopupContent: View>(
+        isPresented: Binding<Bool>,
+        view: @escaping () -> PopupContent
+    ) -> some View {
+        self.modifier(
+            Popup(
+                isPresented: isPresented,
+                view: view
+            )
+        )
+    }
+}
+
+

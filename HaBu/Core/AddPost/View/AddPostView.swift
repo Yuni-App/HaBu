@@ -46,7 +46,6 @@ struct AddPostView: View {
                     AddPostMedia()
                     Spacer()
                 }.padding()
-                
             }
             NavigationLink(
                 destination: TabbarView(),
@@ -54,13 +53,9 @@ struct AddPostView: View {
                 label: { EmptyView() })
         }
         .blur(radius: isPopupVisible ? 1.5 : 0.0)
-        .overlay(
-            Group {
-                if isPopupVisible {
-                    AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
-                }
-            }
-        )
+        .popup(isPresented: $isPopupVisible) {
+                   AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
+               }
         .navigationBarBackButtonHidden(true)
     }
 }
@@ -178,7 +173,7 @@ func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
 func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding<Bool>)->some View {
     VStack {
         Text("Gönderinizin Gizliliği Nasıl Olsun ? ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).foregroundColor(.black).padding(.bottom,5)
-        Text("Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...").foregroundColor(.white)
+        Text("Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...").foregroundColor(Const.secondaryButtonColor)
         Spacer()
         Spacer()
         CustomButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
@@ -190,7 +185,7 @@ func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding
               
         }, size: CustomButtonSize.medium , textColor: .white)
         Spacer()
-        CustomButton(title:  "Açık Gönderi", backgroundColor: .white, action: {
+        CustomButton(title:  "Açık Gönderi", backgroundColor: Const.secondaryButtonColor, action: {
             withAnimation {
                 selectedOption.wrappedValue = .profil
                 isPopupVisible.wrappedValue.toggle()
@@ -202,7 +197,6 @@ func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding
     }.padding(.vertical,10)
     .padding(.horizontal,5)
     .frame(width: Const.width * 0.85,height: Const.width * 0.6 )
-    .background(Color.gray)
     .cornerRadius(15)
     
     
