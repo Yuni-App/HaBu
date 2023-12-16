@@ -8,9 +8,9 @@
 import SwiftUI
 
 enum ImageType {
-    case notSelect
-    case anonim
-    case profil
+    case notSelected
+    case anonymous
+    case notAnonymous
 }
 
 struct AddPostView: View {
@@ -19,7 +19,7 @@ struct AddPostView: View {
     @State  var isShareActive : Bool = false
     @State private var isAnonimComment  = false
     @State private var isPopupVisible = true
-    @State private var selectedOption: ImageType = .notSelect
+    @State private var selectedOption: ImageType = .notSelected
     var body: some View {
         VStack {
             ZStack{
@@ -30,14 +30,14 @@ struct AddPostView: View {
                     }, isShareActive: $isShareActive)
                     TextFields.LineLimitTextField(text: $textContent)
                     VStack{
-                        if selectedOption == .notSelect {
+                        if selectedOption == .notSelected {
                             UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
                         }
-                        else if selectedOption == .anonim
+                        else if selectedOption == .anonymous
                         {
                             UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
                         }
-                        else if selectedOption == .profil {
+                        else if selectedOption == .notAnonymous {
                             UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
                         }
                     }
@@ -178,21 +178,19 @@ func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding
         Spacer()
         CustomButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
             withAnimation {
-                selectedOption.wrappedValue = .anonim
+                selectedOption.wrappedValue = .anonymous
                 isPopupVisible.wrappedValue.toggle()
             }
             return false
-              
         }, size: CustomButtonSize.medium , textColor: .white)
         Spacer()
-        CustomButton(title:  "Açık Gönderi", backgroundColor: Const.secondaryButtonColor, action: {
+        CustomButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
             withAnimation {
-                selectedOption.wrappedValue = .profil
+                selectedOption.wrappedValue = .notAnonymous
                 isPopupVisible.wrappedValue.toggle()
             }
             return false
-              
-        }, size: CustomButtonSize.medium , textColor: Const.primaryButtonColor)
+        }, size: CustomButtonSize.medium , textColor: .white)
       Spacer()
     }.padding(.vertical,10)
     .padding(.horizontal,5)
