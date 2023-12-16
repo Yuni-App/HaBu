@@ -33,7 +33,7 @@ struct FeedView: View {
                             DispatchQueue.main.async {
                                 if minY < offset{
                                     if offset < 0 && -minY > (lastOffset + durationOffset){
-                                        withAnimation(.easeOut .speed(1.5)){
+                                        withAnimation(.easeOut ){
                                             print(minY)
                                             hideTab = true
                                         }
@@ -42,7 +42,7 @@ struct FeedView: View {
                                     
                                 }
                                 if minY > offset && -minY < (lastOffset - durationOffset){
-                                    withAnimation(.easeOut .speed(1.5)){
+                                    withAnimation(.easeOut){
                                         hideTab = false
                                     }
                                     lastOffset = -offset
@@ -143,7 +143,8 @@ struct FeedViewTollBar:View {
                 
             }
         }
+        
         .padding(.horizontal,15)
-        .padding(.top,topEdge)
+        .padding(.top,topEdge + 15)
     }
 }

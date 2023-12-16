@@ -13,7 +13,8 @@ struct FeedViewCell: View {
     @State private var likePost = ActionButtons.unLike
     @Binding var hideTab:Bool
     private var backButton : Bool
-   @State private var showingComment = false
+    @State private var showingComment = false
+    @State private var showingLikeList = false
     let post : Post
     var user : User
     init(post: Post,user:User,hideTab:Binding<Bool>) {
@@ -93,7 +94,15 @@ struct FeedViewCell: View {
                         else{
                             likePost = .unLike
                         }
-                    },getNumber: 20)
+                    },getNumber: 20,
+                    textAction: {
+                        showingLikeList = true
+                    })
+                    .sheet(isPresented: $showingLikeList)
+                     {
+                         LikesView(post: Post.MockData[0])
+                             .presentationDetents([.large,.medium])
+                    }
                     Buttons.actionButton(buttonType:.bubble, action: {
                         showingComment = true
                         print("comment")
