@@ -27,5 +27,7 @@ enum AppImage: String{
     case success = "success"
     case addPhoto = "AddPhoto"
     case mert = "Mert"
+    case anonim = "anonim"
+    case qUser = "Quser"
 }
 

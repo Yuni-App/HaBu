@@ -7,59 +7,100 @@
 
 import SwiftUI
 
+enum ImageType {
+    case notSelect
+    case anonim
+    case profil
+}
+
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var textContent : String = ""
     @State  var isShareActive : Bool = false
-    @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
-    
+    @State private var isPopupVisible = true
+    @State private var selectedOption: ImageType = .notSelect
     var body: some View {
         VStack {
             ZStack{
-                    AddPostBackground()
+                AddPostBackground()
+                VStack{
+                    AddPostAppBar(action: {
+                        dismiss()
+                    }, isShareActive: $isShareActive)
+                    TextFields.LineLimitTextField(text: $textContent)
                     VStack{
-                        AddPostAppBar(action: {
-                            dismiss()
-                        }, isShareActive: $isShareActive)
-                        TextFields.LineLimitTextField(text: $textContent)
-                        AddPostCategory()
-                        HStack{
-                            Toggle("Anonim Gönderi", isOn: $isAnonimPost)
-                                .fontWeight(.bold)
-                        }.padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 7)
-                                    .foregroundColor(Color.white))
-                            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-                        HStack{
-                            Toggle("Anonim Yorum", isOn: $isAnonimComment)
-                                .fontWeight(.bold)
-                        }.padding()
-                            .background(RoundedRectangle(cornerRadius: 7)
-                                .foregroundColor(Color.white))
-                            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-                        AddPostMedia()
-                        Spacer()
-                    }.padding()
-                    
+                        if selectedOption == .notSelect {
+                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                        }
+                        else if selectedOption == .anonim
+                        {
+                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
+                        }
+                        else if selectedOption == .profil {
+                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
+                        }
+                    }
+                    AddPostCategory()
+                    AddPostToggle(isAnonimComment: $isAnonimComment)
+                    AddPostMedia()
+                    Spacer()
+                }.padding()
+                
             }
             NavigationLink(
-                            destination: TabbarView(),
-                            isActive: $isShareActive,
-                            label: { EmptyView() })
-        }.navigationBarBackButtonHidden(true)
+                destination: TabbarView(),
+                isActive: $isShareActive,
+                label: { EmptyView() })
+        }
+        .blur(radius: isPopupVisible ? 1.5 : 0.0)
+        .overlay(
+            Group {
+                if isPopupVisible {
+                    AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
+                }
+            }
+        )
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
     AddPostView()
 }
+
 @ViewBuilder
-func AddPostAppBar(action : @escaping()->Void ,isShareActive : Binding<Bool>) -> some View{
+private func AddPostToggle(isAnonimComment : Binding<Bool>)->some View{
+    HStack{
+        Toggle("Anonim Yorum", isOn: isAnonimComment)
+            .fontWeight(.bold)
+    }.padding()
+        .background(RoundedRectangle(cornerRadius: 7)
+            .foregroundColor(Color.white))
+        .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
+}
+
+@ViewBuilder
+private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,image:AppImage )->some View{
+    ZStack {
+        Rectangle()
+            .foregroundColor(.clear)
+            .frame(width: Const.width/8, height: Const.width/8)
+            .background(
+                Image.imageManager(image:image ,radius: radius ,shadow: Const.primaryColor)
+            )
+    }.onTapGesture {
+        withAnimation {
+            isPopupVisible.wrappedValue.toggle()
+        }
+    }
+}
+
+@ViewBuilder
+ func AddPostAppBar(action : @escaping()->Void ,isShareActive : Binding<Bool>) -> some View{
     HStack{
         Buttons.backButton {
-                action()
+            action()
         }
         Spacer()
         Text("Gönderi Oluştur")
@@ -89,63 +130,6 @@ func AddPostBackground()-> some View {
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
         Const.primaryBackGroundColor
             .frame(height: Const.height * 7.6 / 10)
-    }
-}
-
-
-struct AddPostCategory: View {
-    @State var SelectedTags:[String] = []
-    @Namespace private var animation
-    var body: some View {
-        VStack{
-            HStack{
-                Text("Kategori")
-                    .foregroundColor(.black)
-                    .fontWeight(.bold)
-                Spacer()
-            }
-            ScrollView(.horizontal,showsIndicators: false) {
-                HStack(spacing: 10){
-                    ForEach(SelectedTags ,id: \.self){tag in
-                        TagView(tag, Const.thirColor, "checkmark")
-                            .matchedGeometryEffect(id: tag, in: animation)
-                            .onTapGesture {
-                                withAnimation(.snappy){
-                                    SelectedTags.removeAll(where: {$0 == tag})
-                                }
-                            }
-                        
-                    }
-                }
-                .padding(.horizontal,15)
-                .frame(height: 35)
-                .padding(.vertical,15)
-            }
-            .overlay {
-                if SelectedTags.isEmpty{
-                    Text("Şeçilen Kategoriler")
-                        .font(.callout)
-                        .foregroundStyle(.gray)
-                    
-                }
-            }
-            .background(.white)
-            .zIndex(1)
-            ScrollView(.vertical){
-                TagLayout(spacing: 10){
-                    ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
-                        TagView(tag, Const.primaryColor, "plus")
-                            .matchedGeometryEffect(id: tag, in: animation)
-                            .onTapGesture {
-                                withAnimation(.snappy){
-                                    SelectedTags.insert(tag, at: 0)
-                                }
-                            }
-                    }
-                }
-                .padding(15)
-            }
-        }
     }
 }
 
@@ -190,3 +174,91 @@ func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
     }.padding(.bottom, 30)
 }
 
+@ViewBuilder
+func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding<Bool>)->some View {
+    VStack {
+        Text("Gönderinizin Gizliliği Nasıl Olsun ? ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).foregroundColor(.black).padding(.bottom,5)
+        Text("Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...").foregroundColor(.white)
+        Spacer()
+        Spacer()
+        CustomButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
+            withAnimation {
+                selectedOption.wrappedValue = .anonim
+                isPopupVisible.wrappedValue.toggle()
+            }
+            return false
+              
+        }, size: CustomButtonSize.medium , textColor: .white)
+        Spacer()
+        CustomButton(title:  "Açık Gönderi", backgroundColor: .white, action: {
+            withAnimation {
+                selectedOption.wrappedValue = .profil
+                isPopupVisible.wrappedValue.toggle()
+            }
+            return false
+              
+        }, size: CustomButtonSize.medium , textColor: Const.primaryButtonColor)
+      Spacer()
+    }.padding(.vertical,10)
+    .padding(.horizontal,5)
+    .frame(width: Const.width * 0.85,height: Const.width * 0.6 )
+    .background(Color.gray)
+    .cornerRadius(15)
+    
+    
+}
+
+struct AddPostCategory: View {
+    @State var SelectedTags:[String] = []
+    @Namespace private var animation
+    var body: some View {
+        VStack{
+            HStack{
+                Text("Kategori")
+                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+            ScrollView(.horizontal,showsIndicators: false) {
+                HStack(spacing: 10){
+                    ForEach(SelectedTags ,id: \.self){tag in
+                        TagView(tag, Const.thirColor, "checkmark")
+                            .matchedGeometryEffect(id: tag, in: animation)
+                            .onTapGesture {
+                                withAnimation(.snappy){
+                                    SelectedTags.removeAll(where: {$0 == tag})
+                                }
+                            }
+                    }
+                }
+                .padding(.horizontal,15)
+                .frame(height: 35)
+                .padding(.vertical,15)
+            }
+            .overlay {
+                if SelectedTags.isEmpty{
+                    Text("Şeçilen Kategoriler")
+                        .font(.callout)
+                        .foregroundStyle(.gray)
+                    
+                }
+            }
+            .background(.white)
+            .zIndex(1)
+            ScrollView(.vertical){
+                TagLayout(spacing: 10){
+                    ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
+                        TagView(tag, Const.primaryColor, "plus")
+                            .matchedGeometryEffect(id: tag, in: animation)
+                            .onTapGesture {
+                                withAnimation(.snappy){
+                                    SelectedTags.insert(tag, at: 0)
+                                }
+                            }
+                    }
+                }
+                .padding(15)
+            }
+        }
+    }
+}

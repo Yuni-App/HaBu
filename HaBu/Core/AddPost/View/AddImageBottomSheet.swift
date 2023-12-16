@@ -24,7 +24,7 @@ struct AddImageBottomSheet: View {
                         .background(Color(UIColor(hex: "04243E")))
                         .cornerRadius(7)
                         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                    Text("Kamera")
+                    Text("Kamera") 
                         .foregroundColor(.black)
                         .fontWeight(.bold)
                         .font(.system(size: 25))

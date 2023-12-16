@@ -39,6 +39,8 @@ enum AppIcon: String{
     case square = "square"
     case settings = "gear"
     case savePost = "note"
+    case anonim = "person.fill.questionmark.rtl"
+    
 
     
 
