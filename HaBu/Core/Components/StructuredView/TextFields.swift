@@ -35,27 +35,20 @@ class TextFields {
     @ViewBuilder
     static func CustomTextField3 ( text: Binding<String> , icon:AppIcon , placeHolder : String)->some View {
         VStack {
-            VStack {
-                TextField("", text: text)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(10)
-                    .overlay(
-                        HStack {
-                            if text.wrappedValue.isEmpty {
-                                Image.iconManager(icon, size: 20, weight: .bold, color: .gray)
-                                    .padding(.leading, 8)
-                                Text(placeHolder)
-                                Spacer()
-                            }
-                        })
+            HStack{
+                Image.iconManager(icon, size: 15, weight: .bold, color: .white).padding(.leading,10)
+                ZStack(alignment: .leading) {
+                    TextField(placeHolder, text: text)
+                        .padding(.vertical,15)
+                }
             }
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(10)
         }
     }
     //edit profile text field
     @ViewBuilder
-    static func CustomTextField2(headline : String , color : Color , islocked : Bool , icon : AppIcon? = nil , iconColor : Color? = nil ,
-                                 text:Binding<String>, placeHolder : String , contentType :UITextContentType, keybordType : UIKeyboardType )-> some View {
+    static func CustomTextField2(headline : String , color : Color , islocked : Bool , icon : AppIcon? = nil , iconColor : Color? = nil ,text:Binding<String>, placeHolder : String , contentType :UITextContentType, keybordType : UIKeyboardType )-> some View {
         HStack {
             VStack {
                 HStack {
@@ -110,12 +103,7 @@ class TextFields {
         .padding(.vertical, 10)
     }
     
-    
-    
-    
-    
-    
-    
+ 
 }
 
 

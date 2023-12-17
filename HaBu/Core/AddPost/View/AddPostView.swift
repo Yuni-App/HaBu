@@ -7,44 +7,56 @@
 
 import SwiftUI
 
+enum ImageType {
+    case notSelected
+    case anonymous
+    case notAnonymous
+}
+
 struct AddPostView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var textContent : String = ""
-    @State private var isAnonimPost = false
+    @State  var isShareActive : Bool = false
     @State private var isAnonimComment  = false
-    
+    @State private var isPopupVisible = true
+    @State private var selectedOption: ImageType = .notSelected
     var body: some View {
-       
+        VStack {
             ZStack{
                 AddPostBackground()
                 VStack{
-                    AddPostAppBar()
+                    AddPostAppBar(action: {
+                        dismiss()
+                    }, isShareActive: $isShareActive)
                     TextFields.LineLimitTextField(text: $textContent)
+                    VStack{
+                        if selectedOption == .notSelected {
+                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                        }
+                        else if selectedOption == .anonymous
+                        {
+                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
+                        }
+                        else if selectedOption == .notAnonymous {
+                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
+                        }
+                    }
                     AddPostCategory()
-                    HStack{
-                        Toggle("Anonim Gönderi", isOn: $isAnonimPost)
-                            .fontWeight(.bold)
-                    }.padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 7)
-                                .foregroundColor(Color.white))
-                        .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-                    
-                    
-                    HStack{
-                        Toggle("Anonim Yorum", isOn: $isAnonimComment)
-                            .fontWeight(.bold)
-                    }.padding()
-                        .background( RoundedRectangle(cornerRadius: 7)
-                            .foregroundColor(Color.white))
-                        .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
+                    AddPostToggle(isAnonimComment: $isAnonimComment)
                     AddPostMedia()
-                   
                     Spacer()
                 }.padding()
-                
             }
-            
-        
+            NavigationLink(
+                destination: TabbarView(),
+                isActive: $isShareActive,
+                label: { EmptyView() })
+        }
+        .blur(radius: isPopupVisible ? 1.5 : 0.0)
+        .popup(isPresented: $isPopupVisible) {
+                   AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
+               }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -52,25 +64,52 @@ struct AddPostView: View {
     AddPostView()
 }
 
+@ViewBuilder
+private func AddPostToggle(isAnonimComment : Binding<Bool>)->some View{
+    HStack{
+        Toggle("Anonim Yorum", isOn: isAnonimComment)
+            .fontWeight(.bold)
+    }.padding()
+        .background(RoundedRectangle(cornerRadius: 7)
+            .foregroundColor(Color.white))
+        .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
+}
 
 @ViewBuilder
-func AddPostAppBar()-> some View{
+private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,image:AppImage )->some View{
+    ZStack {
+        Rectangle()
+            .foregroundColor(.clear)
+            .frame(width: Const.width/8, height: Const.width/8)
+            .background(
+                Image.imageManager(image:image ,radius: radius ,shadow: Const.primaryColor)
+            )
+    }.onTapGesture {
+        withAnimation {
+            isPopupVisible.wrappedValue.toggle()
+        }
+    }
+}
+
+@ViewBuilder
+ func AddPostAppBar(action : @escaping()->Void ,isShareActive : Binding<Bool>) -> some View{
     HStack{
-        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
-            Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .white)
+        Buttons.backButton {
+            action()
         }
         Spacer()
         Text("Gönderi Oluştur")
             .foregroundColor(.white)
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
         Spacer()
-        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true)) {
+        Button(action: {
+            isShareActive.wrappedValue = true
+        }, label: {
             Text("Paylaş")
                 .foregroundColor(.green)
                 .fontWeight(.bold)
                 .frame(width: Const.width/7)
-        }
-        
+        })
     }.padding(.top , 25)
 }
 
@@ -81,23 +120,85 @@ func AddPostBackground()-> some View {
             .foregroundColor(.clear)
             .frame(height: Const.height * 2.5 / 10)
             .background(
-                LinearGradient(
-                    stops: [
-                        Gradient.Stop(color: Color(UIColor(hex: "04243E")), location: 0.00),
-                        Gradient.Stop(color: Color(UIColor(hex: "100F42")).opacity(0.49), location: 0.51),
-                        Gradient.Stop(color: Color(UIColor(hex: "100F34")).opacity(0.89), location: 1.00),
-                    ],
-                    startPoint: UnitPoint(x: 0.5, y: 0),
-                    endPoint: UnitPoint(x: 0.5, y: 1)
-                )
+                Const.LinearBackGroundColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-        
-        Color(UIColor(hex: "F3F3F3"))
+        Const.primaryBackGroundColor
             .frame(height: Const.height * 7.6 / 10)
     }
 }
 
+@ViewBuilder
+func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
+    VStack{
+        HStack{
+            Text("Medya")
+                .foregroundColor(.black)
+                .fontWeight(.bold)
+            Spacer()
+        }
+        HStack{
+            if imageList.isEmpty {
+                GenerateImageBox(image: .addPhoto )
+                Spacer()
+            }
+            if imageList.count == 3 {
+                ForEach(imageList, id: \.self) { userImage in
+                    //Image box
+                    GenerateImageBox( image: userImage)
+                    Spacer()
+                }
+            }
+            if imageList.count == 2 {
+                ForEach(imageList, id: \.self) { userImage in
+                    //Image box
+                    GenerateImageBox( image: userImage)
+                    Spacer()
+                }
+                GenerateImageBox(image: .addPhoto)
+                Spacer()
+            }
+            if imageList.count == 1 {
+                ForEach(imageList, id: \.self) { userImage in
+                    GenerateImageBox(image: userImage)
+                }
+                GenerateImageBox(image: .addPhoto)
+                Spacer()
+            }
+        }
+    }.padding(.bottom, 30)
+}
+
+@ViewBuilder
+func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding<Bool>)->some View {
+    VStack {
+        Text("Gönderinizin Gizliliği Nasıl Olsun ? ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).foregroundColor(.black).padding(.bottom,5)
+        Text("Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...").foregroundColor(Const.secondaryButtonColor)
+        Spacer()
+        Spacer()
+        CustomButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
+            withAnimation {
+                selectedOption.wrappedValue = .anonymous
+                isPopupVisible.wrappedValue.toggle()
+            }
+            return false
+        }, size: CustomButtonSize.medium , textColor: .white)
+        Spacer()
+        CustomButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
+            withAnimation {
+                selectedOption.wrappedValue = .notAnonymous
+                isPopupVisible.wrappedValue.toggle()
+            }
+            return false
+        }, size: CustomButtonSize.medium , textColor: .white)
+      Spacer()
+    }.padding(.vertical,10)
+    .padding(.horizontal,5)
+    .frame(width: Const.width * 0.85,height: Const.width * 0.6 )
+    .cornerRadius(15)
+    
+    
+}
 
 struct AddPostCategory: View {
     @State var SelectedTags:[String] = []
@@ -120,7 +221,6 @@ struct AddPostCategory: View {
                                     SelectedTags.removeAll(where: {$0 == tag})
                                 }
                             }
-                        
                     }
                 }
                 .padding(.horizontal,15)
@@ -154,47 +254,3 @@ struct AddPostCategory: View {
         }
     }
 }
-
-@ViewBuilder
-func AddPostMedia(imageList : [String] = ["Mert","Mert"] )-> some View {
-    VStack{
-        HStack{
-            Text("Medya")
-                .foregroundColor(.black)
-                .fontWeight(.bold)
-            Spacer()
-        }
-        HStack{
-            if imageList.isEmpty {
-                GenerateImageBox(image: "AddPhoto" )
-                Spacer()
-            }
-            if imageList.count == 3 {
-                ForEach(imageList, id: \.self) { userImage in
-                    //Image box
-                    GenerateImageBox( image: userImage)
-                    Spacer()
-                }
-            }
-            if imageList.count == 2 {
-                ForEach(imageList, id: \.self) { userImage in
-                    //Image box
-                    GenerateImageBox( image: userImage)
-                    Spacer()
-                    
-                }
-                GenerateImageBox(image: "AddPhoto")
-                Spacer()
-            }
-            if imageList.count == 1 {
-                ForEach(imageList, id: \.self) { userImage in
-                    //Image box
-                    GenerateImageBox(image: userImage)
-                }
-                GenerateImageBox(image: "AddPhoto")
-                Spacer()
-            }
-        }
-    }.padding(.bottom, 30)
-}
-

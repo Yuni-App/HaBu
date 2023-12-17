@@ -28,10 +28,12 @@ struct DeleteAccountCodeView: View {
                 true
                //delete account
             }, destination: AnyView(InfoView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
-        }.frame(width: Const.width)
-            .background(
-                Const.primaryBackGroundColor
-            )
+        }
+        .navigationBarBackButtonHidden(true)
+        .frame(width: Const.width)
+        .background(
+            Const.primaryBackGroundColor
+        )
     }
 }
 

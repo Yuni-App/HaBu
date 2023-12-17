@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BlockedUsers: View {
+struct BlockedUsersView: View {
     @Environment(\.dismiss) private var dismiss
     let blockedList : [User] = User.MockData
     var body: some View {
@@ -30,13 +30,13 @@ struct BlockedUsers: View {
                     .background(
                         Const.primaryBackGroundColor
                 )
-            }
+            }.navigationBarBackButtonHidden(true)
     }
 }
 
 
 #Preview {
-    BlockedUsers()
+    BlockedUsersView()
 }
 
 @ViewBuilder
