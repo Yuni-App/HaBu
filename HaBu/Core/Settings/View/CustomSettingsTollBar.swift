@@ -13,14 +13,14 @@ struct CustomSettingsTollBar: View {
     var body: some View {
         ZStack{
             HStack{
-                Buttons.backButton {
+                Buttons.backButton(action: {
                     action()
-                }
+                }, color: .black)
                 Spacer()
                 if let blockedCount = blockedCount{
                     Text("\(blockedCount) Kişi ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 }
-            }
+            }.padding(.leading,5)
             Text(title)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 25))
