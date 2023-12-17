@@ -12,6 +12,12 @@ struct FeedBackSuccess: View {
         NavigationView{
             ZStack {
                 ScrollView{
+                    HStack {
+                        Buttons.backButton(action: {
+                            //
+                        }).padding()
+                        Spacer()
+                    }
                     VStack {
                         Spacer()
                         Rectangle()
@@ -44,7 +50,7 @@ struct FeedBackSuccess: View {
                                 .foregroundColor(.white)
                                 .background(Const.primaryButtonColor)
                                 .cornerRadius(8)
-                           
+                            
                         }
                         ).padding()
                     }
