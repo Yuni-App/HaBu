@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchItem2: View {
     var user: User
     var ratingSorted: Bool
-    @State private var deneme = false
+    @State private var deneme = true
     
     var body: some View {
         NavigationLink(destination: ProfileView(hideTab: $deneme , user: user), label: {
