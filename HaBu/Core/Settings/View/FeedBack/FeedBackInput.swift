@@ -28,31 +28,34 @@ struct FeedBackInput: View {
                         Const.primaryBackGroundColor
                             .frame(height: Const.height * 7.6 / 10)
                     }
-                    ScrollView{
-                        VStack {
-                            CustomSettingsTollBar(action: {
-                                dismiss()
-                            }, title: "Geri Bildirim" , backgroundColor : .clear)
+                    VStack {
+                        CustomSettingsTollBar(action: {
+                            dismiss()
+                        }, title: "Geri Bildirim" , backgroundColor : .clear)
+                        ScrollView{
+                            VStack {
                             
-                            Image.imageManager(image: .feedBack).frame(width: Const.width * 0.3 ,height: Const.width * 0.3)
-                            TextFields.LineLimitTextField(text: $text)
-                            Spacer()
-                            Rate(selectedRating: $selectedRating)
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Buttons.customButton(title: "Gönder", backgroundColor: Const.primaryButtonColor, action: {
-                                true
-                            }, destination: AnyView(TabbarView()), size: CustomButtonSize.medium)
-                  
-                            Spacer()
-                        }
-                        .frame(width: Const.width , height: Const.height)
-                        .padding(.top , 65)
-                        
+                                
+                                Image.imageManager(image: .feedBack).frame(width: Const.width * 0.3 ,height: Const.width * 0.3)
+                                TextFields.LineLimitTextField(text: $text)
+                                Spacer()
+                                Rate(selectedRating: $selectedRating)
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Buttons.customButton(title: "Gönder", backgroundColor: Const.primaryButtonColor, action: {
+                                    true
+                                }, destination: AnyView(TabbarView()), size: CustomButtonSize.medium)
+                      
+                                Spacer()
+                            }
+                            .frame(width: Const.width , height: Const.height)
+                          
+                            
 
-                        
-                    }
+                            
+                        }
+                    }  .padding(.top , 65)
                        
                 }
             }.navigationBarBackButtonHidden(true)
