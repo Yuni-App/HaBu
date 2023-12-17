@@ -12,7 +12,9 @@ struct SearchItem: View {
     var ratingSorted: Bool
     
     var body: some View {
-        NavigationLink(destination: Text("\(user.name)"),label: {
+        NavigationLink{
+            ProfileView(user: user)
+        }label: {
             HStack{
                 Spacer()
                 VStack(alignment: .leading) {
@@ -57,7 +59,7 @@ struct SearchItem: View {
                 )
                 .frame(width: Const.width * 0.9, height: Const.height * 0.13)
         }
-    )}
+    }
 }
 
 #Preview {

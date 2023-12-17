@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0B721B2B2D660F00555AD2 /* Kodchasan-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0B721A2B2D660F00555AD2 /* Kodchasan-Bold.ttf */; };
 		5C1686232B1A218200A20636 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1686222B1A218200A20636 /* Buttons.swift */; };
 		5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583D2B03B430008BEB6D /* HaBuApp.swift */; };
 		5C2658402B03B430008BEB6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26583F2B03B430008BEB6D /* ContentView.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C0B721A2B2D660F00555AD2 /* Kodchasan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Bold.ttf"; sourceTree = "<group>"; };
 		5C1686222B1A218200A20636 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		5C26583A2B03B430008BEB6D /* HaBu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaBu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C26583D2B03B430008BEB6D /* HaBuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaBuApp.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		5C2DAB492B050CFD00C6E145 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				5C0B721A2B2D660F00555AD2 /* Kodchasan-Bold.ttf */,
 				5C2DAB4A2B050D1C00C6E145 /* IrishGrover-Regular.ttf */,
 			);
 			path = Fonts;
@@ -655,6 +658,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C0B721B2B2D660F00555AD2 /* Kodchasan-Bold.ttf in Resources */,
 				5C2658452B03B431008BEB6D /* Preview Assets.xcassets in Resources */,
 				5C2DAB4B2B050D1C00C6E145 /* IrishGrover-Regular.ttf in Resources */,
 				5C2658422B03B431008BEB6D /* Assets.xcassets in Resources */,
