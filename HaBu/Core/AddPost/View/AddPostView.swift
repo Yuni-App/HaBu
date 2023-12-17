@@ -28,23 +28,33 @@ struct AddPostView: View {
                     AddPostAppBar(action: {
                         dismiss()
                     }, isShareActive: $isShareActive)
-                    TextFields.LineLimitTextField(text:$textContent)
-                    
-                    VStack{
-                        if selectedOption == .notSelected {
-                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                    HStack(alignment: .top) {
+                        VStack{
+                            if selectedOption == .notSelected {
+                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                            }
+                            else if selectedOption == .anonymous
+                            {
+                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
+                            }
+                            else if selectedOption == .notAnonymous {
+                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
+                            }
                         }
-                        else if selectedOption == .anonymous
-                        {
-                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
-                        }
-                        else if selectedOption == .notAnonymous {
-                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
-                        }
+                        .padding(5)
+                        TextField("", text: $textContent,axis: .vertical)
+                            .lineLimit(9...)
+                            .background(Color.white)
+                            .cornerRadius(7)
+                            .padding(.vertical)
                     }
-                
+                    .background(Color.white)
+                    .clipShape(.rect(cornerRadius: 5, style: .circular))
+                    .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
+                    .padding()
                     AddPostCategory()
                     AddPostToggle(isAnonimComment: $isAnonimComment)
+                  
                     AddPostMedia()
                     Spacer()
                 }.padding()
@@ -54,10 +64,10 @@ struct AddPostView: View {
                 isActive: $isShareActive,
                 label: { EmptyView() })
         }
-        /*.blur(radius: isPopupVisible ? 1.5 : 0.0)
+        .blur(radius: isPopupVisible ? 1.5 : 0.0)
         .popup(isPresented: $isPopupVisible) {
                    AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
-               }*/
+               }
         .navigationBarBackButtonHidden(true)
     }
 }
@@ -84,10 +94,12 @@ private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,ima
     ZStack {
         Rectangle()
             .foregroundColor(.clear)
-            .frame(width: Const.width/8, height: Const.width/8)
+            .frame(width: Const.width/10, height: Const.width/10)
             .background(
                 Image.imageManager(image:image ,radius: radius)
             )
+            
+            
     }.onTapGesture {
         withAnimation {
             isPopupVisible.wrappedValue.toggle()
