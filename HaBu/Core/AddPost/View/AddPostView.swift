@@ -118,13 +118,13 @@ func AddPostBackground()-> some View {
     VStack(spacing: 0) {
         Rectangle()
             .foregroundColor(.clear)
-            .frame(height: Const.height * 2.5 / 10)
+            .frame(height: Const.height * 0.25)
             .background(
                 Const.LinearBackGroundColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
         Const.primaryBackGroundColor
-            .frame(height: Const.height * 7.6 / 10)
+            .frame(height: Const.height * 0.76)
     }
 }
 

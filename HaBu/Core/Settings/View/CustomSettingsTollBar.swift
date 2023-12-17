@@ -10,6 +10,7 @@ struct CustomSettingsTollBar: View {
     var action : () -> Void
     var title : String
     var blockedCount:  Int?
+    var backgroundColor : Color?
     var body: some View {
         ZStack{
             HStack{
@@ -29,7 +30,7 @@ struct CustomSettingsTollBar: View {
         }
         .frame(width: Const.width, height: Const.height/22)
         .background(
-            .white
+            backgroundColor ?? .white
         )
         .padding(.horizontal , 10)
     }
