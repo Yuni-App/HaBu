@@ -46,6 +46,8 @@
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
 		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
 		9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8D2B0510F80042A354 /* CustomImage.swift */; };
+		94233D782B2E4B7300F104EA /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94233D772B2E4B7300F104EA /* VM.swift */; };
+		94233D7A2B2E4D1600F104EA /* protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94233D792B2E4D1600F104EA /* protocol.swift */; };
 		943B9CE22B068F0E00067376 /* LikesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B9CE12B068F0E00067376 /* LikesView.swift */; };
 		943B9CE42B06912500067376 /* LikesListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B9CE32B06912500067376 /* LikesListTile.swift */; };
 		943FB8E02B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8DF2B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift */; };
@@ -68,7 +70,6 @@
 		949016E42B041F0A00164405 /* RegisterBuildFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */; };
 		949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E52B041F3000164405 /* RegisterBuildSecondView.swift */; };
 		949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E72B041F4900164405 /* RegisterBuildThirdView.swift */; };
-		949016EA2B04275F00164405 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomButton.swift */; };
 		94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */; };
@@ -120,6 +121,8 @@
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9411AA8D2B0510F80042A354 /* CustomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImage.swift; sourceTree = "<group>"; };
+		94233D772B2E4B7300F104EA /* VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VM.swift; sourceTree = "<group>"; };
+		94233D792B2E4D1600F104EA /* protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocol.swift; sourceTree = "<group>"; };
 		943B9CE12B068F0E00067376 /* LikesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesView.swift; sourceTree = "<group>"; };
 		943B9CE32B06912500067376 /* LikesListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesListTile.swift; sourceTree = "<group>"; };
 		943FB8DF2B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordMailBottomSheet.swift; sourceTree = "<group>"; };
@@ -142,7 +145,6 @@
 		949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildFirstView.swift; sourceTree = "<group>"; };
 		949016E52B041F3000164405 /* RegisterBuildSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildSecondView.swift; sourceTree = "<group>"; };
 		949016E72B041F4900164405 /* RegisterBuildThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBuildThirdView.swift; sourceTree = "<group>"; };
-		949016E92B04275F00164405 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlurModifier.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
@@ -239,7 +241,6 @@
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
-				949016E92B04275F00164405 /* CustomButton.swift */,
 				88A256A82B2DC6FE00EACB9F /* PopUp.swift */,
 			);
 			path = View;
@@ -546,6 +547,8 @@
 				943FB8DD2B063295009C55C6 /* Register */,
 				943FB8DC2B06328F009C55C6 /* Login */,
 				949016DF2B041EBD00164405 /* InfoView.swift */,
+				94233D772B2E4B7300F104EA /* VM.swift */,
+				94233D792B2E4D1600F104EA /* protocol.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 			files = (
 				5CD5534A2B1CC61E0070F102 /* RankView.swift in Sources */,
 				9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */,
+				94233D782B2E4B7300F104EA /* VM.swift in Sources */,
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
 				5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */,
 				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
@@ -680,7 +684,6 @@
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,
 				88A256A92B2DC6FE00EACB9F /* PopUp.swift in Sources */,
 				5C1686232B1A218200A20636 /* Buttons.swift in Sources */,
-				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
@@ -721,6 +724,7 @@
 				5CD3D3FD2B14CF0F00C4A944 /* ScrollableTabView.swift in Sources */,
 				949016E22B041EF400164405 /* LoginView.swift in Sources */,
 				944CD1592B2BB1530074D99D /* SavedPostView.swift in Sources */,
+				94233D7A2B2E4D1600F104EA /* protocol.swift in Sources */,
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
 				94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */,
 				5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */,

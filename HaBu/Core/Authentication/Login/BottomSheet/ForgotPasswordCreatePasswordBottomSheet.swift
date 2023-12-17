@@ -18,7 +18,7 @@ struct ForgotPasswordCreatePasswordBottomSheet: View {
                 Text("Şifre Oluştur").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
                 TextFields.CustomTextField(text: $textPassword, icon: .key, placeHolder: "şifre")
                 TextFields.CustomTextField(text: $textPasswordAgain, icon:  .key, placeHolder: "şifre tekrar")
-                CustomButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
+                Buttons.customButton(title: "Oluştur", backgroundColor: Const.primaryColor, action: {
                     showSheet = false
                     return false
                     

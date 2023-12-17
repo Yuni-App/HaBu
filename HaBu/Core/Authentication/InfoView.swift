@@ -10,7 +10,7 @@ import SwiftUI
 struct InfoView: View {
     
     var body: some View {
-        
+        @StateObject var authViewModel = AuthViewModel()
         NavigationStack {
             ZStack {
                 VStack {
@@ -26,6 +26,7 @@ struct InfoView: View {
                         .padding()
                         
                         Buttons.customButton1(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
+                            authViewModel.login(username: "fas", password: "fa")
                         }, size: .small, textColor: .black, destination: AnyView(RegisterBuildFirstView()))
                         
                         

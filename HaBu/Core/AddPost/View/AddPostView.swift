@@ -176,7 +176,7 @@ func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding
         Text("Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...").foregroundColor(Const.secondaryButtonColor)
         Spacer()
         Spacer()
-        CustomButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
+        Buttons.customButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
             withAnimation {
                 selectedOption.wrappedValue = .anonymous
                 isPopupVisible.wrappedValue.toggle()
@@ -184,7 +184,7 @@ func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding
             return false
         }, size: CustomButtonSize.medium , textColor: .white)
         Spacer()
-        CustomButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
+        Buttons.customButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
             withAnimation {
                 selectedOption.wrappedValue = .notAnonymous
                 isPopupVisible.wrappedValue.toggle()
