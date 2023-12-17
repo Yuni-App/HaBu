@@ -16,24 +16,24 @@ struct PopUp : View {
     var btnClose: String
     
     var body: some View {
-        ZStack {
+        VStack {
             Button(btnOpen) {
                 showingPopup = true
-            }
-            if showingPopup {
-                ZStack {
-                    backgroundColor.frame(width: size.width, height: size.height).cornerRadius(5).shadow(radius: 10).overlay {
-                        VStack {
-                            Spacer()
-                            Text(contents)
-                            Spacer()
-                            Button(btnClose) {
-                                showingPopup = false
-                            }.frame(width: size.width, height: Const.height * 0.05).foregroundColor(.white).background(Color.black).cornerRadius(5)
+            }.overlay {
+                    if showingPopup {
+                        ZStack {
+                            backgroundColor.frame(width: size.width, height: size.height).cornerRadius(5).shadow(radius: 10)
+                            VStack {
+                                Spacer()
+                                Text(contents)
+                                Spacer()
+                                Button(btnClose) {
+                                    showingPopup = false
+                                }.frame(width: size.width, height: Const.height * 0.05).foregroundColor(.white).background(Color.black).cornerRadius(5)
+                            }
                         }
                     }
                 }
-            }
         }
     }
 }

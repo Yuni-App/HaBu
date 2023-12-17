@@ -84,7 +84,7 @@ class Buttons{
     }
     
     @ViewBuilder
-    static func backButton( action: @escaping ()-> Void,color:Color = .white) -> some View{
+    static func backButton( action: @escaping ()-> Void,color:Color = .black) -> some View{
         Button(action: {
             action()
         }, label: {
