@@ -22,13 +22,13 @@ struct ScrollableTabView: View {
                 HStack(alignment : .center) {
                     ScrollView{
                         ForEach(posts) { post in
-                            FeedViewCell(post: post, user: User.MockData[0], hideTab: $hideTab)
+                            FeedViewCell(post: post, user: User.MockData[0])
                         }
                     }
                     if let saves = saves{
                         ScrollView{
                             ForEach(saves) { post in
-                                FeedViewCell(post: post, user: User.MockData[0], hideTab: $hideTab)
+                                FeedViewCell(post: post, user: User.MockData[0])
                             }
                         }
                     }

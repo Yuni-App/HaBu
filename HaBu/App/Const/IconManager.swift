@@ -40,8 +40,9 @@ enum AppIcon: String{
     case settings = "gear"
     case savePost = "note"
     case anonim = "person.fill.questionmark.rtl"
+    case star = "star.fill"
     
-
+}
     
 
 @ViewBuilder

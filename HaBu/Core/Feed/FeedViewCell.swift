@@ -11,30 +11,26 @@ struct FeedViewCell: View {
     @Environment(\.dismiss) var dissmis
     @State private var savePost = ActionButtons.savePost
     @State private var likePost = ActionButtons.unLike
-    @Binding var hideTab:Bool
     private var backButton : Bool
     @State private var showingComment = false
     @State private var showingLikeList = false
     let post : Post
     var user : User
-    init(post: Post,user:User,hideTab:Binding<Bool>) {
+    init(post: Post,user:User) {
         self.post = post
         self.user = user
         self.backButton = false
-        _hideTab = hideTab
     }
     init(navigatedWithComment post: Post,user:User) {
         self.post = post
         self.user = user
         self.backButton = true
-        _hideTab = .constant(false)
         self.showingComment = true
     }
     init(navigated post:Post,user:User){
         self.post = post
         self.user = user
         self.backButton = true
-        _hideTab = .constant(false)
 
     }
     var body: some View {
@@ -49,7 +45,7 @@ struct FeedViewCell: View {
                 Spacer()
                 //User Info
                 NavigationLink{
-                    ProfileView(hideTab: $hideTab, user: user)
+                    ProfileView(user: user)
                 }label: {
                     UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
                         .foregroundStyle(.black)
