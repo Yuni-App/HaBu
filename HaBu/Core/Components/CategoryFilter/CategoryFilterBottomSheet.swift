@@ -12,7 +12,6 @@ struct CategoryFilterBottomSheet: View {
     @State private var scrollOffset: CGFloat = 0
     @State var dragDirection: DragDirection = .none
     @State var selectedFilter = "Hepsi"
-    @Namespace private var animation
     var body: some View {
         VStack {
             Text("Paylaşım Türü")
@@ -31,55 +30,8 @@ struct CategoryFilterBottomSheet: View {
             
             Divider()
                 .padding()
-            Text("Kategoriler")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(Const.thirColor)
-            ScrollView(.horizontal,showsIndicators: false) {
-                HStack(spacing: 5){
-                    ForEach(SelectedTags ,id: \.self){tag in
-                        TagView(tag, Const.thirColor, "checkmark")
-                            .matchedGeometryEffect(id: tag, in: animation)
-                            .onTapGesture {
-                                withAnimation(.bouncy){
-                                    SelectedTags.removeAll(where: {$0 == tag})
-                                }
-                            }
-                        
-                    }
-                }
-                .padding(.horizontal,15)
-                .frame(height: 30)
-                .padding(.vertical,15)
-            }
-            .overlay {
-                if SelectedTags.isEmpty{
-                    Text("Şeçilen Kategoriler")
-                        .font(.callout)
-                        .foregroundStyle(.gray)
-                    
-                }
-            }
-            .background(.white)
-            .zIndex(1)
-            ScrollView(.vertical){
-                TagLayout(spacing: 10){
-                    ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
-                        TagView(tag, Const.primaryColor, "plus")
-                            .matchedGeometryEffect(id: tag, in: animation)
-                            .onTapGesture {
-                                withAnimation(.snappy){
-                                    SelectedTags.insert(tag, at: 0)
-                                }
-                            }
-                    }
-                }
-                .padding(10)
-            }
-            .frame(height:CGFloat(Const.categoryTags.count/3) * 40 )
-            .scrollIndicators(.hidden)
-            .background(.black.opacity(0.07))
-            .zIndex(0)
+            AddCategoryView(SelectedTags: $SelectedTags)
+           
             ZStack{
                 Button(action: {
                     
@@ -157,3 +109,66 @@ struct anonimFilter: Identifiable{
     var icon : String
 }
 
+
+struct AddCategoryView : View {
+    @Binding var SelectedTags:[String]
+    @Namespace private var animation
+    var body: some View {
+        VStack{
+            Text("Kategoriler")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundStyle(Const.thirColor)
+            ScrollView(.horizontal,showsIndicators: false) {
+                HStack(spacing: 5){
+                    ForEach(SelectedTags ,id: \.self){tag in
+                        TagView(tag, Const.thirColor, "checkmark")
+                            .matchedGeometryEffect(id: tag, in: animation)
+                            .onTapGesture {
+                                withAnimation(.bouncy){
+                                    SelectedTags.removeAll(where: {$0 == tag})
+                                }
+                            }
+                        
+                    }
+                }
+                .padding(.horizontal,15)
+                .frame(height: 30)
+                .padding(.vertical,15)
+
+            }
+            .background(.gray.opacity(0.15))
+            .border(.gray)
+
+            .overlay {
+                if SelectedTags.isEmpty{
+                    Text("Şeçilen Kategoriler")
+                        .font(.callout)
+                        .foregroundStyle(.gray)
+                    
+                }
+            }
+            .background(.white)
+            .zIndex(1)
+            VStack{
+                TagLayout(spacing: 10){
+                    ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
+                        TagView(tag, Const.primaryColor, "plus")
+                            .matchedGeometryEffect(id: tag, in: animation)
+                            .onTapGesture {
+                                withAnimation(.snappy){
+                                    SelectedTags.insert(tag, at: 0)
+                                }
+                            }
+                    }
+                }
+                .frame(minHeight: CGFloat((Const.categoryTags.count / 3)) * 35)
+
+            }
+            
+            .scrollIndicators(.hidden)
+            .background(.black.opacity(0.07))
+            .zIndex(0)
+        }
+    }
+}

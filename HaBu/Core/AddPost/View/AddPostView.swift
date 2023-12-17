@@ -15,6 +15,7 @@ enum ImageType {
 
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
+    @State var SelectedTags:[String] = []
     @State private var textContent : String = ""
     @State  var isShareActive : Bool = false
     @State private var isAnonimComment  = false
@@ -52,12 +53,12 @@ struct AddPostView: View {
                     .clipShape(.rect(cornerRadius: 5, style: .circular))
                     .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
                     .padding()
-                    AddPostCategory()
+                    AddCategoryView(SelectedTags: $SelectedTags)
+                        .padding(.vertical,20)
                     AddPostToggle(isAnonimComment: $isAnonimComment)
-                  
                     AddPostMedia()
-                    Spacer()
-                }.padding()
+                   
+                }
             }
             NavigationLink(
                 destination: TabbarView(),
@@ -69,6 +70,7 @@ struct AddPostView: View {
                    AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
                }
         .navigationBarBackButtonHidden(true)
+        
     }
 }
 
@@ -253,7 +255,7 @@ struct AddPostCategory: View {
             }
             .background(.white)
             .zIndex(1)
-            ScrollView(.vertical){
+            VStack{
                 TagLayout(spacing: 10){
                     ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
                         TagView(tag, Const.primaryColor, "plus")
@@ -265,8 +267,9 @@ struct AddPostCategory: View {
                             }
                     }
                 }
-                .padding(15)
-            }
+            }         
+            .frame(minHeight: CGFloat((Const.categoryTags.count / 3)) * 55)
+
         }
     }
 }

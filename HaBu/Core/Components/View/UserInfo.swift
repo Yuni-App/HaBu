@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserInfo: View {
+    @State private var toast: Toast? = nil
     let user:User
     let imageSize : ProfileImageSize
     var timeStamp: String?
@@ -39,16 +40,29 @@ struct UserInfo: View {
                     .opacity(0.6)
                     .font(.footnote)
                     .fontWeight(.semibold)
-                Button(action: {
-                    
-                    
-                }, label: {
+                Menu{
+                    Button(action: {
+                        toast = Toast(style: .warning, message: "Gönderi incelemeye alındı.", width: .infinity)
+
+                    }, label: {
+                        Text("Raporla!")
+                    })
+                    Button(action: {
+                        toast = Toast(style: .info, message: "Kişiyi engellemek istediğinize emin misiniz.", width: .infinity)
+
+                    }, label: {
+                        Text("Kullanıcıyı Engelle")
+                    })
+                }label: {
                     Image.iconManager(.treeDot, size: 15, weight: .regular, color: .black)
                         .rotationEffect(.degrees(90))
-                      
-                })
+                        .padding()
+
+                        
+                }
             }
         }
+        .toastView(toast: $toast)
         
     }
 }
