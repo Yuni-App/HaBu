@@ -41,7 +41,7 @@ class Const{
         endPoint: UnitPoint(x: 0.5, y: 1)
         )
   
-    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer","Mert","Yusuf"]
+    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer"]
     static var anonimFilters: [anonimFilter]=[
         .init(id: 0, color: thirColor, title: "Hepsi", subTitle: "Bütün Gönderiler ", icon: "anonim"),
         .init(id: 1, color:thirColor, title: "Anonim", subTitle: "Sadece Anonim Gönderiler", icon: "anonim"),

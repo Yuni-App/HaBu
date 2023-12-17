@@ -18,7 +18,7 @@ struct PopUp : View {
     var body: some View {
         VStack {
             Button(btnOpen) {
-                showingPopup = true
+                    showingPopup = true
             }.overlay {
                     if showingPopup {
                         ZStack {

@@ -80,7 +80,7 @@ struct FeedView: View {
             
             .sheet(isPresented: $showCategoryFilter) {
                 CategoryFilterBottomSheet()
-                    .presentationDetents([.height(Const.height * 0.6),.large])
+                    .presentationDetents([.height(Const.height * 0.6)])
             }
             
         }

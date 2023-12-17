@@ -28,7 +28,8 @@ struct AddPostView: View {
                     AddPostAppBar(action: {
                         dismiss()
                     }, isShareActive: $isShareActive)
-                    TextFields.LineLimitTextField(text: $textContent)
+                    TextFields.LineLimitTextField(text:$textContent)
+                    
                     VStack{
                         if selectedOption == .notSelected {
                             UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
@@ -41,6 +42,7 @@ struct AddPostView: View {
                             UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
                         }
                     }
+                
                     AddPostCategory()
                     AddPostToggle(isAnonimComment: $isAnonimComment)
                     AddPostMedia()
@@ -52,10 +54,10 @@ struct AddPostView: View {
                 isActive: $isShareActive,
                 label: { EmptyView() })
         }
-        .blur(radius: isPopupVisible ? 1.5 : 0.0)
+        /*.blur(radius: isPopupVisible ? 1.5 : 0.0)
         .popup(isPresented: $isPopupVisible) {
                    AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
-               }
+               }*/
         .navigationBarBackButtonHidden(true)
     }
 }
@@ -69,7 +71,9 @@ private func AddPostToggle(isAnonimComment : Binding<Bool>)->some View{
     HStack{
         Toggle("Anonim Yorum", isOn: isAnonimComment)
             .fontWeight(.bold)
-    }.padding()
+
+    }
+    .padding(.all,5)
         .background(RoundedRectangle(cornerRadius: 7)
             .foregroundColor(Color.white))
         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
@@ -82,7 +86,7 @@ private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,ima
             .foregroundColor(.clear)
             .frame(width: Const.width/8, height: Const.width/8)
             .background(
-                Image.imageManager(image:image ,radius: radius ,shadow: Const.primaryColor)
+                Image.imageManager(image:image ,radius: radius)
             )
     }.onTapGesture {
         withAnimation {

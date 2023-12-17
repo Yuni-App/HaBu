@@ -41,6 +41,7 @@ enum AppIcon: String{
     case savePost = "note"
     case anonim = "person.fill.questionmark.rtl"
     case star = "star.fill"
+    case treeDot = "ellipsis"
     
 }
     

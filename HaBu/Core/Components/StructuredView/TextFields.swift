@@ -48,7 +48,7 @@ class TextFields {
     }
     //edit profile text field
     @ViewBuilder
-    static func CustomTextField2(headline : String , color : Color , islocked : Bool , icon : AppIcon? = nil , iconColor : Color? = nil ,text:Binding<String>, placeHolder : String , contentType :UITextContentType, keybordType : UIKeyboardType )-> some View {
+    static func CustomTextField2(headline : String , color : Color , islocked : Bool , icon : AppIcon? = nil , iconColor : Color? = nil ,text:Binding<String>, placeHolder : String , contentType :UITextContentType , keybordType : UIKeyboardType )-> some View {
         HStack {
             VStack {
                 HStack {

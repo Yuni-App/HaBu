@@ -11,7 +11,6 @@ struct UserInfo: View {
     let user:User
     let imageSize : ProfileImageSize
     var timeStamp: String?
-    
     init(withTime user: User, imageSize: ProfileImageSize, timeStamp: String) {
         self.user = user
         self.imageSize = imageSize
@@ -22,7 +21,6 @@ struct UserInfo: View {
         self.imageSize = imageSize
     }
     var body: some View {
-        
         HStack {
             CircleProfileImage(userIamgeUrl: "", size: imageSize)
             VStack{
@@ -35,8 +33,6 @@ struct UserInfo: View {
                     .font(.caption2)
             }
             .foregroundStyle(.black)
-            
-            
             Spacer()
             if timeStamp != nil{
                 Text("4s")
@@ -45,11 +41,11 @@ struct UserInfo: View {
                     .fontWeight(.semibold)
                 Button(action: {
                     
+                    
                 }, label: {
-                    Image("3DotHoriizontal")
-                        .resizable()
-                        .frame(width: 10,height: 15)
-                        .padding(.horizontal)
+                    Image.iconManager(.treeDot, size: 15, weight: .regular, color: .black)
+                        .rotationEffect(.degrees(90))
+                      
                 })
             }
         }
@@ -59,5 +55,5 @@ struct UserInfo: View {
 
 
 #Preview {
-    UserInfo(user: User.MockData[0], imageSize: .small)
+    UserInfo(withTime : User.MockData[0], imageSize: .small, timeStamp: "12")
 }
