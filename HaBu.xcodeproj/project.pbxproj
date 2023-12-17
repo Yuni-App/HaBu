@@ -32,7 +32,6 @@
 		5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5AB992B056BDC00502D9F /* ProfileView.swift */; };
 		5CE5AB9C2B056D3C00502D9F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */; };
 		5CF151962B1EC2000015BE31 /* NavigationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF151952B1EC2000015BE31 /* NavigationStateManager.swift */; };
-		8821E50C2B1DC900003089B6 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821E50B2B1DC900003089B6 /* CustomSearchBar.swift */; };
 		8821E50F2B1DCAFB003089B6 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821E50E2B1DCAFB003089B6 /* SearchBar.swift */; };
 		8821E5112B1DDCC1003089B6 /* SearchItem3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821E5102B1DDCC1003089B6 /* SearchItem3.swift */; };
 		883CD0712B20E03200E0B757 /* FeedBackInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CD0702B20E03200E0B757 /* FeedBackInput.swift */; };
@@ -40,6 +39,7 @@
 		884E8CF92B09F2E7001BADDF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E8CF82B09F2E7001BADDF /* Notification.swift */; };
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
+		88A256A92B2DC6FE00EACB9F /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A256A82B2DC6FE00EACB9F /* PopUp.swift */; };
 		88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B85B332B06348200D03ED9 /* EditProfileView.swift */; };
 		88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F552B1B3DB3005BE291 /* SearchItem.swift */; };
 		88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F592B1B5B63005BE291 /* SecondSearchView.swift */; };
@@ -53,6 +53,7 @@
 		943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8E12B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift */; };
 		943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */; };
 		944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C97A32B1B4240005F8E96 /* AddPostView.swift */; };
+		944CD1592B2BB1530074D99D /* SavedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944CD1582B2BB1530074D99D /* SavedPostView.swift */; };
 		9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */; };
 		9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */; };
 		9452D3002B1C8130005E2A3B /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */; };
@@ -71,10 +72,11 @@
 		949016EA2B04275F00164405 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E92B04275F00164405 /* CustomButton.swift */; };
 		94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
-		94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsers.swift */; };
+		94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
+		94FAFA972B2E37BF00210585 /* PopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAFA962B2E37BF00210585 /* PopupModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +107,6 @@
 		5CE5AB992B056BDC00502D9F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		5CF151952B1EC2000015BE31 /* NavigationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStateManager.swift; sourceTree = "<group>"; };
-		8821E50B2B1DC900003089B6 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		8821E50E2B1DCAFB003089B6 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		8821E5102B1DDCC1003089B6 /* SearchItem3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem3.swift; sourceTree = "<group>"; };
 		883CD0702B20E03200E0B757 /* FeedBackInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackInput.swift; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		884E8CF82B09F2E7001BADDF /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		88A256A82B2DC6FE00EACB9F /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		88B85B332B06348200D03ED9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		88D69F552B1B3DB3005BE291 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		88D69F592B1B5B63005BE291 /* SecondSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSearchView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		943FB8E12B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCodeBottomSheet.swift; sourceTree = "<group>"; };
 		943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCreatePasswordBottomSheet.swift; sourceTree = "<group>"; };
 		944C97A32B1B4240005F8E96 /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
+		944CD1582B2BB1530074D99D /* SavedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostView.swift; sourceTree = "<group>"; };
 		9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountPasswordView.swift; sourceTree = "<group>"; };
 		9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountCodeView.swift; sourceTree = "<group>"; };
 		9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -144,9 +147,10 @@
 		949016E92B04275F00164405 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlurModifier.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
-		94BDAD642B07AA1000F66312 /* BlockedUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsers.swift; sourceTree = "<group>"; };
+		94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		94FAFA962B2E37BF00210585 /* PopupModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,10 +240,9 @@
 				9411AA8D2B0510F80042A354 /* CustomImage.swift */,
 				9411AA872B04E9C70042A354 /* CheckBoxView.swift */,
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
-				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
 				949016E92B04275F00164405 /* CustomButton.swift */,
-				8821E50B2B1DC900003089B6 /* CustomSearchBar.swift */,
+				88A256A82B2DC6FE00EACB9F /* PopUp.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -438,6 +441,14 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		944CD1572B2BB1310074D99D /* SavedPost */ = {
+			isa = PBXGroup;
+			children = (
+				944CD1582B2BB1530074D99D /* SavedPostView.swift */,
+			);
+			path = SavedPost;
+			sourceTree = "<group>";
+		};
 		946DC96F2B1F075D00AD809D /* StructuredView */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +469,7 @@
 		9470799F2B1B8C750005C4CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				944CD1572B2BB1310074D99D /* SavedPost */,
 				949505CF2B27E7B000C37CC7 /* EditProfile */,
 				883CD06F2B20E01500E0B757 /* FeedBack */,
 				9483385E2B1DB159006964BB /* Rank */,
@@ -466,6 +478,7 @@
 				947079A82B1BD4060005C4CB /* ChangePassword */,
 				947079A22B1BCE230005C4CB /* Agreement */,
 				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
+				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -517,7 +530,7 @@
 		9483385D2B1DB109006964BB /* BlockedUsers */ = {
 			isa = PBXGroup;
 			children = (
-				94BDAD642B07AA1000F66312 /* BlockedUsers.swift */,
+				94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */,
 			);
 			path = BlockedUsers;
 			sourceTree = "<group>";
@@ -554,6 +567,7 @@
 				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
 				94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */,
 				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
+				94FAFA962B2E37BF00210585 /* PopupModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -668,6 +682,7 @@
 				947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */,
 				9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */,
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,
+				88A256A92B2DC6FE00EACB9F /* PopUp.swift in Sources */,
 				5C1686232B1A218200A20636 /* Buttons.swift in Sources */,
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
@@ -677,7 +692,6 @@
 				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
 				943B9CE42B06912500067376 /* LikesListTile.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
-				8821E50C2B1DC900003089B6 /* CustomSearchBar.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */,
 				947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */,
@@ -698,6 +712,7 @@
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */,
+				94FAFA972B2E37BF00210585 /* PopupModifier.swift in Sources */,
 				9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */,
 				883CD0712B20E03200E0B757 /* FeedBackInput.swift in Sources */,
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
@@ -709,8 +724,9 @@
 				8821E50F2B1DCAFB003089B6 /* SearchBar.swift in Sources */,
 				5CD3D3FD2B14CF0F00C4A944 /* ScrollableTabView.swift in Sources */,
 				949016E22B041EF400164405 /* LoginView.swift in Sources */,
+				944CD1592B2BB1530074D99D /* SavedPostView.swift in Sources */,
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
-				94BDAD652B07AA1000F66312 /* BlockedUsers.swift in Sources */,
+				94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */,
 				5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */,
 				5C2658602B03C51C008BEB6D /* Const.swift in Sources */,
 				5C6F523F2B128CF000D79208 /* TagLayout.swift in Sources */,

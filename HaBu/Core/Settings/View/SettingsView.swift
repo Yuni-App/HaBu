@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        NavigationStack{
             VStack{
-                CustomSettingsTollBar(title: "Ayarlar", destinaiton: AnyView(TabbarView()))
+                CustomSettingsTollBar(action: {
+                    dismiss()
+                }, title: "Ayarlar")
                     ScrollView{
                         UserAboutBox()
                         AppAboutBox()
@@ -23,8 +25,8 @@ struct SettingsView: View {
                 .background(
                     Const.primaryBackGroundColor
                 )
-            }
-        }
+            }.navigationBarBackButtonHidden(true)
+        
     }
 }
 
@@ -36,7 +38,7 @@ struct SettingsView: View {
 @ViewBuilder
 private func SettingsTile(icon : AppIcon , text : String , destination : AnyView)->some View {
     NavigationLink {
-      AnyView(destination).navigationBarBackButtonHidden(true)
+      AnyView(destination)
     } label: {
         HStack{
             Image.iconManager(icon, size: 30, weight: .bold, color: .black)
@@ -60,9 +62,9 @@ private func UserAboutBox() ->some View {
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.lock, text: "Şifreyi Değiştir",destination: AnyView(ChangePasswordView()))
             Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.point, text: "Puanlarım",destination: AnyView(RankView()))
+            SettingsTile(icon: AppIcon.blocked, text: "Engellenen Kullanıcılar",destination: AnyView(BlockedUsersView()))
             Divider().frame(width: Const.width * 0.84)
-            SettingsTile(icon: AppIcon.blocked, text: "Engellenen Kullanıcılar",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.savePost, text: "Kaydedilenler ",destination: AnyView(SavedPostView()))
         }.frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 .white
@@ -78,9 +80,10 @@ private func AppAboutBox() ->some View {
             .foregroundColor(.black.opacity(0.7))
             .fontWeight(.bold)
         VStack{
-            SettingsTile(icon: AppIcon.feedBack, text: "Geri Bildirim",destination: AnyView(BlockedUsers()))
+            SettingsTile(icon: AppIcon.feedBack, text: "Geri Bildirim",destination: AnyView(FeedBackInput()))
             Divider().frame(width: Const.width * 0.84)
             SettingsTile(icon: AppIcon.book, text: "Gizlilik Sözleşmesi",destination: AnyView(AgreementView()))
+          
         }.frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 .white

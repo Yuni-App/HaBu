@@ -38,7 +38,11 @@ enum AppIcon: String{
     case checkSquare = "checkmark.square.fill"
     case square = "square"
     case settings = "gear"
-}
+    case savePost = "note"
+    case anonim = "person.fill.questionmark.rtl"
+    
+
+    
 
 @ViewBuilder
 func getLogo(size:CGFloat)-> some View{

@@ -8,26 +8,32 @@
 import SwiftUI
 
 struct DeleteAccountCodeView: View {
+    @Environment(\.dismiss) private var dismiss
+
     @State private var textCode: String = ""
     
     var body: some View {
         VStack{
-          CustomSettingsTollBar(title: "Hesabı Sil",destinaiton: AnyView(SettingsView()))
+            CustomSettingsTollBar(action: {
+                dismiss()
+            }, title: "Hesabı Sil")
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek İçin Mailinize Gelen Kodu Giriniz").fontWeight(.bold)
                     TextFields.CustomTextField3(text: $textCode,icon: .code, placeHolder: "Kod")
                 }.padding()
-                WarningText()
+                warningText()
             }
             CustomButton(title: "Hesabı Sil", backgroundColor: Const.secondaryButtonColor, action: {
                 true
                //delete account
             }, destination: AnyView(InfoView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
-        }.frame(width: Const.width)
-            .background(
-                Const.primaryBackGroundColor
-            )
+        }
+        .navigationBarBackButtonHidden(true)
+        .frame(width: Const.width)
+        .background(
+            Const.primaryBackGroundColor
+        )
     }
 }
 

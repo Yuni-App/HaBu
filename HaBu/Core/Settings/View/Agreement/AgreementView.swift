@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct AgreementView: View {
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         VStack{
-          CustomSettingsTollBar(title: "Gizlilik Sözleşmesi",destinaiton: AnyView(SettingsView()))
+            CustomSettingsTollBar(action: {
+                dismiss()
+            }, title: "Gizlilik Sözleşmesi")
+       
             ScrollView{
                 Text(Const.agreement).padding(25)
             }.frame(width: Const.width)
                 .background(
                     Const.primaryBackGroundColor
                 )
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

@@ -8,6 +8,9 @@
 import SwiftUI
 import Charts
 
+
+//this will add next version
+/*
 struct RankView: View {
     var colors: [(color: Color, title: String)] = [
         (Color.red, "Gönderi"),
@@ -116,3 +119,5 @@ private  struct Product: Identifiable {
     let title: String
     let revenue: Double
 }
+
+*/

@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ChangePasswordView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var textPassword: String = ""
     @State private var textNewPassword : String = ""
     @State private var textNewPasswordAgain : String = ""
-
-
     var body: some View {
         VStack{
-          CustomSettingsTollBar(title: "Şifre Değiştir",destinaiton: AnyView(SettingsView()))
+            CustomSettingsTollBar(action: {
+                dismiss()
+            }, title: "Şifre Değiştir")
+            
             ScrollView{
                 VStack{
                     HStack{
@@ -31,12 +33,13 @@ struct ChangePasswordView: View {
                     ChangeTextField(text: $textNewPassword,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
                     ChangeTextField(text: $textNewPasswordAgain,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
                 }.padding()
+                
             }
             CustomButton(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {
                 true
                 //send kode
             }, destination: AnyView(ChangePasswordSuccessView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
-        }.frame(width: Const.width)
+        }   .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor
             )

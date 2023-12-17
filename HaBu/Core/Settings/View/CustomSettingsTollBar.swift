@@ -6,28 +6,29 @@
 //
 
 import SwiftUI
-
 struct CustomSettingsTollBar: View {
+    var action : () -> Void
     var title : String
-    var destinaiton : AnyView
     var blockedCount:  Int?
     var body: some View {
         ZStack{
             HStack{
-                NavigationLink(destination: destinaiton.navigationBarBackButtonHidden(true)) {
-                    Image.iconManager(AppIcon.back, size: 35, weight: .bold, color: .black)
-                }
+                Buttons.backButton(action: {
+                    action()
+                }, color: .black)
                 Spacer()
                 if let blockedCount = blockedCount{
                     Text("\(blockedCount) Kişi ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 }
-            }
+            }.padding(.leading,5)
             Text(title)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 25))
                 .frame(maxWidth: .infinity, alignment: .center)
             Spacer()
-        }.background(
+        }
+        .frame(width: Const.width, height: Const.height/22)
+        .background(
             .white
         )
         .padding(.horizontal , 10)
@@ -36,5 +37,5 @@ struct CustomSettingsTollBar: View {
 }
 
 #Preview {
-    CustomSettingsTollBar(title: "Baslık", destinaiton: AnyView(TabbarView()))
+  SettingsView()
 }

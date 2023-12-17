@@ -16,3 +16,18 @@ class ImageManager {
     static let loginVector = "LoginVector"
     static let success = "success"
 }
+
+enum AppImage: String{
+    case habuLogo = "HabuLogo"
+    case infoVector = "InfoVector"
+    case registerVector = "RegisterVector"
+    case registerSecondVector = "RegisterSecondVector"
+    case registerThirdVector = "RegisterThirdVector"
+    case loginVector = "LoginVector"
+    case success = "success"
+    case addPhoto = "AddPhoto"
+    case mert = "Mert"
+    case anonim = "anonim"
+    case qUser = "Quser"
+}
+

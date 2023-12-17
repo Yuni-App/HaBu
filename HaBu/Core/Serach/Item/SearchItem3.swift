@@ -12,23 +12,24 @@ struct SearchItem3: View {
     
     var body: some View {
         
-        NavigationLink(destination: Text("profil")) {
+        NavigationLink(destination: Text("\(user.name)"), label: {
             HStack {
-                    CircleProfileImage(userIamgeUrl: "Mert", size: .xsmall)
-                    VStack {
-                        HStack {
-                            Text("\(user.name) \(user.surName)").fontWeight(.semibold).foregroundStyle(Color.black)
-                            Spacer()
-                        }
-                        HStack {
-                            Text("\(user.department)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color(UIColor(hex: "777777")))
-                            Spacer()
-                        }
+                CircleProfileImage(userIamgeUrl: "Mert", size: .xsmall)
+                VStack {
+                    HStack {
+                        Text("\(user.name) \(user.surName)").fontWeight(.semibold).foregroundStyle(Color.black)
+                        Spacer()
                     }
-                }.padding()
+                    HStack {
+                        Text("\(user.department)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color(UIColor(hex: "777777")))
+                        Spacer()
+                    }
+                }
+            }.padding()
                 .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(UIColor(hex: "F0F0F0"))).cornerRadius(10)
         }
-        }
+        )
+    }
     }
 
 

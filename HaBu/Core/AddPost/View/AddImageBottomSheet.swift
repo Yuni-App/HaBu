@@ -10,46 +10,38 @@ import SwiftUI
 
 struct AddImageBottomSheet: View {
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(height: Const.height * 4 / 10)
-                .background(
-                    Color.white
-                )
             HStack{
                 Spacer()
-                VStack{
-                    Image.iconManager(AppIcon.camera, size: 50, weight: .bold, color: .white).padding()
-                        .background(Color(UIColor(hex: "04243E")))
-                        .cornerRadius(7)
-                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                    Text("Kamera")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                        .font(.system(size: 25))
-                }
+                bottomSheetItem(text: "Kamera", icon: .camera)
                 Spacer()
-                VStack{
-                    Image.iconManager(AppIcon.gallery, size: 50, weight: .bold, color: .white).padding()
-                        .background(Color(UIColor(hex: "04243E")))
-                        .cornerRadius(7)
-                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                 
-                    Text("Galeri")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                        .font(.system(size: 25))
-                }
+                bottomSheetItem(text: "Galeri", icon: .gallery)
                 Spacer()
             }
             .frame(width: Const.width)
-        .presentationDetents([.height(CGFloat(Const.height/4)),.height(CGFloat(Const.height/6))])
-        }
+            .presentationDetents([.height(CGFloat(Const.height/4)),.height(CGFloat(Const.height/6))])
     }
     
 }
 
+@ViewBuilder
+func bottomSheetItem(text:String ,icon : AppIcon )-> some View {
+    Button(action: {
+        //open galery or camera
+    }, label: {
+        VStack{
+            Image.iconManager(icon, size: 50, weight: .bold, color: .white).padding()
+                .background(Color(UIColor(hex: "04243E")))
+                .cornerRadius(7)
+                .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+            Text(text)
+                .foregroundColor(.black)
+                .fontWeight(.bold)
+                .font(.system(size: 25))
+        }
+    })
+}
+
+
 #Preview {
-    AddImageBottomSheet()
+    AddPostView()
 }
