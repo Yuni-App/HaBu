@@ -13,7 +13,11 @@ struct SearchItem: View {
     @State private var deneme = false
     
     var body: some View {
-        NavigationLink(destination: ProfileView(hideTab: $deneme , user: user),label: {
+
+        NavigationLink{
+            ProfileView(user: user)
+        }label: {
+
             HStack{
                 Spacer()
                 VStack(alignment: .leading) {
@@ -58,7 +62,7 @@ struct SearchItem: View {
                 )
                 .frame(width: Const.width * 0.9, height: Const.height * 0.13)
         }
-    )}
+    }
 }
 
 #Preview {

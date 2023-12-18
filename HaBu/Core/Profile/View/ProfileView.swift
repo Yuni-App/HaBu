@@ -9,29 +9,31 @@ import SwiftUI
 
 
 struct ProfileView : View {
+    
+    init(hideTab:Binding<Bool>,user:User) {
+        _hideTab = hideTab
+        self.user = user
+    }
+    init(user:User) {
+        self.user = user
+        _hideTab = .constant(false)
+        activateBackButton = true
+        
+        
+    }
+    
+    @Environment(\.dismiss) var dissmis
+    var activateBackButton = false
+    let user : User
+    @Binding var hideTab:Bool
     @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     @State private var shouldNavigate = false
-    @State private var selectedIndex = 0
-    @Binding var hideTab:Bool
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
-    @State var messageBox = 20
     @State var TollBarOffset : CGFloat = 0
-    @State var topEdge:CGFloat = Const.height * 0.05
+    @State var topEdge:CGFloat = Const.height * 0.03
     let maxHeight = UIScreen.main.bounds.height / 2.7
-    let user : User
-    var images = [
-        "profil1",
-        "profil2",
-        "profil3"
-    ]
     @State var imageCount = 0
-    @State var gridSelector = 0
-    var gridOptions = [
-        "Post",
-        "Kaydedilenler"
-    ]
-    
     var body: some View{
         ZStack {
                 GeometryReader{proxy in
@@ -49,17 +51,26 @@ struct ProfileView : View {
                                 
                                 )
                                 .overlay(
+                                    
                                     HStack(spacing:10){
+                                        if activateBackButton == true{
+                                            Buttons.backButton(action: {
+                                                dissmis()
+
+                                            }, color: .white)
+                                            Spacer()
+                                        }
                                         HStack {
                                             Image("profil1")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .frame(width: 20,height: 20)
+                                                .frame(width: 30,height: 30)
                                             .clipShape(.circle)
                                             Text(user.username)
                                                 .fontWeight(.bold)
                                                 .foregroundStyle(.primary)
                                         }
+                                        .padding(.top,40)
                                         .opacity(topBarTitleOpacity())
                                        
                                         Spacer()
@@ -81,14 +92,14 @@ struct ProfileView : View {
                             }
                             .frame(height: maxHeight)
                             .offset(y:-TollBarOffset)
-                            .zIndex(2)
+                            .zIndex(1)
                             VStack(spacing:15){
                                    
                                 ForEach(Post.MockData){post in
-                                    FeedViewCell(post: post, user: User.MockData[0], hideTab: $hideTab)
+                                    FeedViewCell(post: post, user: User.MockData[0])
                                 }
                             }
-                            .zIndex(1)
+                            .zIndex(0)
                             
                         }
                         .overlay(
@@ -132,7 +143,7 @@ struct ProfileView : View {
     }
     func getHeaderHeight() -> CGFloat{
         let topHeight = maxHeight + TollBarOffset
-        return topHeight > (80 + topEdge) ? topHeight - 40 : (40 + topEdge)
+        return topHeight > (80 + topEdge) ? topHeight : (80 + topEdge)
     }
     func getCornerRadius()-> CGFloat{
         let progress = -TollBarOffset / (maxHeight - (40 + topEdge))
@@ -141,7 +152,7 @@ struct ProfileView : View {
         return TollBarOffset < 0 ? radius : 25
     }
     func topBarTitleOpacity()-> CGFloat{
-        let progress = -(TollBarOffset) / ((maxHeight-40) - (40 + topEdge))
+        let progress = -(TollBarOffset) / ((maxHeight-40) - (80 + topEdge))
         return progress
         
         
@@ -154,7 +165,7 @@ struct ProfileView : View {
 struct Tabbar:View {
     @State var editButtonPosition = CGPoint(x:Const.width, y:0)
     let user:User
-    var images = [
+    let images = [
         "profil1",
         "profil2",
         "profil3"
@@ -163,7 +174,6 @@ struct Tabbar:View {
     var topEdge: CGFloat
     @Binding var offset:CGFloat
     var maxHeight:CGFloat
-   
     var body: some View {
        
         VStack{
@@ -207,9 +217,11 @@ struct Tabbar:View {
                     Text("\(user.name) \(user.surName)")
                         .font(.headline)
                         .fontWeight(.semibold)
-                    Text("\(user.department)")
+
+                    Text(user.department)
+
                     HStack {
-                        Image(systemName: "star.fill")
+                        Image.iconManager(.star, size: 15, weight: .bold, color: .white)
                             .foregroundStyle(.yellow)
                         Text("\(user.rating, specifier: "%0.f")").font(.subheadline)
                     }//Rating

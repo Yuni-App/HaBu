@@ -99,6 +99,7 @@ class Buttons{
                         .font(.subheadline)
                 }
             }
+           
             .padding(.vertical,5)
             .padding(.horizontal,10)
             .padding(dragDirection.padding,110)
@@ -110,6 +111,9 @@ class Buttons{
                 }
                     .hidden()
             )
+            .navigationDestination(isPresented: $shouldNavigate, destination:{
+                AnyView(destinaiton)
+            })
             .clipShape(
                 .rect(
                     topLeadingRadius: dragDirection == .left ? 20 : 0,
