@@ -35,9 +35,10 @@ struct PopUp : View {
                     }
                 }
         }
+        
     }
 }
 
 #Preview {
-    PopUp(size: PopUpScreen.lage, backgroundColor: Color.brown, contents: "Nasılsın\nben iyiyim popup yapıyorum", btnOpen: "bana bas ve buton açılsın", btnClose: "Kapat soğuk yapıyor")
+    PopUp(size: PopUpScreen.xxlage, backgroundColor: Color.brown, contents: "Nasılsın\nben iyiyim popup yapıyorum", btnOpen: "bana bas ve buton açılsın", btnClose: "Kapat soğuk yapıyor")
 }
