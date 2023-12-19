@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 
-struct ToastView: View {
+struct ToastView: View{
   
   var style: ToastStyle
   var message: String
@@ -18,38 +18,41 @@ struct ToastView: View {
   var onCancelTapped: (() -> Void)
   
   var body: some View {
-    HStack(alignment: .center, spacing: 12) {
-      Image(systemName: style.iconFileName)
-        .foregroundColor(style.themeColor)
-      Text(message)
-            .font(.footnote)
-            .fontWeight(.semibold)
-            .foregroundColor(.black)
-      
-      Spacer(minLength: 10)
-      
-      Button {
-        onCancelTapped()
-      } label: {
-        Image(systemName: "xmark")
-          .foregroundColor(style.themeColor)
-      }
-    }
-    .padding()
-    .frame(minWidth: 0, maxWidth: width)
-    .background(.blue.opacity(0.06))
-    .cornerRadius(8)
-    .overlay(
-        RoundedRectangle(cornerRadius: 8)
-            .stroke(style.themeColor, lineWidth: 1)
-        )
+      ZStack {
+          HStack(alignment: .center, spacing: 12) {
+          Image(systemName: style.iconFileName)
+            .foregroundColor(style.themeColor)
+          Text(message)
+                .font(.footnote)
+                .fontWeight(.semibold)
+                .foregroundColor(.black)
+          
+          Spacer(minLength: 10)
+          
+          Button {
+            onCancelTapped()
+          } label: {
+            Image(systemName: "xmark")
+              .foregroundColor(style.themeColor)
+          }
+        }
+          
+        .padding()
+        .frame(minWidth: 0, maxWidth: width)
+        .background(.white)
+        .cornerRadius(8)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(style.themeColor, lineWidth: 1)
+            )
     .padding(.horizontal, 16)
+      }
 
   }
 }
 
 #Preview {
-    ToastView(style: .error, message: "Hata ", width: .infinity) {
+    ToastView(style: .success, message: "Hata ", width: .infinity) {
         print("aasd")
     }
 }

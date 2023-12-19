@@ -22,46 +22,56 @@ struct UserInfo: View {
         self.imageSize = imageSize
     }
     var body: some View {
-        HStack {
-            CircleProfileImage(userIamgeUrl: "", size: imageSize)
-            VStack{
-                Text("\(user.name) \(user.surName)")
-                    .fontWeight(.semibold)
-                    .font(.caption)
-                Text("\(user.username)")
-                    .opacity(0.5)
-                    .fontWeight(.semibold)
-                    .font(.caption2)
-            }
-            .foregroundStyle(.black)
-            Spacer()
-            if timeStamp != nil{
-                Text("4s")
-                    .opacity(0.6)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                Menu{
-                    Button(action: {
-                        toast = Toast(style: .warning, message: "Gönderi incelemeye alındı.", width: .infinity)
+        ZStack {
+            HStack {
+                NavigationLink {
+                    ProfileView(user: user)
+                } label: {
+                    HStack {
+                        CircleProfileImage(userIamgeUrl: "", size: imageSize)
+                        VStack{
+                            Text("\(user.name) \(user.surName)")
+                                .fontWeight(.semibold)
+                                .font(.caption)
+                            Text("\(user.username)")
+                                .opacity(0.5)
+                                .fontWeight(.semibold)
+                                .font(.caption2)
+                        }
+                        .foregroundStyle(.black)
+                    }
+                }
 
-                    }, label: {
-                        Text("Raporla!")
-                    })
-                    Button(action: {
-                        toast = Toast(style: .info, message: "Kişiyi engellemek istediğinize emin misiniz.", width: .infinity)
+                Spacer()
+                if timeStamp != nil{
+                    Text("4s")
+                        .opacity(0.6)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    Menu{
+                        Button(action: {
+                            toast = Toast(style: .warning, message: "Gönderi incelemeye alındı.", width: .infinity)
 
-                    }, label: {
-                        Text("Kullanıcıyı Engelle")
-                    })
-                }label: {
-                    Image.iconManager(.treeDot, size: 15, weight: .regular, color: .black)
-                        .rotationEffect(.degrees(90))
-                        .padding()
+                        }, label: {
+                            Text("Raporla!")
+                        })
+                        Button(action: {
+                            toast = Toast(style: .info, message: "Kişiyi engellemek istediğinize emin misiniz.", width: .infinity)
 
-                        
+                        }, label: {
+                            Text("Kullanıcıyı Engelle")
+                        })
+                    }label: {
+                        Image.iconManager(.treeDot, size: 15, weight: .regular, color: .black)
+                            .rotationEffect(.degrees(90))
+                            .padding()
+
+                            
+                    }
                 }
             }
         }
+        .frame(height: .infinity)
         .toastView(toast: $toast)
         
     }
