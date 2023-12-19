@@ -14,11 +14,10 @@ struct OffsetModifier: ViewModifier {
         content.overlay(
             GeometryReader{ proxy -> Color in
                 let minY = (proxy.frame(in: .named("SCROLL")).minY)
-                print(minY)
                 DispatchQueue.main.async {
                         self.offset = minY
                 }
-                return Color.clear
+                return Color.clear.opacity(0)
             }
             ,alignment: .top
         )
@@ -36,5 +35,5 @@ struct CustomCorner : Shape{
 }
 
 #Preview {
-    InfoView()
+    ProfileView(hideTab:.constant(true), user: User.MockData[0])
 }

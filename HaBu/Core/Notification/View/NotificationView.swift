@@ -60,13 +60,13 @@ struct NotificationView: View {
         NavigationLink{
             if let postId = Int(notification.targetId){
                 if let userId = Int(notification.userId){
-                    if notification.type == .postLike{
+                    if notification.type == ""{
                         FeedViewCell(navigated : Post.MockData[postId], user: User.MockData[userId])
                     }
-                    else if notification.type == .postComment {
+                    else if notification.type == "" {
                         FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
                     }
-                    else if notification.type == .commentLike{
+                    else if notification.type == ""{
                         FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
                     }
                 }
@@ -79,7 +79,7 @@ struct NotificationView: View {
                         .foregroundStyle(.black.opacity(0.7))
                         .font(.footnote)
                         .fontWeight(.bold)
-                    Text(notification.caption)
+                    Text(notification.caption ?? "")
                         .font(.headline)
                         .fontWeight(.semibold)
                     .foregroundStyle(.black)

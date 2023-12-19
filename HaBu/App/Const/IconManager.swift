@@ -40,9 +40,14 @@ enum AppIcon: String{
     case settings = "gear"
     case savePost = "note"
     case anonim = "person.fill.questionmark.rtl"
+    case star = "star.fill"
+    case treeDot = "ellipsis"
+    
+}
     
 
-    
-
+@ViewBuilder
+func getLogo(size:CGFloat)-> some View{
+    Text("Y").foregroundStyle(Const.primaryColor).font(.custom("Kodchasan-Bold", size: size))
 }
 

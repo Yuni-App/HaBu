@@ -9,10 +9,11 @@ import SwiftUI
 
 struct SearchItem3: View {
     var user: User
+    @State private var deneme = false
     
     var body: some View {
         
-        NavigationLink(destination: Text("\(user.name)"), label: {
+        NavigationLink(destination: ProfileView(hideTab: $deneme , user: user), label: {
             HStack {
                 CircleProfileImage(userIamgeUrl: "Mert", size: .xsmall)
                 VStack {

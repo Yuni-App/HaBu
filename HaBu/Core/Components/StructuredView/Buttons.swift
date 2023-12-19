@@ -130,16 +130,17 @@ class Buttons{
                         .font(.subheadline)
                 }
             }
+           
             .padding(.vertical,5)
             .padding(.horizontal,10)
             .padding(dragDirection.padding,110)
             .background(color)
             .foregroundStyle(textColor)
             .background(
-                NavigationLink(destination:AnyView(destinaiton), isActive: $shouldNavigate) {
-                    EmptyView()
-                }
-                    .hidden()
+                NavigationLink(
+                    destination: AnyView(destinaiton),
+                    isActive: $shouldNavigate,
+                    label: { EmptyView() })
             )
             .clipShape(
                 .rect(
@@ -279,3 +280,45 @@ enum DragDirection {
     }
 }
 
+
+enum PopUpScreen{
+    
+    case xsmall
+    case small
+    case medium
+    case lage
+    case xlage
+    case xxlage
+    var width : CGFloat{
+        switch self {
+        case .xsmall:
+            return Const.width * 0.85
+        case .small:
+            return Const.width * 0.85
+        case .medium:
+            return Const.width * 0.85
+        case .lage:
+            return Const.width * 0.85
+        case .xlage:
+            return Const.width * 0.85
+        case .xxlage:
+            return Const.width * 0.85
+        }
+    }
+    var height : CGFloat{
+        switch self {
+        case .xsmall:
+            return Const.height * 0.3
+        case .small:
+            return Const.height * 0.35
+        case .medium:
+            return Const.height * 0.4
+        case .lage:
+            return Const.height * 0.5
+        case .xlage:
+            return Const.height * 0.6
+        case .xxlage:
+            return Const.height * 0.7
+        }
+    }
+}
