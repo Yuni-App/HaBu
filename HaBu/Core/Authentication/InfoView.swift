@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct InfoView: View {
-    
+    @State var visiblapopup = false ;
     var body: some View {
-        @StateObject var authViewModel = AuthViewModel()
         NavigationStack {
             ZStack {
                 VStack {
@@ -25,9 +24,9 @@ struct InfoView: View {
                         }, size: .small, textColor: .white, destination: AnyView(LoginView()))
                         .padding()
                         
-                        Buttons.customButton1(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
-                            authViewModel.login(username: "fas", password: "fa")
-                        }, size: .small, textColor: .black, destination: AnyView(RegisterBuildFirstView()))
+                        Buttons.customButton(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
+                            true
+                        }, destination: AnyView(RegisterBuildFirstView()), size: .small, textColor: .black)
                         
                         
                         
@@ -37,6 +36,9 @@ struct InfoView: View {
                 .frame(width: Const.width , height: Const.height)
                 .padding()
             }
+            .popup(isPresented: $visiblapopup, view: {
+                Text("hATA").foregroundColor(.black)
+            })
             .background(Const.authBackGroundColor)
         }
         

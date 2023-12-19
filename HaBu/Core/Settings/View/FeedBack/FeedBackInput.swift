@@ -13,8 +13,6 @@ struct FeedBackInput: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        
-    
             VStack {
                 ZStack{
                     VStack(spacing: 0) {
@@ -32,15 +30,11 @@ struct FeedBackInput: View {
                         CustomSettingsTollBar(action: {
                             dismiss()
                         }, title: "Geri Bildirim" , backgroundColor : .clear)
-                        ScrollView{
+                        
                             VStack {
-                            
-                                
                                 Image.imageManager(image: .feedBack).frame(width: Const.width * 0.3 ,height: Const.width * 0.3)
                                 TextFields.LineLimitTextField(text: $text)
-                                Spacer()
                                 Rate(selectedRating: $selectedRating)
-                                Spacer()
                                 Spacer()
                                 Spacer()
                                 Buttons.customButton(title: "Gönder", backgroundColor: Const.primaryButtonColor, action: {
@@ -50,12 +44,7 @@ struct FeedBackInput: View {
                                 Spacer()
                             }
                             .frame(width: Const.width , height: Const.height)
-                          
-                            
-
-                            
-                        }
-                    }  .padding(.top , 65)
+                    }  .padding(.top , 115)
                        
                 }
             }.navigationBarBackButtonHidden(true)
