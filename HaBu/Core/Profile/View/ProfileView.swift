@@ -217,11 +217,13 @@ struct Tabbar:View {
                     Text("\(user.name) \(user.surName)")
                         .font(.headline)
                         .fontWeight(.semibold)
+
                     Text(user.department)
+
                     HStack {
                         Image.iconManager(.star, size: 15, weight: .bold, color: .white)
                             .foregroundStyle(.yellow)
-                        Text("145").font(.subheadline)
+                        Text("\(user.rating, specifier: "%0.f")").font(.subheadline)
                     }//Rating
                 }
                 Spacer()
