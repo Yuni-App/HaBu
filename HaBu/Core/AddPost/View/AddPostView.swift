@@ -138,13 +138,13 @@ func AddPostBackground()-> some View {
     VStack(spacing: 0) {
         Rectangle()
             .foregroundColor(.clear)
-            .frame(height: Const.height * 2.5 / 10)
+            .frame(height: Const.height * 0.25)
             .background(
                 Const.LinearBackGroundColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
         Const.primaryBackGroundColor
-            .frame(height: Const.height * 7.6 / 10)
+            .frame(height: Const.height * 0.76)
     }
 }
 
@@ -189,7 +189,36 @@ func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
     }.padding(.bottom, 30)
 }
 
-
+@ViewBuilder
+func AddPostPopup(selectedOption : Binding<ImageType> , isPopupVisible : Binding<Bool>)->some View {
+    VStack {
+        Text("Gönderinizin Gizliliği Nasıl Olsun ? ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).foregroundColor(.black).padding(.bottom,5)
+        Text("Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...").foregroundColor(Const.secondaryButtonColor)
+        Spacer()
+        Spacer()
+        Buttons.customButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
+            withAnimation {
+                selectedOption.wrappedValue = .anonymous
+                isPopupVisible.wrappedValue.toggle()
+            }
+            return false
+        }, size: CustomButtonSize.medium , textColor: .white)
+        Spacer()
+        Buttons.customButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
+            withAnimation {
+                selectedOption.wrappedValue = .notAnonymous
+                isPopupVisible.wrappedValue.toggle()
+            }
+            return false
+        }, size: CustomButtonSize.medium , textColor: .white)
+      Spacer()
+    }.padding(.vertical,10)
+    .padding(.horizontal,5)
+    .frame(width: Const.width * 0.85,height: Const.width * 0.6 )
+    .cornerRadius(15)
+    
+    
+}
 struct AddPostCategory: View {
     @State var SelectedTags:[String] = []
     @Namespace private var animation

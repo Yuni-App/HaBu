@@ -22,7 +22,7 @@ struct DeleteAccountPasswordView: View {
                 }.padding()
                 warningText()
             }
-            CustomButton(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
+            Buttons.customButton(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
                 true
                 //send kode
             }, destination: AnyView(DeleteAccountCodeView()), size: CustomButtonSize.medium)

@@ -11,4 +11,6 @@ struct Comment: Identifiable, Codable{
     let id: String
     let comment: String
     let userId: String
+    let createdAt : String
+
 }

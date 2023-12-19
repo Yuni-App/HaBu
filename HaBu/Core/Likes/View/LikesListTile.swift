@@ -29,7 +29,7 @@ struct LikesListTile: View {
                 Spacer()
 
 
-                CustomButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {true} , destination: AnyView( TabbarView()), size: CustomButtonSize.xxsmall)
+                Buttons.customButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {true} , destination: AnyView( TabbarView()), size: CustomButtonSize.xxsmall)
 
                 
             }

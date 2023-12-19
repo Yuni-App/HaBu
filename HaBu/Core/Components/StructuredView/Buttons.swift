@@ -9,9 +9,40 @@ import Foundation
 import SwiftUI
 
 class Buttons{
+    struct customButton: View {
+        var title: String
+        var backgroundColor: Color
+        var action: () -> Bool
+        var destination : AnyView?
+        var size : CustomButtonSize
+        var textColor : Color?
+        @State private var isActiveDestination: Bool = false
+        
+        var body: some View {
+            
+            NavigationLink(
+                destination: destination ?? AnyView(EmptyView()),
+                isActive: $isActiveDestination,
+                label: {})
+            
+            Button(action: {
+                if action(){
+                    isActiveDestination = true
+                }
+            }, label: {
+                Text(title)
+                    .padding()
+                    .frame(width: size.width , height: size.height)
+                    .background(backgroundColor)
+                    .foregroundColor(textColor ?? .white)
+                    .cornerRadius(4)
+            })
+        }
+    }
+    
     //customButton1
     @ViewBuilder
-    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?,destination:AnyView) -> some View{
+    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?,destination:AnyView?) -> some View{
         NavigationLink {
             destination
         } label: {

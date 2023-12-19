@@ -12,12 +12,6 @@ struct FeedBackSuccess: View {
         NavigationView{
             ZStack {
                 ScrollView{
-                    HStack {
-                        Buttons.backButton(action: {
-                            //
-                        }).padding()
-                        Spacer()
-                    }
                     VStack {
                         Spacer()
                         Rectangle()

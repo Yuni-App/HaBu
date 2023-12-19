@@ -16,6 +16,7 @@ struct Post : Identifiable,Codable,Hashable{
     var imageUrl : String?
     let timeStamp : String
     var likeList : [String]
+  //  var commentList : [String]
     
 }
 /*
