@@ -12,44 +12,39 @@ struct FeedBackInput: View {
     @State private var isAnonimPost = false
     @State private var isAnonimComment  = false
     @State private var selectedRating: Int = 0
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationView{
             ZStack{
                 AddPostBackground()
-                    VStack {
-                        FeedBackBar().frame(height: Const.height * 0.15)
-                        Image("Feed 1")
-                            .padding()
-                        //PopUp(size: .lage, backgroundColor: .brown, contents: "merhaba", btnOpen: "aç", btnClose: "kapat")
-                        TextFields.LineLimitTextField(text: $text)
-                        Spacer()
-                        Rate(selectedRating: $selectedRating)
-                        Spacer()
-                        SendButton(text: text).padding(.bottom, Const.height * 0.05)
-                    }.frame(width: Const.width * 0.95)
+                VStack {
+                    HStack {
+                        Buttons.backButton(action: {
+                            dismiss()
+                        })
+                        Text("Geri Bildirim")
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                            .frame(width: Const.width * 0.9)
+                    }.frame(width: Const.width * 1).padding(.top, 40)
+                    Image("Feed 1")
+                        .padding()
+                    //PopUp(size: .lage, backgroundColor: .brown, contents: "merhaba", btnOpen: "aç", btnClose: "kapat")
+                    TextFields.LineLimitTextField(text: $text)
+                    Spacer()
+                    Rate(selectedRating: $selectedRating)
+                    Spacer()
+                    SendButton(text: text).padding(.bottom, Const.height * 0.05)
+                }.frame(width: Const.width * 0.95)
                 
             }
-        }.frame(height: Const.height * 1)
+        }.frame(height: Const.height * 1).navigationBarBackButtonHidden(true)
     }
 }
 
 
 #Preview {
     FeedBackInput()
-}
-
-
-@ViewBuilder
-func FeedBackBar() -> some View {
-    HStack {
-            Buttons.backButton(action: {
-                //
-            })
-            Text("Geri Bildirim")
-                .foregroundColor(.white)
-                .fontWeight(.semibold)
-                .frame(width: Const.width * 0.9)
-    }.frame(width: Const.width * 1)
 }
 
 @ViewBuilder
