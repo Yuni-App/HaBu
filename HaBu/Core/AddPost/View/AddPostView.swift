@@ -41,7 +41,7 @@ struct AddPostView: View {
                             UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
                         }
                     }
-                    AddPostCategory()
+                                AddPostCategory()
                     AddPostToggle(isAnonimComment: $isAnonimComment)
                     AddPostMedia()
                     Spacer()
@@ -55,7 +55,7 @@ struct AddPostView: View {
         .blur(radius: isPopupVisible ? 1.5 : 0.0)
         .popup(isPresented: $isPopupVisible) {
             
-            PopUps.AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible)
+            PopUps.AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible, title: "Gönderinizin Gizliliği Nasıl Olsun ? ", contents: "Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...", size: .xsmall, backgroundColor: .white)
                }
         .navigationBarBackButtonHidden(true)
     }
