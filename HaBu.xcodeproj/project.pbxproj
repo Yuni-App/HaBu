@@ -238,7 +238,6 @@
 			children = (
 				5C2DAB492B050CFD00C6E145 /* Fonts */,
 				5C2DAB472B04FE1C00C6E145 /* Info.plist */,
-				949A09ED2B31E0E50074773E /* Protocols */,
 				94A59ED12B2FA73700925670 /* Services */,
 				5C2658612B03C532008BEB6D /* Extencion */,
 				5C26585D2B03C50C008BEB6D /* App */,
@@ -611,13 +610,6 @@
 				943FB8DD2B063295009C55C6 /* Register */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		949A09ED2B31E0E50074773E /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		94A06AC82B22059400814CD6 /* Modifiers */ = {
