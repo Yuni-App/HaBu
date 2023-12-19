@@ -10,9 +10,10 @@ import SwiftUI
 struct SearchItem2: View {
     var user: User
     var ratingSorted: Bool
+    @State private var deneme = true
     
     var body: some View {
-        NavigationLink(destination: Text("\(user.name)"), label: {
+        NavigationLink(destination: ProfileView(hideTab: $deneme , user: user), label: {
                 VStack {
                     VStack {
                         Image("Mert")

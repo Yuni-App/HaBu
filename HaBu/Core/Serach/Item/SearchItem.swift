@@ -10,11 +10,14 @@ import SwiftUI
 struct SearchItem: View {
     var user: User
     var ratingSorted: Bool
+    @State private var deneme = false
     
     var body: some View {
+
         NavigationLink{
             ProfileView(user: user)
         }label: {
+
             HStack{
                 Spacer()
                 VStack(alignment: .leading) {
