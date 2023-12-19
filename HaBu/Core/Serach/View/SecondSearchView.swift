@@ -11,7 +11,6 @@ struct SecondSearchView: View {
     @State private var searchText = ""
     @State private var isSearchBar = false
     @State private var isSecondSearchViewActive: Bool = true
-    
     //SearchFilter name , surname and username
     var users: [User]{
         if isSearchBar{
@@ -25,20 +24,13 @@ struct SecondSearchView: View {
         }
     }
     var body: some View {
-        NavigationView {
-            VStack{
+
+        VStack{
                 Spacer()
                 HStack{
-                    NavigationLink {
-                        SerachView().navigationBarBackButtonHidden()
-                    } label: {
-                        Image(systemName: AppIcon.back.rawValue).resizable().frame(width: Const.width * 0.03, height: Const.height * 0.025).foregroundStyle(Color.black)
-                    }
-                    
                     SearchBar(searchText: $searchText, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                         .frame(width: Const.width * 0.85)
                 }
-                
                 ScrollView {
                     ForEach(users) { user in
                         SearchItem3(user: user)
@@ -50,8 +42,9 @@ struct SecondSearchView: View {
                     .animation(.easeInOut)
                     .navigationBarBackButtonHidden()
             }.frame(width: Const.width, height: Const.height).background(Const.primaryBackGroundColor)
-        }
+        
     }
+    
 }
 
 

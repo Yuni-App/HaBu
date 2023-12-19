@@ -28,7 +28,8 @@ struct SerachView: View {
         VStack {
             if isSecondSearchViewActive {
                 SecondSearchView()
-            } else {
+            }
+            else {
                 HStack {
                     SearchBar(searchText: $searchText, isEditing: $isEditing, isSecondSearchViewActive: $isSecondSearchViewActive)
                 }.frame(width: Const.width * 0.97)

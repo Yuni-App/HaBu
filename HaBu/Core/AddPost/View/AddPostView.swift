@@ -15,6 +15,7 @@ enum ImageType {
 
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
+    @State var SelectedTags:[String] = []
     @State private var textContent : String = ""
     @State  var isShareActive : Bool = false
     @State private var isAnonimComment  = false
@@ -28,24 +29,37 @@ struct AddPostView: View {
                     AddPostAppBar(action: {
                         dismiss()
                     }, isShareActive: $isShareActive)
-                    TextFields.LineLimitTextField(text: $textContent)
-                    VStack{
-                        if selectedOption == .notSelected {
-                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                    HStack(alignment: .top) {
+                        VStack{
+                            if selectedOption == .notSelected {
+                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                            }
+                            else if selectedOption == .anonymous
+                            {
+                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
+                            }
+                            else if selectedOption == .notAnonymous {
+                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
+                            }
                         }
-                        else if selectedOption == .anonymous
-                        {
-                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
-                        }
-                        else if selectedOption == .notAnonymous {
-                            UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
-                        }
+                        .padding(5)
+                        TextField("", text: $textContent,axis: .vertical)
+                            .lineLimit(9...)
+                            .background(Color.white)
+                            .cornerRadius(7)
+                            .padding(.vertical)
                     }
-                                AddPostCategory()
+                    .background(Color.white)
+                    .clipShape(.rect(cornerRadius: 5, style: .circular))
+                    .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
+                    .padding()
+                    AddCategoryView(SelectedTags: $SelectedTags)
+                        .padding(.vertical,20)
+
                     AddPostToggle(isAnonimComment: $isAnonimComment)
                     AddPostMedia()
-                    Spacer()
-                }.padding()
+                   
+                }
             }
             NavigationLink(
                 destination: TabbarView(),
@@ -58,6 +72,7 @@ struct AddPostView: View {
             PopUps.AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible, title: "Gönderinizin Gizliliği Nasıl Olsun ? ", contents: "Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...", size: .xsmall, backgroundColor: .white)
                }
         .navigationBarBackButtonHidden(true)
+        
     }
 }
 
@@ -70,7 +85,9 @@ private func AddPostToggle(isAnonimComment : Binding<Bool>)->some View{
     HStack{
         Toggle("Anonim Yorum", isOn: isAnonimComment)
             .fontWeight(.bold)
-    }.padding()
+
+    }
+    .padding(.all,5)
         .background(RoundedRectangle(cornerRadius: 7)
             .foregroundColor(Color.white))
         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
@@ -81,10 +98,12 @@ private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,ima
     ZStack {
         Rectangle()
             .foregroundColor(.clear)
-            .frame(width: Const.width/8, height: Const.width/8)
+            .frame(width: Const.width/10, height: Const.width/10)
             .background(
-                Image.imageManager(image:image ,radius: radius ,shadow: Const.primaryColor)
+                Image.imageManager(image:image ,radius: radius)
             )
+            
+            
     }.onTapGesture {
         withAnimation {
             isPopupVisible.wrappedValue.toggle()
@@ -208,7 +227,7 @@ struct AddPostCategory: View {
             }
             .background(.white)
             .zIndex(1)
-            ScrollView(.vertical){
+            VStack{
                 TagLayout(spacing: 10){
                     ForEach(Const.categoryTags.filter{!SelectedTags.contains($0)} , id: \.self){tag in
                         TagView(tag, Const.primaryColor, "plus")
@@ -220,8 +239,9 @@ struct AddPostCategory: View {
                             }
                     }
                 }
-                .padding(15)
-            }
+            }         
+            .frame(minHeight: CGFloat((Const.categoryTags.count / 3)) * 55)
+
         }
     }
 }

@@ -64,13 +64,13 @@ struct ProfileView : View {
                                             Image("profil1")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .frame(width: 30,height: 30)
+                                                .frame(width: 40,height: 40)
                                             .clipShape(.circle)
                                             Text(user.username)
                                                 .fontWeight(.bold)
+                                                .font(.headline)
                                                 .foregroundStyle(.primary)
                                         }
-                                        .padding(.top,40)
                                         .opacity(topBarTitleOpacity())
                                        
                                         Spacer()
@@ -85,7 +85,7 @@ struct ProfileView : View {
                                         .padding(.horizontal,10)
                                         .frame(height:40)
                                         .foregroundStyle(.white)
-                                        .padding(.top,topEdge)
+                                        .padding(.top,topEdge + 25)
                                     ,alignment: .top
                                     
                                 )

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @Environment(\.dismiss) private var dismiss
     var user: User
     @State private var textName : String = ""
     @State private var textSurName : String = ""
@@ -18,6 +17,7 @@ struct EditProfileView: View {
     @State private var dragDirection: DragDirection = .none
     @State private var imageIndices = [0, 1, 2]
     @State private var imagePickerPresented = false
+    @Environment(\.dismiss) private var dismiss
     var images = [
         "profil1",
         "profil2",
@@ -43,20 +43,18 @@ struct EditProfileView: View {
                     
                     VStack{
                         HStack {
-                            Buttons.backButton {
-                                dismiss()
-                            }
+                            Buttons.backButton(action: {
+                                
+                                dismiss.callAsFunction()
+
+                            }, color: .white) 
+                            
                             .padding(.leading)
                             Spacer()
                             Text("HaBu!").foregroundStyle(.white).font(.custom("IrishGrover-Regular", size: 35))
                                 .padding(.trailing)
                             Spacer()
-                            NavigationLink {
-                                SettingsView()
-                                
-                            } label: {
-                                Image.iconManager(.settings, size:25, weight: .bold, color: .white)
-                            }
+
 
                         }
                         HStack {

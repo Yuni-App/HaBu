@@ -106,14 +106,11 @@ class Buttons{
             .background(color)
             .foregroundStyle(textColor)
             .background(
-                NavigationLink(destination:AnyView(destinaiton), isActive: $shouldNavigate) {
-                    EmptyView()
-                }
-                    .hidden()
+                NavigationLink(
+                    destination: AnyView(destinaiton),
+                    isActive: $shouldNavigate,
+                    label: { EmptyView() })
             )
-            .navigationDestination(isPresented: $shouldNavigate, destination:{
-                AnyView(destinaiton)
-            })
             .clipShape(
                 .rect(
                     topLeadingRadius: dragDirection == .left ? 20 : 0,

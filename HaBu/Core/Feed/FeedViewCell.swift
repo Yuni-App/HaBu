@@ -44,14 +44,9 @@ struct FeedViewCell: View {
                 
                 Spacer()
                 //User Info
-                NavigationLink{
-                    ProfileView(user: user)
-                }label: {
-                    UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
-                        .foregroundStyle(.black)
-
-                }
-                .padding(.horizontal)
+                UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
+                    .foregroundStyle(.black)
+                    .padding(.horizontal)
                 
                 //ımage ?? nil
                 if let imageUrl = post.imageUrl{
