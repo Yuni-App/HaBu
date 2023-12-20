@@ -10,13 +10,16 @@ import Foundation
 class RegisterViewModel: ObservableObject {
     @Published var textEmail = ""
     @Published var textPassword = ""
-    @Published var againTextPassword = ""
-    @Published var name = ""
-    @Published var sureName = ""
-    @Published var userName = ""
-    @Published var age = ""
-    @Published var bio = ""
-    
+    @Published var textAgainPassword = ""
+    @Published var textName = ""
+    @Published var textSurname = ""
+    @Published var textUserName = ""
+    @Published var textAge = ""
+    @Published var textBio = ""
+    @Published var textFaculty = ""
+    @Published var textDepartment = ""
+    @Published var textYear = ""
+
     @Published var errorMessage = ""
     @Published var completion = false
     @Published var error = false
@@ -27,10 +30,7 @@ class RegisterViewModel: ObservableObject {
        }
 
     
-    func signUp() {
-        print("sfdghj")
-        print(name)
-    }
+    func signUp() {}
     
 
        
