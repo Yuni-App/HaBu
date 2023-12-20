@@ -127,3 +127,80 @@ struct FeedViewCell: View {
 #Preview {
     FeedViewCell(navigatedWithComment: Post.MockData[0], user: User.MockData[0])
 }
+
+/*
+ import Firebase
+
+ struct FeedViewCell: View {
+
+   @Environment(\.dismiss) var dissmis
+   @State private var savePost = ActionButtons.savePost
+   @State private var likePost = ActionButtons.unLike
+   private var backButton : Bool
+   @State private var showingComment = false
+   @State private var showingLikeList = false
+   let post : Post
+   var user : User
+
+   init(post: Post,user:User) {
+     self.post = post
+     self.user = user
+     self.backButton = false
+   }
+   init(navigatedWithComment post: Post,user:User) {
+     self.post = post
+     self.user = user
+     self.backButton = true
+     self.showingComment = true
+   }
+   init(navigated post:Post,user:User){
+     self.post = post
+     self.user = user
+     self.backButton = true
+
+   }
+
+
+           Buttons.actionButton(buttonType: likePost,action: {
+                   if likePost == .unLike{
+                       likePost = .liked
+                       // Firebase Function'ı çağır
+                       Functions.functions().httpsCallable("updateLikeCount")             .call([
+                       "postId": post.id,
+                       "isLiked": true,
+                       ]) { result, error in
+                       // Sonucu veya hatayı ele alın
+                       if let result = result as? [String: Any]{
+                           if let likeCount = result["likeCount"] as? Int{
+                           self.likeNumber = likeCount
+                           }
+                       }
+                       }
+                   }
+                   else{
+                        likePost = .unLike
+                        // Firebase Function'ı çağır
+                        Functions.functions().httpsCallable("updateLikeCount")           .call([
+                          "postId": post.id,
+                          "isLiked": false,
+                        ]) { result, error in
+                          // Sonucu veya hatayı ele alın
+                          if let result = result as? [String: Any]{
+                            if let likeCount = result["likeCount"] as? Int{
+                              self.likeNumber = likeCount
+                            }
+                          }
+                        }
+                      }
+                    },getNumber: likeNumber, textAction: {
+                      showingLikeList = true
+                     })
+                    
+                  }
+                }
+           .sheet(isPresented: $showingLikeList)
+           {
+             LikesView(post: Post.MockData[0])
+             .presentationDetents([.large,.medium])
+           }
+ */
