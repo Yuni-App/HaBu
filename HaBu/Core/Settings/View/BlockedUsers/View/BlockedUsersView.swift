@@ -9,19 +9,24 @@ import SwiftUI
 
 struct BlockedUsersView: View {
     @Environment(\.dismiss) private var dismiss
-    let blockedList : [User] = User.MockData
+    
+    @StateObject var blockedUsersVM : BlockedUsersViewModal
+    init(){
+        self._blockedUsersVM = StateObject(wrappedValue: BlockedUsersViewModal())
+    } 
+    
     var body: some View {
             VStack{
                 CustomSettingsTollBar(action: {
                     dismiss()
-                }, title: "Engellenenler", blockedCount:  blockedList.count)
+                }, title: "Engellenenler", blockedCount:  blockedUsersVM.blockedList.count)
                 ScrollView{
                     VStack{
-                        if blockedList.count == 0 {
+                        if blockedUsersVM.blockedList.count == 0 {
                             Text("Engellenenler Listeniz Boş").frame(height: Const.height/2).fontWeight(.bold)
                         }else {
-                            ForEach(blockedList, id: \.id){ user in
-                                BlockedUserListTile(user: user)
+                            ForEach(blockedUsersVM.blockedList, id: \.id){ user in
+                                blockedUserListTile(user: user)
                                 Divider()
                         }
                         }
@@ -31,6 +36,10 @@ struct BlockedUsersView: View {
                         Const.primaryBackGroundColor
                 )
             }.navigationBarBackButtonHidden(true)
+            .onAppear {
+                       // Sayfa yüklendiğinde fetchBlockedList fonksiyonunu çağır
+                       blockedUsersVM.fetchBlockedList()
+                   }
     }
 }
 
@@ -40,7 +49,7 @@ struct BlockedUsersView: View {
 }
 
 @ViewBuilder
-private func BlockedUserListTile(user : User)->some View {
+private func blockedUserListTile(user : User)->some View {
         HStack {
             CircleProfileImage(userIamgeUrl: "", size: .small)
             VStack{
@@ -54,7 +63,7 @@ private func BlockedUserListTile(user : User)->some View {
             }
             .foregroundStyle(.black)
             Spacer()
-            CustomButton(title: "Kaldır", backgroundColor: Const.primaryButtonColor, action: {
+            Buttons.customButton(title: "Kaldır", backgroundColor: Const.primaryButtonColor, action: {
                 false
             } ,size: CustomButtonSize.xxxsmall)
         }.padding(.horizontal ,15)

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct RegisterBuildSecondView: View {
     @Environment(\.dismiss) var dissmis
-    @State private var textName  : String = ""
-    @State private var textSurname : String = ""
-    @State private var textUserName : String = ""
-    @State private var textAge : String = ""
-    @State private var textBio : String = ""
+    @StateObject var registerVM : RegisterViewModel
+    init(){
+        self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
+    }
+
     var body: some View {
             ZStack {
                 VStack{
@@ -23,13 +23,11 @@ struct RegisterBuildSecondView: View {
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
                         VStack{
-                            TextFields.CustomTextField(text: $textName, icon: .blocked, placeHolder: "Ad")
-                            TextFields.CustomTextField(text: $textSurname, icon: .blocked, placeHolder: "Soy Ad")
-                            TextFields.CustomTextField(text : $textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
-                            TextFields.CustomTextField(text: $textAge, icon: .blocked, placeHolder: "Yaş")
-                            TextFields.CustomTextField(text: $textBio, icon: .blocked, placeHolder: "Bio")
-                            
-                            
+                            TextFields.CustomTextField(text: $registerVM.textName, icon: .blocked, placeHolder: "Ad")
+                            TextFields.CustomTextField(text: $registerVM.textSurname, icon: .blocked, placeHolder: "Soy Ad")
+                            TextFields.CustomTextField(text : $registerVM.textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
+                            TextFields.CustomTextField(text: $registerVM.textAge, icon: .blocked, placeHolder: "Yaş")
+                            TextFields.CustomTextField(text: $registerVM.textBio, icon: .blocked, placeHolder: "Bio")
                             Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
                             }, size: .small, textColor: .white, destination: AnyView(RegisterBuildThirdView()))
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)

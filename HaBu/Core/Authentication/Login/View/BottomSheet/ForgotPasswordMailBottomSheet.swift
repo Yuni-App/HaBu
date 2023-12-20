@@ -16,7 +16,7 @@ struct ForgotPasswordMailBottomSheet: View {
                 Text("Lütfen mail adresinizi giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
                 TextFields.CustomTextField(text: $textEmail, icon: .mail, placeHolder: "email")
                 
-                CustomButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
+                Buttons.customButton(title: "Onay Kodu Gönder", backgroundColor: Const.primaryColor, action: {
                     true
                     //mail check
                 },destination: AnyView(ForgotPasswordCodeBottomSheet(showSheet: $showSheet ).navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)

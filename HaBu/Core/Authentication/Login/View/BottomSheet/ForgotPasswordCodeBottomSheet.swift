@@ -16,7 +16,7 @@ struct ForgotPasswordCodeBottomSheet: View {
         NavigationStack{  VStack{
             Text("Lütfen kodu  giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
             TextFields.CustomTextField(text: $textCode, icon: .key, placeHolder: "kod")
-            CustomButton(title: "Onayla", backgroundColor: Const.primaryColor, action: {
+            Buttons.customButton(title: "Onayla", backgroundColor: Const.primaryColor, action: {
                 true
             },destination: AnyView(ForgotPasswordCreatePasswordBottomSheet(showSheet: $showSheet).navigationBarBackButtonHidden(true)), size: CustomButtonSize.small)
         }.padding(30)
