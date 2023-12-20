@@ -13,6 +13,11 @@ struct RegisterBuildThirdView: View {
     @State private var textFaculty: String = ""
     @State private var textDepartment : String = ""
     @State private var textYear : String  = ""
+    
+    @StateObject var registerVM : RegisterViewModel
+    init(){
+        self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
+    }
 
     var body: some View {
             ZStack {
@@ -35,7 +40,8 @@ struct RegisterBuildThirdView: View {
                         }
                         Text("Lütfen").foregroundStyle(.black).font(.system(size: 14))
                         Button(action: {
-                            //open  bottomsheet 
+                            registerVM.signUp()
+                            //open  bottomsheet
                         }, label: {
                             Text("Gizlilik Politikası").foregroundStyle(.blue).fontWeight(.bold)
                         })

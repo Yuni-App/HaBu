@@ -76,9 +76,11 @@
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
 		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
 		9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8D2B0510F80042A354 /* CustomImage.swift */; };
+		9439A8812B32180B005D0E20 /* LoginViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439A8802B32180B005D0E20 /* LoginViewModal.swift */; };
+		9439A8832B322F28005D0E20 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439A8822B322F28005D0E20 /* AuthService.swift */; };
+		9439A8872B3245F4005D0E20 /* RegisterViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439A8862B3245F4005D0E20 /* RegisterViewModal.swift */; };
 		943B9CE22B068F0E00067376 /* LikesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B9CE12B068F0E00067376 /* LikesView.swift */; };
 		943B9CE42B06912500067376 /* LikesListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B9CE32B06912500067376 /* LikesListTile.swift */; };
-		943CF1392B31F2A500F37BBE /* AuthViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CF1382B31F2A500F37BBE /* AuthViewModal.swift */; };
 		943FB8E02B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8DF2B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift */; };
 		943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8E12B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift */; };
 		943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */; };
@@ -154,9 +156,11 @@
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9411AA8D2B0510F80042A354 /* CustomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImage.swift; sourceTree = "<group>"; };
+		9439A8802B32180B005D0E20 /* LoginViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModal.swift; sourceTree = "<group>"; };
+		9439A8822B322F28005D0E20 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		9439A8862B3245F4005D0E20 /* RegisterViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModal.swift; sourceTree = "<group>"; };
 		943B9CE12B068F0E00067376 /* LikesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesView.swift; sourceTree = "<group>"; };
 		943B9CE32B06912500067376 /* LikesListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesListTile.swift; sourceTree = "<group>"; };
-		943CF1382B31F2A500F37BBE /* AuthViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModal.swift; sourceTree = "<group>"; };
 		943FB8DF2B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordMailBottomSheet.swift; sourceTree = "<group>"; };
 		943FB8E12B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCodeBottomSheet.swift; sourceTree = "<group>"; };
 		943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCreatePasswordBottomSheet.swift; sourceTree = "<group>"; };
@@ -456,6 +460,41 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9439A87E2B3217E9005D0E20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				949016E12B041EF400164405 /* LoginView.swift */,
+				943B9CE52B0699F400067376 /* BottomSheet */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9439A87F2B3217F3005D0E20 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				9439A8802B32180B005D0E20 /* LoginViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
+		9439A8842B3245C0005D0E20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */,
+				949016E52B041F3000164405 /* RegisterBuildSecondView.swift */,
+				949016E72B041F4900164405 /* RegisterBuildThirdView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9439A8852B3245C6005D0E20 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				9439A8862B3245F4005D0E20 /* RegisterViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
 		943B9CDF2B068EC700067376 /* Likes */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,19 +522,11 @@
 			path = BottomSheet;
 			sourceTree = "<group>";
 		};
-		943CF1362B31F28000F37BBE /* ViewModal */ = {
-			isa = PBXGroup;
-			children = (
-				943CF1382B31F2A500F37BBE /* AuthViewModal.swift */,
-			);
-			path = ViewModal;
-			sourceTree = "<group>";
-		};
 		943FB8DC2B06328F009C55C6 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				943B9CE52B0699F400067376 /* BottomSheet */,
-				949016E12B041EF400164405 /* LoginView.swift */,
+				9439A87F2B3217F3005D0E20 /* ViewModal */,
+				9439A87E2B3217E9005D0E20 /* View */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -503,9 +534,8 @@
 		943FB8DD2B063295009C55C6 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */,
-				949016E52B041F3000164405 /* RegisterBuildSecondView.swift */,
-				949016E72B041F4900164405 /* RegisterBuildThirdView.swift */,
+				9439A8852B3245C6005D0E20 /* ViewModal */,
+				9439A8842B3245C0005D0E20 /* View */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -616,10 +646,10 @@
 		949016D32B04189C00164405 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				943CF1362B31F28000F37BBE /* ViewModal */,
-				943FB8DD2B063295009C55C6 /* Register */,
-				943FB8DC2B06328F009C55C6 /* Login */,
 				949016DF2B041EBD00164405 /* InfoView.swift */,
+				943FB8DC2B06328F009C55C6 /* Login */,
+				943FB8DD2B063295009C55C6 /* Register */,
+				9439A8822B322F28005D0E20 /* AuthService.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -775,6 +805,7 @@
 				5CD5534A2B1CC61E0070F102 /* RankView.swift in Sources */,
 				9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */,
 				9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */,
+				9439A8872B3245F4005D0E20 /* RegisterViewModal.swift in Sources */,
 				5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */,
 				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
 				883CD0732B20E04200E0B757 /* FeedBackSuccess.swift in Sources */,
@@ -786,7 +817,6 @@
 				949016EA2B04275F00164405 /* CustomButton.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */,
-				943CF1392B31F2A500F37BBE /* AuthViewModal.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
 				943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */,
 				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
@@ -804,7 +834,9 @@
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
 				94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */,
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
+				9439A8832B322F28005D0E20 /* AuthService.swift in Sources */,
 				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
+				9439A8812B32180B005D0E20 /* LoginViewModal.swift in Sources */,
 				94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */,
 				5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */,
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
