@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
-     var user: User
-    
+    var user: User
     @Environment(\.dismiss) var dismiss
     @StateObject var editProfileVM : EditProfileViewModel
     init(user:User){
