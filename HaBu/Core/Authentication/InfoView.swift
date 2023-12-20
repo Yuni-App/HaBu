@@ -27,9 +27,6 @@ struct InfoView: View {
                         
                         Buttons.customButton1(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
                         }, size: .small, textColor: .black, destination: AnyView(RegisterBuildFirstView()))
-                        
-                        
-                        
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 }

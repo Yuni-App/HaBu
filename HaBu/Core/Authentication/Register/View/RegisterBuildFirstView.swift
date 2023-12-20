@@ -9,11 +9,12 @@ import SwiftUI
 
 struct RegisterBuildFirstView: View {
     @Environment(\.dismiss) var dissmis
+    
+    @StateObject var registerVM : RegisterViewModel
+    init(){
+        self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
+    }
 
-
-    @State private var textEmail : String = ""
-    @State private var textPassword : String = ""
-    @State private var textPasswordAgain : String = ""
     var body: some View {
         ZStack {
             VStack{
@@ -24,9 +25,9 @@ struct RegisterBuildFirstView: View {
                 
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.RegisterSecondVector)
                 VStack{
-                    TextFields.CustomTextField(text: $textEmail, icon: .mail, placeHolder: "e-posta")
-                    TextFields.CustomTextField(text :$textPassword ,icon: .key, placeHolder: "Şifre")
-                    TextFields.CustomTextField(text : $textPasswordAgain , icon: .key, placeHolder: "Şifre Tekrar")
+                    TextFields.CustomTextField(text: $registerVM.textEmail, icon: .mail, placeHolder: "e-posta")
+                    TextFields.CustomTextField(text :$registerVM.textPassword ,icon: .key, placeHolder: "Şifre")
+                    TextFields.CustomTextField(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar")
                     
                     Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
                     }, size: .small, textColor: .white, destination: AnyView(RegisterBuildSecondView()))
@@ -42,14 +43,11 @@ struct RegisterBuildFirstView: View {
                         Text("Giriş Yap").foregroundStyle(.blue).fontWeight(.bold)
 
                     }
-
-                    
                 }}.frame(width: Const.width , height: Const.height+100)
         }.background(
             Const.authBackGroundColor
         )
         .navigationBarBackButtonHidden(true)
-
     }
 }
 
