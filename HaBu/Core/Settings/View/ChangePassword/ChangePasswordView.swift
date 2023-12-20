@@ -35,7 +35,7 @@ struct ChangePasswordView: View {
                 }.padding()
                 
             }
-            CustomButton(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {
+            Buttons.customButton(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {
                 true
                 //send kode
             }, destination: AnyView(ChangePasswordSuccessView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)

@@ -17,7 +17,7 @@ struct ChangePasswordSuccessView: View {
                 Text("ŞİFRENİZ BAŞARIYLA GÜNCELLENMİŞTİR...").frame(width: Const.width * 0.5).foregroundColor(.green).fontWeight(.bold)
             }
             Spacer()
-            CustomButton(title: "Ana Sayfaya Dön", backgroundColor: Const.primaryButtonColor, action: {
+            Buttons.customButton(title: "Ana Sayfaya Dön", backgroundColor: Const.primaryButtonColor, action: {
                 true
             }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
         }.frame(width: Const.width)

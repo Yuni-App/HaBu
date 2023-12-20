@@ -16,14 +16,14 @@ class PopUps{
             Text(contents).foregroundColor(Const.secondaryButtonColor)
             Spacer()
             HStack{
-                CustomButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
+                Buttons.customButton(title:  "Anonim Gönderi", backgroundColor: Const.primaryButtonColor, action: {
                     withAnimation {
                         selectedOption.wrappedValue = .anonymous
                         isPopupVisible.wrappedValue.toggle()
                     }
                     return false
                 }, size: CustomButtonSize.xxsmall , textColor: .white)
-                CustomButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
+                Buttons.customButton(title:  "Açık Gönderi", backgroundColor: Const.primaryButtonColor.opacity(0.7), action: {
                     withAnimation {
                         selectedOption.wrappedValue = .notAnonymous
                         isPopupVisible.wrappedValue.toggle()
