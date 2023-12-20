@@ -15,8 +15,6 @@ struct RegisterBuildFirstView: View {
         self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
     }
 
- 
-
     var body: some View {
         ZStack {
             VStack{
