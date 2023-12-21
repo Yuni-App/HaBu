@@ -42,7 +42,7 @@ struct LoginView: View {
                             .font(.system(size: 12))
                     }
                     Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
-                        loginVM.signIn()
+                  //      loginVM.signIn()
                         true
                     }, size: CustomButtonSize.medium, destination: {TabbarView()})
                   }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
