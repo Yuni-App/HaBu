@@ -96,6 +96,7 @@
 		9465F9652B34DE0D00F25235 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9642B34DE0D00F25235 /* ErrorMessage.swift */; };
 		9465F96A2B34E09E00F25235 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */; };
 		9465F96F2B34E4B600F25235 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */; };
+		9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9712B34E5B800F25235 /* LikesViewModel.swift */; };
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
@@ -181,6 +182,7 @@
 		9465F9642B34DE0D00F25235 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		9465F9712B34E5B800F25235 /* LikesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesViewModel.swift; sourceTree = "<group>"; };
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 		943B9CDF2B068EC700067376 /* Likes */ = {
 			isa = PBXGroup;
 			children = (
+				9465F9702B34E5A200F25235 /* ViewModel */,
 				943B9CE02B068EEC00067376 /* View */,
 			);
 			path = Likes;
@@ -638,6 +641,14 @@
 			isa = PBXGroup;
 			children = (
 				9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9465F9702B34E5A200F25235 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9465F9712B34E5B800F25235 /* LikesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -968,6 +979,7 @@
 				947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */,
 				884E8CF92B09F2E7001BADDF /* Notification.swift in Sources */,
 				94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */,
+				9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */,
 				88C4C1392B2EF7E200205822 /* PopUps.swift in Sources */,
 				5C5EB7772B31CF78001D2370 /* UserService.swift in Sources */,
 				5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */,
