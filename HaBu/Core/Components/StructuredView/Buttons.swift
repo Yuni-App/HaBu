@@ -41,19 +41,30 @@ class Buttons{
         }
     }
     //customButton1
-    @ViewBuilder
-    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?,destination:AnyView) -> some View{
-        NavigationLink {
-            destination
-        } label: {
-            Text(title)
-                .padding()
-                .frame(width: size.width , height: size.height)
-                .background(backgroundColor)
-                .foregroundColor(textColor ?? .white)
-                .cornerRadius(4)
-        }
+    struct customButton1: View {
+        var title: String
+        var backgroundColor: Color
+        var action: () -> Void
+
+        var size : CustomButtonSize
+        var textColor : Color?
+        let destination: () -> any View
         
+        var body: some View {
+            
+            VStack{
+                NavigationLink { 
+                    AnyView(destination())
+                } label: {
+                    Text(title)
+                        .padding()
+                        .frame(width: size.width , height: size.height)
+                        .background(backgroundColor)
+                        .foregroundColor(textColor ?? .white)
+                        .cornerRadius(4)
+                }
+            }
+        }
     }
     
     

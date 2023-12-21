@@ -18,15 +18,11 @@ struct InfoView: View {
                     
                     VStack{
                         CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
-                        
                         Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action:{
-                            
-                            
-                        }, size: .small, textColor: .white, destination: AnyView(LoginView()))
+                        }, size: .small, textColor: .white, destination: {LoginView()})
                         .padding()
-                        
                         Buttons.customButton1(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
-                        }, size: .small, textColor: .black, destination: AnyView(RegisterBuildFirstView()))
+                        }, size: .small, textColor: .black, destination: {RegisterBuildFirstView()})
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 }

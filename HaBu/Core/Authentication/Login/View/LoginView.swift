@@ -41,13 +41,11 @@ struct LoginView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 12))
                     }
-                    Buttons.customButton(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
+                    Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action: {
                         loginVM.signIn()
-                        return loginVM.completion
-                    }, destination: AnyView(TabbarView()), size: CustomButtonSize.medium)
-                  
-                    
-                }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
+                        true
+                    }, size: CustomButtonSize.medium, destination: {TabbarView()})
+                  }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                     .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 
                 

@@ -30,7 +30,7 @@ struct RegisterBuildFirstView: View {
                     TextFields.CustomTextField(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar")
                     
                     Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                    }, size: .small, textColor: .white, destination: AnyView(RegisterBuildSecondView()))
+                    }, size: .small, textColor: .white, destination: {RegisterBuildSecondView()})
                     
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                     .modifier(RectangleBlurModifier(color: Const.primaryColor))

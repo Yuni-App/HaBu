@@ -22,10 +22,10 @@ struct DeleteAccountPasswordView: View {
                 }.padding()
                 warningText()
             }
-            Buttons.customButton(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
+            Buttons.customButton1(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
                 true
                 //send kode
-            }, destination: AnyView(DeleteAccountCodeView()), size: CustomButtonSize.medium)
+            }, size: CustomButtonSize.medium, destination:{DeleteAccountCodeView()})
         }    .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor
