@@ -78,4 +78,25 @@ class PopUps{
             }.frame(width: size.width, height: size.height)
         }
     }
+    //POPUP4 SAME USERNAME
+    struct LoginPopup: View {
+        var size: PopUpScreen
+        var contents : String
+        @State var okeybtn: Binding<Bool>
+        var body: some View {
+            VStack{
+                Rectangle().frame(width: Const.width * 0.2, height: Const.height * 0.1).foregroundColor(.clear).background(Color.red.opacity(0.7))
+                    .cornerRadius(112).overlay {
+                        Image(systemName: "exclamationmark").resizable().frame(width: Const.width * 0.1,height: Const.height * 0.07)
+                    }
+                Spacer()
+                Text(contents).fontWeight(.semibold)
+                Spacer()
+                CustomButton(title: "Tamam", backgroundColor: .brown, action: {
+                    okeybtn.wrappedValue = false
+                    return true
+                }, size: .lage)
+            }.frame(width: size.width, height: size.height).padding(7)
+        }
+    }
 }

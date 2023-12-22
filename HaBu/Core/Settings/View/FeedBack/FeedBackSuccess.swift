@@ -55,14 +55,14 @@ struct FeedBackSuccess: View {
                         }
                         ).padding()
                     }
-                   Button("Show Popup") {
-                      isPopupVisible.toggle()
-                   }
+//                   Button("Show Popup") {
+//                      isPopupVisible.toggle()
+//                   }
                 }
-            }
-.popup(isPresented: $isPopupVisible) {
-    PopUps.PopUp3(size: .xxsmall, contents: "Burada test amaçlı yazı yazdım \nalt satıra geçince de böyle oluyor", isPopUpPresented: $isPopupVisible)
-            }
+           }
+//     .popup(isPresented: $isPopupVisible) {
+//    PopUps.LoginPopup(size: .xsmall, contents: "Bu kullanıcı adı daha önce alındı başka bir kullanıcı //adı ile tekrar deneyiniz", okeybtn: $isPopupVisible)
+//            }
         }
     }
 }
