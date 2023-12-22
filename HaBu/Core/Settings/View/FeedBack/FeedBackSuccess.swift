@@ -55,14 +55,14 @@ struct FeedBackSuccess: View {
                         }
                         ).padding()
                     }
-//                    Button("Show Popup") {
-//                       isPopupVisible.toggle()
-//                    }
+                   Button("Show Popup") {
+                      isPopupVisible.toggle()
+                   }
                 }
             }
-//.popup(isPresented: $isPopupVisible) {
-//  PopUps.PopUp2(title: "BAŞLIK", contents: "mlaşsdmlaşmdlasşmdşa /ndsakdaşldkasşldalkdmakd", size: .xxsmall, isPopUpPresented: $isPopupVisible)
-//            }
+.popup(isPresented: $isPopupVisible) {
+    PopUps.PopUp3(size: .xxsmall, contents: "Burada test amaçlı yazı yazdım \nalt satıra geçince de böyle oluyor", isPopUpPresented: $isPopupVisible)
+            }
         }
     }
 }

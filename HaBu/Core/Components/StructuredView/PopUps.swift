@@ -32,23 +32,50 @@ class PopUps{
                 }, size: CustomButtonSize.xxsmall , textColor: .white)
             }
         }.padding(.vertical,10)
-        .padding(.horizontal,5)
-        .frame(width: size.width ,height: size.height )
-        .background(backgroundColor)
-        .cornerRadius(5)
+            .padding(.horizontal,5)
+            .frame(width: size.width ,height: size.height )
+            .background(backgroundColor)
+            .cornerRadius(5)
     }
-    @ViewBuilder
-    static func PopUp2(title: String, contents: String, size: PopUpScreen, isPopUpPresented: Binding<Bool>) -> some View {
-        VStack {
-            Text(title).fontWeight(.semibold).foregroundStyle(Color.black).padding(.bottom, 5).font(.title3)
-            Spacer()
-            Text(contents).foregroundStyle(Color.secondary).font(.body)
-            Spacer()
-            CustomButton(title: "Kapat", backgroundColor: .blue, action: {
-                isPopUpPresented.wrappedValue = false
-                return true// Fix the binding variable here
-            }, size: .xlage)
-        }.frame(width: size.width, height: size.height)
+    
+    //popup2 only has close button
+    struct PopUp2: View {
+        var title :String
+        var contents: String
+        var size : PopUpScreen
+        @State var isPopUpPresented: Binding<Bool>
+        var body: some View {
+            VStack {
+                Text(title).fontWeight(.semibold).foregroundStyle(Color.black).padding(.bottom, 5).font(.title3)
+                Spacer()
+                Text(contents).foregroundStyle(Color.secondary).font(.body)
+                Spacer()
+                CustomButton(title: "Kapat", backgroundColor: .blue, action: {
+                    isPopUpPresented.wrappedValue = false
+                    return true// Fix the binding variable here
+                }, size: .xlage)
+            }.frame(width: size.width, height: size.height)
+        }
     }
-
+    //popUp3 only has close multiply button
+    struct PopUp3: View {
+        var size : PopUpScreen
+        var contents : String
+        @State var isPopUpPresented: Binding<Bool>
+        var body: some View {
+            VStack{
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        isPopUpPresented.wrappedValue = false
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill").resizable().frame(width: Const.width * 0.06, height: Const.height * 0.04)
+                            .foregroundStyle(Color.black)
+                    })
+                }.padding(7)
+                Text(contents).padding().fontWeight(.semibold)
+                Spacer()
+            }.frame(width: size.width, height: size.height)
+        }
+    }
 }
