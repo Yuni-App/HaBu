@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FeedBackSuccess: View {
+    @State private var isPopupVisible = false
     var body: some View {
         NavigationView{
             ZStack {
@@ -54,8 +55,14 @@ struct FeedBackSuccess: View {
                         }
                         ).padding()
                     }
+//                    Button("Show Popup") {
+//                       isPopupVisible.toggle()
+//                    }
                 }
             }
+//.popup(isPresented: $isPopupVisible) {
+//  PopUps.PopUp2(title: "BAŞLIK", contents: "mlaşsdmlaşmdlasşmdşa /ndsakdaşldkasşldalkdmakd", size: .xxsmall, isPopUpPresented: $isPopupVisible)
+//            }
         }
     }
 }

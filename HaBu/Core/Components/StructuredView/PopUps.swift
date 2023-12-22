@@ -37,5 +37,18 @@ class PopUps{
         .background(backgroundColor)
         .cornerRadius(5)
     }
+    @ViewBuilder
+    static func PopUp2(title: String, contents: String, size: PopUpScreen, isPopUpPresented: Binding<Bool>) -> some View {
+        VStack {
+            Text(title).fontWeight(.semibold).foregroundStyle(Color.black).padding(.bottom, 5).font(.title3)
+            Spacer()
+            Text(contents).foregroundStyle(Color.secondary).font(.body)
+            Spacer()
+            CustomButton(title: "Kapat", backgroundColor: .blue, action: {
+                isPopUpPresented.wrappedValue = false
+                return true// Fix the binding variable here
+            }, size: .xlage)
+        }.frame(width: size.width, height: size.height)
+    }
 
 }
