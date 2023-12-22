@@ -276,7 +276,7 @@ struct ProfileGeometry: View {
                 VStack(spacing:0){
                     HeaderView()
                         .zIndex(1)
-                    Rectangle()
+                   /* Rectangle()
                         .fill(Const.thirColor)
                         .frame(height: 150)
                         .overlay(
@@ -304,7 +304,7 @@ struct ProfileGeometry: View {
                                 Spacer()
                             }
                                 .padding()
-                        )
+                        )*/
                     ForEach(Post.MockData){post in
                         FeedViewCell(post: post, user: User.MockData[0])
                         
@@ -316,7 +316,7 @@ struct ProfileGeometry: View {
                         offsetY = -offset
                         
                     } onDraggingEnd: {offset, velocity  in
-                        let headerHeight = (size.height * 0.4) + safeArea.top
+                        let headerHeight = (size.height * 0.5) + safeArea.top
                         let minimumHeaderHeight = 100 + safeArea.top
                         
                         let targetEnd  = offset + (velocity * 45)
@@ -352,6 +352,7 @@ struct ProfileGeometry: View {
                         let bottomPadding : CGFloat = 15
                         let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
                         
+                        //Buttons
                         HStack{
                             Buttons.backButton( action: {
                                 dissmis()
@@ -370,23 +371,64 @@ struct ProfileGeometry: View {
                             .padding()
                         }
                         
+                        //User name/surname rating
+                        HStack{
+                            VStack(alignment:.leading) {
+                                Text(user.name)
+                                Text(user.surName)
+                            }
+                            
+                            Spacer()
+                           
+                            .padding(.horizontal)
+                            VStack {
+                                Text("Post")
+                                Text("15")
+                            }
+                        }.foregroundStyle(.white)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        .opacity(proggress == 0 ? 1:0)
+                        .font(.title3)
+                        .foregroundStyle(.white)
+                        .fontWeight(.semibold)
+                        .padding(.top,Const.height * 0.1)
+                        .padding()
                         Image("profil3")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: rect.width,height: rect.height)
+                            .frame(width: rect.width-70,height: rect.height-70)
                             .clipShape(.circle)
-                            .scaleEffect(1 - (proggress * 0.65),anchor: .leading)
-                            .offset(x : -(rect.minX-20) * proggress,y: -resizedOffsetY * proggress)
-                        Text("\(proggress)")
-                            .opacity(-(proggress-1) )
+                            .padding()
+                            .scaleEffect(1 - (proggress * 0.55),anchor: .topLeading)
+                            .offset(x : -(rect.minX-10) * proggress,y: -(resizedOffsetY * proggress)+Const.height * 0.08)
+
                     }
                     .frame(width: Const.width,height: headerHeight * 0.5)
-                    Text(user.username)
-                        .scaleEffect(1-(proggress * 0.1))
-                        .offset(y:-4.5 * proggress)
-                        .font(.title2)
-                        .fontWeight(.bold)
+                    
+                    // userName and rating
+                    HStack {
+                        Text(user.username)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .scaleEffect(1-(proggress * 0.1))
+                            .padding(.horizontal)
+                            VStack{
+                                Image.iconManager(.star, size: 15, weight: .bold, color: .yellow)
+                                    .scaleEffect(1-(proggress * 0.25))
+
+                                Text("\(user.rating.formatted())")
+                                    .scaleEffect(1-(proggress * 0.15))
+
+                            }
+                            .fontWeight(.bold)
+
+                        
+                        }
+                            .offset(y:((Const.height * 0.18) * proggress) - Const.height * 0.19)
+                            
                         .foregroundStyle(.white)
+                    
                     
                     
                 }
