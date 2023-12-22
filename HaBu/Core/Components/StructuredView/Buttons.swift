@@ -9,6 +9,30 @@ import Foundation
 import SwiftUI
 
 class Buttons{
+    struct GecilecekOlancustomButton: View {
+        var title: String
+        var buttonColor: Color
+        var size : CustomButtonSize?
+        var textColor : Color?
+        var icon : AppIcon?
+        var action: () -> Void
+        
+        var body: some View {
+            Button(action: {
+                action()
+            }, label: {
+                Text(title)
+                    .padding()
+                    .frame(width: size?.width ?? Const.width * 0.6 , height: size?.height ?? Const.height * 0.04 )
+                    .background(buttonColor)
+                    .foregroundColor(textColor ?? .white)
+                    .cornerRadius(4)
+                
+            }).shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
+
+        }
+    }
+    
     //custombutton
     struct customButton: View {
         var title: String
@@ -45,7 +69,6 @@ class Buttons{
         var title: String
         var backgroundColor: Color
         var action: () -> Void
-
         var size : CustomButtonSize
         var textColor : Color?
         let destination: () -> any View

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LikesView: View {
-    @Environment(\.dismiss) private var dismiss
+   
     let post : Post
     @StateObject var likesVM : LikesViewModel
     init(post: Post) {
@@ -21,9 +21,7 @@ struct LikesView: View {
         
         VStack {
             HStack{
-                Buttons.backButton {
-                    dismiss()
-                }
+               
                 Text("Beğenenler").fontWeight(.bold)
                 Spacer()
                 Text("\(String(post.likeList.count)) beğeni ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

@@ -23,37 +23,37 @@ class LoginViewModel: ObservableObject {
         self.authService = authService
     }
 
-    func signIn() {
-    
-         guard !textEmail.isEmpty, !textPassword.isEmpty else {
-             if let errorMessage = ErrorMessage(rawValue: 1) {
-                 print(errorMessage.description)
-                 
-             }
-         return
-         }
-         guard textEmail.isValidEmail else {
-             if let errorMessage = ErrorMessage(rawValue: 2) {
-                 print(errorMessage.description)
-                 
-             }
-         return
-         }
-        authService.signIn(email: textEmail, password: textPassword) { result in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error as NSError):
-                if let errorMessage = ErrorMessage(rawValue: error.code) {
-                    print(errorMessage.description)
-                    
-                } else {
-                    print("Bilinmeyen bir hata oluştu.")
-                }
+func signIn() {
+
+        guard !textEmail.isEmpty, !textPassword.isEmpty else {
+            if let errorMessage = ErrorMessage(rawValue: 1) {
+                print(errorMessage.description)
+                
+            }
+        return
+        }
+        guard textEmail.isValidEmail else {
+            if let errorMessage = ErrorMessage(rawValue: 2) {
+                print(errorMessage.description)
+                
+            }
+        return
+        }
+    authService.signIn(email: textEmail, password: textPassword) { result in
+        switch result {
+        case .success(let result):
+            print(result)
+        case .failure(let error as NSError):
+            if let errorMessage = ErrorMessage(rawValue: error.code) {
+                print(errorMessage.description)
+                
+            } else {
+                print("Bilinmeyen bir hata oluştu.")
             }
         }
-        // E-posta ve şifre boş mu kontrolü
     }
+    // E-posta ve şifre boş mu kontrolü
+}
 }
     
     func forgotPassoword(){

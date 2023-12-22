@@ -97,6 +97,7 @@
 		9465F96A2B34E09E00F25235 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */; };
 		9465F96F2B34E4B600F25235 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */; };
 		9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9712B34E5B800F25235 /* LikesViewModel.swift */; };
+		9465F9742B34F54900F25235 /* denemCustomButotn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9732B34F54900F25235 /* denemCustomButotn.swift */; };
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
@@ -183,6 +184,7 @@
 		9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		9465F9712B34E5B800F25235 /* LikesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesViewModel.swift; sourceTree = "<group>"; };
+		9465F9732B34F54900F25235 /* denemCustomButotn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denemCustomButotn.swift; sourceTree = "<group>"; };
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
 				5C8792DD2B2FB967007D288E /* Toast.swift */,
+				9465F9732B34F54900F25235 /* denemCustomButotn.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				949016E62B041F3000164405 /* RegisterBuildSecondView.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
 				88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */,
+				9465F9742B34F54900F25235 /* denemCustomButotn.swift in Sources */,
 				88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */,
 				5C2658402B03B430008BEB6D /* ContentView.swift in Sources */,
 				94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */,
