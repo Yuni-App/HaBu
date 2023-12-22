@@ -31,7 +31,7 @@ struct RegisterBuildThirdView: View {
                         TextFields.CustomTextField(text: $registerVM.textDepartment ,icon: .blocked, placeHolder: "Bölüm")
                         TextFields.CustomTextField(text: $registerVM.textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
                         Buttons.customButton1(title:"Tamamla", backgroundColor: Const.primaryColor, action: {
-                        }, size: .small, textColor: .white, destination: AnyView(TabbarView()))
+                        }, size: .small, textColor: .white, destination: {TabbarView()})
                     }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                     HStack{

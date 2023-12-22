@@ -10,6 +10,6 @@ class BlockedUsersViewModal : ObservableObject{
     @Published var blockedList : [User] = []
     
     func fetchBlockedList(){
-        blockedList =  []
+        blockedList =  [User.MockData[0]]
     }
 }
