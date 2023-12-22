@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditProfileView: View {
     var user: User
@@ -42,7 +43,7 @@ struct EditProfileView: View {
 
                         }
                         HStack {
-                            Image("star")
+                            Image.imageManager(image: .star,width: 30,height:30)
                             Text("150")
                                 .font(.title3)
                                 .fontWeight(.semibold)
@@ -57,15 +58,31 @@ struct EditProfileView: View {
                         HStack {
                             ZStack{
                                 
-                                CircleProfileImage(userImage:editProfileVM.images[0] , index: editProfileVM.imageIndices[0])
+                                CircleProfileImage(index: editProfileVM.imageIndices[0], userImage:editProfileVM.images[0])
+                                    .onTapGesture {
+                                        editProfileVM.showGallery = true
+                                        editProfileVM.selectedImage = 0
+                                    }
+                                    
                                 
-                                CircleProfileImage(userImage: editProfileVM.images[1] , index: editProfileVM.imageIndices[1])
-                                CircleProfileImage(userImage:editProfileVM.images[2] , index: editProfileVM.imageIndices[2])
+                                CircleProfileImage(index: editProfileVM.imageIndices[1], userImage:editProfileVM.images[1])
+                                    .onTapGesture {
+                                        editProfileVM.showGallery = true
+                                        editProfileVM.selectedImage = 1
+
+                                    }
+                                CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:editProfileVM.images[2])
+                                    .onTapGesture {
+                                        editProfileVM.showGallery = true
+                                        editProfileVM.selectedImage = 2
+
+                                    }
                             }
                             .frame(width: Const.width)
                             .gesture(editProfileVM.dragGesture)
                             
                         }
+                        .photosPicker(isPresented: $editProfileVM.showGallery, selection: $editProfileVM.selectedItem)
                         
                     }
                     

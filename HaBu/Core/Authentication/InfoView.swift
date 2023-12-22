@@ -14,6 +14,12 @@ struct InfoView: View {
         NavigationStack {
             ZStack {
                 VStack {
+                    NavigationLink {
+                        TabbarView()
+                    } label: {
+                        Text("go to Tabbar")
+                    }
+
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
                     
                     VStack{

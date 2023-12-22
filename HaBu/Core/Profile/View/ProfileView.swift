@@ -9,31 +9,24 @@ import SwiftUI
 
 
 struct ProfileView : View {
-    
+    @Environment(\.dismiss) var dissmis
+    @StateObject var profileVM :ProfileViewModel
     init(hideTab:Binding<Bool>,user:User) {
         _hideTab = hideTab
         self.user = user
+        self._profileVM = StateObject(wrappedValue: ProfileViewModel(user: user))
     }
     init(user:User) {
         self.user = user
         _hideTab = .constant(false)
         activateBackButton = true
-        
+        self._profileVM = StateObject(wrappedValue: ProfileViewModel(user: user))
         
     }
-    
-    @Environment(\.dismiss) var dissmis
     var activateBackButton = false
     let user : User
     @Binding var hideTab:Bool
-    @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
-    @State private var shouldNavigate = false
-    @State var offset:CGFloat = 0
-    @State var lastOffset:CGFloat = 0
-    @State var TollBarOffset : CGFloat = 0
-    @State var topEdge:CGFloat = Const.height * 0.03
-    let maxHeight = UIScreen.main.bounds.height / 2.7
-    @State var imageCount = 0
+   
     var body: some View{
         ZStack {
                 GeometryReader{proxy in
@@ -41,7 +34,7 @@ struct ProfileView : View {
                     ScrollView(.vertical,showsIndicators: false){
                         VStack(spacing:15){
                             GeometryReader{proxy in
-                                Tabbar(user:user, topEdge: topEdge,offset: $TollBarOffset,maxHeight:maxHeight)
+                                Tabbar(user:profileVM.user, topEdge: profileVM.topEdge,offset: $profileVM.TollBarOffset,maxHeight:profileVM.maxHeight)
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: getHeaderHeight(),alignment:.bottom)
@@ -85,13 +78,13 @@ struct ProfileView : View {
                                         .padding(.horizontal,10)
                                         .frame(height:40)
                                         .foregroundStyle(.white)
-                                        .padding(.top,topEdge + 25)
+                                        .padding(.top,profileVM.topEdge + 25)
                                     ,alignment: .top
                                     
                                 )
                             }
-                            .frame(height: maxHeight)
-                            .offset(y:-TollBarOffset)
+                            .frame(height: profileVM.maxHeight)
+                            .offset(y:-profileVM.TollBarOffset)
                             .zIndex(1)
                             VStack(spacing:15){
                                    
@@ -107,24 +100,24 @@ struct ProfileView : View {
                                 let minY = proxy.frame(in: .named("SCROLL")).minY
                                 let durationOffset: CGFloat = 35
                                 DispatchQueue.main.async {
-                                    if minY < offset{
-                                        if offset < 0 && -minY > (lastOffset + durationOffset){
+                                    if minY < profileVM.offset{
+                                        if profileVM.offset < 0 && -minY > (profileVM.lastOffset + durationOffset){
                                             withAnimation(.easeOut .speed(1.2)){
                                                 print(minY)
                                                 hideTab = true
                                             }
-                                            lastOffset = -offset
+                                            profileVM.lastOffset = -profileVM.offset
                                         }
                                         
                                     }
-                                    if minY > offset && -minY < (lastOffset - durationOffset){
+                                    if minY > profileVM.offset && -minY < (profileVM.lastOffset - durationOffset){
                                         withAnimation(.easeOut .speed(1.5)){
                                             hideTab = false
                                         }
-                                        lastOffset = -offset
+                                        profileVM.lastOffset = -profileVM.offset
                                         
                                     }
-                                    self.offset = minY
+                                    self.profileVM.offset = minY
                                 }
                                 return Color.clear
                                 
@@ -133,7 +126,7 @@ struct ProfileView : View {
                         )
                         .padding(.bottom,15 + bottomEdge + 35)
                         
-                        .modifier(OffsetModifier(offset: $TollBarOffset))
+                        .modifier(OffsetModifier(offset: $profileVM.TollBarOffset))
                     }
                   
                 }
@@ -142,17 +135,17 @@ struct ProfileView : View {
        
     }
     func getHeaderHeight() -> CGFloat{
-        let topHeight = maxHeight + TollBarOffset
-        return topHeight > (80 + topEdge) ? topHeight : (80 + topEdge)
+        let topHeight = profileVM.maxHeight + profileVM.TollBarOffset
+        return topHeight > (80 + profileVM.topEdge) ? topHeight : (80 + profileVM.topEdge)
     }
     func getCornerRadius()-> CGFloat{
-        let progress = -TollBarOffset / (maxHeight - (40 + topEdge))
+        let progress = -profileVM.TollBarOffset / (profileVM.maxHeight - (40 + profileVM.topEdge))
         let value =  1 - progress
         let radius = value * 40
-        return TollBarOffset < 0 ? radius : 25
+        return profileVM.TollBarOffset < 0 ? radius : 25
     }
     func topBarTitleOpacity()-> CGFloat{
-        let progress = -(TollBarOffset) / ((maxHeight-40) - (80 + topEdge))
+        let progress = -(profileVM.TollBarOffset) / ((profileVM.maxHeight-40) - (80 + profileVM.topEdge))
         return progress
         
         

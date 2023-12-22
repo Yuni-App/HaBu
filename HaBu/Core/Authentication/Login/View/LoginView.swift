@@ -65,10 +65,6 @@ struct LoginView: View {
                 //TODO : update 100
             } .frame(width: Const.width , height: Const.height+100)
                 .padding()
-                .popup(isPresented: $loginVM.error) {
-                    Text(loginVM.errorMessage)
-                }
-            
             
         }.background(
             Const.authBackGroundColor
