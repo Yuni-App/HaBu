@@ -32,7 +32,9 @@ struct FeedView: View {
                         let minY = proxy.frame(in: .named("SCROLL")).minY
                         let durationOffset: CGFloat = 35
                         DispatchQueue.main.async {
+                            print(minY)
                             if minY < offset{
+                        
                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                     withAnimation(.easeOut ){
                                         print(minY)
