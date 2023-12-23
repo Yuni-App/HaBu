@@ -12,6 +12,8 @@ struct SecondSearchView: View {
     @State private var isSearchBar = false
     @Environment(\.dismiss) private var dismiss
     @State private var isSecondSearchViewActive: Bool = true
+   // @State private var users: [User] = [] // Store users fetched from Firebase
+   // user mockdata yerine firebase ile yapacak
     
     //SearchFilter name , surname and username
     var users: [User]{
@@ -48,6 +50,27 @@ struct SecondSearchView: View {
             }.frame(width: Const.width, height: Const.height).background(Const.primaryBackGroundColor)
         
     }
+    /*
+     FİREBASE İÇİN EKLENECEK KODLAR
+     ARAMA YAPMAYA BAŞLADIĞINDA FİREBASE ÜZERİNDE KULLANICI GETİRECEK,
+     GETİRECEĞİ İSİMLER FİREBASE'DE userNames ile kayıtlı olan tabloya göre
+     
+    // Function to fetch users from Firebase
+        func fetchUsers() {
+            searchQueryUsers(text: searchText) { userNames in
+                // (assuming you have a function to get user data by username)
+                getUsersByUsernames(userNames) { fetchedUsers in
+                    self.users = fetchedUsers
+                }
+            }
+        }
+
+        // Activate search mode
+        func activateSearch() {
+            isSearchBar = true
+            fetchUsers() // Fetch users from Firebase when search starts
+        }
+    */
     
 }
 
@@ -57,6 +80,8 @@ struct SecondSearchView: View {
 }
 
 /*
+ 
+ BOZUK
  struct SecondSearchView: View {
      @State private var searchText = ""
      @State private var isSearchBar = false

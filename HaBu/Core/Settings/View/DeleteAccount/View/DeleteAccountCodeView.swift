@@ -9,9 +9,11 @@ import SwiftUI
 
 struct DeleteAccountCodeView: View {
     @Environment(\.dismiss) private var dismiss
-
-    @State private var textCode: String = ""
-    
+    @StateObject var deleteAccountVM : DeleteAccountViewModel
+    init(){
+        self._deleteAccountVM = StateObject(wrappedValue: DeleteAccountViewModel())
+    }
+ 
     var body: some View {
         VStack{
             CustomSettingsTollBar(action: {
@@ -20,14 +22,14 @@ struct DeleteAccountCodeView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek İçin Mailinize Gelen Kodu Giriniz").fontWeight(.bold)
-                    TextFields.CustomTextField3(text: $textCode,icon: .code, placeHolder: "Kod")
+                    TextFields.CustomTextField3(text: $deleteAccountVM.textCode,icon: .code, placeHolder: "Kod")
                 }.padding()
                 warningText()
             }
-            Buttons.customButton(title: "Hesabı Sil", backgroundColor: Const.secondaryButtonColor, action: {
+            Buttons.customButton1(title: "Hesabı Sil", backgroundColor: Const.secondaryButtonColor, action: {
                 true
                //delete account
-            }, destination: AnyView(InfoView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
+            }, size: .medium, destination: {InfoView()})
         }
         .navigationBarBackButtonHidden(true)
         .frame(width: Const.width)

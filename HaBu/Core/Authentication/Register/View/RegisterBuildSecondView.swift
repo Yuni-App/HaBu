@@ -29,7 +29,7 @@ struct RegisterBuildSecondView: View {
                             TextFields.CustomTextField(text: $registerVM.textAge, icon: .blocked, placeHolder: "Yaş")
                             TextFields.CustomTextField(text: $registerVM.textBio, icon: .blocked, placeHolder: "Bio")
                             Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                            }, size: .small, textColor: .white, destination: AnyView(RegisterBuildThirdView()))
+                            }, size: .small, textColor: .white, destination: {RegisterBuildThirdView()})
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                         
