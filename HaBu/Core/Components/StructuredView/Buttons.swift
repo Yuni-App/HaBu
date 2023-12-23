@@ -9,20 +9,85 @@ import Foundation
 import SwiftUI
 
 class Buttons{
-    //customButton1
-    @ViewBuilder
-    static func customButton1(title:String , backgroundColor:Color,action:@escaping(()->Void),size:CustomButtonSize,textColor:Color?,destination:AnyView) -> some View{
-        NavigationLink {
-            destination
-        } label: {
-            Text(title)
-                .padding()
-                .frame(width: size.width , height: size.height)
-                .background(backgroundColor)
-                .foregroundColor(textColor ?? .white)
-                .cornerRadius(4)
-        }
+    struct GecilecekOlancustomButton: View {
+        var title: String
+        var buttonColor: Color
+        var size : CustomButtonSize?
+        var textColor : Color?
+        var icon : AppIcon?
+        var action: () -> Void
         
+        var body: some View {
+            Button(action: {
+                action()
+            }, label: {
+                Text(title)
+                    .padding()
+                    .frame(width: size?.width ?? Const.width * 0.6 , height: size?.height ?? Const.height * 0.04 )
+                    .background(buttonColor)
+                    .foregroundColor(textColor ?? .white)
+                    .cornerRadius(4)
+                
+            }).shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
+
+        }
+    }
+    
+    //custombutton
+    struct customButton: View {
+        var title: String
+        var backgroundColor: Color
+        var action: () -> Bool
+        var destination : AnyView?
+        var size : CustomButtonSize
+        var textColor : Color?
+        @State private var isActiveDestination: Bool = false
+        
+        var body: some View {
+            
+            NavigationLink(
+                destination: destination ?? AnyView(EmptyView()),
+                isActive: $isActiveDestination,
+                label: {})
+            
+            Button(action: {
+                if action(){
+                    isActiveDestination = true
+                }
+            }, label: {
+                Text(title)
+                    .padding()
+                    .frame(width: size.width , height: size.height)
+                    .background(backgroundColor)
+                    .foregroundColor(textColor ?? .white)
+                    .cornerRadius(4)
+            })
+        }
+    }
+    //customButton1
+    struct customButton1: View {
+        var title: String
+        var backgroundColor: Color
+        var action: () -> Void
+        var size : CustomButtonSize
+        var textColor : Color?
+        let destination: () -> any View
+        
+        var body: some View {
+            
+            VStack{
+                NavigationLink { 
+                    AnyView(destination())
+                } label: {
+                    Text(title)
+                        .padding()
+                        .frame(width: size.width , height: size.height)
+                        .background(backgroundColor)
+                        .foregroundColor(textColor ?? .white)
+                        .cornerRadius(4)
+                }
+            }
+        }
     }
     
     

@@ -13,7 +13,7 @@ struct LikesListTile: View {
         self.user = user
     }
     var body: some View {
-        NavigationStack{
+    
             HStack {
                 CircleProfileImage(userIamgeUrl: "", size: .small)
                 VStack{
@@ -29,10 +29,10 @@ struct LikesListTile: View {
                 Spacer()
 
 
-                CustomButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {true} , destination: AnyView( TabbarView()), size: CustomButtonSize.xxsmall)
+                Buttons.customButton(title: "Profili Gör", backgroundColor: Const.primaryColor, action: {true} , destination: AnyView( TabbarView()), size: CustomButtonSize.xxsmall)
 
                 
-            }
+            
         }
     }
 }

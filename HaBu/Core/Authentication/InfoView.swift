@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct InfoView: View {
-    
+    @State private var isActiveDestination: Bool = false
+    @State var activeDestinaiton : AnyView?
     var body: some View {
         
         NavigationStack {
@@ -18,27 +19,28 @@ struct InfoView: View {
                     
                     VStack{
                         CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
-                        
-                        Buttons.customButton1(title: "Giriş Yap", backgroundColor: Const.primaryColor, action:{
+                        Buttons.GecilecekOlancustomButton(title: "Giriş Yap", buttonColor: Const.primaryColor , textColor: .white) {
+                            activeDestinaiton = AnyView(LoginView())
+                            isActiveDestination = true
                             
-                            
-                        }, size: .small, textColor: .white, destination: AnyView(LoginView()))
-                        .padding()
-                        
-                        Buttons.customButton1(title: "Kayıt Ol", backgroundColor: Const.secondaryColor, action: {
-                        }, size: .small, textColor: .black, destination: AnyView(RegisterBuildFirstView()))
-                        
-                        
-                        
+                        }.padding()
+                        Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
+                            activeDestinaiton = AnyView(RegisterBuildFirstView())
+                            isActiveDestination = true
+                        }
+
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 }
                 .frame(width: Const.width , height: Const.height)
                 .padding()
+                .navigationDestination(isPresented: $isActiveDestination, destination: {
+                    activeDestinaiton
+                })
             }
             .background(Const.authBackGroundColor)
         }
-        
+       
         .navigationBarBackButtonHidden(true)
         
     }

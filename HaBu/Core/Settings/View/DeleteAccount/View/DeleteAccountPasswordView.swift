@@ -9,7 +9,11 @@ import SwiftUI
 
 struct DeleteAccountPasswordView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var textPassword : String = ""
+    @StateObject var deleteAccountVM : DeleteAccountViewModel
+    init(){
+        self._deleteAccountVM = StateObject(wrappedValue: DeleteAccountViewModel())
+    }
+ 
     var body: some View {
         VStack{
             CustomSettingsTollBar(action: {
@@ -18,14 +22,15 @@ struct DeleteAccountPasswordView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek için Şifrenizi Giriniz ").fontWeight(.bold)
-                    TextFields.CustomTextField3(text : $textPassword ,icon: .key, placeHolder: "şifre")
+                    TextFields.CustomTextField3(text : $deleteAccountVM.textPassword ,icon: .key, placeHolder: "şifre")
                 }.padding()
                 warningText()
             }
-            CustomButton(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
+            Buttons.customButton1(title: "Kodu Gönder", backgroundColor: Const.secondaryButtonColor, action: {
+               // deleteAccountVM.nextToCodeView()
                 true
                 //send kode
-            }, destination: AnyView(DeleteAccountCodeView()), size: CustomButtonSize.medium)
+            }, size: CustomButtonSize.medium, destination:{DeleteAccountCodeView()})
         }    .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor
