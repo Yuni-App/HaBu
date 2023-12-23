@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class ProfileViewModel:ObservableObject{
     init(user:User) {
@@ -21,4 +22,9 @@ class ProfileViewModel:ObservableObject{
     @Published var topEdge:CGFloat = Const.height * 0.03
     let maxHeight = UIScreen.main.bounds.height / 2.7
     @Published var imageCount = 0
+    @Published   var images = [
+        Image("profil1"),
+        Image("profil2"),
+        Image("profil3")
+    ]
 }

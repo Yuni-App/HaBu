@@ -9,7 +9,6 @@ import SwiftUI
 
 
 struct ProfileView : View {
-    @Environment(\.dismiss) var dissmis
     @StateObject var profileVM :ProfileViewModel
     init(hideTab:Binding<Bool>,user:User) {
         _hideTab = hideTab
@@ -28,247 +27,26 @@ struct ProfileView : View {
     @Binding var hideTab:Bool
     
     var body: some View{
-        GeometryReader{
-            let size = $0.size
-            let safeArea = $0.safeAreaInsets
-            ProfileGeometry(size:size,safeArea:safeArea,user: user)
+        GeometryReader{ proxy in
+            let size = proxy.size
+            let safeArea = proxy.safeAreaInsets
+            ProfileGeometry(hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
+           
         }
         .ignoresSafeArea(.all,edges: .top)
-        
-        /*   ZStack {
-         ScrollView(.vertical,showsIndicators: false){
-         VStack(spacing:15){
-         /*Tabbar(user:profileVM.user, topEdge: profileVM.topEdge,offset: $profileVM.TollBarOffset,maxHeight:profileVM.maxHeight)
-          .foregroundStyle(.white)
-          .frame(maxWidth: .infinity)
-          .frame(height: getHeaderHeight(),alignment:.bottom)
-          .background(
-          Const.thirColor,
-          in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
-          
-          )*/
-         Rectangle()
-         .overlay(
-         
-         HStack(spacing:10){
-         if activateBackButton == true{
-         Buttons.backButton(action: {
-         dissmis()
-         
-         }, color: .white)
-         Spacer()
-         }
-         HStack {
-         Image("profil1")
-         .resizable()
-         .aspectRatio(contentMode: .fill)
-         .frame(width: 40,height: 40)
-         .clipShape(.circle)
-         Text(user.username)
-         .fontWeight(.bold)
-         .font(.headline)
-         .foregroundStyle(.primary)
-         }
-         .opacity(topBarTitleOpacity())
-         
-         Spacer()
-         NavigationLink {
-         SettingsView()
-         } label: {
-         Image.iconManager(.settings, size: 20, weight: .black, color: .white)
-         }
-         
-         
-         }
-         .padding(.horizontal,10)
-         .frame(height:40)
-         .foregroundStyle(.white)
-         .padding(.top,profileVM.topEdge + 25)
-         ,alignment: .top
-         
-         )
-         
-         .frame(height: profileVM.maxHeight)
-         .offset(y:-profileVM.TollBarOffset)
-         
-         .zIndex(1)
-         VStack(spacing:15){
-         
-         ForEach(Post.MockData){post in
-         FeedViewCell(post: post, user: User.MockData[0])
-         }
-         }
-         .zIndex(0)
-         
-         }
-         
-         .overlay(
-         GeometryReader{proxy -> Color in
-         let minY = proxy.frame(in: .named("SCROLL")).minY
-         let durationOffset: CGFloat = 35
-         DispatchQueue.main.async {
-         print(minY)
-         if minY < profileVM.offset{
-         if profileVM.offset < 0 && -minY > (profileVM.lastOffset + durationOffset){
-         withAnimation(.easeOut .speed(1.2)){
-         hideTab = true
-         
-         }
-         profileVM.lastOffset = -profileVM.offset
-         }
-         
-         }
-         if minY > profileVM.offset && -minY < (profileVM.lastOffset - durationOffset){
-         withAnimation(.easeOut .speed(1.5)){
-         hideTab = false
-         
-         }
-         profileVM.lastOffset = -profileVM.offset
-         
-         }
-         
-         }
-         return Color.clear
-         }
-         .coordinateSpace(name:"SCROLL")
-         
-         
-         )
-         .padding(.bottom,15 + 35)
-         
-         
-         }
-         
-         
-         
-         
-         
-         .ignoresSafeArea(.all,edges: .all)
-         
-         
-         
-         }*/
-    }
-    func getHeaderHeight() -> CGFloat{
-        let topHeight = profileVM.maxHeight + profileVM.TollBarOffset
-        return topHeight > (80 + profileVM.topEdge) ? topHeight : (80 + profileVM.topEdge)
-    }
-    func getCornerRadius()-> CGFloat{
-        let progress = -profileVM.TollBarOffset / (profileVM.maxHeight - (40 + profileVM.topEdge))
-        let value =  1 - progress
-        let radius = value * 40
-        return profileVM.TollBarOffset < 0 ? radius : 25
-    }
-    func topBarTitleOpacity()-> CGFloat{
-        let progress = -(profileVM.TollBarOffset) / ((profileVM.maxHeight-40) - (80 + profileVM.topEdge))
-        return progress
-        
-        
     }
 }
 
 #Preview {
-    ProfileView(hideTab: .constant(true), user: User.MockData[0])
-}
-struct Tabbar:View {
-    @State var editButtonPosition = CGPoint(x:Const.width, y:0)
-    let user:User
-    let images = [
-        "profil1",
-        "profil2",
-        "profil3"
-    ]
-    @State var imageCount = 0
-    var topEdge: CGFloat
-    @Binding var offset:CGFloat
-    var maxHeight:CGFloat
-    var body: some View {
-        
-        VStack{
-            Spacer()
-            HStack{
-                //Image and picker
-                VStack {
-                    CircleProfileImage(userIamgeUrl:images[imageCount], size: .xlage)
-                        .padding(.leading,10)
-                        .gesture(DragGesture().onEnded({ value in
-                            if value.translation.width < 1 {
-                                withAnimation{
-                                    if imageCount < images.count - 1{
-                                        imageCount += 1
-                                    }
-                                    else{
-                                        imageCount = 0
-                                    }
-                                }
-                            }
-                            else{
-                                withAnimation{
-                                    if imageCount > 0{
-                                        imageCount -= 1
-                                    }
-                                    else{
-                                        imageCount = images.count - 1
-                                    }
-                                }
-                            }
-                        }))
-                    HStack{
-                        ForEach(0..<images.count) { index in
-                            Circle()
-                                .frame(width: 5, height: 5)
-                                .foregroundColor(index == self.imageCount ? .white : .black)
-                        }
-                    }
-                }
-                VStack(alignment:.leading){
-                    Text("\(user.name) \(user.surName)")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                    
-                    Text(user.department)
-                    
-                    HStack {
-                        Image.iconManager(.star, size: 15, weight: .bold, color: .white)
-                            .foregroundStyle(.yellow)
-                        Text("\(user.rating, specifier: "%0.f")").font(.subheadline)
-                    }//Rating
-                }
-                Spacer()
-                //User Info
-                VStack{
-                    Spacer()
-                    Text("4")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                    Text("Post")
-                        .foregroundStyle(.white)
-                        .font(.footnote.bold())
-                    Spacer()
-                    
-                }
-            }
-            .padding(.top,maxHeight * 0.25)
-            
-            Buttons.SlidableButton(destination:AnyView(EditProfileView(user: User.MockData[0])), position: editButtonPosition, dragDirection: .left, text: user == User.MockData[0] ?  "Edit" : "Mesaj", color: .white, textColor: .black)
-        }
-        
-        .padding()
-        .opacity(getOpacity())
-    }
-    
-    func getOpacity()->CGFloat{
-        let progress = -offset / 70
-        let opacity = 1 - progress
-        return offset > 0 ? 1 : opacity
-    }
+   TabbarView()
 }
 struct ProfileGeometry: View {
+    @Binding var hideTab:Bool
     var size : CGSize
     var safeArea : EdgeInsets
+    var profileVM:ProfileViewModel
     var user:User
-    
+    @State var imageIndex = 0
     @State private var offsetY:CGFloat = 0
     var body: some View {
         ScrollViewReader{ scrollProxy in
@@ -276,35 +54,19 @@ struct ProfileGeometry: View {
                 VStack(spacing:0){
                     HeaderView()
                         .zIndex(1)
-                   /* Rectangle()
+                    Rectangle()
                         .fill(Const.thirColor)
-                        .frame(height: 150)
-                        .overlay(
-                            VStack{
-                                HStack {
-                                    VStack(alignment:.leading) {
-                                        Text("\(user.name) \(user.surName)")
-                                            .font(.title3)
-                                            .fontWeight(.bold)
-                                        
-                                        Text(user.bio ?? "")
-                                            .font(.caption)
-                                            .fontWeight(.semibold)
-                                    }
-                                    Spacer()
-                                    VStack {
-                                        Text("Post")
-                                        Text("14")
-                                    }
-                                    .fontWeight(.semibold)
-                                    .font(.title3)
-                                    
-                                }
+                        .frame(height: user.bio == "" && user.bio == nil ? 0 : Const.height * 0.15)
+                        .overlay (
+                            Text(user.bio ?? "")
+                                .font(.footnote)
                                 .foregroundStyle(.white)
-                                Spacer()
-                            }
-                                .padding()
-                        )*/
+                                .fontWeight(.semibold)
+                                .padding(.horizontal,5)
+                                .padding(.top,5)
+                            ,alignment: .topLeading
+                            )
+                        
                     ForEach(Post.MockData){post in
                         FeedViewCell(post: post, user: User.MockData[0])
                         
@@ -351,7 +113,7 @@ struct ProfileGeometry: View {
                         let midY = rect.midY
                         let bottomPadding : CGFloat = 15
                         let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
-                        
+                        print
                         //Buttons
                         HStack{
                             Buttons.backButton( action: {
@@ -371,62 +133,73 @@ struct ProfileGeometry: View {
                             .padding()
                         }
                         
-                        //User name/surname rating
+                        // rating and post count
                         HStack{
-                            VStack(alignment:.leading) {
-                                Text(user.name)
-                                Text(user.surName)
+                            VStack(alignment:.center) {
+                                Image.iconManager(.star, size: 30, weight: .bold, color: .yellow)
+                                Text("90")
                             }
+                            .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
+                            .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.8)))
                             
                             Spacer()
-                           
                             .padding(.horizontal)
                             VStack {
                                 Text("Post")
                                 Text("15")
                             }
+                            .opacity(proggress == 0 ? 1:0)
+
                         }.foregroundStyle(.white)
                             .font(.title2)
                             .fontWeight(.semibold)
-                        .opacity(proggress == 0 ? 1:0)
                         .font(.title3)
                         .foregroundStyle(.white)
                         .fontWeight(.semibold)
                         .padding(.top,Const.height * 0.1)
                         .padding()
-                        Image("profil3")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: rect.width-70,height: rect.height-70)
-                            .clipShape(.circle)
-                            .padding()
-                            .scaleEffect(1 - (proggress * 0.55),anchor: .topLeading)
-                            .offset(x : -(rect.minX-10) * proggress,y: -(resizedOffsetY * proggress)+Const.height * 0.08)
+                        
+                        // user name and surname / depertment
+                        HStack{
+                            Spacer()
+                            VStack (alignment:.center){
+                                Text("\(user.name) \(user.surName)")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                Text(user.department)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.black)
+                            }
+                            Spacer()
+                        }
+                        .opacity(proggress == 0 ? 1:0)
+                        .foregroundStyle(.black)
+                        .padding(.top,Const.height * 0.25)
+                        
+                        HStack{
+                            Buttons.SlidableButton(destination: AnyView(EditProfileView(user: user)), position:profileVM.editButtonPosition , dragDirection: .left, text: "Edit", color: .white, textColor: .black)
+                        }
+                        .padding(.top,Const.height * 0.05)
+                        .offset(x : 500 * proggress)
+                        SlidableImagesView(item:profileVM.images, index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
 
                     }
                     .frame(width: Const.width,height: headerHeight * 0.5)
                     
-                    // userName and rating
+                    // userName
                     HStack {
                         Text(user.username)
                             .font(.title2)
                             .fontWeight(.bold)
                             .scaleEffect(1-(proggress * 0.1))
                             .padding(.horizontal)
-                            VStack{
-                                Image.iconManager(.star, size: 15, weight: .bold, color: .yellow)
-                                    .scaleEffect(1-(proggress * 0.25))
-
-                                Text("\(user.rating.formatted())")
-                                    .scaleEffect(1-(proggress * 0.15))
-
-                            }
                             .fontWeight(.bold)
 
                         
                         }
                             .offset(y:((Const.height * 0.18) * proggress) - Const.height * 0.19)
-                            
                         .foregroundStyle(.white)
                     
                     
