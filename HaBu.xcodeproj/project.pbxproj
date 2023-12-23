@@ -35,6 +35,7 @@
 		5C8792DE2B2FB967007D288E /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8792DD2B2FB967007D288E /* Toast.swift */; };
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5CA6AC4C2B34A4AB00EA294E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA6AC4B2B34A4AB00EA294E /* ProfileViewModel.swift */; };
+		5CB8E8F32B37361B00EC04B3 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8E8F22B37361B00EC04B3 /* ImageUploader.swift */; };
 		5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA01922B135144007F9022 /* OffsetModifier.swift */; };
 		5CD3D3FD2B14CF0F00C4A944 /* ScrollableTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3D3FC2B14CF0F00C4A944 /* ScrollableTabView.swift */; };
 		5CD5534A2B1CC61E0070F102 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD553492B1CC61E0070F102 /* RankView.swift */; };
@@ -118,6 +119,7 @@
 		5C8792DD2B2FB967007D288E /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5CA6AC4B2B34A4AB00EA294E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5CB8E8F22B37361B00EC04B3 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		5CBA01922B135144007F9022 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 		5CD3D3FC2B14CF0F00C4A944 /* ScrollableTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableTabView.swift; sourceTree = "<group>"; };
 		5CD553492B1CC61E0070F102 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			children = (
 				5C5EB7762B31CF78001D2370 /* UserService.swift */,
 				9439A8822B322F28005D0E20 /* AuthService.swift */,
+				5CB8E8F22B37361B00EC04B3 /* ImageUploader.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -827,6 +830,7 @@
 				943B9CE42B06912500067376 /* LikesListTile.swift in Sources */,
 				5C8792DE2B2FB967007D288E /* Toast.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
+				5CB8E8F32B37361B00EC04B3 /* ImageUploader.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */,
 				947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */,
