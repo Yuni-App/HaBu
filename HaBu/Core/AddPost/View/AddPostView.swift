@@ -67,10 +67,7 @@ struct AddPostView: View {
                 label: { EmptyView() })
         }
         .blur(radius: isPopupVisible ? 1.5 : 0.0)
-        .popup(isPresented: $isPopupVisible) {
-            
-            PopUps.AddPostPopup(selectedOption: $selectedOption, isPopupVisible: $isPopupVisible, title: "Gönderinizin Gizliliği Nasıl Olsun ? ", contents: "Anonim Gönderi Seçeneği ile gizli paylaşım yapıp istemediğiniz etkileşimlerden kaçabilirsiniz...", size: .xsmall, backgroundColor: .white)
-               }
+      
         .navigationBarBackButtonHidden(true)
         
     }

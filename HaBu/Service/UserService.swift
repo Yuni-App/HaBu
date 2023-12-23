@@ -21,6 +21,5 @@ struct UserService : UserProvider{
    static func fetchAllUsers() async throws -> [User]{
       let snapshot = try await  Firestore.firestore().collection("user").getDocuments()
        return snapshot.documents.compactMap({try? $0.data(as:User.self)})
-       
     }
 }

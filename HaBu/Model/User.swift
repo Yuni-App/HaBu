@@ -33,7 +33,7 @@ struct UniInfo :Identifiable,Codable ,Hashable{
 }
 extension User {
     static var MockData: [User] = [
-        .init(id: "12345", email: "erbalta80@gmail.com", createdAt: "03.10.2000", username: "omer_erbalta", name: "Ömer", surName: "Erbalta", password: "123456", rating: 90, department: "Computer Science"),
+        .init(id: "12345", email: "erbalta80@gmail.com", createdAt: "03.10.2000", username: "omer_erbalta", name: "Ömer", surName: "Erbalta", password: "123456", bio: "Senior Swift Developer Aynı Zamanda YUNİ de patron,ceo,takım lideri,yatırımcı,yüzde 98 hisse sahibi,yusufun ve mertin sahibi", rating: 90, department: "Computer Science"),
                 .init(id: "12346", email: "yusufAydın@gmail.com", createdAt: "04.10.2000", username: "chatYSF", name: "Yusuf", surName: "Aydın", password: "123456", rating: 55, department: "Electrical Engineering"),
                 .init(id: "12347", email: "mertAlp@gmail.com", createdAt: "05.10.2000", username: "alp_mert", name: "Mert", surName: "Alp", password: "123456", rating: 50, department: "Mechanical Engineering"),
                 .init(id: "12348", email: "asliCetin@gmail.com", createdAt: "06.10.2000", username: "asli_cetin", name: "Aslı", surName: "Çetin", password: "123456", rating: 40, department: "Civil Engineering"),
