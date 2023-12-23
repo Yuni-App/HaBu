@@ -37,7 +37,7 @@ struct FeedView: View {
                         
                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                     withAnimation(.easeOut ){
-                                        print(minY)
+                                        print(offset)
                                         hideTab = true
                                     }
                                     lastOffset = -offset

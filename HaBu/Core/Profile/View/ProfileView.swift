@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ProfileView : View {
+    @Environment(\.dismiss) var dissmis
     @StateObject var profileVM :ProfileViewModel
     init(hideTab:Binding<Bool>,user:User) {
         _hideTab = hideTab
@@ -30,7 +31,7 @@ struct ProfileView : View {
         GeometryReader{ proxy in
             let size = proxy.size
             let safeArea = proxy.safeAreaInsets
-            ProfileGeometry(hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
+            ProfileGeometry(action: {dissmis()}, activateBackButton:activateBackButton, hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
            
         }
         .ignoresSafeArea(.all,edges: .top)
@@ -41,6 +42,8 @@ struct ProfileView : View {
    TabbarView()
 }
 struct ProfileGeometry: View {
+    var action:()->Void
+    var activateBackButton:Bool
     @Binding var hideTab:Bool
     var size : CGSize
     var safeArea : EdgeInsets
@@ -56,7 +59,7 @@ struct ProfileGeometry: View {
                         .zIndex(1)
                     Rectangle()
                         .fill(Const.thirColor)
-                        .frame(height: user.bio == "" && user.bio == nil ? 0 : Const.height * 0.15)
+                        .frame(height: user.bio?.count ?? 0 > 5 ? Const.height * 0.15 : 0)
                         .overlay (
                             Text(user.bio ?? "")
                                 .font(.footnote)
@@ -76,6 +79,10 @@ struct ProfileGeometry: View {
                 .background(
                     ScrollDetector{offset in
                         offsetY = -offset
+                        
+                        if offsetY < offset {
+                            print(offsetY)
+                        }
                         
                     } onDraggingEnd: {offset, velocity  in
                         let headerHeight = (size.height * 0.5) + safeArea.top
@@ -113,14 +120,16 @@ struct ProfileGeometry: View {
                         let midY = rect.midY
                         let bottomPadding : CGFloat = 15
                         let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
-                        print
                         //Buttons
                         HStack{
-                            Buttons.backButton( action: {
-                                dissmis()
-                            }, color: .white)
-                            .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
-                            .padding()
+                            if activateBackButton {
+                                Buttons.backButton( action: {
+                                    action()
+                                }, color: .white)
+                                .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
+                                .padding()
+                            }
+                         
                             
                             Spacer()
                             Button(action: {
