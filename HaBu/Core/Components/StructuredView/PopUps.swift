@@ -58,7 +58,7 @@ class PopUps{
         }
     }
     //popUp3 only has close multiply button
-    struct PopUp3: View {
+    struct Xbutton: View {
         var size : PopUpScreen
         var contents : String
         @State var isPopUpPresented: Binding<Bool>
@@ -69,8 +69,7 @@ class PopUps{
                     Button(action: {
                         isPopUpPresented.wrappedValue = false
                     }, label: {
-                        Image(systemName: "xmark.circle.fill").resizable().frame(width: Const.width * 0.06, height: Const.height * 0.04)
-                            .foregroundStyle(Color.black)
+                        Image("close").resizable().frame(width: Const.width * 0.1, height: Const.height * 0.05)
                     })
                 }.padding(7)
                 Text(contents).padding().fontWeight(.semibold)
@@ -85,12 +84,9 @@ class PopUps{
         @State var okeybtn: Binding<Bool>
         var body: some View {
             VStack{
-                Rectangle().frame(width: Const.width * 0.2, height: Const.height * 0.1).foregroundColor(.clear).background(Color.red.opacity(0.7))
-                    .cornerRadius(112).overlay {
-                        Image(systemName: "exclamationmark").resizable().frame(width: Const.width * 0.1,height: Const.height * 0.07)
-                    }
+                Image("warning").resizable().frame(width: Const.width * 0.2,height: Const.height * 0.1)
                 Spacer()
-                Text(contents).fontWeight(.semibold)
+                Text(contents).fontWeight(.semibold).padding(7)
                 Spacer()
                 CustomButton(title: "Tamam", backgroundColor: .brown, action: {
                     okeybtn.wrappedValue = false
