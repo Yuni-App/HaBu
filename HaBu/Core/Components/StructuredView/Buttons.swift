@@ -323,8 +323,11 @@ enum PopUpScreen{
     case lage
     case xlage
     case xxlage
+    case xxsmall
     var width : CGFloat{
         switch self {
+        case .xxsmall:
+            return Const.width * 0.85
         case .xsmall:
             return Const.width * 0.85
         case .small:
@@ -341,6 +344,8 @@ enum PopUpScreen{
     }
     var height : CGFloat{
         switch self {
+        case .xxsmall:
+            return Const.height * 0.2
         case .xsmall:
             return Const.height * 0.3
         case .small:

@@ -80,3 +80,75 @@ struct CommentViewCell : View {
         
     }
 }
+
+/*
+ Yorum Gönderme fonksiyonu
+ func submitComment() {
+   // Yorumu oluştur
+   let comment = Comment(
+     id: UUID(),
+     text: commentText,
+     user: Auth.auth().currentUser!
+   );
+
+   // Yorumu Firestore'a gönder
+   Firestore.firestore().collection("comments").addDocument(data: comment.toDict()) { error in
+     if let error = error {
+       // Hata mesajını göster
+       print(error.localizedDescription);
+     } else {
+       // Yorum gönderme işlemini tamamla
+       self.commentText = "";
+     }
+   }
+ }
+ ***************************************************************
+ 
+ Yorum beğenip beğenmeme kısmı
+ func like() {
+   // Yorumun beğeni sayısını güncelle
+   let comment = Comment(
+     id: commentId,
+     text: commentText,
+     user: user,
+     likes: likes + 1
+   );
+
+   // Yorumu Firestore'a gönder
+   Firestore.firestore().collection("comments").document(commentId).updateData(comment.toDict()) { error in
+     if let error = error {
+       // Hata mesajını göster
+       print(error.localizedDescription);
+     } else {
+       // Beğenme işlemini tamamla
+       self.likeButton.setImage(Image.iconManager(.heart_fill, size: 30, weight: .bold, color: .red), for: .normal);
+     }
+   }
+ }
+
+ func dislike() {
+   // Yorumun beğenmeme sayısını güncelle
+   let comment = Comment(
+     id: commentId,
+     text: commentText,
+     user: user,
+     dislikes: dislikes + 1
+   );
+
+   // Yorumu Firestore'a gönder
+   Firestore.firestore().collection("comments").document(commentId).updateData(comment.toDict()) { error in
+     if let error = error {
+       // Hata mesajını göster
+       print(error.localizedDescription);
+     } else {
+       // Beğenmeme işlemini tamamla
+       self.dislikeButton.setImage(Image.iconManager(.heart_broken, size: 30, weight: .bold, color: .red), for: .normal);
+     }
+   }
+ }
+ ****************************************************************
+ 
+ 
+ 
+ 
+ */
