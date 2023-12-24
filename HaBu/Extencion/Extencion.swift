@@ -96,13 +96,12 @@ extension View {
             Popup(
                 isPresented: isPresented,
                 view: view
-            ).animation(.easeInOut(duration: 0.7))
+            ).animation(.easeInOut(duration: 0.07))
         )
     }
 }
 
 extension View {
-
   func toastView(toast: Binding<Toast?>) -> some View {
     self.modifier(ToastModifier(toast: toast))
   }

@@ -75,7 +75,7 @@ struct LoginView: View {
                 })
                
                 .popup(isPresented: $loginVM.error) {
-                    Text(loginVM.errorMessage)
+                    PopUps.PopUp2(title: "Hata", contents: loginVM.errorMessage, size: .xxsmall, isPopUpPresented: $loginVM.error)
                 }
         }.background(Const.authBackGroundColor)
         .navigationBarBackButtonHidden(true)

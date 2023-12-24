@@ -31,7 +31,9 @@ struct RegisterBuildSecondView: View {
                             TextFields.CustomTextField(text: $registerVM.textBio, icon: .blocked, placeHolder: "Bio")
                             Buttons.GecilecekOlancustomButton(title: "Devam Et", buttonColor: Const.secondaryColor , textColor: .black ) {
                                 registerVM.activeDestinaiton = AnyView(RegisterBuildThirdView())
-                                isActiveDestination = registerVM.checkBuildSecond()
+                                Task{
+                                    isActiveDestination = await registerVM.checkBuildSecond()
+                                }
                                 
                             }
                            

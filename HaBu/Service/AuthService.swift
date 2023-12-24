@@ -18,11 +18,22 @@ protocol AuthProvider {
     func checkAuthenticationStatus(completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
-class AuthService : AuthProvider{
+class AuthService : ObservableObject{
+    @Published var user: FirebaseAuth.User?
+    func checkUser() async {
+            do {
+                if let currentUser = try await  Auth.auth().currentUser{
+                    self.user = currentUser
+                }
+            } catch {
+                print("User check error: \(error.localizedDescription)")
+            }
+    }
     func signIn(email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             // Giriş başarılıysa result değerini kullanabilirsiniz
+            user = result.user
         } catch {
             if let authError = error as? NSError {
                 print(authError.code)
@@ -33,43 +44,89 @@ class AuthService : AuthProvider{
             }
         }
     }
-    func createUser(email: String, password: String) async throws {
+  
+
+    func createUser(email: String, password: String, username: String) async throws {
         do {
-            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            // Firebase Authentication üzerinde kullanıcı oluştur
+            let authResult = try await Auth.auth().createUser(withEmail:"olacak@gmail.com", password: "111111")
+            
+            // Oluşturulan kullanıcının UID'sini al
+            let uid = authResult.user.uid
+            
+            // Firestore kullanıcı koleksiyonunu referans al
+            let userCollection = Firestore.firestore().collection("user")
+            
+            // Kullanıcıyı Firestore koleksiyonuna ekle
+            try await userCollection.document(uid).setData([
+                "email": "olacak@gmail.com",
+                "username": "mertalp009"
+                // Diğer kullanıcı özelliklerini buraya ekleyebilirsiniz
+                
+            ])
+            user = authResult.user
             // Giriş başarılıysa result değerini kullanabilirsiniz
         } catch {
             if let authError = error as? NSError {
-                print(authError.code)
+                print("Auth Hata Kodu: \(authError.code)")
                 throw authError
+            } else if let firestoreError = error as? NSError {
+                print("Firestore Hata Kodu: \(firestoreError.code)")
+                throw firestoreError
             } else {
-                let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu "])
+                let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu"])
                 throw genericError
             }
         }
     }
     
-    func checkUsernameAvailability(username: String, completion: @escaping (Bool) -> Void) {
-        // Firebase'de kullanıcı adının mevcut olup olmadığını kontrol etmek için gereken işlemleri yapın.
-        // Örneğin, bir Firestore koleksiyonunda kullanıcı adlarını takip edebilir veya başka bir benzeri yöntemi kullanabilirsiniz.
+    
+    //Çalışmıyor 
+    func isEmailInUse(email: String) async throws -> Bool {
+           do {
+               let methods = try await Auth.auth().fetchSignInMethods(forEmail: "a@gmail.com")
+               print("aaa")
+               print(methods)
+               print(methods != nil && !methods.isEmpty)
+               return methods != nil && !methods.isEmpty
+           } catch {
+               if let authError = error as? NSError {
+                   print(authError.code)
+                   throw authError
+               } else {
+                   let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu "])
+                   throw genericError
+               }
+           }
+       }
+    
+    //çalışmıyor
+    func checkUsernameAvailability(username: String) async throws -> Bool {
+        let usernamesCollection = Firestore.firestore().collection("user")
+        print("usernamesCollection")
+        print(usernamesCollection)
         
-        // Bu sadece bir örnek ve projenize göre özelleştirmeniz gerekebilir.
-        // Firestore kullanımınıza bağlı olarak, belirli bir koleksiyon ve doküman kullanabilirsiniz.
-        // Aşağıdaki örnek, "usernames" adlı bir Firestore koleksiyonu içinde kullanıcı adlarını kontrol eder.
-        
-        let usernamesCollection = Firestore.firestore().collection("usernames")
-        
-        usernamesCollection.document(username).getDocument { (document, error) in
-            if let document = document, document.exists {
-                // Kullanıcı adı zaten alınmış
-                completion(false)
+        do {
+            // Belirtilen kullanıcı adını içeren belgeyi sorgula
+            let querySnapshot = try await usernamesCollection.whereField("user_name", isEqualTo: username).getDocuments()
+            
+            // Sorgudan dönen belge sayısına göre kullanıcı adının kullanılabilirliğini kontrol et
+            let isAvailable = querySnapshot.documents.isEmpty
+            print("isAvailable")
+            print(isAvailable)
+            return isAvailable
+        } catch {
+            if let firestoreError = error as? NSError {
+                print("Firestore Hata Kodu: \(firestoreError.code)")
+                
+                throw firestoreError
             } else {
-                // Kullanıcı adı kullanılabilir
-                completion(true)
+                let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu"])
+                throw genericError
             }
         }
     }
-    
-  
+
     
     func forgotPassword(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
@@ -97,13 +154,10 @@ class AuthService : AuthProvider{
             }
         }
     }
-    func logOut(completion: @escaping (Result<Void, Error>) -> Void) {
+    func logOut() async throws -> Void{
         do {
-            try Auth.auth().signOut()
-            completion(.success(()))
-        } catch let error {
-            completion(.failure(error))
-        }
+            try await Auth.auth().signOut()
+            } catch let error {}
     }
     func checkAuthenticationStatus(completion: @escaping (Result<Bool, Error>) -> Void) {
         if let user = Auth.auth().currentUser {
@@ -115,45 +169,3 @@ class AuthService : AuthProvider{
         }
     }
 }
-
-/*
- 
- import SwiftUI
- 
- struct ContentView: View {
- @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
- @StateObject private var authService = AuthService()  // Auth servisi
- 
- var body: some View {
- Group {
- if isLoggedIn {
- FeedView()
- } else {
- LoginView()
- }
- }
- .onAppear {
- // Uygulama başladığında oturum durumunu kontrol et
- authService.checkAuthenticationStatus { result in
- switch result {
- case .success(let isAuthenticated):
- // Oturum açık mı değil mi?
- isLoggedIn = isAuthenticated
- case .failure(let error):
- // Hata durumu
- print("Oturum durumu kontrol edilirken hata oluştu: \(error.localizedDescription)")
- }
- }
- }
- }
- }
- 
- struct ContentView_Previews: PreviewProvider {
- static var previews: some View {
- ContentView()
- }
- }
- 
- 
- 
- */

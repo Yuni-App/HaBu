@@ -112,7 +112,7 @@ struct SettingsView: View {
                 .foregroundColor(.black.opacity(0.7))
                 .fontWeight(.bold)
             VStack{
-                SettingsTile(destination: {InfoView()}, icon: AppIcon.logout, text: "Çıkış Yap")
+                SettingsTile(destination: {LogOutView()}, icon: AppIcon.logout, text: "Çıkış Yap")
                 Divider().frame(width: Const.width * 0.84)
                 SettingsTile(destination : {
                     DeleteAccountPasswordView()

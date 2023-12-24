@@ -11,10 +11,10 @@ enum ErrorMessage: Int  {
     case emptyFields = 1
     case invalidEmail = 2
     case shortPassword = 3
+    case passwordsNotMatch = 4
     case wrongPassword = 17004
-
-    case userNotFound = 4
-    case authenticationError = 5
+    case confidentialityAgreement = 5
+    
     
     var description: String {
         switch self {
@@ -26,10 +26,10 @@ enum ErrorMessage: Int  {
              return "Şifre en az 6 karakterli olmalı "
         case .wrongPassword:
             return "Yanlış şifre. Lütfen doğru şifreyi girin."
-        case .userNotFound:
-            return "Kullanıcı bulunamadı. Lütfen kayıtlı bir e-posta adresi kullanın veya hesap oluşturun."
-        case .authenticationError:
-            return "Kimlik doğrulama hatası. Lütfen tekrar deneyin."
+        case .passwordsNotMatch:
+            return "Şifreler Eşleşmiyor"
+        case .confidentialityAgreement:
+            return "Gizlilik sözleşmesini onaylanıyız"
         }
     }
 }

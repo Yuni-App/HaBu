@@ -33,7 +33,9 @@ struct RegisterBuildFirstView: View {
                   
                     Buttons.GecilecekOlancustomButton(title: "Devam Et", buttonColor: Const.secondaryColor , textColor: .black ) {
                         registerVM.activeDestinaiton = AnyView(RegisterBuildSecondView())
-                        isActiveDestination = registerVM.checkBuildFirst()
+                        Task{
+                            isActiveDestination = await registerVM.checkBuildFirst()
+                        }
                     }
                     
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)

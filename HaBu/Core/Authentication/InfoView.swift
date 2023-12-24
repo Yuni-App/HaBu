@@ -47,5 +47,5 @@ struct InfoView: View {
     }
 }
 #Preview {
-    ContentView()
+    InfoView()
 }

@@ -34,7 +34,9 @@ struct RegisterBuildThirdView: View {
                         TextFields.CustomTextField(text: $registerVM.textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
                         Buttons.GecilecekOlancustomButton(title: "Tamamla", buttonColor: Const.secondaryColor , textColor: .black ) {
                             registerVM.activeDestinaiton = AnyView(TabbarView())
-                            isActiveDestination = registerVM.signUp()
+                            Task{
+                                isActiveDestination = await registerVM.signUp()
+                            }
                             
                         }
 
