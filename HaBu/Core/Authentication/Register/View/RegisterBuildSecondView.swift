@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterBuildSecondView: View {
     @Environment(\.dismiss) var dissmis
+    @State private var isActiveDestination: Bool = false
     @StateObject var registerVM : RegisterViewModel
     init(){
         self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
@@ -28,8 +29,12 @@ struct RegisterBuildSecondView: View {
                             TextFields.CustomTextField(text : $registerVM.textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
                             TextFields.CustomTextField(text: $registerVM.textAge, icon: .blocked, placeHolder: "Yaş")
                             TextFields.CustomTextField(text: $registerVM.textBio, icon: .blocked, placeHolder: "Bio")
-                            Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                            }, size: .small, textColor: .white, destination: {RegisterBuildThirdView()})
+                            Buttons.GecilecekOlancustomButton(title: "Devam Et", buttonColor: Const.secondaryColor , textColor: .black ) {
+                                registerVM.activeDestinaiton = AnyView(RegisterBuildThirdView())
+                                isActiveDestination = registerVM.checkBuildSecond()
+                                
+                            }
+                           
                         }.frame(width: Const.width * 0.85, height:  Const.height * 0.5)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                         
@@ -49,7 +54,12 @@ struct RegisterBuildSecondView: View {
             }
             .background(
                 Const.authBackGroundColor
-            )
+            ).popup(isPresented: $registerVM.error, view: {
+                Text(registerVM.errorMessage)
+            })
+            .navigationDestination(isPresented: $isActiveDestination, destination: {
+                registerVM.activeDestinaiton
+            })
             .navigationBarBackButtonHidden(true)
 
     }

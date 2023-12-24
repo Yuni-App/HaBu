@@ -93,6 +93,7 @@
 		94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
+		94D580AB2B383E9000FECBB9 /* copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D580AA2B383E9000FECBB9 /* copy.swift */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
 		94FAFA972B2E37BF00210585 /* PopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAFA962B2E37BF00210585 /* PopupModifier.swift */; };
 /* End PBXBuildFile section */
@@ -181,6 +182,7 @@
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
+		94D580AA2B383E9000FECBB9 /* copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = copy.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		94FAFA962B2E37BF00210585 /* PopupModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -561,6 +563,7 @@
 			children = (
 				9439A87F2B3217F3005D0E20 /* ViewModal */,
 				9439A87E2B3217E9005D0E20 /* View */,
+				94D580AA2B383E9000FECBB9 /* copy.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
 				5CF151962B1EC2000015BE31 /* NavigationStateManager.swift in Sources */,
 				88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */,
+				94D580AB2B383E9000FECBB9 /* copy.swift in Sources */,
 				5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */,
 				5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */,
 				8821E5112B1DDCC1003089B6 /* SearchItem3.swift in Sources */,
