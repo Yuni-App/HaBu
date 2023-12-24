@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RegisterBuildFirstView: View {
     @Environment(\.dismiss) var dissmis
-    
+    @State private var isActiveDestination: Bool = false
+
     @StateObject var registerVM : RegisterViewModel
     init(){
         self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
@@ -29,8 +30,11 @@ struct RegisterBuildFirstView: View {
                     TextFields.CustomTextField(text :$registerVM.textPassword ,icon: .key, placeHolder: "Şifre")
                     TextFields.CustomTextField(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar")
                     
-                    Buttons.customButton1(title: "Devam Et", backgroundColor: Const.primaryColor, action: {
-                    }, size: .small, textColor: .white, destination: {RegisterBuildSecondView()})
+                  
+                    Buttons.GecilecekOlancustomButton(title: "Devam Et", buttonColor: Const.secondaryColor , textColor: .black ) {
+                        registerVM.activeDestinaiton = AnyView(RegisterBuildSecondView())
+                        isActiveDestination = registerVM.checkBuildFirst()
+                    }
                     
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                     .modifier(RectangleBlurModifier(color: Const.primaryColor))
@@ -47,6 +51,12 @@ struct RegisterBuildFirstView: View {
         }.background(
             Const.authBackGroundColor
         )
+        .popup(isPresented: $registerVM.error, view: {
+            Text(registerVM.errorMessage)
+        })
+        .navigationDestination(isPresented: $isActiveDestination, destination: {
+            registerVM.activeDestinaiton
+        })
         .navigationBarBackButtonHidden(true)
     }
 }

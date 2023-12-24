@@ -1,4 +1,12 @@
 //
+//  copy.swift
+//  HaBu
+//
+//  Created by mert alp on 24.12.2023.
+//
+
+import Foundation
+//
 //  LoginView.swift
 //  HaBu
 //
@@ -7,7 +15,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct LoginView2: View {
     
     @Environment(\.dismiss) var dissmis
     @State private var isActiveDestination: Bool = false

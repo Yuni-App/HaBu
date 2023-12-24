@@ -28,7 +28,7 @@ class Buttons{
                     .foregroundColor(textColor ?? .white)
                     .cornerRadius(4)
                 
-            }).shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
+            }).shadow(color: Color.black.opacity(0.5), radius: 5, x: 2, y: 2)
 
         }
     }

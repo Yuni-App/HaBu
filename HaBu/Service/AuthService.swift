@@ -18,14 +18,45 @@ protocol AuthProtocol {
     func checkAuthenticationStatus(completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
-class AuthService: AuthProtocol {
-   
+class AuthService {
+    func signIn2(email: String, password: String) async throws {
+            guard !email.isEmpty, !password.isEmpty else {
+                throw NSError(domain: "com.example", code: 1, userInfo: [NSLocalizedDescriptionKey: "E-posta ve şifre boş olamaz"])
+            }
+
+            try await Auth.auth().signIn(withEmail: email, password: password)
+        }
+    func checkUsernameAvailability(username: String, completion: @escaping (Bool) -> Void) {
+        // Firebase'de kullanıcı adının mevcut olup olmadığını kontrol etmek için gereken işlemleri yapın.
+        // Örneğin, bir Firestore koleksiyonunda kullanıcı adlarını takip edebilir veya başka bir benzeri yöntemi kullanabilirsiniz.
+
+        // Bu sadece bir örnek ve projenize göre özelleştirmeniz gerekebilir.
+        // Firestore kullanımınıza bağlı olarak, belirli bir koleksiyon ve doküman kullanabilirsiniz.
+        // Aşağıdaki örnek, "usernames" adlı bir Firestore koleksiyonu içinde kullanıcı adlarını kontrol eder.
+
+        let usernamesCollection = Firestore.firestore().collection("usernames")
+
+        usernamesCollection.document(username).getDocument { (document, error) in
+            if let document = document, document.exists {
+                // Kullanıcı adı zaten alınmış
+                completion(false)
+            } else {
+                // Kullanıcı adı kullanılabilir
+                completion(true)
+            }
+        }
+    }
+
+    
     func signIn(email: String, password: String, completion: @escaping (Result<AuthDataResult,Error>) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error as? NSError {
+                print("error")
                 completion(.failure(error))
             }
            else if let result = result {
+               print("succes")
+               
                completion(.success(result))
             }
         }
