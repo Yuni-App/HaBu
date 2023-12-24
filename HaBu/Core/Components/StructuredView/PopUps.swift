@@ -50,7 +50,7 @@ class PopUps{
                 Spacer()
                 Text(contents).foregroundStyle(Color.secondary).font(.body)
                 Spacer()
-                CustomButton(title: "Kapat", backgroundColor: .blue, action: {
+                Buttons.customButton(title: "Kapat", backgroundColor: .blue, action: {
                     isPopUpPresented.wrappedValue = false
                     return true// Fix the binding variable here
                 }, size: .xlage)
@@ -88,7 +88,7 @@ class PopUps{
                 Spacer()
                 Text(contents).fontWeight(.semibold).padding(7)
                 Spacer()
-                CustomButton(title: "Tamam", backgroundColor: .brown, action: {
+                Buttons.customButton(title: "Tamam", backgroundColor: .brown, action: {
                     okeybtn.wrappedValue = false
                     return true
                 }, size: .lage)

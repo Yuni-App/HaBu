@@ -24,92 +24,60 @@ class LoginViewModel: ObservableObject {
     init(authService: AuthService) {
         self.authService = authService
     }
-
-    func signIn2() async ->Bool {
-            do {
-                try await authService.signIn2(email: textEmail, password: textPassword)
-                // Giriş başarılıysa yapılacak işlemler
-                self.completion = true
-                return true
-            } catch {
-                errorMessage = error.localizedDescription
-                self.errorMessage = error.localizedDescription
-                self.error = true
-                self.completion = true
-                return false 
-            }
-        }
-func signIn()-> Bool {
-
+    
+    func signIn() async ->Bool {
         guard !textEmail.isEmpty, !textPassword.isEmpty else {
             if let errorMessage = ErrorMessage(rawValue: 1) {
                 print(errorMessage.description)
-                self.errorMessage = "Lütfen Tüm Alanaları Doldurunuz"
+                self.errorMessage = errorMessage.description
                 self.error = true
                 self.completion = true
                 
             }
-        return false
+            return false
         }
         guard textEmail.isValidEmail else {
             if let errorMessage = ErrorMessage(rawValue: 2) {
                 print(errorMessage.description)
-                self.errorMessage = "Geçerli bir eposta giriniz"
+                self.errorMessage = errorMessage.description
                 self.error = true
                 self.completion = true
                 
             }
-        return false
+            return false
         }
         guard textPassword.count >= 6 else {
-            if let errorMessage = ErrorMessage(rawValue: 2) {
+            if let errorMessage = ErrorMessage(rawValue: 3) {
                 print(errorMessage.description)
-                self.errorMessage = "şifre en az 6 karakterli olmalı"
+                self.errorMessage = errorMessage.description
                 self.error = true
                 self.completion = true
-                
             }
-        return false
+            return false
         }
-    
-        var signInSuccess = false
-        authService.signIn(email: textEmail, password: textPassword) { result in
-        print("sdffgsd")
-        print(result)
-        switch result {
-        case .success(let result):
-            signInSuccess = true
+        do {
+            try await authService.signIn(email: textEmail, password: textPassword)
             self.completion = true
-            
-         
-        case .failure(let error as NSError):
-            if let errorMessage = ErrorMessage(rawValue: error.code) {
-                print("çalıştı girdi4")
-                print(errorMessage.description)
-                print("çalıştı girdi5")
-                self.errorMessage = error.localizedDescription
-                self.error = true
-                self.completion = true
-                signInSuccess = false
-                print("çalıştı girdi6")
-                
-            } else {
-                self.errorMessage = "Bir Hata Oluştu"
-                self.error = true
-                self.completion = true
-                signInSuccess = false
+            return true
+        } catch {
+            if let authError = error as? NSError {
+                if let errorMessage = ErrorMessage(rawValue: authError.code) {
+                    print(errorMessage.description)
+                    self.errorMessage = errorMessage.description
+                    self.error = true
+                    self.completion = true
+                    return false
+                }
             }
+            self.errorMessage = "Beklenemdik bir hata oluştu"
+            return false
         }
     }
-    print("signInSuccess")
-    print(signInSuccess)
-    return signInSuccess
-   
-}
+    
     func forgotPassoword(){
         //  authService.forgotPassoword()
     }
 }
-    
- 
+
+
 

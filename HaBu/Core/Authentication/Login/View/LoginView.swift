@@ -47,7 +47,7 @@ struct LoginView: View {
                        
                         loginVM.activeDestinaiton = AnyView(TabbarView())
                         Task{
-                            isActiveDestination =   await loginVM.signIn2()
+                            isActiveDestination =   await loginVM.signIn()
                         }
                     }
                  
