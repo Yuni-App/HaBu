@@ -96,7 +96,7 @@ extension View {
             Popup(
                 isPresented: isPresented,
                 view: view
-            )
+            ).animation(.easeInOut(duration: 0.7))
         )
     }
 }

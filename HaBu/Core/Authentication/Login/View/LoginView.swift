@@ -69,6 +69,7 @@ struct LoginView: View {
                 //TODO : update 100
             } .frame(width: Const.width , height: Const.height+100)
                 .padding()
+
                 .navigationDestination(isPresented: $isActiveDestination, destination: {
                     loginVM.activeDestinaiton
                 })

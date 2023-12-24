@@ -9,250 +9,258 @@ import SwiftUI
 
 
 struct ProfileView : View {
-    
+    @Environment(\.dismiss) var dissmis
+    @StateObject var profileVM :ProfileViewModel
     init(hideTab:Binding<Bool>,user:User) {
         _hideTab = hideTab
         self.user = user
+        self._profileVM = StateObject(wrappedValue: ProfileViewModel(user: user))
     }
     init(user:User) {
         self.user = user
         _hideTab = .constant(false)
         activateBackButton = true
-        
+        self._profileVM = StateObject(wrappedValue: ProfileViewModel(user: user))
         
     }
-    
-    @Environment(\.dismiss) var dissmis
     var activateBackButton = false
     let user : User
     @Binding var hideTab:Bool
-    @State var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
-    @State private var shouldNavigate = false
-    @State var offset:CGFloat = 0
-    @State var lastOffset:CGFloat = 0
-    @State var TollBarOffset : CGFloat = 0
-    @State var topEdge:CGFloat = Const.height * 0.03
-    let maxHeight = UIScreen.main.bounds.height / 2.7
-    @State var imageCount = 0
+    
     var body: some View{
-        ZStack {
-                GeometryReader{proxy in
-                    let bottomEdge = proxy.safeAreaInsets.bottom
-                    ScrollView(.vertical,showsIndicators: false){
-                        VStack(spacing:15){
-                            GeometryReader{proxy in
-                                Tabbar(user:user, topEdge: topEdge,offset: $TollBarOffset,maxHeight:maxHeight)
-                                .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: getHeaderHeight(),alignment:.bottom)
-                                .background(
-                                    Const.thirColor,
-                                    in:CustomCorner(corners: [.bottomRight,.bottomLeft], radius: getCornerRadius())
-                                
-                                )
-                                .overlay(
-                                    
-                                    HStack(spacing:10){
-                                        if activateBackButton == true{
-                                            Buttons.backButton(action: {
-                                                dissmis()
-
-                                            }, color: .white)
-                                            Spacer()
-                                        }
-                                        HStack {
-                                            Image("profil1")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 40,height: 40)
-                                            .clipShape(.circle)
-                                            Text(user.username)
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                                .foregroundStyle(.primary)
-                                        }
-                                        .opacity(topBarTitleOpacity())
-                                       
-                                        Spacer()
-                                        NavigationLink {
-                                            SettingsView()
-                                        } label: {
-                                            Image.iconManager(.settings, size: 20, weight: .black, color: .white)
-                                        }
-
-                                      
-                                    }
-                                        .padding(.horizontal,10)
-                                        .frame(height:40)
-                                        .foregroundStyle(.white)
-                                        .padding(.top,topEdge + 25)
-                                    ,alignment: .top
-                                    
-                                )
-                            }
-                            .frame(height: maxHeight)
-                            .offset(y:-TollBarOffset)
-                            .zIndex(1)
-                            VStack(spacing:15){
-                                   
-                                ForEach(Post.MockData){post in
-                                    FeedViewCell(post: post, user: User.MockData[0])
-                                }
-                            }
-                            .zIndex(0)
-                            
-                        }
-                        .overlay(
-                            GeometryReader{proxy -> Color in
-                                let minY = proxy.frame(in: .named("SCROLL")).minY
-                                let durationOffset: CGFloat = 35
-                                DispatchQueue.main.async {
-                                    if minY < offset{
-                                        if offset < 0 && -minY > (lastOffset + durationOffset){
-                                            withAnimation(.easeOut .speed(1.2)){
-                                                print(minY)
-                                                hideTab = true
-                                            }
-                                            lastOffset = -offset
-                                        }
-                                        
-                                    }
-                                    if minY > offset && -minY < (lastOffset - durationOffset){
-                                        withAnimation(.easeOut .speed(1.5)){
-                                            hideTab = false
-                                        }
-                                        lastOffset = -offset
-                                        
-                                    }
-                                    self.offset = minY
-                                }
-                                return Color.clear
-                                
-                            }
-                            
-                        )
-                        .padding(.bottom,15 + bottomEdge + 35)
-                        
-                        .modifier(OffsetModifier(offset: $TollBarOffset))
-                    }
-                  
-                }
-                .ignoresSafeArea(.all)
+        GeometryReader{ proxy in
+            let size = proxy.size
+            let safeArea = proxy.safeAreaInsets
+            ProfileGeometry(action: {dissmis()}, activateBackButton:activateBackButton, hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
+           
         }
-       
-    }
-    func getHeaderHeight() -> CGFloat{
-        let topHeight = maxHeight + TollBarOffset
-        return topHeight > (80 + topEdge) ? topHeight : (80 + topEdge)
-    }
-    func getCornerRadius()-> CGFloat{
-        let progress = -TollBarOffset / (maxHeight - (40 + topEdge))
-        let value =  1 - progress
-        let radius = value * 40
-        return TollBarOffset < 0 ? radius : 25
-    }
-    func topBarTitleOpacity()-> CGFloat{
-        let progress = -(TollBarOffset) / ((maxHeight-40) - (80 + topEdge))
-        return progress
-        
-        
+        .ignoresSafeArea(.all,edges: .top)
     }
 }
 
 #Preview {
-    ProfileView(hideTab: .constant(true), user: User.MockData[0])
+   TabbarView()
 }
-struct Tabbar:View {
-    @State var editButtonPosition = CGPoint(x:Const.width, y:0)
-    let user:User
-    let images = [
-        "profil1",
-        "profil2",
-        "profil3"
-    ]
-    @State var imageCount = 0
-    var topEdge: CGFloat
-    @Binding var offset:CGFloat
-    var maxHeight:CGFloat
+struct ProfileGeometry: View {
+    var action:()->Void
+    var activateBackButton:Bool
+    @Binding var hideTab:Bool
+    var size : CGSize
+    var safeArea : EdgeInsets
+    var profileVM:ProfileViewModel
+    var user:User
+    @State var imageIndex = 0
+    @State private var offsetY:CGFloat = 0
     var body: some View {
-       
-        VStack{
-            Spacer()
-            HStack{
-                //Image and picker
-                VStack {
-                    CircleProfileImage(userIamgeUrl:images[imageCount], size: .xlage)
-                    .padding(.leading,10)
-                    .gesture(DragGesture().onEnded({ value in
-                        if value.translation.width < 1 {
-                            withAnimation{
-                                if imageCount < images.count - 1{
-                                    imageCount += 1
-                                }
-                                else{
-                                    imageCount = 0
-                                }
-                            }
-                        }
-                        else{
-                            withAnimation{
-                                if imageCount > 0{
-                                    imageCount -= 1
-                                }
-                                else{
-                                    imageCount = images.count - 1
-                                }
-                            }
-                        }
-                }))
-                    HStack{
-                        ForEach(0..<images.count) { index in
-                            Circle()
-                                .frame(width: 5, height: 5)
-                                .foregroundColor(index == self.imageCount ? .white : .black)
-                        }
+        ScrollViewReader{ scrollProxy in
+            ScrollView{
+                VStack(spacing:0){
+                    HeaderView()
+                        .zIndex(1)
+                    Rectangle()
+                        .fill(Const.thirColor)
+                        .frame(height: user.bio?.count ?? 0 > 5 ? Const.height * 0.15 : 0)
+                        .overlay (
+                            Text(user.bio ?? "")
+                                .font(.footnote)
+                                .foregroundStyle(.white)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal,5)
+                                .padding(.top,5)
+                            ,alignment: .topLeading
+                            )
+                        
+                    ForEach(Post.MockData){post in
+                        FeedViewCell(post: post, user: User.MockData[0])
+                        
                     }
                 }
-                VStack(alignment:.leading){
-                    Text("\(user.name) \(user.surName)")
-                        .font(.headline)
+                .id("SCROLLVIEW")
+                .background(
+                    ScrollDetector{offset in
+                        offsetY = -offset
+                        
+                        if offsetY < offset {
+                            print(offsetY)
+                        }
+                        
+                    } onDraggingEnd: {offset, velocity  in
+                        let headerHeight = (size.height * 0.5) + safeArea.top
+                        let minimumHeaderHeight = 100 + safeArea.top
+                        
+                        let targetEnd  = offset + (velocity * 45)
+                        if targetEnd < (headerHeight - minimumHeaderHeight) && targetEnd > 0{
+                            withAnimation(.interactiveSpring(response: 0.55, dampingFraction: 0.65, blendDuration: 0.65)){
+                                scrollProxy.scrollTo("SCROLLVIEW",anchor:  .top)
+                            }
+                        }
+                    }
+                    
+                )
+            }
+            
+        }
+    }
+    @ViewBuilder
+    func HeaderView()->some View{
+        @Environment(\.dismiss) var dissmis
+        let headerHeight = (size.height * 0.4) + safeArea.top
+        let minimumHeaderHeight = 100 + safeArea.top
+        let proggress = max( min(-offsetY  / (headerHeight - minimumHeaderHeight), 1), 0)
+        GeometryReader{_ in
+            ZStack{
+                Rectangle()
+                    .fill(Const.thirColor.gradient)
+                
+                
+                VStack(spacing: 15){
+                    GeometryReader{
+                        let rect = $0.frame(in: .global)
+                        let halfScaledHeight = (rect.height * 0.3) * 0.5
+                        let midY = rect.midY
+                        let bottomPadding : CGFloat = 15
+                        let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
+                        //Buttons
+                        HStack{
+                            if activateBackButton {
+                                Buttons.backButton( action: {
+                                    action()
+                                }, color: .white)
+                                .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
+                                .padding()
+                            }
+                         
+                            
+                            Spacer()
+                            Button(action: {
+                                
+                            }, label: {
+                                Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
+                            })
+                            .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
+                            
+                            .padding()
+                        }
+                        
+                        // rating and post count
+                        HStack{
+                            VStack(alignment:.center) {
+                                Image.iconManager(.star, size: 30, weight: .bold, color: .yellow)
+                                Text("90")
+                            }
+                            .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
+                            .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.8)))
+                            
+                            Spacer()
+                            .padding(.horizontal)
+                            VStack {
+                                Text("Post")
+                                Text("15")
+                            }
+                            .opacity(proggress == 0 ? 1:0)
+
+                        }.foregroundStyle(.white)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        .font(.title3)
+                        .foregroundStyle(.white)
                         .fontWeight(.semibold)
+                        .padding(.top,Const.height * 0.1)
+                        .padding()
+                        
+                        // user name and surname / depertment
+                        HStack{
+                            Spacer()
+                            VStack (alignment:.center){
+                                Text("\(user.name) \(user.surName)")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                Text(user.department)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.black)
+                            }
+                            Spacer()
+                        }
+                        .opacity(proggress == 0 ? 1:0)
+                        .foregroundStyle(.black)
+                        .padding(.top,Const.height * 0.25)
+                        
+                        HStack{
+                            Buttons.SlidableButton(destination: AnyView(EditProfileView(user: user)), position:profileVM.editButtonPosition , dragDirection: .left, text: "Edit", color: .white, textColor: .black)
+                        }
+                        .padding(.top,Const.height * 0.05)
+                        .offset(x : 500 * proggress)
+                        SlidableImagesView(item:profileVM.images, index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
 
-                    Text(user.department)
-
+                    }
+                    .frame(width: Const.width,height: headerHeight * 0.5)
+                    
+                    // userName
                     HStack {
-                        Image.iconManager(.star, size: 15, weight: .bold, color: .white)
-                            .foregroundStyle(.yellow)
-                        Text("\(user.rating, specifier: "%0.f")").font(.subheadline)
-                    }//Rating
-                }
-                Spacer()
-                //User Info
-                VStack{
-                    Spacer()
-                    Text("4")
-                        .font(.title)
-                        .fontWeight(.semibold)
+                        Text(user.username)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .scaleEffect(1-(proggress * 0.1))
+                            .padding(.horizontal)
+                            .fontWeight(.bold)
+
+                        
+                        }
+                            .offset(y:((Const.height * 0.18) * proggress) - Const.height * 0.19)
                         .foregroundStyle(.white)
-                    Text("Post")
-                        .foregroundStyle(.white)
-                        .font(.footnote.bold())
-                    Spacer()
+                    
+                    
                     
                 }
+                .padding(.top,safeArea.top)
+                
             }
-            .padding(.top,maxHeight * 0.25)
-           
-            Buttons.SlidableButton(destination:AnyView(EditProfileView(user: User.MockData[0])), position: editButtonPosition, dragDirection: .left, text: user == User.MockData[0] ?  "Edit" : "Mesaj", color: .white, textColor: .black)
-        }
-       
-        .padding()
-        .opacity(getOpacity())
+            .frame(width: Const.width, height:(headerHeight + offsetY) < minimumHeaderHeight ? minimumHeaderHeight : (headerHeight + offsetY),alignment:.bottom)
+            .offset(y:-offsetY)
+        }.frame(height: headerHeight)
+    }
+}
+
+
+struct ScrollDetector:UIViewRepresentable{
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
     }
     
-    func getOpacity()->CGFloat{
-        let progress = -offset / 70
-        let opacity = 1 - progress
-        return offset > 0 ? 1 : opacity
+    
+    var onScroll:(CGFloat) -> ()
+    var onDraggingEnd:(CGFloat,CGFloat) ->()
+    
+    func makeUIView(context: Context) ->  UIView {
+        return UIView()
+    }
+    func  updateUIView(_ uiView: UIView, context: Context) {
+        DispatchQueue.main.async {
+            if let scrollView = uiView.superview?.superview?.superview as? UIScrollView, !context.coordinator.isDelegatedAdded {
+                scrollView.delegate = context.coordinator
+                context.coordinator.isDelegatedAdded = true
+            }
+        }
+    }
+    class Coordinator:NSObject,UIScrollViewDelegate{
+        var parent : ScrollDetector
+        init(parent: ScrollDetector) {
+            self.parent = parent
+        }
+        var isDelegatedAdded : Bool = false
+        
+        func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            parent.onScroll(scrollView.contentOffset.y)
+        }
+        func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+            parent.onDraggingEnd(targetContentOffset.pointee.y,velocity.y)
+        }
+        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            let velocity = scrollView.panGestureRecognizer.velocity(in: scrollView.panGestureRecognizer.view)
+            parent.onDraggingEnd(scrollView.contentOffset.y,velocity.y)
+            
+        }
     }
 }

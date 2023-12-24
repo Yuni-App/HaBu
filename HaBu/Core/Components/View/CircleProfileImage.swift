@@ -72,6 +72,7 @@ enum ProfileImageSize{
 
 struct CircleProfileImage: View {
     let userIamgeUrl : String
+    var userImage : Image = Image(systemName: "plus.app")
     var index : Int?
     var size : ProfileImageSize?
     
@@ -79,9 +80,13 @@ struct CircleProfileImage: View {
         self.userIamgeUrl = userIamgeUrl
         self.size = size
     }
-    init(userImage:String,index : Int){
-        self.userIamgeUrl = userImage
+    init(index : Int,userImage: Image? = nil){
+        self.userIamgeUrl = ""
         self.index = index
+        if let userImage = userImage{
+            self.userImage = userImage
+        }
+        
     }
     var body: some View {
         if let size = self.size{
@@ -109,22 +114,32 @@ struct CircleProfileImage: View {
         }
         if let index = self.index{
             let value = ImageLocationAndSize.fromRawValue(index)
-            Image(userIamgeUrl)
-                .resizable()
-                .clipShape(.rect(cornerRadius: 15))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.white, lineWidth: 1)
-                )
-                .frame(width: value!.size, height: value!.size)
-                .position(value!.Position)
-                .onTapGesture {
-                    
-                }
+            if userImage != Image(systemName: "plus.app"){
+                userImage
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 15))
+                    .overlay(
+                         RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.white, lineWidth: 1)
+                        
+                    )
+                    .frame(width: value!.size, height: value!.size)
+                    .position(value!.Position)
+            }
+            else{
+                userImage
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 15))
+                    .frame(width: value!.size, height: value!.size)
+                    .position(value!.Position)
+                    .foregroundStyle(.white)
+
+                
+            }
         }
     }
 }
 
 #Preview {
-    CircleProfileImage(userIamgeUrl: "", size: .medium)
+    CircleProfileImage( index: 2)
 }

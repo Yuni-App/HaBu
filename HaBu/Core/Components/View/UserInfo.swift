@@ -71,7 +71,6 @@ struct UserInfo: View {
                 }
             }
         }
-        .frame(height: .infinity)
         .toastView(toast: $toast)
         
     }
