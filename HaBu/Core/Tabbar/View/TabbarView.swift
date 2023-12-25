@@ -21,7 +21,8 @@ struct TabbarView: View {
     }
     var body: some View {
         
-        NavigationStack {
+        
+        
             GeometryReader{proxy in
                 let bottomEdge = proxy.safeAreaInsets.bottom
                 let topEdge = proxy.safeAreaInsets.leading
@@ -54,7 +55,8 @@ struct TabbarView: View {
                     ,alignment: .bottom
                 )
             }
-        }
+        
+        
     }
 }
 
