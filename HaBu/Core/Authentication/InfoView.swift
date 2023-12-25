@@ -28,6 +28,7 @@ struct InfoView: View {
                         Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
                             activeDestinaiton = AnyView(RegisterBuildFirstView())
                             isActiveDestination = true
+    
                         }
 
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
