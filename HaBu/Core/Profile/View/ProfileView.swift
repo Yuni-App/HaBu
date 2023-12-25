@@ -32,17 +32,20 @@ struct ProfileView : View {
             let size = proxy.size
             let safeArea = proxy.safeAreaInsets
             ProfileGeometry(action: {dissmis()}, activateBackButton:activateBackButton, hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
-           
+            
         }
+        
         .ignoresSafeArea(.all,edges: .top)
     }
 }
 
 #Preview {
-   TabbarView()
+    TabbarView()
 }
 struct ProfileGeometry: View {
     var action:()->Void
+    @State var navigate = false
+    @State var navigationPage : AnyView? = nil
     var activateBackButton:Bool
     @Binding var hideTab:Bool
     var size : CGSize
@@ -53,9 +56,119 @@ struct ProfileGeometry: View {
     @State private var offsetY:CGFloat = 0
     var body: some View {
         ScrollViewReader{ scrollProxy in
+            let headerHeight = (size.height * 0.4) + safeArea.top
+            let minimumHeaderHeight = 100 + safeArea.top
+            let proggress = max( min(-offsetY  / (headerHeight - minimumHeaderHeight), 1), 0)
             ScrollView{
                 VStack(spacing:0){
-                    HeaderView()
+                    GeometryReader{_ in
+                        ZStack{
+                            Rectangle()
+                                .fill(Const.thirColor.gradient)
+                            VStack(spacing: 15){
+                                GeometryReader{
+                                    let rect = $0.frame(in: .global)
+                                    let halfScaledHeight = (rect.height * 0.3) * 0.5
+                                    let midY = rect.midY
+                                    let bottomPadding : CGFloat = 15
+                                    let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
+                                    //Buttons
+                                    HStack{
+                                        Spacer()
+                                        Button(action: {
+                                            navigate = true
+                                            navigationPage = AnyView(SettingsView())
+                                            
+                                        }, label: {
+                                            Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
+                                        })
+                                        .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
+                                        
+                                        .padding()
+                                    }
+                                    
+                                    // rating and post count
+                                    HStack{
+                                        VStack(alignment:.center) {
+                                            Image.iconManager(.star, size: 30, weight: .bold, color: .yellow)
+                                            Text("90")
+                                        }
+                                        .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
+                                        .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.8)))
+                                        
+                                        Spacer()
+                                            .padding(.horizontal)
+                                        VStack {
+                                            Text("Post")
+                                            Text("15")
+                                        }
+                                        .opacity(proggress == 0 ? 1:0)
+                                        
+                                    }.foregroundStyle(.white)
+                                        .font(.title2)
+                                        .fontWeight(.semibold)
+                                        .font(.title3)
+                                        .foregroundStyle(.white)
+                                        .fontWeight(.semibold)
+                                        .padding(.top,Const.height * 0.1)
+                                        .padding()
+                                    
+                                    // user name and surname / depertment
+                                    HStack{
+                                        Spacer()
+                                        VStack (alignment:.center){
+                                            Text("\(user.name) \(user.surName)")
+                                                .font(.title3)
+                                                .fontWeight(.semibold)
+                                                .foregroundStyle(.white)
+                                            Text(user.department)
+                                                .font(.subheadline)
+                                                .fontWeight(.semibold)
+                                                .foregroundStyle(.black)
+                                        }
+                                        Spacer()
+                                    }
+                                    .opacity(proggress == 0 ? 1:0)
+                                    .foregroundStyle(.black)
+                                    .padding(.top,Const.height * 0.25)
+                                    
+                                    
+                                    HStack{
+                                        Buttons.SlidableButton(action: {
+                                            navigate = true
+                                            navigationPage = AnyView(EditProfileView(user: user))
+                                        },position:profileVM.editButtonPosition , dragDirection: .left, text: activateBackButton ? "Mesaj" : "Edit", color: .white, textColor: .black)
+                                    }
+                                    .padding(.top,Const.height * 0.05)
+                                    .offset(x : 500 * proggress)
+                                    SlidableImagesView(item:profileVM.images, index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
+                                    
+                                }
+                                .frame(width: Const.width,height: headerHeight * 0.5)
+                                
+                                // userName
+                                HStack {
+                                    Text(user.username)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .scaleEffect(1-(proggress * 0.1))
+                                        .padding(.horizontal)
+                                        .fontWeight(.bold)
+                                    
+                                    
+                                }
+                                .offset(y:((Const.height * 0.18) * proggress) - Const.height * 0.19)
+                                .foregroundStyle(.white)
+                                
+                                
+                                
+                            }
+                            .padding(.top,safeArea.top)
+                            
+                        }
+                        .frame(width: Const.width, height:(headerHeight + offsetY) < minimumHeaderHeight ? minimumHeaderHeight : (headerHeight + offsetY),alignment:.bottom)
+                        .offset(y:-offsetY)
+                    }.frame(height: headerHeight)
                         .zIndex(1)
                     Rectangle()
                         .fill(Const.thirColor)
@@ -68,8 +181,7 @@ struct ProfileGeometry: View {
                                 .padding(.horizontal,5)
                                 .padding(.top,5)
                             ,alignment: .topLeading
-                            )
-                        
+                        )
                     ForEach(Post.MockData){post in
                         FeedViewCell(post: post, user: User.MockData[0])
                         
@@ -97,129 +209,14 @@ struct ProfileGeometry: View {
                     }
                     
                 )
+                
+            }
+            .navigationDestination(isPresented: $navigate) {
+                navigationPage
             }
             
+            
         }
-    }
-    @ViewBuilder
-    func HeaderView()->some View{
-        @Environment(\.dismiss) var dissmis
-        let headerHeight = (size.height * 0.4) + safeArea.top
-        let minimumHeaderHeight = 100 + safeArea.top
-        let proggress = max( min(-offsetY  / (headerHeight - minimumHeaderHeight), 1), 0)
-        GeometryReader{_ in
-            ZStack{
-                Rectangle()
-                    .fill(Const.thirColor.gradient)
-                
-                
-                VStack(spacing: 15){
-                    GeometryReader{
-                        let rect = $0.frame(in: .global)
-                        let halfScaledHeight = (rect.height * 0.3) * 0.5
-                        let midY = rect.midY
-                        let bottomPadding : CGFloat = 15
-                        let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
-                        //Buttons
-                        HStack{
-                            if activateBackButton {
-                                Buttons.backButton( action: {
-                                    action()
-                                }, color: .white)
-                                .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
-                                .padding()
-                            }
-                         
-                            
-                            Spacer()
-                            Button(action: {
-                                
-                            }, label: {
-                                Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
-                            })
-                            .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
-                            
-                            .padding()
-                        }
-                        
-                        // rating and post count
-                        HStack{
-                            VStack(alignment:.center) {
-                                Image.iconManager(.star, size: 30, weight: .bold, color: .yellow)
-                                Text("90")
-                            }
-                            .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
-                            .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.8)))
-                            
-                            Spacer()
-                            .padding(.horizontal)
-                            VStack {
-                                Text("Post")
-                                Text("15")
-                            }
-                            .opacity(proggress == 0 ? 1:0)
-
-                        }.foregroundStyle(.white)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        .font(.title3)
-                        .foregroundStyle(.white)
-                        .fontWeight(.semibold)
-                        .padding(.top,Const.height * 0.1)
-                        .padding()
-                        
-                        // user name and surname / depertment
-                        HStack{
-                            Spacer()
-                            VStack (alignment:.center){
-                                Text("\(user.name) \(user.surName)")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(.white)
-                                Text(user.department)
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(.black)
-                            }
-                            Spacer()
-                        }
-                        .opacity(proggress == 0 ? 1:0)
-                        .foregroundStyle(.black)
-                        .padding(.top,Const.height * 0.25)
-                        
-                        HStack{
-                            Buttons.SlidableButton(destination: AnyView(EditProfileView(user: user)), position:profileVM.editButtonPosition , dragDirection: .left, text: "Edit", color: .white, textColor: .black)
-                        }
-                        .padding(.top,Const.height * 0.05)
-                        .offset(x : 500 * proggress)
-                        SlidableImagesView(item:profileVM.images, index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
-
-                    }
-                    .frame(width: Const.width,height: headerHeight * 0.5)
-                    
-                    // userName
-                    HStack {
-                        Text(user.username)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .scaleEffect(1-(proggress * 0.1))
-                            .padding(.horizontal)
-                            .fontWeight(.bold)
-
-                        
-                        }
-                            .offset(y:((Const.height * 0.18) * proggress) - Const.height * 0.19)
-                        .foregroundStyle(.white)
-                    
-                    
-                    
-                }
-                .padding(.top,safeArea.top)
-                
-            }
-            .frame(width: Const.width, height:(headerHeight + offsetY) < minimumHeaderHeight ? minimumHeaderHeight : (headerHeight + offsetY),alignment:.bottom)
-            .offset(y:-offsetY)
-        }.frame(height: headerHeight)
     }
 }
 
