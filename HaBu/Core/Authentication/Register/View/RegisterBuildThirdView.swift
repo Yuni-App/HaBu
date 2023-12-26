@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RegisterBuildThirdView: View {
-    @State private var isChecked: Bool = false
+  
+    @State private var isActiveDestination: Bool = false
+
     @Environment(\.dismiss) var dissmis
     
     @StateObject var registerVM : RegisterViewModel
@@ -30,16 +32,21 @@ struct RegisterBuildThirdView: View {
                         TextFields.CustomTextField(text: $registerVM.textFaculty, icon: .blocked, placeHolder: "Fakülte")
                         TextFields.CustomTextField(text: $registerVM.textDepartment ,icon: .blocked, placeHolder: "Bölüm")
                         TextFields.CustomTextField(text: $registerVM.textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
-                        Buttons.customButton1(title:"Tamamla", backgroundColor: Const.primaryColor, action: {
-                        }, size: .small, textColor: .white, destination: {TabbarView()})
+                        Buttons.GecilecekOlancustomButton(title: "Tamamla", buttonColor: Const.secondaryColor , textColor: .black ) {
+                            registerVM.activeDestinaiton = AnyView(TabbarView())
+                            isActiveDestination = registerVM.signUp()
+                            
+                        }
+
                     }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                     HStack{
-                        CheckBoxView(checked: isChecked){
+                        CheckBoxView(checked: registerVM.isChecked){
+                            registerVM.isChecked.toggle()
                         }
                         Text("Lütfen").foregroundStyle(.black).font(.system(size: 14))
                         Button(action: {
-                            registerVM.signUp()
+                           
                             //open  bottomsheet
                         }, label: {
                             Text("Gizlilik Politikası").foregroundStyle(.blue).fontWeight(.bold)
@@ -47,7 +54,13 @@ struct RegisterBuildThirdView: View {
                         Text("Onaylayınız").foregroundStyle(.black).font(.system(size: 14))
                     }}.frame(width: Const.width , height: Const.height+100)
             }.background(Const.authBackGroundColor)
+            .popup(isPresented: $registerVM.error, view: {
+                Text(registerVM.errorMessage)
+            })
             .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isActiveDestination, destination: {
+                registerVM.activeDestinaiton
+            })
 
         }
     }

@@ -50,9 +50,11 @@ class PopUps{
                 Spacer()
                 Text(contents).foregroundStyle(Color.secondary).font(.body)
                 Spacer()
+
                 Buttons.GecilecekOlancustomButton(title: "Kapat", buttonColor: .blue, size: .xlage) {
                     isPopUpPresented.wrappedValue = false
                 }
+
             }.frame(width: size.width, height: size.height)
         }
     }
@@ -87,9 +89,11 @@ class PopUps{
                 Spacer()
                 Text(contents).fontWeight(.semibold).padding(7)
                 Spacer()
+
                 Buttons.GecilecekOlancustomButton(title: "Tamam", buttonColor: .brown,size: .lage) {
                     okeybtn.wrappedValue = false
                 }
+
             }.frame(width: size.width, height: size.height).padding(7)
         }
     }

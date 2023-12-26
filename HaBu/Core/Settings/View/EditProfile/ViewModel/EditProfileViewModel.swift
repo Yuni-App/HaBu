@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import SwiftUI
+import PhotosUI
 
 class EditProfileViewModel : ObservableObject{
     init(user: User) {
@@ -18,6 +19,9 @@ class EditProfileViewModel : ObservableObject{
         self.textBio = user.bio ?? ""
         self.textPassword = user.password
     }
+    @Published var selectedItem : PhotosPickerItem?{
+        didSet{Task{ await loadImage(fromItem: selectedItem)}}
+    }
     @Published var user:User
     @Published  var textName : String = ""
     @Published  var textSurName : String = ""
@@ -27,11 +31,15 @@ class EditProfileViewModel : ObservableObject{
     @Published var  dragDirection: DragDirection = .none
     @Published  var imageIndices = [0, 1, 2]
     @Published  var imagePickerPresented = false
-    @Published var images = [
-        "profil1",
-        "profil2",
-        "profil3"
+    @Published var showGallery = false
+    private var uiImage :UIImage?
+    @Published var profileImage : Image?
+    @Published var images : [Image] = [
+        Image("profil1"),
+        Image("profil2"),
+        Image("profil3")
     ]
+    @Published var selectedImage = 0
     var dragGesture: some Gesture {
         DragGesture()
             .onChanged(onDragChanged)
@@ -95,5 +103,14 @@ class EditProfileViewModel : ObservableObject{
         }
         
     }
+    func loadImage(fromItem item : PhotosPickerItem?)async{
+        guard let item = item else {return}
+        guard let data = try? await item.loadTransferable(type: Data.self) else  {return}
+        guard let uiImage = UIImage(data: data) else{return}
+        self.uiImage = uiImage
+        self.images[selectedImage] = Image(uiImage: uiImage)
+        
+    }
 }
+
 
