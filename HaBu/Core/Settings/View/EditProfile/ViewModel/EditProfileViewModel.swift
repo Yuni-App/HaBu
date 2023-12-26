@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import SwiftUI
 import PhotosUI
-
+@MainActor
 class EditProfileViewModel : ObservableObject{
     init(user: User) {
         self.user = user
@@ -37,7 +37,7 @@ class EditProfileViewModel : ObservableObject{
     @Published var images : [Image] = [
         Image("profil1"),
         Image("profil2"),
-        Image("profil3")
+        Image(systemName: "plus.app.fill")
     ]
     @Published var selectedImage = 0
     var dragGesture: some Gesture {
@@ -98,8 +98,8 @@ class EditProfileViewModel : ObservableObject{
             data["password"] = textPassword
         }
         if !data.isEmpty{
+            print(AuthService().user?.email)
             try await Firestore.firestore().collection("user").document(user.id).updateData(data)
-
         }
         
     }

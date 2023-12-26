@@ -57,25 +57,20 @@ struct EditProfileView: View {
                         //profile Images
                         HStack {
                             ZStack{
-                                
                                 CircleProfileImage(index: editProfileVM.imageIndices[0], userImage:editProfileVM.images[0])
                                     .onTapGesture {
                                         editProfileVM.showGallery = true
                                         editProfileVM.selectedImage = 0
                                     }
-                                    
-                                
-                                CircleProfileImage(index: editProfileVM.imageIndices[1], userImage:editProfileVM.images[1])
+                                CircleProfileImage(index: editProfileVM.imageIndices[1], userImage: editProfileVM.images[1] )
                                     .onTapGesture {
                                         editProfileVM.showGallery = true
                                         editProfileVM.selectedImage = 1
-
                                     }
-                                CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:editProfileVM.images[2])
+                                CircleProfileImage(index: editProfileVM.imageIndices[2], userImage: editProfileVM.images[2] )
                                     .onTapGesture {
                                         editProfileVM.showGallery = true
                                         editProfileVM.selectedImage = 2
-
                                     }
                             }
                             .frame(width: Const.width)
@@ -98,10 +93,15 @@ struct EditProfileView: View {
                 //bio
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
-                Buttons.customButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
+                Buttons.customButton(title: "Kaydet", backgroundColor: Const.thirColor, action:{
                     print(editProfileVM.textName)
+                    Task{
+                       try await editProfileVM.updateUserData()
+                        return true
+                    }
                     return false
                 }, size: .lage)
+               
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
         }

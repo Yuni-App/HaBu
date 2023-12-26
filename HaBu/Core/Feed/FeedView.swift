@@ -112,6 +112,7 @@ struct FeedView: View {
 struct FeedViewTollBar:View {
     @Binding var showCategoryFilter:Bool
     @Binding var messageBox : Int
+    
     @Environment(\.colorScheme) var sheme
     var topEdge:CGFloat
     var body: some View {
@@ -127,9 +128,6 @@ struct FeedViewTollBar:View {
                 }, label: {
                     Image.iconManager(.filter, size: 20, weight: .bold, color: .black).padding(20)
                 })
-                NavigationLink(destination: SettingsView()) {
-                    Text("adsgfdfh")
-                }
                 //message icon
                 //this will active at next version
                 

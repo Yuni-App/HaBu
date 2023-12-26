@@ -114,19 +114,6 @@ struct CircleProfileImage: View {
         }
         if let index = self.index{
             let value = ImageLocationAndSize.fromRawValue(index)
-            if userImage != Image(systemName: "plus.app"){
-                userImage
-                    .resizable()
-                    .clipShape(.rect(cornerRadius: 15))
-                    .overlay(
-                         RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.white, lineWidth: 1)
-                        
-                    )
-                    .frame(width: value!.size, height: value!.size)
-                    .position(value!.Position)
-            }
-            else{
                 userImage
                     .resizable()
                     .clipShape(.rect(cornerRadius: 15))
@@ -135,7 +122,7 @@ struct CircleProfileImage: View {
                     .foregroundStyle(.white)
 
                 
-            }
+            
         }
     }
 }

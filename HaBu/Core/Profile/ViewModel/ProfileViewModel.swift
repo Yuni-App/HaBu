@@ -24,7 +24,6 @@ class ProfileViewModel:ObservableObject{
     @Published var imageCount = 0
     @Published   var images = [
         Image("profil1"),
-        Image("profil2"),
-        Image("profil3")
+        Image("profil2")
     ]
 }
