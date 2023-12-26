@@ -12,7 +12,7 @@ struct InfoView: View {
     @State var activeDestinaiton : AnyView?
     var body: some View {
         
-        NavigationStack {
+     
             ZStack {
                 VStack {
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
@@ -38,11 +38,11 @@ struct InfoView: View {
                 .navigationDestination(isPresented: $isActiveDestination, destination: {
                     activeDestinaiton
                 })
-            }
+            }    .navigationBarBackButtonHidden(true)
             .background(Const.authBackGroundColor)
-        }
+        
        
-        .navigationBarBackButtonHidden(true)
+    
         
     }
 }

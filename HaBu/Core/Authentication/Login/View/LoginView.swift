@@ -37,7 +37,7 @@ struct LoginView: View {
                                 print("Şifremi unuttum ")
                             }
                             .sheet(isPresented: $loginVM.showingForgotPassword) {
-                                ForgotPasswordMailBottomSheet(showSheet: $loginVM.showingForgotPassword )
+                                PasswordResetView()
                                     .presentationDetents([.medium,.height(CGFloat(Const.height/4 + 10))])
                             }
                             .foregroundColor(.white)
@@ -59,7 +59,7 @@ struct LoginView: View {
                     Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                     
                     NavigationLink {
-                        RegisterBuildFirstView().navigationBarBackButtonHidden(true)
+                        RegisterView()
                     } label: {
                         Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(.bold)
                         

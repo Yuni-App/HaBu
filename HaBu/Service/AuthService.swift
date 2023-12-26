@@ -18,7 +18,9 @@ protocol AuthProvider {
     func checkAuthenticationStatus(completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
+@MainActor
 class AuthService : ObservableObject{
+    static let shared = AuthService()
     @Published var user: FirebaseAuth.User?
     
     func checkUser() async {
