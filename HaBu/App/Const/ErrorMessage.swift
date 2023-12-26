@@ -10,22 +10,29 @@ import Foundation
 enum ErrorMessage: Int  {
     case emptyFields = 1
     case invalidEmail = 2
-    case wrongPassword = 17009
-    case userNotFound = 4
-    case authenticationError = 5
+    case shortPassword = 3
+    case passwordsNotMatch = 4
+    case wrongPassword = 17004
+    case confidentialityAgreement = 5
+    case registeredMail = 17007
+    
     
     var description: String {
         switch self {
         case .emptyFields:
-            return "E-posta ve şifre alanları boş bırakılamaz."
+            return "Lütfen tüm alanları doldurunuz. "
         case .invalidEmail:
-            return "Geçersiz e-posta adresi. Lütfen geçerli bir e-posta adresi girin."
+            return "Geçersiz e-posta adresi. Mail adresinizin edu.tr uzantılı mailiniz olduğundan emin olun."
+        case .shortPassword:
+             return "Şifre en az 6 karakterli olmalı "
         case .wrongPassword:
             return "Yanlış şifre. Lütfen doğru şifreyi girin."
-        case .userNotFound:
-            return "Kullanıcı bulunamadı. Lütfen kayıtlı bir e-posta adresi kullanın veya hesap oluşturun."
-        case .authenticationError:
-            return "Kimlik doğrulama hatası. Lütfen tekrar deneyin."
+        case .passwordsNotMatch:
+            return "Şifreler Eşleşmiyor"
+        case .confidentialityAgreement:
+            return "Gizlilik sözleşmesini onaylanıyız"
+        case .registeredMail:
+            return "Mail adresi zaten kayıtlı"
         }
     }
 }

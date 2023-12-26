@@ -127,7 +127,9 @@ struct FeedViewTollBar:View {
                 }, label: {
                     Image.iconManager(.filter, size: 20, weight: .bold, color: .black).padding(20)
                 })
-                
+                NavigationLink(destination: SettingsView()) {
+                    Text("adsgfdfh")
+                }
                 //message icon
                 //this will active at next version
                 

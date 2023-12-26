@@ -24,14 +24,16 @@ struct RegisterBuildSecondView: View {
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.3, imagePath: ImageManager.registerVector)
                         VStack{
-                            TextFields.CustomTextField(text: $registerVM.textName, icon: .blocked, placeHolder: "Ad")
-                            TextFields.CustomTextField(text: $registerVM.textSurname, icon: .blocked, placeHolder: "Soy Ad")
-                            TextFields.CustomTextField(text : $registerVM.textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
-                            TextFields.CustomTextField(text: $registerVM.textAge, icon: .blocked, placeHolder: "Yaş")
-                            TextFields.CustomTextField(text: $registerVM.textBio, icon: .blocked, placeHolder: "Bio")
+                            //    TextFields.CustomTextField(text: $registerVM.textName, icon: .blocked, placeHolder: "Ad")
+                            //      TextFields.CustomTextField(text: $registerVM.textSurname, icon: .blocked, placeHolder: "Soy Ad")
+                            //      TextFields.CustomTextField(text : $registerVM.textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
+                            //    TextFields.CustomTextField(text: $registerVM.textAge, icon: .blocked, placeHolder: "Yaş")
+                            //    TextFields.CustomTextField(text: $registerVM.textBio, icon: .blocked, placeHolder: "Bio")
                             Buttons.GecilecekOlancustomButton(title: "Devam Et", buttonColor: Const.secondaryColor , textColor: .black ) {
                                 registerVM.activeDestinaiton = AnyView(RegisterBuildThirdView())
-                                isActiveDestination = registerVM.checkBuildSecond()
+                                Task{
+                                    //        isActiveDestination = await registerVM.checkBuildSecond()
+                                }
                                 
                             }
                            
