@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import Kingfisher
 
 struct EditProfileView: View {
     var user: User
@@ -39,8 +40,8 @@ struct EditProfileView: View {
                             Text("Yuni").foregroundStyle(.white).font(.custom("Kodchasan-Bold", size: 35))
                                 .padding(.trailing)
                             Spacer()
-
-
+                           
+                        
                         }
                         HStack {
                             Image.imageManager(image: .star,width: 30,height:30)
@@ -68,6 +69,7 @@ struct EditProfileView: View {
                                             editProfileVM.showGallery = true
                                             editProfileVM.selectedImage = 1
                                         }
+                                    
                                     CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:images.count > 2 ?  images[2] : nil)
                                         .onTapGesture {
                                             editProfileVM.showGallery = true

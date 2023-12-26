@@ -40,7 +40,7 @@ class EditProfileViewModel : ObservableObject{
     @Published  var imagePickerPresented = false
     @Published var showGallery = false
     private var uiImage :UIImage?
-    @Published var profileImage : Image?
+    @Published var profileImage : KFImage?
     @Published var images : [KFImage]?
     @Published var selectedImage = 0
     var dragGesture: some Gesture {
