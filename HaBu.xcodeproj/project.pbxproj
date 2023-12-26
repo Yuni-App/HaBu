@@ -79,6 +79,7 @@
 		9465F96A2B34E09E00F25235 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */; };
 		9465F96F2B34E4B600F25235 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */; };
 		9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9712B34E5B800F25235 /* LikesViewModel.swift */; };
+		94686A0F2B3980950089C7CD /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94686A0E2B3980950089C7CD /* RegisterView.swift */; };
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
@@ -170,6 +171,7 @@
 		9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		9465F9712B34E5B800F25235 /* LikesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesViewModel.swift; sourceTree = "<group>"; };
+		94686A0E2B3980950089C7CD /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		9439A8842B3245C0005D0E20 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				94686A0E2B3980950089C7CD /* RegisterView.swift */,
 				949016E32B041F0A00164405 /* RegisterBuildFirstView.swift */,
 				949016E52B041F3000164405 /* RegisterBuildSecondView.swift */,
 				949016E72B041F4900164405 /* RegisterBuildThirdView.swift */,
@@ -887,6 +890,7 @@
 				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
 				883CD0732B20E04200E0B757 /* FeedBackSuccess.swift in Sources */,
 				948338622B1DC0ED006964BB /* TextFields.swift in Sources */,
+				94686A0F2B3980950089C7CD /* RegisterView.swift in Sources */,
 				947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */,
 				9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */,
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,

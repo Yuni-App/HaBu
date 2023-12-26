@@ -25,7 +25,7 @@ struct InfoView: View {
                             
                         }.padding()
                         Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
-                            activeDestinaiton = AnyView(RegisterBuildFirstView())
+                            activeDestinaiton = AnyView(RegisterView())
                             isActiveDestination = true
     
                         }

@@ -14,6 +14,7 @@ enum ErrorMessage: Int  {
     case passwordsNotMatch = 4
     case wrongPassword = 17004
     case confidentialityAgreement = 5
+    case registeredMail = 17007
     
     
     var description: String {
@@ -21,7 +22,7 @@ enum ErrorMessage: Int  {
         case .emptyFields:
             return "Lütfen tüm alanları doldurunuz. "
         case .invalidEmail:
-            return "Geçersiz e-posta adresi. Lütfen geçerli bir e-posta adresi girin."
+            return "Geçersiz e-posta adresi. Mail adresinizin edu.tr uzantılı mailiniz olduğundan emin olun."
         case .shortPassword:
              return "Şifre en az 6 karakterli olmalı "
         case .wrongPassword:
@@ -30,6 +31,8 @@ enum ErrorMessage: Int  {
             return "Şifreler Eşleşmiyor"
         case .confidentialityAgreement:
             return "Gizlilik sözleşmesini onaylanıyız"
+        case .registeredMail:
+            return "Mail adresi zaten kayıtlı"
         }
     }
 }
