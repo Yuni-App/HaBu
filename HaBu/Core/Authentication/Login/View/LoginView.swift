@@ -47,7 +47,7 @@ struct LoginView: View {
                        
                         loginVM.activeDestinaiton = AnyView(TabbarView())
                         Task{
-                            isActiveDestination =   await loginVM.signIn2()
+                            isActiveDestination =   await loginVM.signIn()
                         }
                     }
                  
@@ -75,7 +75,7 @@ struct LoginView: View {
                 })
                
                 .popup(isPresented: $loginVM.error) {
-                    Text(loginVM.errorMessage)
+                    PopUps.PopUp2(title: "Hata", contents: loginVM.errorMessage, size: .xxsmall, isPopUpPresented: $loginVM.error)
                 }
         }.background(Const.authBackGroundColor)
         .navigationBarBackButtonHidden(true)

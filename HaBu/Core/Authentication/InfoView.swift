@@ -15,7 +15,6 @@ struct InfoView: View {
         NavigationStack {
             ZStack {
                 VStack {
-
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
                     
                     VStack{
@@ -26,7 +25,7 @@ struct InfoView: View {
                             
                         }.padding()
                         Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
-                            activeDestinaiton = AnyView(RegisterBuildFirstView())
+                            activeDestinaiton = AnyView(RegisterView())
                             isActiveDestination = true
     
                         }
@@ -48,5 +47,5 @@ struct InfoView: View {
     }
 }
 #Preview {
-    ContentView()
+    InfoView()
 }

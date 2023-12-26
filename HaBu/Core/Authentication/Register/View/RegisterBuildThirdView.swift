@@ -29,12 +29,14 @@ struct RegisterBuildThirdView: View {
                     .padding(.trailing,Const.width * 0.9)
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerVector)
                     VStack{
-                        TextFields.CustomTextField(text: $registerVM.textFaculty, icon: .blocked, placeHolder: "Fakülte")
-                        TextFields.CustomTextField(text: $registerVM.textDepartment ,icon: .blocked, placeHolder: "Bölüm")
-                        TextFields.CustomTextField(text: $registerVM.textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
-                        Buttons.GecilecekOlancustomButton(title: "Tamamla", buttonColor: Const.secondaryColor , textColor: .black ) {
+                //       TextFields.CustomTextField(text: $registerVM.textFaculty, icon: .blocked, placeHolder: "Fakülte")
+                     //   TextFields.CustomTextField(text: $registerVM.textDepartment ,icon: .blocked, placeHolder: "Bölüm")
+                        //       TextFields.CustomTextField(text: $registerVM.textYear ,icon: .blocked, placeHolder: "Giriş Yılı")
+                     Buttons.GecilecekOlancustomButton(title: "Tamamla", buttonColor: Const.secondaryColor , textColor: .black ) {
                             registerVM.activeDestinaiton = AnyView(TabbarView())
-                            isActiveDestination = registerVM.signUp()
+                            Task{
+                                //    isActiveDestination = await registerVM.signUp()
+                            }
                             
                         }
 

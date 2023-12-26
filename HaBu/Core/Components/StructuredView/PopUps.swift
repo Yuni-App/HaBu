@@ -51,7 +51,9 @@ class PopUps{
                 Text(contents).foregroundStyle(Color.secondary).font(.body)
                 Spacer()
 
+
                 Buttons.GecilecekOlancustomButton(title: "Kapat", buttonColor: .blue, size: .xlage) {
+
                     isPopUpPresented.wrappedValue = false
                 }
 

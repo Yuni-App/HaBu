@@ -96,22 +96,20 @@ extension View {
             Popup(
                 isPresented: isPresented,
                 view: view
-            ).animation(.easeInOut(duration: 0.7))
+            ).animation(.easeInOut(duration: 0.07))
         )
     }
 }
 
 extension View {
-
   func toastView(toast: Binding<Toast?>) -> some View {
     self.modifier(ToastModifier(toast: toast))
   }
 }
 
-
 extension String {
     var isValidEmail: Bool {
-        let emailRegex = #"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"#
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
+        let balikesirEduTrRegex = #"^\d{12}@ogr\.balikesir\.edu\.tr$"#
+        return NSPredicate(format: "SELF MATCHES %@", balikesirEduTrRegex).evaluate(with: self)
     }
 }
