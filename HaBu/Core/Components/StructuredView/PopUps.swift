@@ -50,10 +50,11 @@ class PopUps{
                 Spacer()
                 Text(contents).foregroundStyle(Color.secondary).font(.body)
                 Spacer()
-                /*CustomButton(title: "Kapat", backgroundColor: .blue, action: {
+
+                Buttons.GecilecekOlancustomButton(title: "Kapat", buttonColor: .blue, size: .xlage) {
                     isPopUpPresented.wrappedValue = false
-                    return true// Fix the binding variable here
-                }, size: .xlage)*/
+                }
+
             }.frame(width: size.width, height: size.height)
         }
     }
@@ -88,10 +89,11 @@ class PopUps{
                 Spacer()
                 Text(contents).fontWeight(.semibold).padding(7)
                 Spacer()
-                /*CustomButton(title: "Tamam", backgroundColor: .brown, action: {
+
+                Buttons.GecilecekOlancustomButton(title: "Tamam", buttonColor: .brown,size: .lage) {
                     okeybtn.wrappedValue = false
-                    return true
-                }, size: .lage)*/
+                }
+
             }.frame(width: size.width, height: size.height).padding(7)
         }
     }
