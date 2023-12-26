@@ -129,16 +129,15 @@ class Buttons{
     
     
     struct SlidableButton: View {
-        @State private var shouldNavigate = false
-        var destinaiton : AnyView
+        var action  : () -> Void
         @State var position : CGPoint
         let dragDirection : DragDirection
         let startPosition:CGPoint
         let text : String
         let color:Color
         let textColor:Color
-        init(destination :AnyView, position: CGPoint,dragDirection:DragDirection,text: String,color:Color,textColor:Color) {
-            self.destinaiton = destination
+        init(action:@escaping()->Void,position: CGPoint,dragDirection:DragDirection,text: String,color:Color,textColor:Color) {
+            self.action = action
             self.position = position
             self.startPosition = position
             self.dragDirection = dragDirection
@@ -170,12 +169,6 @@ class Buttons{
             .padding(dragDirection.padding,110)
             .background(color)
             .foregroundStyle(textColor)
-            .background(
-                NavigationLink(
-                    destination: AnyView(destinaiton),
-                    isActive: $shouldNavigate,
-                    label: { EmptyView() })
-            )
             .clipShape(
                 .rect(
                     topLeadingRadius: dragDirection == .left ? 20 : 0,
@@ -197,7 +190,8 @@ class Buttons{
             })
                 .onEnded({ _ in
                     position = CGPoint(x:startPosition.x, y :startPosition.y)
-                    shouldNavigate = true
+                    action()
+                    
                     
                 })
             )
