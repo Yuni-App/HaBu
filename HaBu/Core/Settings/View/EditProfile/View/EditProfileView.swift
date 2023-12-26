@@ -55,29 +55,32 @@ struct EditProfileView: View {
                             .fontWeight(.semibold)
                         
                         //profile Images
-                        HStack {
-                            ZStack{
-                                CircleProfileImage(index: editProfileVM.imageIndices[0], userImage:editProfileVM.images[0])
-                                    .onTapGesture {
-                                        editProfileVM.showGallery = true
-                                        editProfileVM.selectedImage = 0
-                                    }
-                                CircleProfileImage(index: editProfileVM.imageIndices[1], userImage: editProfileVM.images[1] )
-                                    .onTapGesture {
-                                        editProfileVM.showGallery = true
-                                        editProfileVM.selectedImage = 1
-                                    }
-                                CircleProfileImage(index: editProfileVM.imageIndices[2], userImage: editProfileVM.images[2] )
-                                    .onTapGesture {
-                                        editProfileVM.showGallery = true
-                                        editProfileVM.selectedImage = 2
-                                    }
+                        if let images = editProfileVM.images{
+                            HStack {
+                                ZStack{
+                                    CircleProfileImage(index: editProfileVM.imageIndices[0], userImage:images.count > 0 ?  images[0] : nil)
+                                        .onTapGesture {
+                                            editProfileVM.showGallery = true
+                                            editProfileVM.selectedImage = 0
+                                        }
+                                    CircleProfileImage(index: editProfileVM.imageIndices[1], userImage:images.count > 1 ?  images[1] : nil)
+                                        .onTapGesture {
+                                            editProfileVM.showGallery = true
+                                            editProfileVM.selectedImage = 1
+                                        }
+                                    CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:images.count > 2 ?  images[2] : nil)
+                                        .onTapGesture {
+                                            editProfileVM.showGallery = true
+                                            editProfileVM.selectedImage = 2
+                                        }
+                                }
+                                .frame(width: Const.width)
+                                .gesture(editProfileVM.dragGesture)
+                                
                             }
-                            .frame(width: Const.width)
-                            .gesture(editProfileVM.dragGesture)
-                            
+                            .photosPicker(isPresented: $editProfileVM.showGallery, selection: $editProfileVM.selectedItem)
                         }
-                        .photosPicker(isPresented: $editProfileVM.showGallery, selection: $editProfileVM.selectedItem)
+                       
                         
                     }
                     
@@ -94,10 +97,8 @@ struct EditProfileView: View {
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 Buttons.customButton(title: "Kaydet", backgroundColor: Const.thirColor, action:{
-                    print(editProfileVM.textName)
                     Task{
                        try await editProfileVM.updateUserData()
-                        return true
                     }
                     return false
                 }, size: .lage)

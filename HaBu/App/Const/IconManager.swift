@@ -13,7 +13,7 @@ enum AppIcon: String{
     case mail = "mail"
     case key = "key"
     case envelope = "envelope"
-    case person = "person.fill"
+    case person = "person.circle.fill"
     case personBadgePlus = "person.badge.plus"
     case calendar = "calendar"
     case pencil = "pencil"
@@ -42,6 +42,7 @@ enum AppIcon: String{
     case anonim = "person.fill.questionmark.rtl"
     case star = "star.fill"
     case treeDot = "ellipsis"
+    case plus = "plus.app.fill"
     
 }
     

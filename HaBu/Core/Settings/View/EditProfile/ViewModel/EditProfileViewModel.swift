@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import SwiftUI
 import PhotosUI
+import Kingfisher
 @MainActor
 class EditProfileViewModel : ObservableObject{
     init(user: User) {
@@ -18,6 +19,12 @@ class EditProfileViewModel : ObservableObject{
         self.textEmail = user.email
         self.textBio = user.bio ?? ""
         self.textPassword = user.password
+        if let profileImageList = user.profileImageUrl{
+            let imageList = profileImageList.map {imageName in
+                KFImage(URL(string: imageName))
+            }
+            self.images = imageList
+        }
     }
     @Published var selectedItem : PhotosPickerItem?{
         didSet{Task{ await loadImage(fromItem: selectedItem)}}
@@ -34,11 +41,7 @@ class EditProfileViewModel : ObservableObject{
     @Published var showGallery = false
     private var uiImage :UIImage?
     @Published var profileImage : Image?
-    @Published var images : [Image] = [
-        Image("profil1"),
-        Image("profil2"),
-        Image(systemName: "plus.app.fill")
-    ]
+    @Published var images : [KFImage]?
     @Published var selectedImage = 0
     var dragGesture: some Gesture {
         DragGesture()
@@ -108,7 +111,6 @@ class EditProfileViewModel : ObservableObject{
         guard let data = try? await item.loadTransferable(type: Data.self) else  {return}
         guard let uiImage = UIImage(data: data) else{return}
         self.uiImage = uiImage
-        self.images[selectedImage] = Image(uiImage: uiImage)
         
     }
 }
