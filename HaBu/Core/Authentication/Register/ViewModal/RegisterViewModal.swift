@@ -73,39 +73,12 @@ class RegisterViewModel: ObservableObject {
             }
             return false
         }
-      /*
-       do {
-           let userNameCheck  = try await authService.checkUsernameAvailability(username: "OmerErbalta")
-           print(userNameCheck)
-           print(userNameCheck)
-           if userNameCheck {
-               self.completion = true
-               self.error = true
-               self.errorMessage = "kullanıcı adı zaten kullanımda"
-               return false
-           }else{
-               self.completion = true
-               return true
-           }
-       } catch {
-           if let authError = error as? NSError {
-               if let errorMessage = ErrorMessage(rawValue: authError.code) {
-                   print(errorMessage.description)
-                   self.errorMessage = errorMessage.description
-                   self.error = true
-                   self.completion = true
-                   return false
-               }
-           }
-           self.errorMessage = "Beklenemdik bir hata oluştu"
-           return false
-       }
-       */
-        
         do {
             try await authService.createUser(email: textEmail, password: textPassword, username: textUserName)
             self.completion = true
-            return true
+            self.errorMessage = "Hesabınız oluşturuşdu mailinizi onaylayarak giriş yapabilirsiniz.."
+            self.error = true
+            return false
         } catch {
             if let authError = error as? NSError {
                 if let errorMessage = ErrorMessage(rawValue: authError.code) {

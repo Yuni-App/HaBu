@@ -14,7 +14,10 @@ class LoginViewModel: ObservableObject {
     @Published var textEmail = ""
     @Published var textPassword = ""
     @Published var showingForgotPassword = false
-    
+    @Published var textForgotEmail : String = ""
+
+    @Published var showAlert = false
+    @Published var alertMessage = ""
     @Published var errorMessage = ""
     @Published var completion = false
     @Published var error = false
@@ -74,9 +77,40 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func forgotPassoword(){
-        //  authService.forgotPassoword()
+    func resetPassword() async {
+        guard !textForgotEmail.isEmpty else {
+            if let errorMessage = ErrorMessage(rawValue: 1) {
+                print(errorMessage.description)
+                self.alertMessage = errorMessage.description
+                self.showAlert = true
+            }
+            return
+        }
+        
+        guard textForgotEmail.isValidEmail else {
+            if let errorMessage = ErrorMessage(rawValue: 2) {
+                print(errorMessage.description)
+                self.alertMessage = errorMessage.description
+                self.showAlert = true
+            }
+            return
+        }
+        
+        do {
+            try await authService.forgotPassword(email: textForgotEmail) // 'textForgotEmail' değişkenini kullandığınızdan emin olun
+            self.alertMessage = "Şifre sıfırlama bağlantısı e-posta adresinize gönderildi."
+            self.showAlert = true
+        } catch {
+            if let authError = error as? NSError {
+                self.alertMessage = errorMessage.description
+                self.showAlert = true
+            } else {
+                self.alertMessage = errorMessage.description
+                self.showAlert = true
+            }
+        }
     }
+
 }
 
 

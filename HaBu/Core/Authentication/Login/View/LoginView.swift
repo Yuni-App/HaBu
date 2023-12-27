@@ -37,7 +37,7 @@ struct LoginView: View {
                                 print("Şifremi unuttum ")
                             }
                             .sheet(isPresented: $loginVM.showingForgotPassword) {
-                                PasswordResetView()
+                                ForgotPasswordMailBottomSheet()
                                     .presentationDetents([.medium,.height(CGFloat(Const.height/4 + 10))])
                             }
                             .foregroundColor(.white)
