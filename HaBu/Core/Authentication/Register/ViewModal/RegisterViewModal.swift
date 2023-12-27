@@ -8,119 +8,98 @@
 import Foundation
 import SwiftUI
 
+
 class RegisterViewModel: ObservableObject {
     @Published var textEmail = ""
     @Published var textPassword = ""
     @Published var textAgainPassword = ""
     @Published var textUserName = ""
     @Published var isChecked : Bool = false
-    
-    @Published var errorMessage = ""
-    @Published var completion = false
-    @Published var error = false
-    
-    @Published var activeDestinaiton : AnyView?
+
+    @Published var showAlert = false
+    @Published var alertTitle = ""
+    @Published var alertMessage = ""
     
     private var authService: AuthService
     init(authService: AuthService) {
         self.authService = authService
     }
     
-    func register ()async->Bool{
+    //TODO: REGISTER METHOD
+    func register()async->Bool{
         guard !textEmail.isEmpty, !textPassword.isEmpty , !textAgainPassword.isEmpty , !textUserName.isEmpty else {
             if let errorMessage = ErrorMessage(rawValue: 1) {
-                self.errorMessage = errorMessage.description
-                self.error = true
-                self.completion = true
+                self.showAlert = true
+                self.alertTitle = "Hata!!"
+                self.alertMessage = errorMessage.description
+                print(errorMessage.description)
             }
             return false
         }
         guard textEmail.isValidEmail else {
             if let errorMessage = ErrorMessage(rawValue: 2) {
                 print(errorMessage.description)
-                self.errorMessage = errorMessage.description
-                self.error = true
-                self.completion = true
+                self.showAlert = true
+                self.alertTitle = "Hata!!"
+                self.alertMessage = errorMessage.description
             }
             return false
         }
         guard textPassword.count >= 6 else {
             if let errorMessage = ErrorMessage(rawValue: 3) {
+                self.showAlert = true
+                self.alertTitle = "Hata!!"
+                self.alertMessage = errorMessage.description
                 print(errorMessage.description)
-                self.errorMessage = errorMessage.description
-                self.error = true
-                self.completion = true
             }
             
             return false
         }
         guard textPassword == textAgainPassword else {
             if let errorMessage = ErrorMessage(rawValue: 4) {
+                self.showAlert = true
+                self.alertTitle = "Hata!!"
+                self.alertMessage = errorMessage.description
                 print(errorMessage.description)
-                self.errorMessage = errorMessage.description
-                self.error = true
-                self.completion = true
             }
             return false
         }
-        
         guard isChecked == true else {
             if let errorMessage = ErrorMessage(rawValue: 5) {
+                self.showAlert = true
+                self.alertTitle = "Hata!!"
+                self.alertMessage = errorMessage.description
                 print(errorMessage.description)
-                self.errorMessage = errorMessage.description
-                self.error = true
-                self.completion = true
             }
             return false
         }
-      /*
-       do {
-           let userNameCheck  = try await authService.checkUsernameAvailability(username: "OmerErbalta")
-           print(userNameCheck)
-           print(userNameCheck)
-           if userNameCheck {
-               self.completion = true
-               self.error = true
-               self.errorMessage = "kullanıcı adı zaten kullanımda"
-               return false
-           }else{
-               self.completion = true
-               return true
-           }
-       } catch {
-           if let authError = error as? NSError {
-               if let errorMessage = ErrorMessage(rawValue: authError.code) {
-                   print(errorMessage.description)
-                   self.errorMessage = errorMessage.description
-                   self.error = true
-                   self.completion = true
-                   return false
-               }
-           }
-           self.errorMessage = "Beklenemdik bir hata oluştu"
-           return false
-       }
-       */
-        
         do {
             try await authService.createUser(email: textEmail, password: textPassword, username: textUserName)
-            self.completion = true
+            self.showAlert = true
+            self.alertTitle = "Başarılı."
+            self.alertMessage = "Hesabınız oluşturuşdu mailinizi onaylayarak giriş yapabilirsiniz.."
+            print("Kayıt başarılı mail adresi onaylanmalı")
             return true
-        } catch {
-            if let authError = error as? NSError {
-                if let errorMessage = ErrorMessage(rawValue: authError.code) {
+        } catch let error as NSError {
+                if let errorMessage = ErrorMessage(rawValue: error.code) {
+                    self.showAlert = true
+                    self.alertTitle = "Hata!!"
+                    self.alertMessage = errorMessage.description
                     print(errorMessage.description)
-                    self.errorMessage = errorMessage.description
-                    self.error = true
-                    self.completion = true
                     return false
                 }
-            }
-            self.errorMessage = "Beklenemdik bir hata oluştu"
+            self.showAlert = true
+            self.alertTitle = "Hata!!"
+            self.alertMessage = "Beklenmedik bir hata oluştu"
+            print("Beklenmedik bir hata oluştu")
             return false
+          
         }
     }
 }
+
+
+
 
 
 

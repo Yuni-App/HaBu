@@ -10,9 +10,7 @@ import SwiftUI
 struct LoginView: View {
     
     @Environment(\.dismiss) var dissmis
-    @State private var isActiveDestination: Bool = false
     @StateObject var loginVM : LoginViewModel
-    
     init(){
         self._loginVM = StateObject(wrappedValue: LoginViewModel(authService: AuthService()))
     }
@@ -21,7 +19,6 @@ struct LoginView: View {
             VStack{
                 Buttons.backButton{
                     dissmis()
-                    
                 }
                 .padding(.trailing,Const.width * 0.9)
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
@@ -37,49 +34,39 @@ struct LoginView: View {
                                 print("Şifremi unuttum ")
                             }
                             .sheet(isPresented: $loginVM.showingForgotPassword) {
-                                ForgotPasswordMailBottomSheet(showSheet: $loginVM.showingForgotPassword )
+                                ForgotPasswordMailBottomSheet()
                                     .presentationDetents([.medium,.height(CGFloat(Const.height/4 + 10))])
                             }
                             .foregroundColor(.white)
                             .font(.system(size: 12))
                     }
                     Buttons.GecilecekOlancustomButton(title: "Giriş Yap", buttonColor: Const.secondaryColor , textColor: .black ) {
-                       
-                        loginVM.activeDestinaiton = AnyView(TabbarView())
                         Task{
-                            isActiveDestination =   await loginVM.signIn()
+                            loginVM.isActiveDestination =   await loginVM.signIn()
                         }
                     }
-                 
-                  }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
+                }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
                     .modifier(RectangleBlurModifier(color: Const.primaryColor))
-                
-                
                 HStack{
                     Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
                     
                     NavigationLink {
-                        RegisterBuildFirstView().navigationBarBackButtonHidden(true)
+                        RegisterView()
                     } label: {
                         Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(.bold)
                         
                     }
-                    
                 }
-                //TODO : update 100
             } .frame(width: Const.width , height: Const.height+100)
                 .padding()
-
-                .navigationDestination(isPresented: $isActiveDestination, destination: {
-                    loginVM.activeDestinaiton
+                .navigationDestination(isPresented: $loginVM.isActiveDestination, destination: {
+                    TabbarView()
                 })
-               
-                .popup(isPresented: $loginVM.error) {
-                    PopUps.PopUp2(title: "Hata", contents: loginVM.errorMessage, size: .xxsmall, isPopUpPresented: $loginVM.error)
-                }
-        }.background(Const.authBackGroundColor)
-        .navigationBarBackButtonHidden(true)
-        
+                .alert(isPresented: $loginVM.showAlert) {
+                    Alert(title: Text(loginVM.alertTitle), message: Text( loginVM.alertMessage), dismissButton: .default(Text("Tamam")))
+                }.background(Const.authBackGroundColor)
+                .navigationBarBackButtonHidden(true)
+        }
     }
 }
 #Preview {

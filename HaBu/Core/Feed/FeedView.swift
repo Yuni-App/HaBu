@@ -127,37 +127,37 @@ struct FeedViewTollBar:View {
                 }, label: {
                     Image.iconManager(.filter, size: 20, weight: .bold, color: .black).padding(20)
                 })
-                NavigationLink(destination: SettingsView()) {
-                    Text("adsgfdfh")
-                }
+            
                 //message icon
                 //this will active at next version
-                
-                Button(action: {
-                    // -> MessageBox View
-                    
-                }, label: {
-                    Image.iconManager(.tray, size: 25, weight: .bold, color: .black)
-                        .padding(.top,10)
-                        .overlay(
-                            Text("\(messageBox < 100 ? messageBox: 99)+")
-                                .font(.caption2)
-                                .fontWeight(.bold)
-                                .foregroundStyle(sheme == .dark ? .black : .white)
-                                .padding(.vertical,2)
-                                .padding(.horizontal,3)
-                                .background(.red, in: Capsule())
-                                .background(
-                                    Capsule().stroke(sheme == .dark ? .black:.white,lineWidth:2)
-                                )
-                            
-                            ,alignment: .topTrailing
-                        )
-                        .padding(20)
-                    
-                }
-                       
-                )
+              /*
+               
+               Button(action: {
+                   // -> MessageBox View
+                   
+               }, label: {
+                   Image.iconManager(.tray, size: 25, weight: .bold, color: .black)
+                       .padding(.top,10)
+                       .overlay(
+                           Text("\(messageBox < 100 ? messageBox: 99)+")
+                               .font(.caption2)
+                               .fontWeight(.bold)
+                               .foregroundStyle(sheme == .dark ? .black : .white)
+                               .padding(.vertical,2)
+                               .padding(.horizontal,3)
+                               .background(.red, in: Capsule())
+                               .background(
+                                   Capsule().stroke(sheme == .dark ? .black:.white,lineWidth:2)
+                               )
+                           
+                           ,alignment: .topTrailing
+                       )
+                       .padding(20)
+                   
+               }
+                      
+               )
+               */
                 
                 
                 

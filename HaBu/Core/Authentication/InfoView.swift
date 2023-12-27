@@ -11,8 +11,6 @@ struct InfoView: View {
     @State private var isActiveDestination: Bool = false
     @State var activeDestinaiton : AnyView?
     var body: some View {
-        
-        NavigationStack {
             ZStack {
                 VStack {
                     CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
@@ -22,14 +20,11 @@ struct InfoView: View {
                         Buttons.GecilecekOlancustomButton(title: "Giriş Yap", buttonColor: Const.primaryColor , textColor: .white) {
                             activeDestinaiton = AnyView(LoginView())
                             isActiveDestination = true
-                            
                         }.padding()
                         Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
                             activeDestinaiton = AnyView(RegisterView())
                             isActiveDestination = true
-    
                         }
-
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 }
@@ -38,11 +33,11 @@ struct InfoView: View {
                 .navigationDestination(isPresented: $isActiveDestination, destination: {
                     activeDestinaiton
                 })
-            }
+            }.navigationBarBackButtonHidden(true)
             .background(Const.authBackGroundColor)
-        }
+        
        
-        .navigationBarBackButtonHidden(true)
+    
         
     }
 }
