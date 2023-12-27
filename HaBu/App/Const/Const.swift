@@ -49,8 +49,5 @@ class Const{
     ]
     static let agreement: String = "**Gizlilik Sözleşmesi**Bu gizlilik sözleşmesi, [Şirket Adı] tarafından sunulan hizmetlerin kullanımı sırasında toplanan bilgilerin nasıl işlendiğini ve korunduğunu açıklar. **Toplanan Bilgiler**- Kişisel Bilgiler: Ad, soyadı, e-posta adresi gibi kullanıcıya ait kişisel bilgiler.- Kullanım Bilgileri: Web sitesi veya uygulamayı nasıl kullandığınıza dair bilgiler.**Bilgi Kullanımı**Toplanan bilgiler, aşağıdaki amaçlar için kullanılabilir:- Hizmet sağlamak ve yönetmek.- Kullanıcı deneyimini kişiselleştirmek.- Güvenlik amacıyla bilgileri izlemek.- İstatistiksel analizler yapmak.**Bilgi Paylaşımı**Şirketiniz, kullanıcı bilgilerini üçüncü taraflarla paylaşmayacak veya satmayacaktır. Ancak, yasal zorunluluk durumlarında gerekli bilgiler yetkililere sağlanabilir.**Güvenlik**Şirketiniz, toplanan bilgileri güvenli bir şekilde saklamak için çeşitli güvenlik önlemleri alır. Ancak, internet üzerinden iletişim kesin güvenli değildir.**Çocukların Gizliliği**Bu hizmet, 13 yaşın altındaki çocuklardan bilgi toplamaz bilir veya izin vermez. Eğer 13 yaşın altındaki bir çocuksanız, bu hizmeti kullanmamalısınız. **Değişiklikler**Bu gizlilik politikası zaman zaman güncellenebilir. Güncellemeler hakkında bilgilendirilmek için bu sayfayı düzenli olarak kontroetmelisiniz.Bu gizlilik sözleşmesini kabul etmek, [Şirket Adı] tarafından belirtilen koşulları anladığınız ve kabul ettiğiniz anlamına gelir."
     static let feedBackText: String = "Merhaba HaBu Kullanıcısı,\nDeğerli düşünceleriniz ve önerileriniz, uygulamamızı daha da geliştirmemize katkı sağlıyor. Sizin gibi değerli kullanıcılarımızın memnuniyeti, en önemli önceliğimizdir. HaBu'yu tercih ettiğiniz için teşekkür ederiz. İyi günler dileriz!\nSaygılarımla, HaBu Ekibi"
-    
-    
-    static let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu"])
-}
+     }
 

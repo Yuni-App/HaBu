@@ -67,7 +67,7 @@
 		943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */; };
 		9446D3C82B38BA0F0054CFB5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446D3C72B38BA0F0054CFB5 /* LogOutView.swift */; };
 		9446D3CB2B38BA390054CFB5 /* LogOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446D3CA2B38BA390054CFB5 /* LogOutViewModel.swift */; };
-		9446D3D32B38C94E0054CFB5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446D3D22B38C94E0054CFB5 /* LoadingView.swift */; };
+		9446D3D32B38C94E0054CFB5 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9446D3D22B38C94E0054CFB5 /* SplashView.swift */; };
 		944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C97A32B1B4240005F8E96 /* AddPostView.swift */; };
 		944CD1592B2BB1530074D99D /* SavedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944CD1582B2BB1530074D99D /* SavedPostView.swift */; };
 		9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */; };
@@ -154,7 +154,7 @@
 		943FB8E32B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCreatePasswordBottomSheet.swift; sourceTree = "<group>"; };
 		9446D3C72B38BA0F0054CFB5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
 		9446D3CA2B38BA390054CFB5 /* LogOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewModel.swift; sourceTree = "<group>"; };
-		9446D3D22B38C94E0054CFB5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		9446D3D22B38C94E0054CFB5 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		944C97A32B1B4240005F8E96 /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
 		944CD1582B2BB1530074D99D /* SavedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostView.swift; sourceTree = "<group>"; };
 		9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountPasswordView.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		5C2658582B03C451008BEB6D /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				9446D3CF2B38C9240054CFB5 /* Loading */,
+				9446D3CF2B38C9240054CFB5 /* Splash */,
 				9470799E2B1B8C680005C4CB /* Settings */,
 				94808CCF2B0CE5CA00CC51FD /* AddPost */,
 				943B9CDF2B068EC700067376 /* Likes */,
@@ -571,18 +571,18 @@
 		9446D3C62B38B9F10054CFB5 /* LogOut */ = {
 			isa = PBXGroup;
 			children = (
-				9446D3C72B38BA0F0054CFB5 /* LogOutView.swift */,
-				9446D3CA2B38BA390054CFB5 /* LogOutViewModel.swift */,
+				94C016C62B3CA266000A0FAE /* ViewModel */,
+				94C016C52B3CA25E000A0FAE /* View */,
 			);
 			path = LogOut;
 			sourceTree = "<group>";
 		};
-		9446D3CF2B38C9240054CFB5 /* Loading */ = {
+		9446D3CF2B38C9240054CFB5 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
-				9446D3D22B38C94E0054CFB5 /* LoadingView.swift */,
+				9446D3D22B38C94E0054CFB5 /* SplashView.swift */,
 			);
-			path = Loading;
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		944CD1572B2BB1310074D99D /* SavedPost */ = {
@@ -647,27 +647,19 @@
 		9470799E2B1B8C680005C4CB /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				9470799F2B1B8C750005C4CB /* View */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		9470799F2B1B8C750005C4CB /* View */ = {
-			isa = PBXGroup;
-			children = (
+				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
+				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
+				947079A22B1BCE230005C4CB /* Agreement */,
+				947079A82B1BD4060005C4CB /* ChangePassword */,
+				947079A92B1BD4360005C4CB /* DeleteAccount */,
+				9483385D2B1DB109006964BB /* BlockedUsers */,
+				9483385E2B1DB159006964BB /* Rank */,
+				883CD06F2B20E01500E0B757 /* FeedBack */,
 				9446D3C62B38B9F10054CFB5 /* LogOut */,
 				944CD1572B2BB1310074D99D /* SavedPost */,
 				949505CF2B27E7B000C37CC7 /* EditProfile */,
-				883CD06F2B20E01500E0B757 /* FeedBack */,
-				9483385E2B1DB159006964BB /* Rank */,
-				9483385D2B1DB109006964BB /* BlockedUsers */,
-				947079A92B1BD4360005C4CB /* DeleteAccount */,
-				947079A82B1BD4060005C4CB /* ChangePassword */,
-				947079A22B1BCE230005C4CB /* Agreement */,
-				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
-				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 			);
-			path = View;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		947079A22B1BCE230005C4CB /* Agreement */ = {
@@ -758,6 +750,22 @@
 				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		94C016C52B3CA25E000A0FAE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9446D3C72B38BA0F0054CFB5 /* LogOutView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94C016C62B3CA266000A0FAE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9446D3CA2B38BA390054CFB5 /* LogOutViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		94CCABE52B03C7AD00DCFB51 /* Components */ = {
@@ -917,7 +925,7 @@
 				9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */,
 				883CD0712B20E03200E0B757 /* FeedBackInput.swift in Sources */,
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
-				9446D3D32B38C94E0054CFB5 /* LoadingView.swift in Sources */,
+				9446D3D32B38C94E0054CFB5 /* SplashView.swift in Sources */,
 				5CF151962B1EC2000015BE31 /* NavigationStateManager.swift in Sources */,
 				9446D3CB2B38BA390054CFB5 /* LogOutViewModel.swift in Sources */,
 				88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */,
