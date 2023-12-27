@@ -8,17 +8,9 @@
 import SwiftUI
 
 struct FeedBackSuccess: View {
-    @State private var isPopupVisible = false
+    @State private var isActiveDestination: Bool = false
     var body: some View {
-        NavigationView{
-            ZStack {
                 ScrollView{
-                    HStack {
-                        Buttons.backButton(action: {
-                            //
-                        }).padding()
-                        Spacer()
-                    }
                     VStack {
                         Spacer()
                         Rectangle()
@@ -29,7 +21,6 @@ struct FeedBackSuccess: View {
                             .overlay {
                                 Image("dua").resizable()
                             }
-                        
                         Text("DEĞERLİ GERİ BİLDİRİMİZ İÇİN TEŞEKKÜR EDERİZ ..")
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
@@ -45,26 +36,17 @@ struct FeedBackSuccess: View {
                             .foregroundColor(Color.black.opacity(0.7))
                             .frame(width: Const.width * 0.7, alignment: .center)
                             .padding()
-                        NavigationLink(destination: TabbarView().navigationBarBackButtonHidden(true),label: {
-                            Text("Ana Sayfaya Dön").fontWeight(.semibold)
-                                .frame(width: Const.width * 0.5, height: Const.height * 0.05, alignment: .center)
-                                .foregroundColor(.white)
-                                .background(Const.primaryButtonColor)
-                                .cornerRadius(8)
-                            
-                        }
-                        ).padding()
-                    }
-                 Button("Show Popup") {
-                    isPopupVisible.toggle()
-                 }
-                }
-           }
-     .popup(isPresented: $isPopupVisible) {
-         PopUps.Xbutton(size: .xxsmall, contents: "Talebiniz başarı ile alınmıştır.", isPopUpPresented: $isPopupVisible)
+                        Buttons.customButton(title: "Ana Sayfaya Dön", buttonColor: Const.primaryButtonColor) {
+                            isActiveDestination = true
+                        }.padding(.top , 80)
+                      
+                    }.navigationDestination(isPresented: $isActiveDestination, destination: {
+                        TabbarView()
+                    })
+                    .navigationBarBackButtonHidden()
            }
         }
-    }
+    
 }
 
 

@@ -40,7 +40,7 @@ struct LoginView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 12))
                     }
-                    Buttons.GecilecekOlancustomButton(title: "Giriş Yap", buttonColor: Const.secondaryColor , textColor: .black ) {
+                    Buttons.customButton(title: "Giriş Yap", buttonColor: Const.secondaryColor , textColor: .black ) {
                         Task{
                             loginVM.isActiveDestination =   await loginVM.signIn()
                         }

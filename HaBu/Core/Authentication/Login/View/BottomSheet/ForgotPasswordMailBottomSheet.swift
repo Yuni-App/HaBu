@@ -18,7 +18,7 @@ struct ForgotPasswordMailBottomSheet: View {
             VStack{
                 Text("Lütfen mail adresinizi giriniz.").foregroundStyle(.black).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/).font(.system(size: 20))
                 TextFields.CustomTextField(text: $loginVM.textForgotEmail, icon: .mail, placeHolder: "email")
-                Buttons.GecilecekOlancustomButton(title: "Onayla", buttonColor: Const.primaryButtonColor,size: .xsmall) {
+                Buttons.customButton(title: "Onayla", buttonColor: Const.primaryButtonColor,size: .xsmall) {
                     Task {
                        await loginVM.resetPassword()
                     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoadingView: View {
+struct SplashView: View {
     var body: some View {
         Text("Yuni...").foregroundStyle(Const.primaryColor).font(.custom("Kodchasan-Bold", size: 40))
             .padding(10)
@@ -15,5 +15,5 @@ struct LoadingView: View {
 }
 
 #Preview {
-    LoadingView()
+    SplashView()
 }

@@ -86,21 +86,6 @@ extension [LayoutSubviews.Element]{
     }
 }
 
-
-extension View {
-    func popup<PopupContent: View>(
-        isPresented: Binding<Bool>,
-        view: @escaping () -> PopupContent
-    ) -> some View {
-        self.modifier(
-            Popup(
-                isPresented: isPresented,
-                view: view
-            ).animation(.easeInOut(duration: 0.07))
-        )
-    }
-}
-
 extension View {
   func toastView(toast: Binding<Toast?>) -> some View {
     self.modifier(ToastModifier(toast: toast))

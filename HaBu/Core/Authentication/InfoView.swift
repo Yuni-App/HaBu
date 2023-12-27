@@ -17,11 +17,11 @@ struct InfoView: View {
                     
                     VStack{
                         CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
-                        Buttons.GecilecekOlancustomButton(title: "Giriş Yap", buttonColor: Const.primaryColor , textColor: .white) {
+                        Buttons.customButton(title: "Giriş Yap", buttonColor: Const.primaryColor , textColor: .white) {
                             activeDestinaiton = AnyView(LoginView())
                             isActiveDestination = true
                         }.padding()
-                        Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
+                        Buttons.customButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
                             activeDestinaiton = AnyView(RegisterView())
                             isActiveDestination = true
                         }
