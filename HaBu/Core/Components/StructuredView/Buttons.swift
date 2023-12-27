@@ -9,14 +9,13 @@ import Foundation
 import SwiftUI
 
 class Buttons{
-    struct GecilecekOlancustomButton: View {
+    struct customButton: View {
         var title: String
         var buttonColor: Color
         var size : CustomButtonSize?
         var textColor : Color?
         var icon : AppIcon?
         var action: () -> Void
-        
         var body: some View {
             Button(action: {
                 action()
@@ -32,64 +31,6 @@ class Buttons{
 
         }
     }
-    
-    //custombutton
-    struct customButton: View {
-        var title: String
-        var backgroundColor: Color
-        var action: () -> Bool
-        var destination : AnyView?
-        var size : CustomButtonSize
-        var textColor : Color?
-        @State private var isActiveDestination: Bool = false
-        
-        var body: some View {
-            
-            NavigationLink(
-                destination: destination ?? AnyView(EmptyView()),
-                isActive: $isActiveDestination,
-                label: {})
-            
-            Button(action: {
-                if action(){
-                    isActiveDestination = true
-                }
-            }, label: {
-                Text(title)
-                    .padding()
-                    .frame(width: size.width , height: size.height)
-                    .background(backgroundColor)
-                    .foregroundColor(textColor ?? .white)
-                    .cornerRadius(4)
-            })
-        }
-    }
-    //customButton1
-    struct customButton1: View {
-        var title: String
-        var backgroundColor: Color
-        var action: () -> Void
-        var size : CustomButtonSize
-        var textColor : Color?
-        let destination: () -> any View
-        
-        var body: some View {
-            
-            VStack{
-                NavigationLink { 
-                    AnyView(destination())
-                } label: {
-                    Text(title)
-                        .padding()
-                        .frame(width: size.width , height: size.height)
-                        .background(backgroundColor)
-                        .foregroundColor(textColor ?? .white)
-                        .cornerRadius(4)
-                }
-            }
-        }
-    }
-    
     
     //actionButton
     @ViewBuilder

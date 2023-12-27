@@ -12,6 +12,8 @@ struct ChangePasswordView: View {
     @State private var textPassword: String = ""
     @State private var textNewPassword : String = ""
     @State private var textNewPasswordAgain : String = ""
+    @State private var isActiveDestination: Bool = false
+    
     var body: some View {
         VStack{
             CustomSettingsTollBar(action: {
@@ -35,11 +37,13 @@ struct ChangePasswordView: View {
                 }.padding()
                 
             }
-            Buttons.customButton1(title: "Değiştir", backgroundColor: Const.primaryButtonColor, action: {
-                true
-                //send kode
-            }, size: CustomButtonSize.medium, destination: {ChangePasswordSuccessView()})
+            Buttons.customButton(title: "Değiştir", buttonColor: Const.primaryButtonColor) {
+                isActiveDestination = true
+            }
         }   .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isActiveDestination, destination: {
+                ChangePasswordView()
+            })
             .background(
                 Const.primaryBackGroundColor
             )
@@ -49,7 +53,7 @@ struct ChangePasswordView: View {
 #Preview {
     ChangePasswordView()
 }
- @ViewBuilder
+@ViewBuilder
 private func ChangeTextField(text: Binding<String> ,title : String , placeHolder : String)->some View{
     VStack {
         HStack{
@@ -58,6 +62,6 @@ private func ChangeTextField(text: Binding<String> ,title : String , placeHolder
         }
         TextFields.CustomTextField3(text: text, icon: .key, placeHolder: placeHolder)
     }.padding(.vertical , 7)
- 
+    
     
 }

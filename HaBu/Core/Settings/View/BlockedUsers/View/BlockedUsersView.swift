@@ -63,9 +63,8 @@ private func blockedUserListTile(user : User)->some View {
             }
             .foregroundStyle(.black)
             Spacer()
-            Buttons.customButton(title: "Kaldır", backgroundColor: Const.primaryButtonColor, action: {
-                false
-            } ,size: CustomButtonSize.xxxsmall)
+            Buttons.customButton(title:"Kaldır" , buttonColor: Const.primaryButtonColor,size: .xxxsmall) {
+            }
         }.padding(.horizontal ,15)
         .padding(.vertical,5)
     

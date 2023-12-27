@@ -36,7 +36,7 @@ struct FeedBackSuccess: View {
                             .foregroundColor(Color.black.opacity(0.7))
                             .frame(width: Const.width * 0.7, alignment: .center)
                             .padding()
-                        Buttons.GecilecekOlancustomButton(title: "Ana Sayfaya Dön", buttonColor: Const.primaryButtonColor) {
+                        Buttons.customButton(title: "Ana Sayfaya Dön", buttonColor: Const.primaryButtonColor) {
                             isActiveDestination = true
                         }.padding(.top , 80)
                       

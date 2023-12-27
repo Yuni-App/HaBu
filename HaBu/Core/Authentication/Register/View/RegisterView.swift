@@ -27,7 +27,7 @@ struct RegisterView: View {
                     TextFields.CustomTextField(text :$registerVM.textPassword ,icon: .key, placeHolder: "Şifre")
                     TextFields.CustomTextField(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar")
                     TextFields.CustomTextField(text : $registerVM.textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
-                    Buttons.GecilecekOlancustomButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
+                    Buttons.customButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
                         Task{
                          await registerVM.register()
                         }

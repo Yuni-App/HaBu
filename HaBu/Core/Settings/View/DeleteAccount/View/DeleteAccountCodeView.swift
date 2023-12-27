@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DeleteAccountCodeView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var isActiveDestination: Bool = false
     @StateObject var deleteAccountVM : DeleteAccountViewModel
     init(){
         self._deleteAccountVM = StateObject(wrappedValue: DeleteAccountViewModel())
@@ -26,11 +27,14 @@ struct DeleteAccountCodeView: View {
                 }.padding()
                 warningText()
             }
-            Buttons.customButton1(title: "Hesabı Sil", backgroundColor: Const.secondaryButtonColor, action: {
-                true
-               //delete account
-            }, size: .medium, destination: {InfoView()})
+            Buttons.customButton(title: "Hesabı Sil", buttonColor: Const.secondaryButtonColor) {
+                isActiveDestination = true
+            }
+           
         }
+        .navigationDestination(isPresented: $isActiveDestination, destination: {
+            InfoView()
+        })
         .navigationBarBackButtonHidden(true)
         .frame(width: Const.width)
         .background(

@@ -98,10 +98,9 @@ struct EditProfileView: View {
                 //bio
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
-                Buttons.customButton(title: "Kaydet", backgroundColor: Const.thirColor, action: {
-                    print(editProfileVM.textName)
-                    return false
-                }, size: .lage)
+                Buttons.customButton(title: "Text" , buttonColor: Const.thirColor, size:.lage) {
+                    
+                }
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
         }
