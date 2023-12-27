@@ -85,8 +85,7 @@ class LoginViewModel: ObservableObject {
     
     
     
-    
-    
+
     //TODO: RESET PASSWORD METHOD
     func resetPassword() async {
         guard !textForgotEmail.isEmpty else {

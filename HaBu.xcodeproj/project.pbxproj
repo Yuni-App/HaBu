@@ -50,7 +50,6 @@
 		889C25342B03CA4200E6074C /* Commnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C25332B03CA4200E6074C /* Commnet.swift */; };
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B85B332B06348200D03ED9 /* EditProfileView.swift */; };
-		88C4C1392B2EF7E200205822 /* PopUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C4C1382B2EF7E200205822 /* PopUps.swift */; };
 		88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F552B1B3DB3005BE291 /* SearchItem.swift */; };
 		88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F592B1B5B63005BE291 /* SecondSearchView.swift */; };
 		88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */; };
@@ -97,7 +96,6 @@
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
-		94FAFA972B2E37BF00210585 /* PopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAFA962B2E37BF00210585 /* PopupModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,7 +140,6 @@
 		889C25332B03CA4200E6074C /* Commnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commnet.swift; sourceTree = "<group>"; };
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		88B85B332B06348200D03ED9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
-		88C4C1382B2EF7E200205822 /* PopUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUps.swift; sourceTree = "<group>"; };
 		88D69F552B1B3DB3005BE291 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		88D69F592B1B5B63005BE291 /* SecondSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSearchView.swift; sourceTree = "<group>"; };
 		88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem2.swift; sourceTree = "<group>"; };
@@ -188,7 +185,6 @@
 		94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		94FAFA962B2E37BF00210585 /* PopupModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -653,7 +649,6 @@
 			children = (
 				5C1686222B1A218200A20636 /* Buttons.swift */,
 				948338612B1DC0ED006964BB /* TextFields.swift */,
-				88C4C1382B2EF7E200205822 /* PopUps.swift */,
 			);
 			path = StructuredView;
 			sourceTree = "<group>";
@@ -770,7 +765,6 @@
 				5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */,
 				94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */,
 				5CBA01922B135144007F9022 /* OffsetModifier.swift */,
-				94FAFA962B2E37BF00210585 /* PopupModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -931,7 +925,6 @@
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				949016E82B041F4900164405 /* RegisterBuildThirdView.swift in Sources */,
-				94FAFA972B2E37BF00210585 /* PopupModifier.swift in Sources */,
 				9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */,
 				883CD0712B20E03200E0B757 /* FeedBackInput.swift in Sources */,
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
@@ -959,7 +952,6 @@
 				884E8CF92B09F2E7001BADDF /* Notification.swift in Sources */,
 				94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */,
 				9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */,
-				88C4C1392B2EF7E200205822 /* PopUps.swift in Sources */,
 				5C5EB7772B31CF78001D2370 /* UserService.swift in Sources */,
 				5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */,
 			);
