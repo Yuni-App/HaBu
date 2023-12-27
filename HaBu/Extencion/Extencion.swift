@@ -109,7 +109,14 @@ extension View {
 
 extension String {
     var isValidEmail: Bool {
-        let balikesirEduTrRegex = #"^\d{12}@ogr\.balikesir\.edu\.tr$"#
-        return NSPredicate(format: "SELF MATCHES %@", balikesirEduTrRegex).evaluate(with: self)
+        let emailRegex = #"^.*@.*$"#
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
 }
+
+//extension String {
+//    var isValidEmail: Bool {
+//        let balikesirEduTrRegex = #"^\d{12}@ogr\.balikesir\.edu\.tr$"#
+//        return NSPredicate(format: "SELF MATCHES %@", balikesirEduTrRegex).evaluate(with: self)
+//    }
+//}

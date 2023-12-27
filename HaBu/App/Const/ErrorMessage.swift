@@ -14,8 +14,8 @@ enum ErrorMessage: Int  {
     case passwordsNotMatch = 4
     case wrongPassword = 17004
     case confidentialityAgreement = 5
-    case onaysızmail = 6
     case registeredMail = 17007
+    case verifiedError = 10
     
     
     var description: String {
@@ -34,8 +34,8 @@ enum ErrorMessage: Int  {
             return "Gizlilik sözleşmesini onaylanıyız"
         case .registeredMail:
             return "Mail adresi zaten kayıtlı"
-        case .onaysızmail:
-             return "Mail Adresinizi Onaylayınız"
+        case.verifiedError:
+            return "Giriş yapmak için önce mailinizi doğrulayınız."
         }
     }
 }

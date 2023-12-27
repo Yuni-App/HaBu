@@ -21,50 +21,36 @@ class AuthService : ObservableObject , AuthProvider {
     static let shared = AuthService()
     @Published var user: FirebaseAuth.User?
     
+    //TODO: USER CHECK
     func checkUser() async {
         do {
-            if let currentUser = try await Auth.auth().currentUser{
+            if let currentUser = Auth.auth().currentUser{
                 self.user = currentUser
             }
-        } catch {
-            print("User check error: \(error.localizedDescription)")
-        }
-    }
-    
-    func signIn(email: String, password: String) async throws {
-        do {
-            
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            // Giriş başarılıysa result değerini kullanabilirsiniz
-          
-            user = result.user
-            print(user?.email)
-          
-      
-        } catch {
-            if let authError = error as? NSError {
-                print(authError.code)
-                throw authError
-            } else {
-                let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu "])
-                throw genericError
-            }
         }
     }
     
     
+    //TODO: CREATE USER METHOD
     func createUser(email: String, password: String, username: String) async throws {
         do {
             // Firebase Authentication üzerinde kullanıcı oluştur
-            let authResult = try await Auth.auth().createUser(withEmail:email, password: password)
+            let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+            try await authResult.user.sendEmailVerification()
+            try await createUserCollection(authResult: authResult, email: email, password: password, username: username)
+        } catch let error as NSError{
+                print("Auth Hata Kodu: \(error.code)")
+                print("Auth Hata : \(error)")
+                throw error
+        }
+    }
+
+    //TODO: CREATE USER COLLECTİON FİELD 
+    func createUserCollection(authResult : AuthDataResult,email: String, password: String, username: String) async throws{
+        do{
             self.user = authResult.user
-            // Oluşturulan kullanıcının UID'sini al
             let uid = authResult.user.uid
-            
-            // Firestore kullanıcı koleksiyonunu referans al
             let userCollection = Firestore.firestore().collection("user")
-            
-            // Kullanıcıyı Firestore koleksiyonuna ekle
             try await userCollection.document(uid).setData([
                 "email": email,
                 "username": username,
@@ -77,48 +63,89 @@ class AuthService : ObservableObject , AuthProvider {
                 "profile_images":  [],
                 "register_year": "",
                 "surname":"",
-                // Diğer kullanıcı özelliklerini buraya ekleyebilirsiniz
             ])
-       
-           
-            print(user?.email)
-            // Giriş başarılıysa result değerini kullanabilirsiniz
-        } catch {
-            if let authError = error as? NSError {
-                print("Auth Hata Kodu: \(authError.code)")
-                throw authError
-            } else if let firestoreError = error as? NSError {
-                print("Firestore Hata Kodu: \(firestoreError.code)")
-                throw firestoreError
-            } else {
-                let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu"])
-                throw genericError
-            }
         }
     }
     
-    //tamamlandı
+    //TODO: SIGN IN METHOD
+    func signIn(email: String, password: String) async throws {
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            print("burada")
+            if result.user.isEmailVerified {
+                // Kullanıcının e-posta adresi doğrulanmış
+                self.user = result.user
+                print("Kullanıcının e-posta adresi doğrulandı.")
+            } else {
+                print("Kullanıcının e-posta adresi henüz doğrulanmamış.")
+                 let verifiedError = NSError(domain: "com.HaBu", code: 10, userInfo: [NSLocalizedDescriptionKey: "Giriş yapmak için önce mailinizi doğrulayınız."])
+                throw verifiedError
+            }
+        } catch let error as NSError {
+            print("Auth Hata Kodu: \(error.code)")
+            print("Auth Hata : \(error)")
+            throw error
+        }
+    }
+    
+    
+    //TODO: LOGOUT METHOD
     func logOut() async throws -> Void{
         do {
-            try await Auth.auth().signOut()
+            try Auth.auth().signOut()
         } catch let error {
-            print("hataaa")
-            print(error)
+            print("Auth Hata : \(error)")
         }
     }
     
     
+    //TODO: FORGOT PASSWORD METHOD
     func forgotPassword(email: String) async throws -> Void {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
-        } catch let error {
-            if let authError = error as? NSError {
-                print(authError.code)
-                throw authError
-            } else {
-                let genericError = NSError(domain: "com.HaBu", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bilinmeyen bir hata oluştu "])
-                throw genericError
-            }
+        } catch let error as NSError {
+            print("Auth Hata Kodu: \(error.code)")
+            print("Auth Hata : \(error)")
+            throw error
         }
     }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+ 
+    
+ 
+    
+
 }
