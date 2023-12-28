@@ -39,9 +39,9 @@ class EditProfileViewModel : ObservableObject{
     @Published  var imageIndices = [0, 1, 2]
     @Published  var imagePickerPresented = false
     @Published var showGallery = false
-    private var uiImage :UIImage?
     @Published var profileImage : KFImage?
-    @Published var images : [KFImage]?
+    @Published var images : [Any]?
+    @Published var loadedImages : [Image]?
     @Published var selectedImage = 0
     var dragGesture: some Gesture {
         DragGesture()
@@ -110,7 +110,7 @@ class EditProfileViewModel : ObservableObject{
         guard let item = item else {return}
         guard let data = try? await item.loadTransferable(type: Data.self) else  {return}
         guard let uiImage = UIImage(data: data) else{return}
-        self.uiImage = uiImage
+        images?[self.selectedImage] = Image(uiImage: uiImage) 
         
     }
 }

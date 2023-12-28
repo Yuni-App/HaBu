@@ -32,7 +32,7 @@ struct LogOutView: View {
                     }
                     
                     HStack{
-                        Buttons.GecilecekOlancustomButton(title: "Çıkış",buttonColor: Const.primaryButtonColor, size: .xxxsmall) {
+                        Buttons.customButton(title: "Çıkış",buttonColor: Const.primaryButtonColor, size: .xxxsmall) {
                             Task {
                                 isActiveDestination  = await VM.logout()
                             }

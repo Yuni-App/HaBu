@@ -14,7 +14,6 @@ struct FeedBackInput: View {
     @State private var selectedRating: Int = 0
     @Environment(\.dismiss) private var dismiss
     var body: some View {
-        NavigationView{
             ZStack{
                 AddPostBackground()
                 VStack {
@@ -36,9 +35,7 @@ struct FeedBackInput: View {
                     Spacer()
                     SendButton(text: text).padding(.bottom, Const.height * 0.05)
                 }.frame(width: Const.width * 0.95)
-                
-            }
-        }.frame(height: Const.height * 1).navigationBarBackButtonHidden(true)
+            }.frame(height: Const.height * 1).navigationBarBackButtonHidden(true)
     }
 }
 
@@ -51,7 +48,7 @@ struct FeedBackInput: View {
 func SendButton(text: String) -> some View {
     HStack {
         NavigationLink(
-            destination: FeedBackSuccess().navigationBarBackButtonHidden(),
+            destination: FeedBackSuccess(),
             label: {
                 Text("GÖNDER")
                     .fontWeight(.semibold)

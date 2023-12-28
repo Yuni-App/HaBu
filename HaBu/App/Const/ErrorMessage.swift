@@ -15,6 +15,7 @@ enum ErrorMessage: Int  {
     case wrongPassword = 17004
     case confidentialityAgreement = 5
     case registeredMail = 17007
+    case verifiedError = 10
     
     
     var description: String {
@@ -33,6 +34,8 @@ enum ErrorMessage: Int  {
             return "Gizlilik sözleşmesini onaylanıyız"
         case .registeredMail:
             return "Mail adresi zaten kayıtlı"
+        case.verifiedError:
+            return "Giriş yapmak için önce mailinizi doğrulayınız."
         }
     }
 }

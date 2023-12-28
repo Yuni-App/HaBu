@@ -17,19 +17,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct HaBuApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var authService = AuthService()
+    @StateObject private var authService = AuthService.shared
     @State private var isLoading = true
 
        var body: some Scene {
            WindowGroup {
                Group {
-                   if isLoading {
-                       LoadingView()
-                   } else {
-                       if let user = authService.user {
-                           TabbarView()
+                   NavigationStack{
+                       if isLoading {
+                           SplashView()
                        } else {
-                           ContentView()
+                           if authService.user != nil {
+                               TabbarView()
+                           } else {
+                               ContentView()
+                           }
                        }
                    }
                }

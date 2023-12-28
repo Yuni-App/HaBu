@@ -40,8 +40,8 @@ struct EditProfileView: View {
                             Text("Yuni").foregroundStyle(.white).font(.custom("Kodchasan-Bold", size: 35))
                                 .padding(.trailing)
                             Spacer()
-                           
-                        
+                            
+                            
                         }
                         HStack {
                             Image.imageManager(image: .star,width: 30,height:30)
@@ -64,12 +64,13 @@ struct EditProfileView: View {
                                             editProfileVM.showGallery = true
                                             editProfileVM.selectedImage = 0
                                         }
+                                    
                                     CircleProfileImage(index: editProfileVM.imageIndices[1], userImage:images.count > 1 ?  images[1] : nil)
                                         .onTapGesture {
                                             editProfileVM.showGallery = true
                                             editProfileVM.selectedImage = 1
+                                            
                                         }
-                                    
                                     CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:images.count > 2 ?  images[2] : nil)
                                         .onTapGesture {
                                             editProfileVM.showGallery = true
@@ -82,36 +83,36 @@ struct EditProfileView: View {
                             }
                             .photosPicker(isPresented: $editProfileVM.showGallery, selection: $editProfileVM.selectedItem)
                         }
-                       
+                        
                         
                     }
                     
                     
                 }.frame(maxHeight: Const.height * 0.35) // Üçgen Yapı
                 
-               //isim
+                //isim
                 TextFields.CustomTextField2(headline: "İsim", color: .white, islocked: false, text: $editProfileVM.textName, placeHolder: "İsminizi Giriniz", contentType: .name, keybordType: .namePhonePad)
-                 //soyisim
+                //soyisim
                 TextFields.CustomTextField2(headline: "Soyisim", color: .white, islocked: false, text: $editProfileVM.textSurName, placeHolder: "Soyisminiz giriniz", contentType: .familyName, keybordType: .namePhonePad)
                 //email
                 TextFields.CustomTextField2(headline: "Email", color: .white, islocked: true, text: $editProfileVM.textEmail, placeHolder: "Email adresiniz", contentType: .emailAddress, keybordType: .emailAddress)
                 //bio
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
-                Buttons.customButton(title: "Kaydet", backgroundColor: Const.thirColor, action:{
+                
+                Buttons.customButton(title: "Text" , buttonColor: Const.thirColor, size:.lage) {
                     Task{
-                       try await editProfileVM.updateUserData()
+                        try await editProfileVM.updateUserData()
                     }
-                    return false
-                }, size: .lage)
-               
+                    
+                }
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
         }
         .navigationBarBackButtonHidden(true)
     }
     
-   
+    
     
 }
 

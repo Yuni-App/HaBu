@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import Kingfisher
 
+
 class ProfileViewModel:ObservableObject{
     init(user:User) {
         self.user = user
@@ -19,6 +20,7 @@ class ProfileViewModel:ObservableObject{
             }
             self.images = imageList
         }
+        
     }
     @Published var user:User
     @Published var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
@@ -30,4 +32,5 @@ class ProfileViewModel:ObservableObject{
     let maxHeight = UIScreen.main.bounds.height / 2.7
     @Published var imageCount = 0
     @Published var images :[KFImage]?
+    @Published var imagesData:[Data]?
 }

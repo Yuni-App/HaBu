@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import Kingfisher
 
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
@@ -86,21 +87,6 @@ extension [LayoutSubviews.Element]{
     }
 }
 
-
-extension View {
-    func popup<PopupContent: View>(
-        isPresented: Binding<Bool>,
-        view: @escaping () -> PopupContent
-    ) -> some View {
-        self.modifier(
-            Popup(
-                isPresented: isPresented,
-                view: view
-            ).animation(.easeInOut(duration: 0.07))
-        )
-    }
-}
-
 extension View {
   func toastView(toast: Binding<Toast?>) -> some View {
     self.modifier(ToastModifier(toast: toast))
@@ -109,7 +95,14 @@ extension View {
 
 extension String {
     var isValidEmail: Bool {
-        let balikesirEduTrRegex = #"^\d{12}@ogr\.balikesir\.edu\.tr$"#
-        return NSPredicate(format: "SELF MATCHES %@", balikesirEduTrRegex).evaluate(with: self)
+        let emailRegex = #"^.*@.*$"#
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
 }
+
+//extension String {
+//    var isValidEmail: Bool {
+//        let balikesirEduTrRegex = #"^\d{12}@ogr\.balikesir\.edu\.tr$"#
+//        return NSPredicate(format: "SELF MATCHES %@", balikesirEduTrRegex).evaluate(with: self)
+//    }
+//}

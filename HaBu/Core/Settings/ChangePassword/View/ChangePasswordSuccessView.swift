@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChangePasswordSuccessView: View {
-    
+    @State private var isActiveDestination: Bool = false
     var body: some View {
         VStack{
             Spacer()
@@ -17,14 +17,17 @@ struct ChangePasswordSuccessView: View {
                 Text("ŞİFRENİZ BAŞARIYLA GÜNCELLENMİŞTİR...").frame(width: Const.width * 0.5).foregroundColor(.green).fontWeight(.bold)
             }
             Spacer()
-            Buttons.customButton(title: "Ana Sayfaya Dön", backgroundColor: Const.primaryButtonColor, action: {
-                true
-            }, destination: AnyView(TabbarView().navigationBarBackButtonHidden(true)), size: CustomButtonSize.medium)
+            Buttons.customButton(title:"Ana Sayfaya Dön" , buttonColor: Const.primaryButtonColor) {
+                isActiveDestination = true
+            }
+            
         }.frame(width: Const.width)
             .background(Const.primaryBackGroundColor
-        )
+            ).navigationDestination(isPresented: $isActiveDestination, destination: {
+                TabbarView()
+            })
             .navigationBarBackButtonHidden(true)
-     
+        
     }
 }
 

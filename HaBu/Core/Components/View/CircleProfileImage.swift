@@ -72,7 +72,7 @@ enum ProfileImageSize{
 
 struct CircleProfileImage: View {
     let userIamgeUrl : String
-    var userImage : KFImage?
+    var userImage : Any?
     var index : Int?
     var size : ProfileImageSize?
     
@@ -80,10 +80,13 @@ struct CircleProfileImage: View {
         self.userIamgeUrl = userIamgeUrl
         self.size = size
     }
-    init(index : Int,userImage: KFImage? = nil){
+    init(index : Int,userImage: Any? = nil){
         self.userIamgeUrl = ""
         self.index = index
-        if let userImage = userImage{
+        if let userImage = userImage as? KFImage{
+            self.userImage = userImage
+        }
+        else if let userImage = userImage as? Image{
             self.userImage = userImage
         }
         
@@ -102,7 +105,7 @@ struct CircleProfileImage: View {
                 
             }
             else{
-                Image("profil1")
+                Image(systemName: "person")
                     .resizable()
                     .clipShape(.rect(cornerRadius: 15))
                     .overlay(
@@ -114,7 +117,15 @@ struct CircleProfileImage: View {
         }
         if let index = self.index{
             let value = ImageLocationAndSize.fromRawValue(index)
-            if let image = userImage {
+            if let image = userImage as? KFImage {
+                image
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 15))
+                    .frame(width: value!.size, height: value!.size)
+                    .position(value!.Position)
+                    .foregroundStyle(.white)
+            }
+            else if let image = userImage as? Image{
                 image
                     .resizable()
                     .clipShape(.rect(cornerRadius: 15))
