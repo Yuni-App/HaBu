@@ -39,3 +39,42 @@ extension Post {
         .init(id: "8", userId: "8", caption: "Fatih Terim ve Mert'in arkadaşlığı, samimiyetleri ve birbirlerine olan saygılarıyla dolu. İkili, hem iş hem de kişisel hayatta birbirlerine destek oluyor. Bu dostluk, sadece başarıları değil, aynı zamanda zor zamanlarda birbirlerine güç veren bir bağ.", timeStamp: "09.09.2022", likeList: []),
     ]
 }
+/*
+ struct Post: Identifiable, Decodable, Encodable {
+   var id: String
+   var title: String
+   var content: String
+   var likes: Int
+   var likedBy: [String]
+//like'ı benzersiz bir yapıya çevirmek için var bu sayede bir defa tıklanabilecek
+
+   init(id: String, title: String, content: String, likes: Int) {
+     self.id = id
+     self.title = title
+     self.content = content
+     self.likes = likes
+   }
+//kullanıcının bir kez beğenebilmesine dayalı bir func
+   func like() {
+ if let user = Auth.auth().currentUser {
+   if !likedBy.contains(user.uid) {
+     self.likes += 1
+     self.likedBy.append(user.uid)
+     save()
+   }
+ }
+}
+
+   func getLikes() -> Int {
+     return self.likes
+   }
+
+   func save() {
+     Firestore.firestore().collection("posts").document(id).setData(self.toAnyObject()) { error in
+       if let error = error {
+         print(error)
+       }
+     }
+   }
+ }
+ */
