@@ -110,7 +110,12 @@ class EditProfileViewModel : ObservableObject{
         guard let item = item else {return}
         guard let data = try? await item.loadTransferable(type: Data.self) else  {return}
         guard let uiImage = UIImage(data: data) else{return}
-        images?[self.selectedImage] = Image(uiImage: uiImage) 
+        if images?.count ?? 0 > selectedImage {
+            images?[self.selectedImage] = Image(uiImage: uiImage)
+        }
+        else{
+            images?.append(Image(uiImage: uiImage))
+        }
         
     }
 }
