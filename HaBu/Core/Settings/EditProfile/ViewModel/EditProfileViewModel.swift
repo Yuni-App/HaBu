@@ -106,13 +106,15 @@ class EditProfileViewModel : ObservableObject{
             for i in 0..<images.count{
                 if let image = images[i] as? Image{
                     if let uiImage = image.renderToUiImage(){
-                        let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id)
-                        if user.profileImageUrl?.count ?? 0 <= i{
-                            imageUrlList?.append(imageUrl!)
+                        if let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id){
+                            if user.profileImageUrl?.count ?? 0 <= i{
+                                imageUrlList?.append(imageUrl)
+                            }
+                            else{
+                                imageUrlList?[i] = imageUrl
+                            }
                         }
-                        else{
-                            imageUrlList?[i] = imageUrl!
-                        }
+                     
                     }
                 }
             }
