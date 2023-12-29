@@ -2,7 +2,7 @@
 //  EditProfileView.swift
 //  HaBu
 //
-//  Created by yusuf on 16.11.2023.
+//  Created by OmerErbalta on 16.11.2023.
 //
 
 import SwiftUI

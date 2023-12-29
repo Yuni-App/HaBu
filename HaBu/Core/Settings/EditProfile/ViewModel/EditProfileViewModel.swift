@@ -35,7 +35,7 @@ class EditProfileViewModel : ObservableObject{
     @Published  var textEmail : String = ""
     @Published  var textBio : String = ""
     @Published  var textPassword: String = ""
-    @Published var  dragDirection: DragDirection = .none
+    @Published  var  dragDirection: DragDirection = .none
     @Published  var imageIndices = [0, 1, 2]
     @Published  var imagePickerPresented = false
     @Published var showGallery = false
@@ -103,6 +103,11 @@ class EditProfileViewModel : ObservableObject{
         if !data.isEmpty{
             print(AuthService().user?.email)
             try await Firestore.firestore().collection("user").document(user.id).updateData(data)
+        }
+        if let images = images{
+            for i in 0..<images.count{
+                
+            }
         }
         
     }
