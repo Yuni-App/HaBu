@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileView : View {
     @Environment(\.dismiss) var dissmis
     @StateObject var profileVM :ProfileViewModel
+    
     init(hideTab:Binding<Bool>,user:User) {
         _hideTab = hideTab
         self.user = user
@@ -40,9 +41,10 @@ struct ProfileView : View {
 }
 
 #Preview {
-    TabbarView()
+    ProfileView(user: User.MockData[0])
 }
 struct ProfileGeometry: View {
+    @Environment(\.dismiss) var dismiss
     var action:()->Void
     @State var navigate = false
     @State var navigationPage : AnyView? = nil
@@ -74,6 +76,12 @@ struct ProfileGeometry: View {
                                     let resizedOffsetY = (midY - (minimumHeaderHeight - halfScaledHeight - bottomPadding))
                                     //Buttons
                                     HStack{
+                                        if activateBackButton{
+                                            Buttons.backButton(action: {
+                                               dismiss()
+                                            }, color: .white)
+                                            .padding()
+                                        }
                                         Spacer()
                                         Button(action: {
                                             navigate = true
