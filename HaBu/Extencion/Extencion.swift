@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import Kingfisher
 
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
@@ -105,3 +106,11 @@ extension String {
 //        return NSPredicate(format: "SELF MATCHES %@", balikesirEduTrRegex).evaluate(with: self)
 //    }
 //}
+extension View {
+    @MainActor func renderToUiImage(scale displayScale: CGFloat = 1.0) -> UIImage? {
+        let renderer = ImageRenderer(content: self)
+        renderer.scale = displayScale
+        return renderer.uiImage
+    }
+    
+}
