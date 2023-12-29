@@ -9,7 +9,8 @@ import Foundation
 import FirebaseFirestore
 import SwiftUI
 import PhotosUI
-
+import Kingfisher
+@MainActor
 class EditProfileViewModel : ObservableObject{
     init(user: User) {
         self.user = user
@@ -18,6 +19,12 @@ class EditProfileViewModel : ObservableObject{
         self.textEmail = user.email
         self.textBio = user.bio ?? ""
         self.textPassword = user.password
+        if let profileImageList = user.profileImageUrl{
+            let imageList = profileImageList.map {imageName in
+                KFImage(URL(string: imageName))
+            }
+            self.images = imageList
+        }
     }
     @Published var selectedItem : PhotosPickerItem?{
         didSet{Task{ await loadImage(fromItem: selectedItem)}}
@@ -28,17 +35,13 @@ class EditProfileViewModel : ObservableObject{
     @Published  var textEmail : String = ""
     @Published  var textBio : String = ""
     @Published  var textPassword: String = ""
-    @Published var  dragDirection: DragDirection = .none
+    @Published  var  dragDirection: DragDirection = .none
     @Published  var imageIndices = [0, 1, 2]
     @Published  var imagePickerPresented = false
     @Published var showGallery = false
-    private var uiImage :UIImage?
-    @Published var profileImage : Image?
-    @Published var images : [Image] = [
-        Image("profil1"),
-        Image("profil2"),
-        Image("profil3")
-    ]
+    @Published var profileImage : KFImage?
+    @Published var images : [Any]?
+    @Published var loadedImages : [Image]?
     @Published var selectedImage = 0
     var dragGesture: some Gesture {
         DragGesture()
@@ -84,6 +87,7 @@ class EditProfileViewModel : ObservableObject{
     }
     
     func updateUserData() async throws{
+        var imageUrlList :[String]?
         var data = [String:Any]()
         if user.name != textName && textName.count > 2{
             data["name"] = textName
@@ -97,9 +101,27 @@ class EditProfileViewModel : ObservableObject{
         if user.password != textPassword && textPassword.count > 6{
             data["password"] = textPassword
         }
+        if let images = images{
+            imageUrlList = user.profileImageUrl
+            for i in 0..<images.count{
+                if let image = images[i] as? Image{
+                    if let uiImage = image.renderToUiImage(){
+                        if let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id){
+                            if user.profileImageUrl?.count ?? 0 <= i{
+                                imageUrlList?.append(imageUrl)
+                            }
+                            else{
+                                imageUrlList?[i] = imageUrl
+                            }
+                        }
+                     
+                    }
+                }
+            }
+        }
+        data["profileImageUrl"] = imageUrlList ?? nil
         if !data.isEmpty{
             try await Firestore.firestore().collection("user").document(user.id).updateData(data)
-
         }
         
     }
@@ -107,8 +129,12 @@ class EditProfileViewModel : ObservableObject{
         guard let item = item else {return}
         guard let data = try? await item.loadTransferable(type: Data.self) else  {return}
         guard let uiImage = UIImage(data: data) else{return}
-        self.uiImage = uiImage
-        self.images[selectedImage] = Image(uiImage: uiImage)
+        if images?.count ?? 0 > selectedImage {
+            images?[self.selectedImage] = Image(uiImage: uiImage)
+        }
+        else{
+            images?.append(Image(uiImage: uiImage))
+        }
         
     }
 }

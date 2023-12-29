@@ -20,9 +20,7 @@ struct TabbarView: View {
     
     }
     var body: some View {
-        
-        
-        
+        NavigationStack{
             GeometryReader{proxy in
                 let bottomEdge = proxy.safeAreaInsets.bottom
                 let topEdge = proxy.safeAreaInsets.leading
@@ -49,14 +47,13 @@ struct TabbarView: View {
                 .navigationBarBackButtonHidden(true)
                 .overlay(
                     VStack{
-                      CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
+                        CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
                     }
                         .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
                     ,alignment: .bottom
                 )
             }
-        
-        
+        }
     }
 }
 

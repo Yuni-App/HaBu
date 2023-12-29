@@ -141,7 +141,7 @@ struct ProfileGeometry: View {
                                     }
                                     .padding(.top,Const.height * 0.05)
                                     .offset(x : 500 * proggress)
-                                    SlidableImagesView(item:profileVM.images, index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
+                                    SlidableImagesView(item:profileVM.images ?? [], index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
                                     
                                 }
                                 .frame(width: Const.width,height: headerHeight * 0.5)
