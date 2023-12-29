@@ -87,6 +87,7 @@ class EditProfileViewModel : ObservableObject{
     }
     
     func updateUserData() async throws{
+        var imageUrlList :[String]?
         var data = [String:Any]()
         if user.name != textName && textName.count > 2{
             data["name"] = textName
@@ -100,14 +101,25 @@ class EditProfileViewModel : ObservableObject{
         if user.password != textPassword && textPassword.count > 6{
             data["password"] = textPassword
         }
-        if !data.isEmpty{
-            print(AuthService().user?.email)
-            try await Firestore.firestore().collection("user").document(user.id).updateData(data)
-        }
         if let images = images{
+            imageUrlList = user.profileImageUrl
             for i in 0..<images.count{
-                
+                if let image = images[i] as? Image{
+                    if let uiImage = image.renderToUiImage(){
+                        let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id)
+                        if user.profileImageUrl?.count ?? 0 <= i{
+                            imageUrlList?.append(imageUrl!)
+                        }
+                        else{
+                            imageUrlList?[i] = imageUrl!
+                        }
+                    }
+                }
             }
+        }
+        data["profileImageUrl"] = imageUrlList ?? nil
+        if !data.isEmpty{
+            try await Firestore.firestore().collection("user").document(user.id).updateData(data)
         }
         
     }
