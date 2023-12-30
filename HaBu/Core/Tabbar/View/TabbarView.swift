@@ -11,13 +11,14 @@ import SwiftUI
 struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
+    let user = AuthService.shared.currentUser
     init() {
         UITableView.appearance().isHidden = true
     
     }
     init(currentTab:String) {
         UITableView.appearance().isHidden = true
-    
+
     }
     var body: some View {
         NavigationStack{
@@ -38,7 +39,7 @@ struct TabbarView: View {
                         .frame(maxWidth: .infinity,maxHeight: .infinity)
                         .tag("Notification")
                         .toolbar(.hidden, for: .tabBar)
-                    ProfileView(hideTab: $hideBar, user: User.MockData[0])
+                    ProfileView(hideTab: $hideBar, user: user)
                         .frame(maxWidth: .infinity,maxHeight: .infinity)
                         .tag("Profile")
                         .toolbar(.hidden, for: .tabBar)

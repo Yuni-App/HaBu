@@ -16,22 +16,41 @@ protocol AuthProvider {
     func logOut() async throws -> Void
 }
 
-@MainActor
 class AuthService : ObservableObject , AuthProvider {
     static let shared = AuthService()
-    @Published var user: FirebaseAuth.User?
+    @Published var currentUser : User?
+    @Published var userSession: FirebaseAuth.User?
     
+    init() {
+        Task{
+          await checkUser()
+          try await loadUserData()
+        }
+    }
     //TODO: USER CHECK
+    @MainActor
     func checkUser() async {
         do {
-            if let currentUser = Auth.auth().currentUser{
-                self.user = currentUser
+            if let userSession = Auth.auth().currentUser{
+                self.userSession = userSession
             }
         }
     }
     
+    @MainActor
+    func loadUserData()async throws{
+        self.userSession = Auth.auth().currentUser
+        guard let currentUid = self.userSession?.uid else {return }
+        
+        self.currentUser = try await UserService.fetchUser(withUserID: currentUid)
+        print(currentUser)
+    
+         
+    }
+    
     
     //TODO: CREATE USER METHOD
+    @MainActor
     func createUser(email: String, password: String, username: String) async throws {
         do {
             // Firebase Authentication üzerinde kullanıcı oluştur
@@ -46,23 +65,17 @@ class AuthService : ObservableObject , AuthProvider {
     }
 
     //TODO: CREATE USER COLLECTİON FİELD 
+    @MainActor
     func createUserCollection(authResult : AuthDataResult,email: String, password: String, username: String) async throws{
-        do{
-            self.user = authResult.user
+      do{
+            self.userSession = authResult.user
             let uid = authResult.user.uid
             let userCollection = Firestore.firestore().collection("user")
             try await userCollection.document(uid).setData([
                 "email": email,
                 "username": username,
-                "bio": "",
-                "created_at": "",
-                "depertmant": "",
-                "faculty": "",
                 "id": uid,
                 "password": password,
-                "profile_images":  [],
-                "register_year": "",
-                "surname":"",
             ])
         }
     }
@@ -74,7 +87,7 @@ class AuthService : ObservableObject , AuthProvider {
             print("burada")
             if result.user.isEmailVerified {
                 // Kullanıcının e-posta adresi doğrulanmış
-                self.user = result.user
+                self.userSession = result.user
                 print("Kullanıcının e-posta adresi doğrulandı.")
             } else {
                 print("Kullanıcının e-posta adresi henüz doğrulanmamış.")
