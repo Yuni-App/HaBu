@@ -25,6 +25,9 @@ class EditProfileViewModel : ObservableObject{
             }
             self.images = imageList
         }
+        else{
+            self.images = []
+        }
     }
     @Published var selectedItem : PhotosPickerItem?{
         didSet{Task{ await loadImage(fromItem: selectedItem)}}
