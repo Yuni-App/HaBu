@@ -105,11 +105,12 @@ class EditProfileViewModel : ObservableObject{
             data["password"] = textPassword
         }
         if let images = images{
-            imageUrlList = user.profileImageUrl
+            imageUrlList = user.profileImageUrl ?? []
             for i in 0..<images.count{
                 if let image = images[i] as? Image{
                     if let uiImage = image.renderToUiImage(){
                         if let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id){
+                            print(imageUrl)
                             if user.profileImageUrl?.count ?? 0 <= i{
                                 imageUrlList?.append(imageUrl)
                             }

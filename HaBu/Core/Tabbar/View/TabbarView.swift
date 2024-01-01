@@ -58,7 +58,8 @@ struct TabbarView: View {
             }
         }
         else{
-            Text("error")
+            ProgressView()
+                   .progressViewStyle(CircularProgressViewStyle())
         }
         
     }
