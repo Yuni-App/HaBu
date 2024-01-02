@@ -25,7 +25,8 @@ class AuthService : ObservableObject , AuthProvider {
     func checkUser() async {
         do {
             if let currentUser = Auth.auth().currentUser{
-                self.user = currentUser
+                AuthService.shared.user = currentUser
+              
             }
         }
     }
@@ -74,7 +75,8 @@ class AuthService : ObservableObject , AuthProvider {
             print("burada")
             if result.user.isEmailVerified {
                 // Kullanıcının e-posta adresi doğrulanmış
-                self.user = result.user
+        
+                AuthService.shared.user = result.user
                 print("Kullanıcının e-posta adresi doğrulandı.")
             } else {
                 print("Kullanıcının e-posta adresi henüz doğrulanmamış.")
@@ -93,6 +95,7 @@ class AuthService : ObservableObject , AuthProvider {
     func logOut() async throws -> Void{
         do {
             try Auth.auth().signOut()
+            AuthService.shared.user = nil
         } catch let error {
             print("Auth Hata : \(error)")
         }

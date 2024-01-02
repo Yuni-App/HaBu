@@ -13,7 +13,7 @@ enum ImageType {
     case notAnonymous
 }
 
-struct AddPostView: View {
+struct AddPostView: View {x
     @Environment(\.dismiss) private var dismiss
     @State var SelectedTags:[String] = []
     @State private var textContent : String = ""
@@ -66,7 +66,7 @@ struct AddPostView: View {
                 isActive: $isShareActive,
                 label: { EmptyView() })
         }
-        .blur(radius: isPopupVisible ? 1.5 : 0.0)
+ //       .blur(radius: isPopupVisible ? 1.5 : 0.0)
       
         .navigationBarBackButtonHidden(true)
         
