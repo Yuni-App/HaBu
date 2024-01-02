@@ -25,7 +25,7 @@ struct HaBuApp: App {
                Group {
                    NavigationStack{
                        if isLoading {
-                           SplashView()
+  //                         SplashView()
                        } else {
                            if authService.user != nil {
                                TabbarView()
