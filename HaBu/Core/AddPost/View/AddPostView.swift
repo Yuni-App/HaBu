@@ -15,35 +15,37 @@ enum ImageType {
 
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
-    @State var SelectedTags:[String] = []
-    @State private var textContent : String = ""
-    @State  var isShareActive : Bool = false
-    @State private var isAnonimComment  = false
-    @State private var isPopupVisible = false
-    @State private var selectedOption: ImageType = .notSelected
+    
+    @StateObject var addPostVM : AddPostViewModel
+    
+    
+    init(){
+        self._addPostVM = StateObject(wrappedValue: AddPostViewModel(postService: PostService()))
+    }
+    
     var body: some View {
         VStack {
             ZStack{
                 AddPostBackground()
                 VStack{
-                    AddPostAppBar(action: {
+                    AddPostAppBar(addpostVM: addPostVM, action: {
                         dismiss()
-                    }, isShareActive: $isShareActive)
+                    })
                     HStack(alignment: .top) {
                         VStack{
-                            if selectedOption == .notSelected {
-                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .qUser)
+                            if addPostVM.isAnonimType == .notSelected {
+                                UserTypeImage(showAlert: $addPostVM.showAlert, alertType: $addPostVM.alertType , radius: 7.0,image: .qUser)
                             }
-                            else if selectedOption == .anonymous
+                            else if addPostVM.isAnonimType == .anonymous
                             {
-                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 7.0,image: .anonim)
+                                UserTypeImage(showAlert: $addPostVM.showAlert ,alertType: $addPostVM.alertType, radius: 7.0,image: .anonim)
                             }
-                            else if selectedOption == .notAnonymous {
-                                UserTypeImage(isPopupVisible: $isPopupVisible , radius: 35.0,image: .mert)
+                            else if addPostVM.isAnonimType == .notAnonymous {
+                                UserTypeImage(showAlert: $addPostVM.showAlert ,alertType: $addPostVM.alertType, radius: 35.0,image: .mert)
                             }
                         }
                         .padding(5)
-                        TextField("", text: $textContent,axis: .vertical)
+                        TextField("Ne düşünüyorsunuz ? ", text: $addPostVM.textContent,axis: .vertical)
                             .lineLimit(9...)
                             .background(Color.white)
                             .cornerRadius(7)
@@ -53,21 +55,66 @@ struct AddPostView: View {
                     .clipShape(.rect(cornerRadius: 5, style: .circular))
                     .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y:3)
                     .padding()
-                    AddCategoryView(SelectedTags: $SelectedTags)
+                    AddCategoryView(SelectedTags: $addPostVM.SelectedTags)
                         .padding(.vertical,20)
 
-                    AddPostToggle(isAnonimComment: $isAnonimComment)
+                    AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
                     AddPostMedia()
-                   
                 }
-            }
-            NavigationLink(
-                destination: TabbarView(),
-                isActive: $isShareActive,
-                label: { EmptyView() })
+            } .navigationDestination(isPresented: $addPostVM.isShareActive, destination: {
+                TabbarView()
+            })
+         
         }
-        .blur(radius: isPopupVisible ? 1.5 : 0.0)
-      
+        .alert(isPresented: $addPostVM.showAlert) {
+            if (addPostVM.alertType == .anonymous){
+                Alert(
+                        title: Text("Anonim mi olacak"),
+                        primaryButton: .default(
+                            Text("Anonim"),
+                            action: {
+                                addPostVM.isAnonimType = .anonymous
+                                // Burada birinci butona basıldığında yapılacak işlemleri ekleyebilirsiniz.
+                                print("Anonim seçildi.")
+                            }
+                        ),
+                        secondaryButton: .default(
+                            Text("Profili Göster"),
+                            action: {
+                                addPostVM.isAnonimType = .notAnonymous
+                                // Burada ikinci butona basıldığında yapılacak işlemleri ekleyebilirsiniz.
+                                print("Profili Göster seçildi.")
+                            }
+                        )
+                    )
+            }else if (addPostVM.alertType == .approval){
+                Alert(
+                        title: Text("Gönderi Oluşturuluyor"),
+                        primaryButton: .default(
+                            Text("Onayla"),
+                            action: {
+                                Task{
+                                     await addPostVM.createPost()
+                                }
+                                addPostVM.isShareActive = true
+                         
+                            }
+                        ),
+                        
+                        secondaryButton: .cancel(
+                            Text("İptal"),
+                            action: {
+                                addPostVM.isShareActive = false
+                            
+                            }
+                        )
+                    )
+            }
+            
+            else {
+            Alert(title: Text(addPostVM.alertTitle), message: Text( addPostVM.alertMessage), dismissButton: .default(Text("Tamam")))
+            }
+        }
         .navigationBarBackButtonHidden(true)
         
     }
@@ -91,7 +138,7 @@ private func AddPostToggle(isAnonimComment : Binding<Bool>)->some View{
 }
 
 @ViewBuilder
-private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,image:AppImage )->some View{
+private func UserTypeImage(showAlert :Binding<Bool> ,alertType: Binding<AlertType>, radius : CGFloat ,image:AppImage )->some View{
     ZStack {
         Rectangle()
             .foregroundColor(.clear)
@@ -103,13 +150,15 @@ private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,ima
             
     }.onTapGesture {
         withAnimation {
-            isPopupVisible.wrappedValue.toggle()
+            alertType.wrappedValue = .anonymous
+            showAlert.wrappedValue.toggle()
+            
         }
     }
 }
 
 @ViewBuilder
- func AddPostAppBar(action : @escaping()->Void ,isShareActive : Binding<Bool>) -> some View{
+func AddPostAppBar(addpostVM: AddPostViewModel, action : @escaping()->Void) -> some View{
     HStack{
         Buttons.backButton {
             action()
@@ -120,7 +169,13 @@ private func UserTypeImage(isPopupVisible :Binding<Bool> , radius : CGFloat ,ima
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
         Spacer()
         Button(action: {
-            isShareActive.wrappedValue = true
+           
+        
+            addpostVM.alertType = .approval
+            addpostVM.showAlert.toggle()
+           
+            
+            
         }, label: {
             Text("Paylaş")
                 .foregroundColor(.green)

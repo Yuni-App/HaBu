@@ -25,7 +25,8 @@ class AuthService : ObservableObject , AuthProvider {
     func checkUser() async {
         do {
             if let currentUser = Auth.auth().currentUser{
-                self.user = currentUser
+                AuthService.shared.user = currentUser
+              
             }
         }
     }
@@ -36,7 +37,10 @@ class AuthService : ObservableObject , AuthProvider {
         do {
             // Firebase Authentication üzerinde kullanıcı oluştur
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+            
             try await authResult.user.sendEmailVerification()
+            print("sdfgfsfdsdff")
+
             try await createUserCollection(authResult: authResult, email: email, password: password, username: username)
         } catch let error as NSError{
                 print("Auth Hata Kodu: \(error.code)")
@@ -48,9 +52,14 @@ class AuthService : ObservableObject , AuthProvider {
     //TODO: CREATE USER COLLECTİON FİELD 
     func createUserCollection(authResult : AuthDataResult,email: String, password: String, username: String) async throws{
         do{
-            self.user = authResult.user
+            
+          
+         
             let uid = authResult.user.uid
             let userCollection = Firestore.firestore().collection("user")
+            print("sdfgfsfdsdff")
+            print(uid)
+            
             try await userCollection.document(uid).setData([
                 "email": email,
                 "username": username,
@@ -60,10 +69,15 @@ class AuthService : ObservableObject , AuthProvider {
                 "faculty": "",
                 "id": uid,
                 "password": password,
-                "profile_images":  [],
+                "profile_images": [],
                 "register_year": "",
-                "surname":"",
+                "surname": ""
             ])
+            
+            
+            try Auth.auth().signOut()
+            AuthService.shared.user = nil
+         
         }
     }
     
@@ -74,7 +88,8 @@ class AuthService : ObservableObject , AuthProvider {
             print("burada")
             if result.user.isEmailVerified {
                 // Kullanıcının e-posta adresi doğrulanmış
-                self.user = result.user
+        
+                AuthService.shared.user = result.user
                 print("Kullanıcının e-posta adresi doğrulandı.")
             } else {
                 print("Kullanıcının e-posta adresi henüz doğrulanmamış.")
@@ -93,6 +108,7 @@ class AuthService : ObservableObject , AuthProvider {
     func logOut() async throws -> Void{
         do {
             try Auth.auth().signOut()
+            AuthService.shared.user = nil
         } catch let error {
             print("Auth Hata : \(error)")
         }

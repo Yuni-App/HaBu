@@ -90,6 +90,8 @@
 		94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */; };
+		94C617EC2B444BF5009F2A6F /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C617EB2B444BF5009F2A6F /* AddPostViewModel.swift */; };
+		94C617EE2B44594A009F2A6F /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C617ED2B44594A009F2A6F /* PostService.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
@@ -177,6 +179,8 @@
 		94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlurModifier.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
+		94C617EB2B444BF5009F2A6F /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
+		94C617ED2B44594A009F2A6F /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +379,7 @@
 				5C5EB7762B31CF78001D2370 /* UserService.swift */,
 				9439A8822B322F28005D0E20 /* AuthService.swift */,
 				5CB8E8F22B37361B00EC04B3 /* ImageUploader.swift */,
+				94C617ED2B44594A009F2A6F /* PostService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 		94808CCF2B0CE5CA00CC51FD /* AddPost */ = {
 			isa = PBXGroup;
 			children = (
+				94C617EA2B444BDF009F2A6F /* ViewModel */,
 				94808CD02B0CE5E400CC51FD /* View */,
 			);
 			path = AddPost;
@@ -764,6 +770,14 @@
 			isa = PBXGroup;
 			children = (
 				9446D3CA2B38BA390054CFB5 /* LogOutViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		94C617EA2B444BDF009F2A6F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				94C617EB2B444BF5009F2A6F /* AddPostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -901,6 +915,7 @@
 				5CB8E8F32B37361B00EC04B3 /* ImageUploader.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */,
+				94C617EC2B444BF5009F2A6F /* AddPostViewModel.swift in Sources */,
 				947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */,
 				943FB8E02B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
@@ -922,6 +937,7 @@
 				9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
+				94C617EE2B44594A009F2A6F /* PostService.swift in Sources */,
 				9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */,
 				883CD0712B20E03200E0B757 /* FeedBackInput.swift in Sources */,
 				88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */,
