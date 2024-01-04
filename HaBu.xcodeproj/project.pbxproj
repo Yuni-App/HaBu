@@ -32,7 +32,6 @@
 		5C5EB77B2B31D429001D2370 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5EB77A2B31D429001D2370 /* EditProfileViewModel.swift */; };
 		5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F523C2B128CC700D79208 /* CategoryFilterBottomSheet.swift */; };
 		5C6F523F2B128CF000D79208 /* TagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F523E2B128CF000D79208 /* TagLayout.swift */; };
-		5C86CB5C2B3F8E4E00AA865B /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86CB5B2B3F8E4E00AA865B /* RootViewModel.swift */; };
 		5C8792DE2B2FB967007D288E /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8792DD2B2FB967007D288E /* Toast.swift */; };
 		5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */; };
 		5CA6AC4C2B34A4AB00EA294E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA6AC4B2B34A4AB00EA294E /* ProfileViewModel.swift */; };
@@ -120,7 +119,6 @@
 		5C5EB77A2B31D429001D2370 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		5C6F523C2B128CC700D79208 /* CategoryFilterBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterBottomSheet.swift; sourceTree = "<group>"; };
 		5C6F523E2B128CF000D79208 /* TagLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLayout.swift; sourceTree = "<group>"; };
-		5C86CB5B2B3F8E4E00AA865B /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		5C8792DD2B2FB967007D288E /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDRotateFeedViewCell.swift; sourceTree = "<group>"; };
 		5CA6AC4B2B34A4AB00EA294E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -226,6 +224,8 @@
 				5C2658582B03C451008BEB6D /* Core */,
 				94D588E52B03B6FD006327A3 /* Model */,
 				5C2658412B03B431008BEB6D /* Assets.xcassets */,
+				5C26583F2B03B430008BEB6D /* ContentView.swift */,
+				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
 				5C5EB7732B31CCB7001D2370 /* GoogleService-Info.plist */,
 				5C2658432B03B431008BEB6D /* Preview Content */,
 			);
@@ -254,7 +254,6 @@
 				949016D32B04189C00164405 /* Authentication */,
 				94CCABE52B03C7AD00DCFB51 /* Components */,
 				5C2658592B03C45C008BEB6D /* Feed */,
-				5C86CB582B3F8DEA00AA865B /* Root */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -403,32 +402,6 @@
 				5C6F523E2B128CF000D79208 /* TagLayout.swift */,
 			);
 			path = CategoryFilter;
-			sourceTree = "<group>";
-		};
-		5C86CB582B3F8DEA00AA865B /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				5C86CB5A2B3F8E3600AA865B /* ViewModel */,
-				5C86CB592B3F8E2900AA865B /* View */,
-			);
-			path = Root;
-			sourceTree = "<group>";
-		};
-		5C86CB592B3F8E2900AA865B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
-				5C26583F2B03B430008BEB6D /* ContentView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5C86CB5A2B3F8E3600AA865B /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				5C86CB5B2B3F8E4E00AA865B /* RootViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5CA6AC4A2B34A49D00EA294E /* ViewModel */ = {
@@ -909,7 +882,6 @@
 				5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */,
 				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
 				883CD0732B20E04200E0B757 /* FeedBackSuccess.swift in Sources */,
-				5C86CB5C2B3F8E4E00AA865B /* RootViewModel.swift in Sources */,
 				948338622B1DC0ED006964BB /* TextFields.swift in Sources */,
 				94686A0F2B3980950089C7CD /* RegisterView.swift in Sources */,
 				947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */,
