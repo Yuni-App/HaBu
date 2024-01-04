@@ -16,46 +16,31 @@ protocol AuthProvider {
     func logOut() async throws -> Void
 }
 
+@MainActor
 class AuthService : ObservableObject , AuthProvider {
     static let shared = AuthService()
-    @Published var currentUser : User?
-    @Published var userSession: FirebaseAuth.User?
+    @Published var user: FirebaseAuth.User?
     
-    init() {
-        Task{
-          await checkUser()
-          try await loadUserData()
-        }
-    }
     //TODO: USER CHECK
-    @MainActor
     func checkUser() async {
         do {
-            if let userSession = Auth.auth().currentUser{
-                self.userSession = userSession
+            if let currentUser = Auth.auth().currentUser{
+                AuthService.shared.user = currentUser
+              
             }
         }
     }
     
-    @MainActor
-    func loadUserData()async throws{
-        self.userSession = Auth.auth().currentUser
-        guard let currentUid = self.userSession?.uid else {return }
-        
-        self.currentUser = try await UserService.fetchUser(withUserID: currentUid)
-        print(currentUser)
-    
-         
-    }
-    
     
     //TODO: CREATE USER METHOD
-    @MainActor
     func createUser(email: String, password: String, username: String) async throws {
         do {
             // Firebase Authentication üzerinde kullanıcı oluştur
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+            
             try await authResult.user.sendEmailVerification()
+            print("sdfgfsfdsdff")
+
             try await createUserCollection(authResult: authResult, email: email, password: password, username: username)
         } catch let error as NSError{
                 print("Auth Hata Kodu: \(error.code)")
@@ -67,16 +52,29 @@ class AuthService : ObservableObject , AuthProvider {
     //TODO: CREATE USER COLLECTİON FİELD 
     @MainActor
     func createUserCollection(authResult : AuthDataResult,email: String, password: String, username: String) async throws{
-      do{
-            self.userSession = authResult.user
+        do{
+            
+          
+         
             let uid = authResult.user.uid
             let userCollection = Firestore.firestore().collection("user")
+            print("sdfgfsfdsdff")
+            print(uid)
+            
             try await userCollection.document(uid).setData([
                 "email": email,
                 "username": username,
                 "id": uid,
                 "password": password,
+                "profile_images": [],
+                "register_year": "",
+                "surname": ""
             ])
+            
+            
+            try Auth.auth().signOut()
+            AuthService.shared.user = nil
+         
         }
     }
     
@@ -87,7 +85,8 @@ class AuthService : ObservableObject , AuthProvider {
             print("burada")
             if result.user.isEmailVerified {
                 // Kullanıcının e-posta adresi doğrulanmış
-                self.userSession = result.user
+        
+                AuthService.shared.user = result.user
                 print("Kullanıcının e-posta adresi doğrulandı.")
             } else {
                 print("Kullanıcının e-posta adresi henüz doğrulanmamış.")
@@ -106,6 +105,7 @@ class AuthService : ObservableObject , AuthProvider {
     func logOut() async throws -> Void{
         do {
             try Auth.auth().signOut()
+            AuthService.shared.user = nil
         } catch let error {
             print("Auth Hata : \(error)")
         }
