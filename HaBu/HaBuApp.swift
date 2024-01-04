@@ -19,30 +19,26 @@ struct HaBuApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authService = AuthService.shared
     @State private var isLoading = true
-    @StateObject var rootVM = RootViewModel()
+
        var body: some Scene {
            WindowGroup {
                Group {
                    NavigationStack{
-                       if rootVM.userSession == nil {
-                           SplashView()
-                       } 
-                       else {
-                           if authService.userSession != nil {
+                       if isLoading {
+  //                         SplashView()
+                       } else {
+                           if authService.user != nil {
                                TabbarView()
                            } else {
                                ContentView()
                            }
                        }
                    }
-                   .task {
-                       print(rootVM.userSession)
-                   }
                }
-               .task {
-                   Task{
-                       let user = try await UserService.fetchUser(withUserID: "5S0ngdVuL2XjlFYoD2KQa4qVAJg1")
-                       print(user.name)
+               .onAppear {
+                   Task {
+                       await authService.checkUser()
+                       isLoading = false
                    }
                }
            }
