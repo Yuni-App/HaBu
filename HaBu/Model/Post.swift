@@ -78,3 +78,51 @@ extension Post {
    }
  }
  */
+
+
+/*
+ 
+ 
+ how many posts to show on the screen
+ 
+ 
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
+class ViewModel: ObservableObject{
+    @Published var documents: [DocumentSnapShot] = []
+    let db = Firestore.firestore()
+    
+   //burada n sayısı ekranda kaç tane göstermek istiyoruz onu belirtmek için kullanıyoruz
+   //30 tane yazarsak ekranda 30 tane gösterecek bu sayıyla değiştiriyoruz
+    func loadPosts(amount n : Int ){
+        var  query :Query
+        if documents.count > 0{
+            query = db.collection("posts").order(by: "createdTime", descending: true)
+                .limit(to: n)
+                .start(afterDocument: documents.last)
+        }else{
+            query = db.collection("posts").order(by: "createdTime", descending: true)
+                .limit(to: n)
+        }
+        query.getDocuments{ querySnapshot, error in
+            guard let documents = querySnapshot?.documents, error == nil else{
+                print("error load posts \(error)")
+                return
+            }
+            self.documents += documents
+            
+        }
+    }
+    func loadPostNeeded(current: DocumentSnapshot, amount n: Int){
+        guard documents.count > 0 && current == documents.last! else{ return }
+        self.loadPosts(amount: n)
+    }
+    
+}
+ 
+*/
+
+ 
+ 
+
