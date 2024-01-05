@@ -125,7 +125,7 @@ struct ProfileGeometry: View {
                                     HStack{
                                         Spacer()
                                         VStack (alignment:.center){
-                                            Text("\(user.name) \(user.surName)")
+                                            Text("\(user.name) \(user.surname)")
                                                 .font(.title3)
                                                 .fontWeight(.semibold)
                                                 .foregroundStyle(.white)

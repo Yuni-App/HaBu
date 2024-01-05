@@ -15,7 +15,7 @@ class EditProfileViewModel : ObservableObject{
     init(user: User) {
         self.user = user
         self.textName = user.name
-        self.textSurName = user.surName
+        self.textSurName = user.surname
         self.textEmail = user.email
         self.textBio = user.bio ?? ""
         self.textPassword = user.password
@@ -95,7 +95,7 @@ class EditProfileViewModel : ObservableObject{
         if user.name != textName && textName.count > 2{
             data["name"] = textName
         }
-        if user.surName != textSurName && textSurName.count > 2{
+        if user.surname != textSurName && textSurName.count > 2{
             data["sur_name"] = textSurName
         }
         if user.bio != textBio && textBio.count > 2{

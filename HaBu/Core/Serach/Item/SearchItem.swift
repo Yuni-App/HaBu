@@ -21,7 +21,7 @@ struct SearchItem: View {
                 Spacer()
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
-                        Text("\(user.name) \(user.surName)")
+                        Text("\(user.name) \(user.surname)")
                             .foregroundStyle(Color.white)
                             .font(.title3).fontWeight(.semibold)
                         Text(user.department).font(.caption2).fontWeight(.semibold).foregroundStyle(Color.white).opacity(0.7)

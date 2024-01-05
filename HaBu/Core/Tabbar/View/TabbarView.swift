@@ -11,8 +11,9 @@ import SwiftUI
 struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
-    let user = AuthService.shared.currentUser
+    @StateObject private var authService = AuthService.shared
     init() {
+       
         UITableView.appearance().isHidden = true
     
     }
@@ -21,7 +22,8 @@ struct TabbarView: View {
 
     }
     var body: some View {
-        if let user = user{
+        
+        if let user = authService.currentUser{
             NavigationStack{
                 GeometryReader{proxy in
                     let bottomEdge = proxy.safeAreaInsets.bottom
@@ -58,8 +60,15 @@ struct TabbarView: View {
             }
         }
         else{
-            ProgressView()
-                   .progressViewStyle(CircularProgressViewStyle())
+            
+            VStack {
+                if let user = authService.user{
+                    Text(authService.user?.email ?? " ")
+                    Text(authService.currentUser?.name ?? "")
+                }
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            }
         }
         
     }
