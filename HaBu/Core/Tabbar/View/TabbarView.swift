@@ -30,7 +30,7 @@ struct TabbarView: View {
                     let topEdge = proxy.safeAreaInsets.leading
                     
                     TabView(selection:$currentTab){
-                        FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
+                        FeedView(bottomEdge: bottomEdge, hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Feed")
                             .toolbar(.hidden, for: .tabBar)
@@ -42,7 +42,7 @@ struct TabbarView: View {
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Notification")
                             .toolbar(.hidden, for: .tabBar)
-                        ProfileView(hideTab: $hideBar, user: user)
+                        ProfileView(hideTab: $hideBar, user: AuthService.shared.currentUser ?? user)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Profile")
                             .toolbar(.hidden, for: .tabBar)
@@ -62,10 +62,6 @@ struct TabbarView: View {
         else{
             
             VStack {
-                if let user = authService.user{
-                    Text(authService.user?.email ?? " ")
-                    Text(authService.currentUser?.name ?? "")
-                }
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
             }

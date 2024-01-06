@@ -51,7 +51,7 @@ struct FeedViewCell: View {
                 //ımage ?? nil
                 if let imageUrl = post.imageUrl{
                     HStack {
-                        KFImage(URL(string: imageUrl))
+                        KFImage(URL(string: imageUrl[0]))
                             .resizable()
                             .frame(width: Const.width * 0.95,height: Const.height * 0.35)
                         .scaledToFill()

@@ -96,7 +96,7 @@ class EditProfileViewModel : ObservableObject{
             data["name"] = textName
         }
         if user.surname != textSurName && textSurName.count > 2{
-            data["sur_name"] = textSurName
+            data["surname"] = textSurName
         }
         if user.bio != textBio && textBio.count > 2{
             data["bio"] = textBio

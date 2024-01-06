@@ -12,8 +12,8 @@ struct User : Identifiable,Codable,Hashable{
     let email : String
     let created_at : String
     var username : String
-    var name : String?
-    var surname : String?
+    var name : String
+    var surname : String
     var password : String
     var profileImageUrl : [String]?
     var bio : String?
