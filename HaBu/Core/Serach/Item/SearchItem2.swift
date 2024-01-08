@@ -26,7 +26,7 @@ struct SearchItem2: View {
                             .stroke(.white, lineWidth: 2)
                     )
                     .frame(width: Const.width * 0.28, height: Const.height * 0.13)
-                    Text("\(user.name) \(user.surName)")
+                    Text("\(user.name) \(user.surname)")
                         .font(.headline)
                         .foregroundStyle(Color.black)
                     HStack {

@@ -19,13 +19,17 @@ struct HaBuApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authService = AuthService.shared
     @State private var isLoading = true
+    
+    init() {
 
+      
+    }
        var body: some Scene {
            WindowGroup {
                Group {
                    NavigationStack{
                        if isLoading {
-  //                         SplashView()
+                           SplashView()
                        } else {
                            if authService.user != nil {
                                TabbarView()
@@ -37,7 +41,7 @@ struct HaBuApp: App {
                }
                .onAppear {
                    Task {
-                       await authService.checkUser()
+                      try await authService.checkUser()
                        isLoading = false
                    }
                }

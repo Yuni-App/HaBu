@@ -11,49 +11,62 @@ import SwiftUI
 struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
+    @StateObject private var authService = AuthService.shared
     init() {
+       
         UITableView.appearance().isHidden = true
     
     }
     init(currentTab:String) {
         UITableView.appearance().isHidden = true
-    
+
     }
     var body: some View {
-        NavigationStack{
-            GeometryReader{proxy in
-                let bottomEdge = proxy.safeAreaInsets.bottom
-                let topEdge = proxy.safeAreaInsets.leading
-                
-                TabView(selection:$currentTab){
-                    FeedView(bottomEdge: bottomEdge, hideTab: $hideBar, topEdge: topEdge)
-                        .frame(maxWidth: .infinity,maxHeight: .infinity)
-                        .tag("Feed")
-                        .toolbar(.hidden, for: .tabBar)
-                    SerachView()
-                        .frame(maxWidth: .infinity,maxHeight: .infinity)
-                        .tag("Search")
-                        .toolbar(.hidden, for: .tabBar)
-                    NotificationView()
-                        .frame(maxWidth: .infinity,maxHeight: .infinity)
-                        .tag("Notification")
-                        .toolbar(.hidden, for: .tabBar)
-                    ProfileView(hideTab: $hideBar, user: User.MockData[0])
-                        .frame(maxWidth: .infinity,maxHeight: .infinity)
-                        .tag("Profile")
-                        .toolbar(.hidden, for: .tabBar)
-                }
-                
-                .navigationBarBackButtonHidden(true)
-                .overlay(
-                    VStack{
-                        CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
+        
+        if let user = authService.currentUser{
+            NavigationStack{
+                GeometryReader{proxy in
+                    let bottomEdge = proxy.safeAreaInsets.bottom
+                    let topEdge = proxy.safeAreaInsets.leading
+                    
+                    TabView(selection:$currentTab){
+                        FeedView(bottomEdge: bottomEdge, hideTab: $hideBar)
+                            .frame(maxWidth: .infinity,maxHeight: .infinity)
+                            .tag("Feed")
+                            .toolbar(.hidden, for: .tabBar)
+                        SerachView()
+                            .frame(maxWidth: .infinity,maxHeight: .infinity)
+                            .tag("Search")
+                            .toolbar(.hidden, for: .tabBar)
+                        NotificationView()
+                            .frame(maxWidth: .infinity,maxHeight: .infinity)
+                            .tag("Notification")
+                            .toolbar(.hidden, for: .tabBar)
+                        ProfileView(hideTab: $hideBar, user: AuthService.shared.currentUser ?? user)
+                            .frame(maxWidth: .infinity,maxHeight: .infinity)
+                            .tag("Profile")
+                            .toolbar(.hidden, for: .tabBar)
                     }
-                        .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
-                    ,alignment: .bottom
-                )
+                    
+                    .navigationBarBackButtonHidden(true)
+                    .overlay(
+                        VStack{
+                            CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
+                        }
+                            .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
+                        ,alignment: .bottom
+                    )
+                }
             }
         }
+        else{
+            
+            VStack {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            }
+        }
+        
     }
 }
 

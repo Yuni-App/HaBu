@@ -13,6 +13,8 @@ struct EditProfileView: View {
     var user: User
     @Environment(\.dismiss) var dismiss
     @StateObject var editProfileVM : EditProfileViewModel
+    @State var navigate = false
+    var destination : AnyView?
     init(user:User){
         self.user = user
         self._editProfileVM = StateObject(wrappedValue: EditProfileViewModel(user: user))
@@ -59,19 +61,19 @@ struct EditProfileView: View {
                         if let images = editProfileVM.images{
                             HStack {
                                 ZStack{
-                                    CircleProfileImage(index: editProfileVM.imageIndices[0], userImage:images.count > 0 ?  images[0] : nil)
+                                    CircleProfileImage(index: editProfileVM.imageIndices[1], userImage:images.count > 0 ?  images[0] : nil)
                                         .onTapGesture {
                                             editProfileVM.showGallery = true
                                             editProfileVM.selectedImage = 0
                                         }
                                     
-                                    CircleProfileImage(index: editProfileVM.imageIndices[1], userImage:images.count > 1 ?  images[1] : nil)
+                                    CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:images.count > 1 ?  images[1] : nil)
                                         .onTapGesture {
                                             editProfileVM.showGallery = true
                                             editProfileVM.selectedImage = 1
                                             
                                         }
-                                    CircleProfileImage(index: editProfileVM.imageIndices[2], userImage:images.count > 2 ?  images[2] : nil)
+                                    CircleProfileImage(index: editProfileVM.imageIndices[0], userImage:images.count > 2 ?  images[2] : nil)
                                         .onTapGesture {
                                             editProfileVM.showGallery = true
                                             editProfileVM.selectedImage = 2
@@ -100,10 +102,14 @@ struct EditProfileView: View {
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 
-                Buttons.customButton(title: "Text" , buttonColor: Const.thirColor, size:.lage) {
+                Buttons.customButton(title: "Kaydet" , buttonColor: Const.thirColor, size:.lage) {
                     Task{
                         try await editProfileVM.updateUserData()
+                        try await AuthService.shared.checkUser()
                     }
+                    dismiss()
+                    
+                    
                     
                 }
             }.frame(width: Const.width * 1)

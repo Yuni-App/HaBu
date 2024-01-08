@@ -53,7 +53,7 @@ private func blockedUserListTile(user : User)->some View {
         HStack {
             CircleProfileImage(userIamgeUrl: "", size: .small)
             VStack{
-                Text("\(user.name) \(user.surName)")
+                Text("\(user.name) \(user.surname)")
                     .fontWeight(.semibold)
                     .font(.caption)
                 Text("\(user.username)")
