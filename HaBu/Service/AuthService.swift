@@ -25,7 +25,7 @@ class AuthService : ObservableObject , AuthProvider {
         do {
             if let currentUser = Auth.auth().currentUser{
                 AuthService.shared.user = currentUser
-                AuthService.shared.currentUser = try await UserService.fetchUser(withUserID: "HpPAPu9PVbeerPevBzq0LFPKU6P2")
+                AuthService.shared.currentUser = try await UserService.fetchUser(withUserID: currentUser.uid)
             }
         }
         catch{
