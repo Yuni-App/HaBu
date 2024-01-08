@@ -18,7 +18,7 @@ struct SearchItem3: View {
                 CircleProfileImage(userIamgeUrl: "Mert", size: .xsmall)
                 VStack {
                     HStack {
-                        Text("\(user.name) \(user.surName)").fontWeight(.semibold).foregroundStyle(Color.black)
+                        Text("\(user.name) \(user.surname)").fontWeight(.semibold).foregroundStyle(Color.black)
                         Spacer()
                     }
                     HStack {

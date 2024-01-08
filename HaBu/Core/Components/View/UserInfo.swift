@@ -30,7 +30,7 @@ struct UserInfo: View {
                     HStack {
                         CircleProfileImage(userIamgeUrl: "", size: imageSize)
                         VStack{
-                            Text("\(user.name) \(user.surName)")
+                            Text("\(user.name) \(user.surname)")
                                 .fontWeight(.semibold)
                                 .font(.caption)
                             Text("\(user.username)")
