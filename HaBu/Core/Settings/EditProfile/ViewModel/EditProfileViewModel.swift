@@ -15,7 +15,7 @@ class EditProfileViewModel : ObservableObject{
     init(user: User) {
         self.user = user
         self.textName = user.name
-        self.textSurName = user.surName
+        self.textSurName = user.surname
         self.textEmail = user.email
         self.textBio = user.bio ?? ""
         self.textPassword = user.password
@@ -24,6 +24,9 @@ class EditProfileViewModel : ObservableObject{
                 KFImage(URL(string: imageName))
             }
             self.images = imageList
+        }
+        else{
+            self.images = []
         }
     }
     @Published var selectedItem : PhotosPickerItem?{
@@ -92,8 +95,8 @@ class EditProfileViewModel : ObservableObject{
         if user.name != textName && textName.count > 2{
             data["name"] = textName
         }
-        if user.surName != textSurName && textSurName.count > 2{
-            data["sur_name"] = textSurName
+        if user.surname != textSurName && textSurName.count > 2{
+            data["surname"] = textSurName
         }
         if user.bio != textBio && textBio.count > 2{
             data["bio"] = textBio
@@ -102,11 +105,12 @@ class EditProfileViewModel : ObservableObject{
             data["password"] = textPassword
         }
         if let images = images{
-            imageUrlList = user.profileImageUrl
+            imageUrlList = user.profileImageUrl ?? []
             for i in 0..<images.count{
                 if let image = images[i] as? Image{
                     if let uiImage = image.renderToUiImage(){
                         if let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id){
+                            print(imageUrl)
                             if user.profileImageUrl?.count ?? 0 <= i{
                                 imageUrlList?.append(imageUrl)
                             }

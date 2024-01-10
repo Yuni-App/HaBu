@@ -105,7 +105,7 @@ struct CircleProfileImage: View {
                 
             }
             else{
-                Image(systemName: "person")
+                Image("profil3")
                     .resizable()
                     .clipShape(.rect(cornerRadius: 15))
                     .overlay(

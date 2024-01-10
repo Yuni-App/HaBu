@@ -15,6 +15,7 @@ class ProfileViewModel:ObservableObject{
     init(user:User) {
         self.user = user
         if let profileImageList = user.profileImageUrl{
+            print(profileImageList)
             let imageList = profileImageList.map {imageName in
                 KFImage(URL(string: imageName))
             }

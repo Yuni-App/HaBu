@@ -114,3 +114,34 @@ extension View {
     }
     
 }
+
+extension UIImage {
+    func compress(to maxSizeInKB: Int) -> Data? {
+        var compression: CGFloat = 1.0
+        guard var imageData = self.jpegData(compressionQuality: compression) else {
+            return nil
+        }
+        
+        var resizedImage = self
+        while imageData.count > maxSizeInKB * 1024, compression > 0.1 {
+            compression -= 0.1
+            
+            guard let newImageData = resizedImage.jpegData(compressionQuality: compression) else {
+                break
+            }
+            
+            imageData = newImageData
+            resizedImage = resizedImage.resized(to: CGSize(width: resizedImage.size.width * 0.9, height: resizedImage.size.height * 0.9))
+        }
+        
+        return imageData
+    }
+    
+    func resized(to size: CGSize) -> UIImage {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
+        defer { UIGraphicsEndImageContext() }
+        self.draw(in: rect)
+        return UIGraphicsGetImageFromCurrentImageContext() ?? self
+    }
+}

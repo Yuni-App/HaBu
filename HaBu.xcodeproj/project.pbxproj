@@ -23,6 +23,7 @@
 		5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */; };
 		5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */; };
 		5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */; };
+		5C414C912B484F6E00EF3D79 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C414C902B484F6E00EF3D79 /* FeedViewModel.swift */; };
 		5C5EB74A2B31CC8E001D2370 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5C5EB7492B31CC8E001D2370 /* FirebaseAuth */; };
 		5C5EB7562B31CC8E001D2370 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5C5EB7552B31CC8E001D2370 /* FirebaseFirestore */; };
 		5C5EB75A2B31CC8E001D2370 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C5EB7592B31CC8E001D2370 /* FirebaseFirestoreSwift */; };
@@ -116,6 +117,7 @@
 		5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBottomSheet.swift; sourceTree = "<group>"; };
 		5C2DAB5C2B052AE100C6E145 /* IGTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextFieldModifier.swift; sourceTree = "<group>"; };
 		5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
+		5C414C902B484F6E00EF3D79 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		5C5EB7732B31CCB7001D2370 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C5EB7762B31CF78001D2370 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		5C5EB77A2B31D429001D2370 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
@@ -227,9 +229,9 @@
 				5C26585D2B03C50C008BEB6D /* App */,
 				5C2658582B03C451008BEB6D /* Core */,
 				94D588E52B03B6FD006327A3 /* Model */,
-				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
-				5C26583F2B03B430008BEB6D /* ContentView.swift */,
 				5C2658412B03B431008BEB6D /* Assets.xcassets */,
+				5C26583F2B03B430008BEB6D /* ContentView.swift */,
+				5C26583D2B03B430008BEB6D /* HaBuApp.swift */,
 				5C5EB7732B31CCB7001D2370 /* GoogleService-Info.plist */,
 				5C2658432B03B431008BEB6D /* Preview Content */,
 			);
@@ -265,6 +267,7 @@
 		5C2658592B03C45C008BEB6D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				5C414C8F2B484F5F00EF3D79 /* ViewModel */,
 				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 				5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */,
 				5C2DAB582B05238B00C6E145 /* CommentBottomSheet.swift */,
@@ -371,6 +374,14 @@
 				5C2DAB562B050FC500C6E145 /* NotificationView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5C414C8F2B484F5F00EF3D79 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5C414C902B484F6E00EF3D79 /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5C5EB7752B31CF67001D2370 /* Service */ = {
@@ -918,6 +929,7 @@
 				94C617EC2B444BF5009F2A6F /* AddPostViewModel.swift in Sources */,
 				947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */,
 				943FB8E02B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift in Sources */,
+				5C414C912B484F6E00EF3D79 /* FeedViewModel.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
 				88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */,
 				88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */,

@@ -15,19 +15,21 @@ protocol AuthProvider {
     func forgotPassword(email: String) async throws -> Void
     func logOut() async throws -> Void
 }
-
 @MainActor
 class AuthService : ObservableObject , AuthProvider {
     static let shared = AuthService()
     @Published var user: FirebaseAuth.User?
-    
+    @Published var currentUser : User?
     //TODO: USER CHECK
-    func checkUser() async {
+    func checkUser() async throws {
         do {
             if let currentUser = Auth.auth().currentUser{
                 AuthService.shared.user = currentUser
-              
+                AuthService.shared.currentUser = try await UserService.fetchUser(withUserID: currentUser.uid)
             }
+        }
+        catch{
+            print(error)
         }
     }
     
@@ -50,6 +52,7 @@ class AuthService : ObservableObject , AuthProvider {
     }
 
     //TODO: CREATE USER COLLECTİON FİELD 
+    @MainActor
     func createUserCollection(authResult : AuthDataResult,email: String, password: String, username: String) async throws{
         do{
             
@@ -57,24 +60,19 @@ class AuthService : ObservableObject , AuthProvider {
          
             let uid = authResult.user.uid
             let userCollection = Firestore.firestore().collection("user")
-            print("sdfgfsfdsdff")
-            print(uid)
             
             try await userCollection.document(uid).setData([
-                "email": email,
-                "username": username,
-                "bio": "",
-                "created_at": "",
-                "depertmant": "",
-                "faculty": "",
                 "id": uid,
+                "email": email,
+                "created_at":"",
+                "username": username,
+                "name":"",
+                "surname": "",
                 "password": password,
-                "profile_images": [],
                 "register_year": "",
-                "surname": ""
+                "rating": 0.0,
+                "department":""
             ])
-            
-            
             try Auth.auth().signOut()
             AuthService.shared.user = nil
          
@@ -125,43 +123,5 @@ class AuthService : ObservableObject , AuthProvider {
             throw error
         }
     }
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
- 
-    
- 
-    
 
 }

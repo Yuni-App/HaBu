@@ -20,7 +20,7 @@ struct SecondSearchView: View {
         if isSearchBar{
             return User.MockData.filter {
                 $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.surName.localizedCaseInsensitiveContains(searchText) ||
+                $0.surname.localizedCaseInsensitiveContains(searchText) ||
                 $0.username.localizedCaseInsensitiveContains(searchText)
             }
         }else {
