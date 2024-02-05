@@ -18,7 +18,7 @@ protocol PostProvider{
 class PostService : PostProvider{
 
     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool) async throws {
-         let authService = AuthService.shared
+        let authService = AuthService.shared
         do {
             let userCollection = Firestore.firestore().collection("post")
             let documentReference = userCollection.document()

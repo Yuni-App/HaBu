@@ -90,10 +90,10 @@ struct ProfileGeometry: View {
                                         }, label: {
                                             Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
                                         })
-                                        .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
+                                       
                                         
                                         .padding()
-                                    }
+                                    } .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
                                     
                                     // rating and post count
                                     HStack{

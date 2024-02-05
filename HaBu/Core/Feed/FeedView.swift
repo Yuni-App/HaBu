@@ -36,10 +36,10 @@ struct FeedView: View {
                         VStack (alignment:.leading){
                             ForEach(feedVM.posts , id: \.id){post in
                                  FeedViewCell(post: post,user: User.MockData[0])
-                                 
                                  Divider()
                              }
-                         }.padding(.top,Const.height * 0.12)
+                         }
+                        .padding(.top,Const.height * 0.12)
                             .overlay(
                                 GeometryReader{proxy -> Color in
                                     let minY = proxy.frame(in: .named("SCROLL")).minY
@@ -77,6 +77,7 @@ struct FeedView: View {
                   
                     
                 }
+                
                 .coordinateSpace(name:"SCROLL")
                 //TollBar
                 .overlay(
