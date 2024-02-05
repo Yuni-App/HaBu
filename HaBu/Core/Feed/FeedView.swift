@@ -36,7 +36,6 @@ struct FeedView: View {
                         VStack (alignment:.leading){
                             ForEach(feedVM.posts , id: \.id){post in
                                  FeedViewCell(post: post,user: User.MockData[0])
-                                 
                                  Divider()
                              }
                          }
@@ -78,9 +77,7 @@ struct FeedView: View {
                   
                     
                 }
-                .refreshable {
-                    print("refresh")
-                }
+                
                 .coordinateSpace(name:"SCROLL")
                 //TollBar
                 .overlay(
