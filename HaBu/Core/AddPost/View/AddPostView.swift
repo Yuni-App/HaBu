@@ -7,11 +7,7 @@
 
 import SwiftUI
 
-enum ImageType {
-    case notSelected
-    case anonymous
-    case notAnonymous
-}
+
 
 struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
@@ -61,7 +57,7 @@ struct AddPostView: View {
                     AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
                     AddPostMedia()
                 }
-            } .navigationDestination(isPresented: $addPostVM.isShareActive, destination: {
+            } .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
                 TabbarView()
             })
          
@@ -74,7 +70,6 @@ struct AddPostView: View {
                             Text("Anonim"),
                             action: {
                                 addPostVM.isAnonimType = .anonymous
-                                // Burada birinci butona basıldığında yapılacak işlemleri ekleyebilirsiniz.
                                 print("Anonim seçildi.")
                             }
                         ),
@@ -82,7 +77,6 @@ struct AddPostView: View {
                             Text("Profili Göster"),
                             action: {
                                 addPostVM.isAnonimType = .notAnonymous
-                                // Burada ikinci butona basıldığında yapılacak işlemleri ekleyebilirsiniz.
                                 print("Profili Göster seçildi.")
                             }
                         )
@@ -93,26 +87,26 @@ struct AddPostView: View {
                         primaryButton: .default(
                             Text("Onayla"),
                             action: {
+                                addPostVM.isShare = true
                                 Task{
-                                     await addPostVM.createPost()
+                                   await addPostVM.createPost()
                                 }
-                                addPostVM.isShareActive = true
-                         
                             }
                         ),
-                        
                         secondaryButton: .cancel(
                             Text("İptal"),
                             action: {
-                                addPostVM.isShareActive = false
-                            
+                                addPostVM.isShare = false
                             }
                         )
                     )
             }
+            else if (addPostVM.alertType == .errorAlert){
+                Alert(title: Text(addPostVM.alertTitle), message: Text( addPostVM.alertMessage), dismissButton: .default(Text("Tamam")))
+            }
             
             else {
-            Alert(title: Text(addPostVM.alertTitle), message: Text( addPostVM.alertMessage), dismissButton: .default(Text("Tamam")))
+            Alert(title: Text("Hata!!"), message: Text("Beklenmedik Bir Hata Oluştu. Tekrar Deneyin.."), dismissButton: .default(Text("Tamam")))
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -169,13 +163,9 @@ func AddPostAppBar(addpostVM: AddPostViewModel, action : @escaping()->Void) -> s
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
         Spacer()
         Button(action: {
-           
-        
-            addpostVM.alertType = .approval
-            addpostVM.showAlert.toggle()
-           
-            
-            
+            Task{
+                await addpostVM.checkTextFields()
+            }
         }, label: {
             Text("Paylaş")
                 .foregroundColor(.green)
@@ -296,4 +286,9 @@ struct AddPostCategory: View {
 
         }
     }
+}
+enum ImageType {
+    case notSelected
+    case anonymous
+    case notAnonymous
 }

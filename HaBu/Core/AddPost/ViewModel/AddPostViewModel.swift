@@ -7,6 +7,7 @@
 
 import Foundation
 enum AlertType {
+    case notSelected
     case errorAlert
     case anonymous
     case approval
@@ -15,66 +16,67 @@ enum AlertType {
 class AddPostViewModel : ObservableObject {
     @Published var textContent = ""
     @Published var SelectedTags : [String] = []
-  
-    @Published var isShareActive = false
+    
+    @Published var isShare = false
+    @Published var isShareSuccess = false
+
     @Published var isAnonimComment = false
- 
+    @Published var isAnonimType : ImageType = .notSelected
+    
     @Published var showAlert = false
     @Published var alertTitle = ""
     @Published var alertMessage = ""
-    @Published var alertType : AlertType = .anonymous
-    
-    @Published var isAnonimType : ImageType = .notSelected
-    
+    @Published var alertType : AlertType = .notSelected
    
     private var postService: PostService
     init(postService: PostService) {
         self.postService = postService
     }
     
+    func checkTextFields()  async{
+        guard !textContent.isEmpty else {
+            showAlert = true
+            alertTitle = "HATA"
+            alertType = .errorAlert
+            alertMessage = "Boş paylaşım yapamazsınız!"
+            return
+        }
+        guard isAnonimType != .notSelected else {
+            showAlert = true
+            alertTitle = "HATA"
+            alertType = .errorAlert
+            alertMessage = "Lütfen anonimlik türünü seçiniz"
+            return
+        }
+        guard SelectedTags.count != 0  else {
+            showAlert = true
+            alertTitle = "HATA"
+            alertType = .errorAlert
+            alertMessage = "En az bir tane kategori seçmelisiniz!"
+            return
+        }
+       
+        showAlert = true
+        alertTitle = ""
+        alertMessage = ""
+        alertType = .approval
+    }
 
+    
+    
     func createPost() async {
+        guard isShare  else {
+            return
+        }
         do {
-            guard !textContent.isEmpty else {
-                showAlert = true
-                alertTitle = "HATA"
-                alertType = .errorAlert
-                alertMessage = "Boş paylaşım yapamazsınız!"
-                return
-            }
-            guard isAnonimType != .notSelected else {
-                showAlert = true
-                alertTitle = "HATA"
-                alertType = .errorAlert
-                alertMessage = "lütfen anonimlik türünü seçiniz"
-                return
-            } 
-            guard SelectedTags.count != 0  else {
-                showAlert = true
-                alertTitle = "HATA"
-                alertType = .errorAlert
-                alertMessage = "En az bir tane kategori seçmelisiniz!"
-                return
-            }
-            print("burada")
-            
             let isAnonim = (isAnonimType == .anonymous) ? true : false
-
-            print(textContent)
-            print(SelectedTags)
-            print(isAnonimComment)
-            print(isAnonim)
-            
             try await postService.createPost(textContent: textContent, selectedTags: SelectedTags, isAnonimComment: isAnonimComment, isAnonim: isAnonim)
-           
-           
+                isShareSuccess = true
         } catch{
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
             alertMessage = "Bir hata oluştu!"
-         
-          
         }
     }
     

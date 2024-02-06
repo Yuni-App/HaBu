@@ -45,13 +45,16 @@ class PostService : PostProvider{
             try await documentReference.setData([
                 "id": documentReference.documentID,
                 "userId": authService.user?.uid,
-                "isAnonim": isAnonim,
-                "isAnonimComment": isAnonimComment,
                 "caption": textContent,
-                "tags": selectedTags,
                 "imageUrl": ["https://example.com/image.jpg","https://example.com/image.jpg"],
                 "timeStamp": FieldValue.serverTimestamp(),
-                "likeList": []
+                "likeList": [],
+                "isAnonim": isAnonim,
+                "isAnonimComment": isAnonimComment,
+                "tags": selectedTags,
+                
+              
+               
             ])
             print("Belge başarıyla eklendi.")
         } catch {
