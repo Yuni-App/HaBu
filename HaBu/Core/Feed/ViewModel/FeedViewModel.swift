@@ -18,7 +18,6 @@ class FeedViewModel : ObservableObject{
     init() {
         Task{
            await requestData()
-            listenForChanges()
         }
     }
     
@@ -27,7 +26,7 @@ class FeedViewModel : ObservableObject{
         self.postsData.onNext(postsFromService)
     }
     
-    private func listenForChanges() {
+    func listenForChanges() {
         listener = Firestore.firestore().collection("post").addSnapshotListener{ [weak self] (snapshot, error) in
                 guard let documents = snapshot?.documents else {
                     print("Error fetching documents: \(error!)")
