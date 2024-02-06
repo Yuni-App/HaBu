@@ -13,7 +13,7 @@ import Kingfisher
 }
 
 struct SlidableImagesView: View {
-    var item : [KFImage]
+    var item : [String]
     @Binding var index : Int
     var size : CGFloat
     var rect : CGRect
@@ -25,7 +25,7 @@ struct SlidableImagesView: View {
           
             if item.count != 0{
                 VStack{
-                    item[index]
+                    KFImage(URL(string: item[index]))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: rect.width-50,height: rect.height-50)

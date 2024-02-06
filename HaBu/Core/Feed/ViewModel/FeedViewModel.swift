@@ -7,37 +7,39 @@
 
 import Foundation
 import Firebase
+import RxSwift
+import RxCocoa
 
 class FeedViewModel : ObservableObject{
-    @Published var  posts : [Post] = []
-    var snapShot: [DocumentSnapshot] =   []
+    var postsData: PublishSubject<[Post]> = PublishSubject()
+    private var listener: ListenerRegistration?
+
+    
     init() {
         Task{
-            try await fetchPosts()
-            await snapShotToPost()
+           await requestData()
+            listenForChanges()
         }
     }
-    @MainActor
-    func fetchPosts() async throws{
-        var snapshot : [DocumentSnapshot] = []
-        if  self.snapShot.count > 1 {
-          if let lastDocument = snapshot.last{
-              let data = try await Firestore.firestore().collection("post").order(by: "timeStap",descending: true).start(afterDocument: lastDocument).limit(to: 20).getDocuments()
-              snapshot.append(contentsOf: data.documents)
-          }
+    
+    func requestData() async{
+        let postsFromService = await PostService().fetchPosts()
+        self.postsData.onNext(postsFromService)
+    }
+    
+    private func listenForChanges() {
+        listener = Firestore.firestore().collection("post").addSnapshotListener{ [weak self] (snapshot, error) in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                
+                let posts = documents.compactMap({try? $0.data(as:Post.self)})
+                self?.postsData.onNext(posts)
+            }
         }
-        else{
-            let data = try await Firestore.firestore().collection("post").order(by: "timeStamp",descending: true).limit(to: 20).getDocuments()
-            snapshot = data.documents
-        }
-        self.snapShot.append(contentsOf:snapshot)
         
-    }
-    @MainActor
-    func snapShotToPost(){
-        let data  = self.snapShot.compactMap({try? $0.data(as:Post.self)})
-        print(snapShot)
-        posts.append(contentsOf: data)
-        print(posts)
-    }
+        deinit {
+            listener?.remove()
+        }
 }
