@@ -68,3 +68,17 @@ struct SearchItem: View {
     SearchItem(user: User.MockData[0], ratingSorted: true)
 }
 
+/*
+ HStack{
+                 Spacer()
+                 VStack(alignment: .leading) {
+                     VStack(alignment: .leading) {
+                         Text("\(user.name) \(user.surname)")
+                             .foregroundStyle(Color.white)
+                             .font(.title3).fontWeight(.semibold)
+                         if let classifiedID = user.classifyIDFromEmail() {
+                             Text(classifiedID).font(.caption2).fontWeight(.semibold).foregroundStyle(Color.white).opacity(0.7)
+                         }
+                     }
+             
+ */
