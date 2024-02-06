@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import RxSwift
+import RxCocoa
 
 struct FeedView: View {
     @StateObject var  feedVM = FeedViewModel()
@@ -18,23 +20,35 @@ struct FeedView: View {
     @State var addPostButtonPosition = CGPoint(x: 10, y: 20)
     @State var navigate = false
     @State var navigationPage : AnyView? = nil
+    let disposeBag = DisposeBag()
+    @State var posts = [Post]()
+    
+    private func setupBinding(){
+        print("func")
+        feedVM
+            .postsData
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe { posts in
+                self.posts = posts
+            }.disposed(by: disposeBag)
+    }
     var body: some View {
             VStack {
                 ScrollView(.vertical,showsIndicators: false){
-                    if feedVM.posts == []{
+                    if posts == []{
                         
-                          VStack (alignment:.center){
-                              HStack(spacing:20){
-                                  ProgressView()
-                                  Text(" Yükleniyor")
-                              }
-                              .padding(.top,Const.height * 0.12)
-                         }
-                          .frame(width: Const.width)
+                        VStack (alignment:.center){
+                            HStack(spacing:20){
+                                ProgressView()
+                                Text(" Yükleniyor")
+                            }
+                            .padding(.top,Const.height * 0.12)
+                        }
+                        .frame(width: Const.width)
                     }
                     else{
                         VStack (alignment:.leading){
-                            ForEach(feedVM.posts , id: \.id){post in
+                            ForEach(posts , id: \.id){post in
                                  FeedViewCell(post: post,user: User.MockData[0])
                                  Divider()
                              }
@@ -77,6 +91,10 @@ struct FeedView: View {
                   
                     
                 }
+                .onAppear{
+                    print("deneme")
+                    setupBinding()
+                }
                 
                 .coordinateSpace(name:"SCROLL")
                 //TollBar
@@ -101,6 +119,7 @@ struct FeedView: View {
                         .presentationDetents([.height(Const.height * 0.6)])
                 }
             }
+          
         .navigationDestination(isPresented: $navigate) {
             navigationPage
         }
