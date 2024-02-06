@@ -16,12 +16,8 @@ class ProfileViewModel:ObservableObject{
         self.user = user
         if let profileImageList = user.profileImageUrl{
             print(profileImageList)
-            let imageList = profileImageList.map {imageName in
-                KFImage(URL(string: imageName))
-            }
-            self.images = imageList
+            self.images = profileImageList
         }
-        
     }
     @Published var user:User
     @Published var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
@@ -32,6 +28,6 @@ class ProfileViewModel:ObservableObject{
     @Published var topEdge:CGFloat = Const.height * 0.03
     let maxHeight = UIScreen.main.bounds.height / 2.7
     @Published var imageCount = 0
-    @Published var images :[KFImage]?
+    @Published var images :[String]?
     @Published var imagesData:[Data]?
 }
