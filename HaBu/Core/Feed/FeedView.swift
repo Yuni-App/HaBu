@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import RxSwift
+import RxCocoa
 
 struct FeedView: View {
     @StateObject var  feedVM = FeedViewModel()
@@ -14,95 +16,142 @@ struct FeedView: View {
     @Binding var hideTab:Bool
     @State var offset:CGFloat = 0
     @State var lastOffset:CGFloat = 0
+    @State var lastOffsetPositive:CGFloat = 0
     @State var messageBox = 20
     @State var addPostButtonPosition = CGPoint(x: 10, y: 20)
     @State var navigate = false
     @State var navigationPage : AnyView? = nil
+    let disposeBag = DisposeBag()
+    @State var posts = [Post]()
+    @State private var yOffset : CGFloat = 0
+    @State private var previousyOffset : CGFloat = 0
+    @State var show :Bool = true
+
+    
+    func detectScrollOffset()-> some View{
+        DispatchQueue.main.async {
+            print(lastOffsetPositive)
+            if offset > 50{
+                
+            }
+        
+        }
+        return Color.clear
+    }
+    private func setupBinding(){
+        feedVM
+            .postsData
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe { posts in
+                self.posts = posts
+            }.disposed(by: disposeBag)
+    }
     var body: some View {
+        
+        ZStack {
+            ZStack{
+                ProgressView()
+                    .padding(.bottom,Const.height * 0.8)
+                    .opacity(offset > 30 ? 1:0)
+
+            }
+            .zIndex(12)
             VStack {
-                ScrollView(.vertical,showsIndicators: false){
-                    if feedVM.posts == []{
-                        
-                          VStack (alignment:.center){
-                              HStack(spacing:20){
-                                  ProgressView()
-                                  Text(" Yükleniyor")
-                              }
-                              .padding(.top,Const.height * 0.12)
-                         }
-                          .frame(width: Const.width)
-                    }
-                    else{
-                        VStack (alignment:.leading){
-                            ForEach(feedVM.posts , id: \.id){post in
-                                 FeedViewCell(post: post,user: User.MockData[0])
-                                 Divider()
+                    ScrollView(.vertical,showsIndicators: false){
+                        if posts == []{
+                            
+                            VStack (alignment:.center){
+                                HStack(spacing:20){
+                                    ZStack{
+                                       ProgressView()
+                                    }
+                                    Text(" Yükleniyor..")
+                                }
+                                .padding(.top,Const.height * 0.12)
+                            }
+                            .frame(width: Const.width)
+                        }
+                        else{
+                            VStack (alignment:.leading){
+                                ForEach(posts , id: \.id){post in
+                                     FeedViewCell(post: post,user: User.MockData[0])
+                                     Divider()
+                                 }
                              }
-                         }
-                        .padding(.top,Const.height * 0.12)
-                            .overlay(
-                                GeometryReader{proxy -> Color in
-                                    let minY = proxy.frame(in: .named("SCROLL")).minY
-                                    let durationOffset: CGFloat = 35
-                                    DispatchQueue.main.async {
-                                        print(minY)
-                                        if minY < offset{
-                                    
-                                            if offset < 0 && -minY > (lastOffset + durationOffset){
-                                                withAnimation(.easeOut ){
-                                                    print(offset)
-                                                    hideTab = true
+                            .padding(.top,Const.height * 0.12)
+                                .overlay(
+                                    GeometryReader{proxy -> Color in
+                                        let minY = proxy.frame(in: .named("SCROLL")).minY
+                                        let durationOffset: CGFloat = 35
+                                        DispatchQueue.main.async {
+                                            if minY < offset{
+                                                if offset < 0 && -minY > (lastOffset + durationOffset){
+                                                    withAnimation(.easeOut ){
+                                                        hideTab = true
+                                                    }
+                                                    lastOffset = -offset
+                                                }
+                                               
+                                                
+                                            }
+                                            if offset > 0 && minY > lastOffsetPositive{
+                                                lastOffsetPositive = offset
+                                            }
+                                            if minY > offset && -minY < (lastOffset - durationOffset){
+                                                withAnimation(.easeOut){
+                                                    hideTab = false
                                                 }
                                                 lastOffset = -offset
+                                                
                                             }
-                                            
+                                           
+                                            self.offset = minY
                                         }
-                                        if minY > offset && -minY < (lastOffset - durationOffset){
-                                            withAnimation(.easeOut){
-                                                hideTab = false
-                                            }
-                                            lastOffset = -offset
-                                            
-                                        }
-                                        self.offset = minY
+                                        return Color.clear
+                                        
                                     }
-                                    return Color.clear
                                     
-                                }
-                                
-                            )
-                            .padding()
-                            .padding(.bottom,15 + bottomEdge + 35)
+                                )
+                                .padding()
+                                .padding(.bottom,15 + bottomEdge + 35)
+                        }
+                      
+                        
                     }
-                  
+                    .background(GeometryReader{_ in 
+                        self.detectScrollOffset()
+                    })
+                    .onAppear{
+                        setupBinding()
+                    }
                     
+                    .coordinateSpace(name:"SCROLL")
+                    //TollBar
+                    .overlay(
+                        FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
+                            .background(.white)
+                            .offset(y:hideTab ? (-15 - 70 ) :0)
+                        ,alignment: .top
+                    )
+                    .ignoresSafeArea(.all,edges: .all)
+                    //Slidable Button
+                    .overlay(
+                        Buttons.SlidableButton(action: {
+                            navigate = true
+                            navigationPage = AnyView(AddPostView())
+                        }, position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                        .offset(x:hideTab ? -Const.width * 0.5:0)
+                        
+                    )
+                    .sheet(isPresented: $showCategoryFilter) {
+                        CategoryFilterBottomSheet()
+                            .presentationDetents([.height(Const.height * 0.6)])
+                    }
                 }
-                
-                .coordinateSpace(name:"SCROLL")
-                //TollBar
-                .overlay(
-                    FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
-                        .background(.white)
-                        .offset(y:hideTab ? (-15 - 70 ) :0)
-                    ,alignment: .top
-                )
-                .ignoresSafeArea(.all,edges: .all)
-                //Slidable Button
-                .overlay(
-                    Buttons.SlidableButton(action: {
-                        navigate = true
-                        navigationPage = AnyView(AddPostView())
-                    }, position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                    .offset(x:hideTab ? -Const.width * 0.5:0)
-                    
-                )
-                .sheet(isPresented: $showCategoryFilter) {
-                    CategoryFilterBottomSheet()
-                        .presentationDetents([.height(Const.height * 0.6)])
-                }
-            }
-        .navigationDestination(isPresented: $navigate) {
-            navigationPage
+              
+            .navigationDestination(isPresented: $navigate) {
+                navigationPage
+        }
         }
      
         
@@ -177,5 +226,19 @@ struct FeedViewTollBar:View {
                 .stroke().opacity(0.3)
                 .background(Color.clear)
         )
+    }
+}
+
+struct CircleA : View {
+    @Binding var yOffset:CGFloat
+    var size :CGFloat = 80
+    var degress:CGFloat = 60
+    var color :Color
+    var body: some View {
+        Circle()
+            .stroke(style: StrokeStyle(lineWidth: 5,lineCap: .round,lineJoin: .round))
+            .frame(width: size,height: size)
+            .rotationEffect(.degrees(degress + yOffset))
+            .foregroundStyle(color)
     }
 }
