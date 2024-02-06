@@ -22,9 +22,9 @@ struct User : Identifiable,Codable,Hashable{
 }
 extension User {
     static var MockData: [User] = [
-        .init(id: "DuZ0Jo1m7sOnARgym09ZP0Yv7i22", email: "erbalta80@gmail.com", created_at: "03.10.2000", username: "omer_erbalta", name: "Ömer", surname: "Erbalta", password: "123456", profileImageUrl: ["https://yt3.googleusercontent.com/2HHB6DuR4aCIMGPyaOb9AUUmB-TIVY8kVVii2mYd_7l1qkhawAL7thr3-51S7_8yNZgxl-ex=s900-c-k-c0x00ffffff-no-rj","https://i.pinimg.com/736x/32/6d/15/326d1586b612944a70971389a7cf4faa.jpg"], bio: "Senior Swift Developer Aynı Zamanda YUNİ de patron,ceo,takım lideri,yatırımcı,yüzde 98 hisse sahibi,yusufun ve mertin sahibi", rating: 90, department: "Computer Science"),
-        .init(id: "12346", email: "yusufAydın@gmail.com", created_at: "04.10.2000", username: "chatYSF", name: "Yusuf", surname: "Aydın", password: "123456", rating: 55, department: "Electrical Engineering"),
-        .init(id: "12347", email: "mertAlp@gmail.com", created_at: "05.10.2000", username: "alp_mert", name: "Mert", surname: "Alp", password: "123456", rating: 50, department: "Mechanical Engineering"),
+        .init(id: "DuZ0Jo1m7sOnARgym09ZP0Yv7i22", email: "202013709081@gmail.com", created_at: "03.10.2000", username: "omer_erbalta", name: "Ömer", surname: "Erbalta", password: "123456", profileImageUrl: ["https://yt3.googleusercontent.com/2HHB6DuR4aCIMGPyaOb9AUUmB-TIVY8kVVii2mYd_7l1qkhawAL7thr3-51S7_8yNZgxl-ex=s900-c-k-c0x00ffffff-no-rj","https://i.pinimg.com/736x/32/6d/15/326d1586b612944a70971389a7cf4faa.jpg"], bio: "Senior Swift Developer Aynı Zamanda YUNİ de patron,ceo,takım lideri,yatırımcı,yüzde 98 hisse sahibi,yusufun ve mertin sahibi", rating: 90, department: "Computer Science"),
+        .init(id: "12346", email: "202013709033@gmail.com", created_at: "04.10.2000", username: "chatYSF", name: "Yusuf", surname: "Aydın", password: "123456", rating: 55, department: "Electrical Engineering"),
+        .init(id: "12347", email: "202013709013@gmail.com", created_at: "05.10.2000", username: "alp_mert", name: "Mert", surname: "Alp", password: "123456", rating: 50, department: "Mechanical Engineering"),
         .init(id: "12348", email: "asliCetin@gmail.com", created_at: "06.10.2000", username: "asli_cetin", name: "Aslı", surname: "Çetin", password: "123456", rating: 40, department: "Civil Engineering"),
         .init(id: "12349", email: "emreYilmaz@gmail.com", created_at: "07.10.2000", username: "emre_yilmaz", name: "Emre", surname: "Yılmaz", password: "123456", rating: 17, department: "Chemistry"),
         .init(id: "12350", email: "gizemArslan@gmail.com", created_at: "08.10.2000", username: "gizem_arslan", name: "Gizem", surname: "Arslan", password: "123456", rating: 14, department: "Psychology"),
@@ -45,4 +45,44 @@ extension User {
         .init(id: "12365", email: "gülAydın@gmail.com", created_at: "23.10.2000", username: "gul_aydin", name: "Gül", surname: "Aydın", password: "123456", rating: 31, department: "International Relations"),
     ]
 }
+/*
+// enum FacultyCode: String {
+ case computerScience = "1370"
+ case electricalEngineering = "1371"
+ case mechanicalEngineering = "1372"
+ 
+ // Fakülte kodlarına karşılık gelen isimleri döndüren hesaplanmış özellik
+ var name: String {
+     switch self {
+     case .computerScience:
+         return "Computer Science"
+     case .electricalEngineering:
+         return "Electrical Engineering"
+     case .mechanicalEngineering:
+         return "Mechanical Engineering"
+     }
+ }
+}
 
+// E-posta adresinden @ işaretinden önceki 12 sayıyı sınıflandıran bir fonksiyon.
+func classifyIDFromEmail() -> String? {
+ // E-posta adresini "@" işaretine göre ayırır.
+ let components = email.components(separatedBy: "@")
+ // Eğer iki bileşen varsa, ilk bileşeni alırız (kullanıcı adı) ve istenen 12 sayıyı alırız.
+ if components.count == 2 {
+     let idCandidate = components[0]
+     // İlgili parçaları ayırırız.
+     let year = idCandidate.prefix(4)
+     let facultyCodeString = idCandidate.dropFirst(4).prefix(4)
+     let departmentCode = idCandidate.dropFirst(8).prefix(1)
+     let sequenceNumber = idCandidate.dropFirst(9)
+     // Fakülte kodunu fakülte ismiyle değiştiririz.
+     if let facultyCode = FacultyCode(rawValue: String(facultyCodeString)) {
+         // Sınıflandırmayı oluştururuz.
+         let classification = "\(year) \(facultyCode.name) \(departmentCode) \(sequenceNumber)"
+         return classification
+     }
+ }
+ return nil
+}
+*/
