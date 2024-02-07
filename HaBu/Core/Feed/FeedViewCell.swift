@@ -50,18 +50,20 @@ struct FeedViewCell: View {
                 
                 //ımage ?? nil
                 if let imageUrl = post.imageUrl{
-                    if imageUrl[0] != "" || imageUrl.isEmpty
-                    {
-                        HStack {
-                            KFImage(URL(string: imageUrl[0]))
-                                .resizable()
-                                .frame(width: Const.width * 0.95,height: Const.height * 0.35)
-                            .scaledToFill()
+                    if imageUrl.count > 0 {
+                        if  imageUrl[0] != "" && !(imageUrl.isEmpty)
+                        {
+                            HStack {
+                                KFImage(URL(string: imageUrl[0]))
+                                    .resizable()
+                                    .frame(width: Const.width * 0.95,height: Const.height * 0.35)
+                                    .scaledToFill()
+                            }
+                            .frame(width: Const.width)
+                            
                         }
-                        .frame(width: Const.width)
                         
                     }
-                    
                 }
                 // caption
                 HStack {
