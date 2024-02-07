@@ -7,6 +7,13 @@
 import SwiftUI
 import Foundation
 
+enum ImageType {
+    case notSelected
+    case anonymous
+    case notAnonymous
+}
+
+
 enum AlertType {
     case notSelected
     case errorAlert

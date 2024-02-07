@@ -85,8 +85,8 @@
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
-		94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */; };
-		94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */; };
+		94808CD42B0CE63000CC51FD /* AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD32B0CE63000CC51FD /* AddCategory.swift */; };
+		94808CD82B0CE64D00CC51FD /* AddMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD72B0CE64D00CC51FD /* AddMedia.swift */; };
 		948338622B1DC0ED006964BB /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948338612B1DC0ED006964BB /* TextFields.swift */; };
 		949016E02B041EBD00164405 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016DF2B041EBD00164405 /* InfoView.swift */; };
 		949016E22B041EF400164405 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949016E12B041EF400164405 /* LoginView.swift */; };
@@ -98,6 +98,7 @@
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
 		94CCABE82B03C8C700DCFB51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94CCABE72B03C8C700DCFB51 /* Kingfisher */; };
 		94D588E72B03B70C006327A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D588E62B03B70C006327A3 /* User.swift */; };
+		94E40ECC2B73E0EF0078143C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E40ECB2B73E0EF0078143C /* CustomAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,8 +176,8 @@
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
-		94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageBottomSheet.swift; sourceTree = "<group>"; };
-		94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageBox.swift; sourceTree = "<group>"; };
+		94808CD32B0CE63000CC51FD /* AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategory.swift; sourceTree = "<group>"; };
+		94808CD72B0CE64D00CC51FD /* AddMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedia.swift; sourceTree = "<group>"; };
 		948338612B1DC0ED006964BB /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		949016DF2B041EBD00164405 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		949016E12B041EF400164405 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -187,6 +188,7 @@
 		94C617ED2B44594A009F2A6F /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
 		94D588E62B03B70C006327A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		94E40ECB2B73E0EF0078143C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -721,8 +723,9 @@
 			isa = PBXGroup;
 			children = (
 				944C97A32B1B4240005F8E96 /* AddPostView.swift */,
-				94808CD72B0CE64D00CC51FD /* GenerateImageBox.swift */,
-				94808CD32B0CE63000CC51FD /* AddImageBottomSheet.swift */,
+				94808CD72B0CE64D00CC51FD /* AddMedia.swift */,
+				94808CD32B0CE63000CC51FD /* AddCategory.swift */,
+				94E40ECB2B73E0EF0078143C /* CustomAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -912,7 +915,7 @@
 				9439A8872B3245F4005D0E20 /* RegisterViewModal.swift in Sources */,
 				9465F9652B34DE0D00F25235 /* ErrorMessage.swift in Sources */,
 				5C6F523D2B128CC700D79208 /* CategoryFilterBottomSheet.swift in Sources */,
-				94808CD42B0CE63000CC51FD /* AddImageBottomSheet.swift in Sources */,
+				94808CD42B0CE63000CC51FD /* AddCategory.swift in Sources */,
 				883CD0732B20E04200E0B757 /* FeedBackSuccess.swift in Sources */,
 				948338622B1DC0ED006964BB /* TextFields.swift in Sources */,
 				94686A0F2B3980950089C7CD /* RegisterView.swift in Sources */,
@@ -936,6 +939,7 @@
 				94C617EC2B444BF5009F2A6F /* AddPostViewModel.swift in Sources */,
 				947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */,
 				943FB8E02B0632BA009C55C6 /* ForgotPasswordMailBottomSheet.swift in Sources */,
+				94E40ECC2B73E0EF0078143C /* CustomAlertView.swift in Sources */,
 				5C414C912B484F6E00EF3D79 /* FeedViewModel.swift in Sources */,
 				943B9CE22B068F0E00067376 /* LikesView.swift in Sources */,
 				88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */,
@@ -981,7 +985,7 @@
 				9452D3002B1C8130005E2A3B /* ChangePasswordView.swift in Sources */,
 				947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */,
 				884E8CF92B09F2E7001BADDF /* Notification.swift in Sources */,
-				94808CD82B0CE64D00CC51FD /* GenerateImageBox.swift in Sources */,
+				94808CD82B0CE64D00CC51FD /* AddMedia.swift in Sources */,
 				9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */,
 				5C5EB7772B31CF78001D2370 /* UserService.swift in Sources */,
 				5C9420952B061402004F9A17 /* ThreeDRotateFeedViewCell.swift in Sources */,
