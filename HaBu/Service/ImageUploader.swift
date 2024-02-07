@@ -15,6 +15,7 @@ struct ImageUploder{
         
         let filename = UUID().uuidString
         let ref = targetFile == .profileFile ? Storage.storage().reference(withPath: "/\(targetFile.value)/\(id)/\(filename)") :Storage.storage().reference(withPath: "/\(targetFile.value)/\(id)/\(filename)")
+
         
         
         do{
