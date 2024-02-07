@@ -31,19 +31,18 @@ struct ThreeDRotateFeedViewCell: View {
             ZStack {
                 //Image
                 VStack{
-                    if let imageUrl = post.imageUrl{
-                        KFImage(URL(string: imageUrl[0]))
+                    KFImage(URL(string: post.imageUrl[0]))
                             .resizable()
                             .frame(width: Const.width * 0.95,height: Const.height * 0.35)
                             .scaledToFill()
-                    }
+                    
                     
                 }.opacity(isFlipped ? 0.0 : 1.0)
                 
                 //Caption
                 VStack{
                     HStack {
-                        if let _ =  post.imageUrl {
+                        if post.imageUrl.count > 0{
                             Text("\(user.username ): ")
                                 .fontWeight(.bold)
                                 .font(.subheadline)
