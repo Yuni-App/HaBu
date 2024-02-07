@@ -55,12 +55,14 @@ struct AddPostView: View {
                         .padding(.vertical,20)
 
                     AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
-                    AddPostMedia()
+                    AddPostMedia(addpostVM: addPostVM)
                 }
             } .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
                 TabbarView()
             })
          
+        } .sheet(isPresented:  $addPostVM.isShowingImagePicker) {
+            ImagePicker(selectedImages: $addPostVM.selectedImages)
         }
         .alert(isPresented: $addPostVM.showAlert) {
             if (addPostVM.alertType == .anonymous){
@@ -191,7 +193,7 @@ func AddPostBackground()-> some View {
 }
 
 @ViewBuilder
-func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
+func AddPostMedia(addpostVM: AddPostViewModel)-> some View {
     VStack{
         HStack{
             Text("Medya")
@@ -200,31 +202,137 @@ func AddPostMedia(imageList : [AppImage] = [.mert,.mert] )-> some View {
             Spacer()
         }
         HStack{
-            if imageList.isEmpty {
-                GenerateImageBox(image: .addPhoto )
+            if addpostVM.selectedImages.isEmpty {
+                Button(action: {
+                    
+                    if addpostVM.selectedImages.count < 3 {
+                        addpostVM.isShowingImagePicker.toggle()
+                    } else {
+                        // Kullanıcıya bir uyarı göster
+                        // Örneğin: Alert gösterebiliriz
+                        print("En fazla 3 fotoğraf seçebilirsiniz.")
+                    }
+                    
+                    
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: Const.width/4, height: Const.width/4)
+                            .background(
+                                Image.imageManager(image:.addPhoto ,radius: 7,shadow: Color.black)
+                               
+                            )
+                    }
+                })
                 Spacer()
             }
-            if imageList.count == 3 {
-                ForEach(imageList, id: \.self) { userImage in
-                    //Image box
-                    GenerateImageBox( image: userImage)
-                    Spacer()
+            if  addpostVM.selectedImages.count == 3 {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(addpostVM.selectedImages.indices, id: \.self) { index in
+                            VStack {
+                                Image(uiImage: addpostVM.selectedImages[index])
+                                    .resizable()
+                                    .frame(width: 100, height: 100)
+                                
+                                Button("Kaldır") {
+                                    addpostVM.selectedImages.remove(at: index)
+                                }
+                                .foregroundColor(.red)
+                            }
+                        }
+                    }
                 }
+         
             }
-            if imageList.count == 2 {
-                ForEach(imageList, id: \.self) { userImage in
-                    //Image box
-                    GenerateImageBox( image: userImage)
-                    Spacer()
+            if  addpostVM.selectedImages.count == 2 {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(addpostVM.selectedImages.indices, id: \.self) { index in
+                            VStack {
+                                Image(uiImage: addpostVM.selectedImages[index])
+                                    .resizable()
+                                    .frame(width: 100, height: 100)
+                                
+                                Button("Kaldır") {
+                                    addpostVM.selectedImages.remove(at: index)
+                                }
+                                .foregroundColor(.red)
+                            }
+                        }
+                    }
                 }
-                GenerateImageBox(image: .addPhoto)
+ 
+                Button(action: {
+                    
+                    
+                    if addpostVM.selectedImages.count < 3 {
+                        addpostVM.isShowingImagePicker.toggle()
+                    } else {
+                        // Kullanıcıya bir uyarı göster
+                        // Örneğin: Alert gösterebiliriz
+                        print("En fazla 3 fotoğraf seçebilirsiniz.")
+                    }
+                    
+                    
+                    
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: Const.width/4, height: Const.width/4)
+                            .background(
+                                Image.imageManager(image:.addPhoto ,radius: 7,shadow: Color.black)
+                               
+                            )
+                    }
+                })
                 Spacer()
             }
-            if imageList.count == 1 {
-                ForEach(imageList, id: \.self) { userImage in
-                    GenerateImageBox(image: userImage)
+            if  addpostVM.selectedImages.count == 1 {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(addpostVM.selectedImages.indices, id: \.self) { index in
+                            VStack {
+                                Image(uiImage: addpostVM.selectedImages[index])
+                                    .resizable()
+                                    .frame(width: 100, height: 100)
+                                
+                                Button("Kaldır") {
+                                    addpostVM.selectedImages.remove(at: index)
+                                }
+                                .foregroundColor(.red)
+                            }
+                        }
+                    }
                 }
-                GenerateImageBox(image: .addPhoto)
+       
+                Button(action: {
+                    
+                    
+                    if addpostVM.selectedImages.count < 3 {
+                        addpostVM.isShowingImagePicker.toggle()
+                    } else {
+                        // Kullanıcıya bir uyarı göster
+                        // Örneğin: Alert gösterebiliriz
+                        print("En fazla 3 fotoğraf seçebilirsiniz.")
+                    }
+                    
+                    
+                    
+                    
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: Const.width/4, height: Const.width/4)
+                            .background(
+                                Image.imageManager(image:.addPhoto ,radius: 7,shadow: Color.black)
+                               
+                            )
+                    }
+                })
                 Spacer()
             }
         }
@@ -291,4 +399,40 @@ enum ImageType {
     case notSelected
     case anonymous
     case notAnonymous
+}
+
+
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var selectedImages: [UIImage]
+    @Environment(\.presentationMode) var presentationMode
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.allowsEditing = true
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+        // Nothing to do here
+    }
+    
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        let parent: ImagePicker
+        
+        init(parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.editedImage] as? UIImage {
+                parent.selectedImages.append(image)
+            }
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
 }

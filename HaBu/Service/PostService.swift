@@ -9,9 +9,10 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 protocol PostProvider{
-     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool , isAnonim : Bool) async throws -> Void
+     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool , isAnonim : Bool, selectedImages: [UIImage]) async throws -> Void
     // static func fetchPost( postID: String) async throws -> Post
     // static func fetchPosts() async throws ->  [Post]
 }
@@ -30,31 +31,37 @@ class PostService : PostProvider{
             return posts
         }
         catch{
-            print("error")
             return []
         }
     }
     
     
    
-    func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool) async throws {
+    func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool, selectedImages: [UIImage]) async throws {
         let authService = AuthService.shared
+        var uploadedImageURLs: [String] = []
         do {
             let userCollection = Firestore.firestore().collection("post")
             let documentReference = userCollection.document()
+            if !selectedImages.isEmpty {
+                
+                for image in selectedImages {
+                    if let imageUrl = try? await ImageUploder.imageUpload(image: image, targetFile: .profileFile, postId: documentReference.documentID){
+                        uploadedImageURLs.append(imageUrl)
+                    }
+                }
+            }
+            print(uploadedImageURLs)
             try await documentReference.setData([
                 "id": documentReference.documentID,
                 "userId": authService.user?.uid,
                 "caption": textContent,
-                "imageUrl": ["https://example.com/image.jpg","https://example.com/image.jpg"],
+                "imageUrl": uploadedImageURLs,
                 "timeStamp": FieldValue.serverTimestamp(),
                 "likeList": [],
                 "isAnonim": isAnonim,
                 "isAnonimComment": isAnonimComment,
                 "tags": selectedTags,
-                
-              
-               
             ])
             print("Belge başarıyla eklendi.")
         } catch {
@@ -63,3 +70,4 @@ class PostService : PostProvider{
         
     }
 }
+

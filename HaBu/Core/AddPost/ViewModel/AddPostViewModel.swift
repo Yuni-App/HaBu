@@ -4,8 +4,9 @@
 //
 //  Created by mert alp on 2.01.2024.
 //
-
+import SwiftUI
 import Foundation
+
 enum AlertType {
     case notSelected
     case errorAlert
@@ -16,6 +17,9 @@ enum AlertType {
 class AddPostViewModel : ObservableObject {
     @Published var textContent = ""
     @Published var SelectedTags : [String] = []
+ 
+    @Published var selectedImages: [UIImage] = []
+    @Published var  isShowingImagePicker = false
     
     @Published var isShare = false
     @Published var isShareSuccess = false
@@ -70,7 +74,7 @@ class AddPostViewModel : ObservableObject {
         }
         do {
             let isAnonim = (isAnonimType == .anonymous) ? true : false
-            try await postService.createPost(textContent: textContent, selectedTags: SelectedTags, isAnonimComment: isAnonimComment, isAnonim: isAnonim)
+            try await postService.createPost(textContent: textContent, selectedTags: SelectedTags, isAnonimComment: isAnonimComment, isAnonim: isAnonim , selectedImages: selectedImages)
                 isShareSuccess = true
         } catch{
             showAlert = true
