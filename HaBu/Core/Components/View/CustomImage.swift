@@ -14,7 +14,7 @@ struct CustomImage: View {
     var body: some View {
         Image(imagePath)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .aspectRatio(contentMode: .fill)
             .foregroundColor(.white)
             .frame(width: width , height: height)
     }

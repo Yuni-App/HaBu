@@ -126,6 +126,7 @@ struct FeedViewCell: View {
                 Divider()
 
             }
+            .frame(width: Const.width * 0.98)
             .navigationBarBackButtonHidden(true)
         
     }

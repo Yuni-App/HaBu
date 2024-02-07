@@ -17,6 +17,7 @@ struct InfoView: View {
                     
                     VStack{
                         CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
+                            
                         Buttons.customButton(title: "Giriş Yap", buttonColor: Const.primaryColor , textColor: .white) {
                             activeDestinaiton = AnyView(LoginView())
                             isActiveDestination = true
@@ -25,11 +26,12 @@ struct InfoView: View {
                             activeDestinaiton = AnyView(RegisterView())
                             isActiveDestination = true
                         }
+                       
+
                     }.frame(width: Const.width*0.85,height: Const.height * 0.35)
                         .modifier(RectangleBlurModifier(color: Const.primaryColor))
                 }
                 .frame(width: Const.width , height: Const.height)
-                .padding()
                 .navigationDestination(isPresented: $isActiveDestination, destination: {
                     activeDestinaiton
                 })
