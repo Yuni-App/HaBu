@@ -27,21 +27,27 @@ struct FeedView: View {
     @State private var previousyOffset : CGFloat = 0
     @State var show :Bool = true
     @State var refresh = false
-
     
     func detectScrollOffset()-> some View{
         DispatchQueue.main.async {
           
-            if lastOffsetPositive > 50 && refresh == false {
+            if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
                     await feedVM.requestData()
+                    print("update")
+                    print(feedVM.newPostCount)
+
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        refresh = false
+                        lastOffsetPositive = offset
+                    }
+                   
                 }
             }
-            if offset < 50 && lastOffsetPositive > 50{
-                lastOffsetPositive = 0
-                refresh = false
-            }
+           
         
         }
         return Color.clear
@@ -57,36 +63,66 @@ struct FeedView: View {
     var body: some View {
         
         ZStack {
-            ZStack{
-                ProgressView()
-                    .padding(.bottom,Const.height * 0.8)
-                    .opacity(offset > 30 ? 1:0)
-
-            }
-            .zIndex(12)
             VStack {
-                    ScrollView(.vertical,showsIndicators: false){
-                        if posts == []{
-                            
-                            VStack (alignment:.center){
-                                HStack(spacing:20){
-                                    ZStack{
-                                       ProgressView()
+                ScrollViewReader{ value in
+                    ZStack{
+                        Button(action: {
+                            lastOffsetPositive = 180
+                            withAnimation {
+                                value.scrollTo(posts[0].id,anchor: .bottom)
+                                
+                            }
+                            print("tıklandı")
+                        }, label: {
+                            Text("+ \(feedVM.newPostCount) post")
+                                .foregroundStyle(.white)
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .padding(.horizontal,15)
+                                .padding(.vertical,8)
+                        })
+                        .background(.blue)
+                        .clipShape(.rect(cornerRadius: 15, style: .continuous))
+                        .scaleEffect(hideTab ? 1.5 :1 )
+                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > 0 ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
+                        .zIndex(10)
+                        
+                        ScrollView(.vertical,showsIndicators: false){
+                            if posts == []{
+                                VStack (alignment:.center){
+                                    HStack(spacing:20){
+                                        ZStack{
+                                            ProgressView()
+                                        }
+                                        Text(" Yükleniyor..")
                                     }
-                                    Text(" Yükleniyor..")
+                                    .padding(.top,Const.height * 0.12)
+                                }
+                                .frame(width: Const.width)
+                            }
+                            else{
+                                VStack (alignment:.center){
+                                    if lastOffsetPositive > 170 || refresh == true {
+                                        ProgressView()
+                                            .frame(width: 50,height: 50)
+                                            .scaleEffect(1.25)
+                                            .padding(.vertical,offset > 0 ?  -offset : 0)
+                                    }
+                                    else{
+                                        Image.iconManager(.down_arrow, size: 20, weight: .bold, color:.gray)
+                                            .fontWeight(.bold)
+                                            .opacity(offset > 30 ? 1:0)
+                                            .rotationEffect(.degrees(offset < 180 ? offset : 180), anchor: .center)
+                                            .scaleEffect(offset / 100)
+                                            .padding(.vertical,offset > 0 ?  -offset : 0)
+                                    }
+                                    ForEach(posts , id: \.id){post in
+                                        FeedViewCell(post: post,user: User.MockData[0]).id(post.id)
+                                        Divider()
+                                    }
+                                    
                                 }
                                 .padding(.top,Const.height * 0.12)
-                            }
-                            .frame(width: Const.width)
-                        }
-                        else{
-                            VStack (alignment:.leading){
-                                ForEach(posts , id: \.id){post in
-                                     FeedViewCell(post: post,user: User.MockData[0])
-                                     Divider()
-                                 }
-                             }
-                            .padding(.top,Const.height * 0.12)
                                 .overlay(
                                     GeometryReader{proxy -> Color in
                                         let minY = proxy.frame(in: .named("SCROLL")).minY
@@ -99,7 +135,7 @@ struct FeedView: View {
                                                     }
                                                     lastOffset = -offset
                                                 }
-                                               
+                                                
                                                 
                                             }
                                             if offset > 0 && minY > lastOffsetPositive{
@@ -115,7 +151,7 @@ struct FeedView: View {
                                                 lastOffset = -offset
                                                 
                                             }
-                                           
+                                            
                                             self.offset = minY
                                         }
                                         return Color.clear
@@ -125,40 +161,41 @@ struct FeedView: View {
                                 )
                                 .padding()
                                 .padding(.bottom,15 + bottomEdge + 35)
+                            }
+                            
+                            
                         }
-                      
-                        
-                    }
-                    .background(GeometryReader{_ in 
-                        self.detectScrollOffset()
-                    })
-                    .onAppear{
-                        setupBinding()
-                    }
-                    
-                    .coordinateSpace(name:"SCROLL")
-                    //TollBar
-                    .overlay(
-                        FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
-                            .background(.white)
-                            .offset(y:hideTab ? (-15 - 70 ) :0)
-                        ,alignment: .top
-                    )
-                    .ignoresSafeArea(.all,edges: .all)
-                    //Slidable Button
-                    .overlay(
-                        Buttons.SlidableButton(action: {
-                            navigate = true
-                            navigationPage = AnyView(AddPostView())
-                        }, position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                        .offset(x:hideTab ? -Const.width * 0.5:0)
-                        
-                    )
-                    .sheet(isPresented: $showCategoryFilter) {
-                        CategoryFilterBottomSheet()
-                            .presentationDetents([.height(Const.height * 0.6)])
+                        .background(GeometryReader{_ in
+                            self.detectScrollOffset()
+                        })
+                        .onAppear{
+                            setupBinding()
+                        }
+                        .coordinateSpace(name:"SCROLL")
+                        //TollBar
+                        .overlay(
+                            FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
+                                .background(.white)
+                                .offset(y:hideTab ? (-15 - 70 ) :0)
+                            ,alignment: .top
+                        )
+                        .ignoresSafeArea(.all,edges: .all)
+                        //Slidable Button
+                        .overlay(
+                            Buttons.SlidableButton(action: {
+                                navigate = true
+                                navigationPage = AnyView(AddPostView())
+                            }, position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                            .offset(x:hideTab ? -Const.width * 0.5:0)
+                            
+                        )
+                        .sheet(isPresented: $showCategoryFilter) {
+                            CategoryFilterBottomSheet()
+                                .presentationDetents([.height(Const.height * 0.6)])
+                        }
                     }
                 }
+            }
               
             .navigationDestination(isPresented: $navigate) {
                 navigationPage

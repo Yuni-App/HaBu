@@ -40,7 +40,7 @@ struct TabbarView: View {
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Notification")
                             .toolbar(.hidden, for: .tabBar)
-                        ProfileView(hideTab: $hideBar, user: AuthService.shared.currentUser ?? user)
+                        ProfileView(hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Profile")
                             .toolbar(.hidden, for: .tabBar)
@@ -57,8 +57,6 @@ struct TabbarView: View {
                 }
             }
         }
-    
-        
     }
 }
 
