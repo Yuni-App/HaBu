@@ -10,11 +10,11 @@ import Foundation
 import Firebase
 import FirebaseStorage
 struct ImageUploder{
-    static func imageUpload(image:UIImage,targetFile:targetString,userId:String? = nil)async throws -> String?{
+    static func imageUpload(image:UIImage,targetFile:targetString,id:String)async throws -> String?{
         guard let imageData = image.compress(to: 50) else{return nil}
         
         let filename = UUID().uuidString
-        let ref = userId != nil ? Storage.storage().reference(withPath: "/\(targetFile.value)/\(userId!)/\(filename)") :Storage.storage().reference(withPath: "/\(targetFile.value)/\(filename)")
+        let ref = targetFile == .profileFile ? Storage.storage().reference(withPath: "/\(targetFile.value)/\(id)/\(filename)") :Storage.storage().reference(withPath: "/\(targetFile.value)/\(id)/\(filename)")
         
         
         do{
