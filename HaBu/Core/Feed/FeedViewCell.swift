@@ -49,31 +49,32 @@ struct FeedViewCell: View {
                     .padding(.horizontal)
                 
                 //ımage ?? nil
-                if let imageUrl = post.imageUrl{
-                    if imageUrl[0] != "" || imageUrl.isEmpty
-                    {
-                        HStack {
-                            KFImage(URL(string: imageUrl[0]))
-                                .resizable()
-                                .frame(width: Const.width * 0.95,height: Const.height * 0.35)
-                            .scaledToFill()
+                if post.imageUrl.count > 0 {
+                    if  post.imageUrl[0] != "" && !(post.imageUrl.isEmpty)
+                        {
+                            HStack {
+                                KFImage(URL(string: post.imageUrl[0]))
+                                    .resizable()
+                                    .frame(width: Const.width * 0.95,height: Const.height * 0.35)
+                                    .scaledToFill()
+                            }
+                            .frame(width: Const.width)
+                            
                         }
-                        .frame(width: Const.width)
-                        
-                    }
-                    
                 }
                 // caption
                 HStack {
-                    if let _ =  post.imageUrl {
-                        Text("\(user.username ): ")
-                            .fontWeight(.bold)
-                            .font(.subheadline)
-                        +  Text(post.caption)
-                    }
-                    else{
-                        Text(post.caption)
-                    }
+                    if post.imageUrl.count < 0{
+                            Text("\(user.username ): ")
+                                .fontWeight(.bold)
+                                .font(.subheadline)
+                            +  Text(post.caption)
+                        }
+                        else{
+                            Text(post.caption)
+                        }
+                    
+                   
                      
                     Spacer()
                 }
@@ -125,6 +126,7 @@ struct FeedViewCell: View {
                 Divider()
 
             }
+            .frame(width: Const.width * 0.98)
             .navigationBarBackButtonHidden(true)
         
     }

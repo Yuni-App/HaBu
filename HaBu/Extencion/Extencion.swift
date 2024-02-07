@@ -92,6 +92,37 @@ extension View {
     self.modifier(ToastModifier(toast: toast))
   }
 }
+extension View {
+    func hideKeyboardOnTap() -> some View {
+        self.onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+    }
+}
+extension View {
+    func moveFocusOnReturn() -> some View {
+        modifier(MoveFocusOnReturnModifier())
+    }
+}
+
+struct MoveFocusOnReturnModifier: ViewModifier {
+    @State private var textFieldTag = 0
+    
+    func body(content: Content) -> some View {
+        content
+            .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidEndEditingNotification)) { _ in
+                self.textFieldTag += 1
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+                DispatchQueue.main.async {
+                    let textField = UITextField()
+                    UIApplication.shared.windows.first?.addSubview(textField)
+                    textField.isHidden = true
+                    textField.becomeFirstResponder()
+                }
+            }
+    }
+}
 
 extension String {
     var isValidEmail: Bool {

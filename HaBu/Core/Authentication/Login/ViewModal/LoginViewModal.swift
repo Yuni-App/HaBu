@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 import SwiftUI
 
-
+@MainActor
 class LoginViewModel: ObservableObject {
     @Published var textEmail = ""
     @Published var textPassword = ""
