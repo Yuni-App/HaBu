@@ -27,8 +27,6 @@ struct TabbarView: View {
             NavigationStack{
                 GeometryReader{proxy in
                     let bottomEdge = proxy.safeAreaInsets.bottom
-                    let topEdge = proxy.safeAreaInsets.leading
-                    
                     TabView(selection:$currentTab){
                         FeedView(bottomEdge: bottomEdge, hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
@@ -59,13 +57,7 @@ struct TabbarView: View {
                 }
             }
         }
-        else{
-            
-            VStack {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-            }
-        }
+    
         
     }
 }

@@ -7,10 +7,17 @@
 
 import SwiftUI
 
+enum FocusableField: Hashable {
+    case  email, password
+}
 struct LoginView: View {
     
     @Environment(\.dismiss) var dissmis
     @StateObject var loginVM : LoginViewModel
+    @State private var isKeyboardHidden = true
+    
+    @FocusState private var focusedField: FocusableField?
+    
     init(){
         self._loginVM = StateObject(wrappedValue: LoginViewModel(authService: AuthService()))
     }
@@ -24,7 +31,11 @@ struct LoginView: View {
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
                 VStack{
                     TextFields.CustomTextField(text: $loginVM.textEmail, icon: .mail, placeHolder: "e-posta")
+                    
                     TextFields.CustomTextField(text: $loginVM.textPassword , icon: .key, placeHolder: "Şifre")
+                    
+                    
+                    
                     HStack{
                         Spacer()
                         Text("Şifremi unuttum.")
@@ -59,6 +70,7 @@ struct LoginView: View {
                 }
             } .frame(width: Const.width , height: Const.height+100)
                 .padding()
+            
                 .navigationDestination(isPresented: $loginVM.isActiveDestination, destination: {
                     TabbarView()
                 })
@@ -67,7 +79,11 @@ struct LoginView: View {
                 }.background(Const.authBackGroundColor)
                 .navigationBarBackButtonHidden(true)
         }
+        .hideKeyboardOnTap()
+        
     }
+    
+  
 }
 #Preview {
     LoginView()

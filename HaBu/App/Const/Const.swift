@@ -15,7 +15,7 @@ class Const{
     static let thirColor = Color(uiColor: UIColor(hex: "5B8291"))
     static let secondaryColor = Color(uiColor : UIColor(hex:"68E4DD"))
     static let backgroundColor = Color(uiColor: UIColor(hex: "E9E9E9"))
-    static let tabBarItems = ["Feed","Search","Notification","Profile"]
+    static let tabBarItems = ["yuniLogo2","Search","Notification","Profile"]
     static let fourthColor = Color(uiColor: UIColor(hex: "5E77F9"))
     static let primaryBackGroundColor = Color(UIColor(hex: "F3F3F3"))
     static let primaryButtonColor = Color(UIColor(hex: "04243E"))

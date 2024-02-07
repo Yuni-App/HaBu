@@ -8,7 +8,7 @@
 import Foundation
 
 class ImageManager {
-    static let habuLogo = "HabuLogo"
+    static let habuLogo = "yuniSplash"
     static let infoVector = "InfoVector"
     static let registerVector = "RegisterVector"
     static let RegisterSecondVector = "RegisterSecondVector"

@@ -26,13 +26,21 @@ struct FeedView: View {
     @State private var yOffset : CGFloat = 0
     @State private var previousyOffset : CGFloat = 0
     @State var show :Bool = true
+    @State var refresh = false
 
     
     func detectScrollOffset()-> some View{
         DispatchQueue.main.async {
-            print(lastOffsetPositive)
-            if offset > 50{
-                
+          
+            if lastOffsetPositive > 50 && refresh == false {
+                refresh = true
+                Task{
+                    await feedVM.requestData()
+                }
+            }
+            if offset < 50 && lastOffsetPositive > 50{
+                lastOffsetPositive = 0
+                refresh = false
             }
         
         }
@@ -96,6 +104,9 @@ struct FeedView: View {
                                             }
                                             if offset > 0 && minY > lastOffsetPositive{
                                                 lastOffsetPositive = offset
+                                            }
+                                            if offset < 16{
+                                                lastOffsetPositive = 0
                                             }
                                             if minY > offset && -minY < (lastOffset - durationOffset){
                                                 withAnimation(.easeOut){
