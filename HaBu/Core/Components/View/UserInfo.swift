@@ -17,6 +17,7 @@ struct UserInfo: View {
         self.user = user
         self.imageSize = imageSize
         self.timeStamp = timeStamp
+        
         if let imageURlList = user.profileImageUrl{
             print("imageUrlList")
             if imageURlList.count > 0 {
