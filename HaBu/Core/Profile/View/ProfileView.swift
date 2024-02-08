@@ -12,10 +12,10 @@ struct ProfileView : View {
     @Environment(\.dismiss) var dissmis
     @StateObject var profileVM :ProfileViewModel
     
-    init(hideTab:Binding<Bool>,user:User) {
+    init(hideTab:Binding<Bool>) {
         _hideTab = hideTab
-        self.user = user
-        self._profileVM = StateObject(wrappedValue: ProfileViewModel(user: user))
+        self.user = AuthService.shared.currentUser!
+        self._profileVM = StateObject(wrappedValue: ProfileViewModel(user:AuthService.shared.currentUser!))
     }
     init(user:User) {
         self.user = user

@@ -19,6 +19,8 @@ struct Post : Identifiable,Codable,Hashable{
     let likeList : [String]
     let isAnonim : Bool
     let isAnonimComment : Bool
+    var user: User? = nil
+    
     let tags :[String]
 }
 extension Post {

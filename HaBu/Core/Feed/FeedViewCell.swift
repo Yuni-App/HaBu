@@ -20,6 +20,7 @@ struct FeedViewCell: View {
         self.post = post
         self.user = user
         self.backButton = false
+        
     }
     init(navigatedWithComment post: Post,user:User) {
         self.post = post
@@ -44,7 +45,7 @@ struct FeedViewCell: View {
                 
                 Spacer()
                 //User Info
-                UserInfo(withTime: user, imageSize: .small, timeStamp: "5")
+                UserInfo(withTime: user, imageSize: .small, timeStamp: post.timeStamp.differenceFromTodayString())
                     .foregroundStyle(.black)
                     .padding(.horizontal)
                 
@@ -91,7 +92,7 @@ struct FeedViewCell: View {
                         else{
                             likePost = .unLike
                         }
-                    },getNumber: 20,
+                    },getNumber: post.likeList.count,
                     textAction: {
                         showingLikeList = true
                     })
@@ -103,7 +104,7 @@ struct FeedViewCell: View {
                     Buttons.actionButton(buttonType:.bubble, action: {
                         showingComment = true
                         print("comment")
-                    }, getNumber: 10)
+                    }, getNumber: post.likeList.count)
                     .sheet(isPresented: $showingComment) {
                         CommentBottomSheet()
                             .presentationDetents([.large,.medium])

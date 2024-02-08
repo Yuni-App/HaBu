@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import Kingfisher
-
+import Firebase
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexValue = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
@@ -174,5 +174,28 @@ extension UIImage {
         defer { UIGraphicsEndImageContext() }
         self.draw(in: rect)
         return UIGraphicsGetImageFromCurrentImageContext() ?? self
+    }
+}
+extension Timestamp {
+    func differenceFromTodayString() -> String {
+        let currentDate = Date()
+        let timeStampDate = self.dateValue()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .hour, .minute, .second], from: timeStampDate, to: currentDate)
+        
+        let days = components.day ?? 0
+        let hours = components.hour ?? 0
+        let minutes = components.minute ?? 0
+        let seconds = components.second ?? 0
+        
+        if hours < 1 {
+            return "\(minutes) d"
+        }
+        if days == 0 && hours < 24 {
+            return "\(hours) s"
+        } else {
+            return "\(days) g"
+        }
     }
 }
