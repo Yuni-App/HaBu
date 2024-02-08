@@ -73,7 +73,7 @@ extension Image {
     ) -> some View {
         Image(image.rawValue)
             .resizable()
-            .frame(width: width,height : height)
+            .frame(width: width, height : height)
             .background(backgroundColor?.opacity(0.1) ?? Color.clear)
             .cornerRadius(radius ?? 0)
             .shadow(color: (shadow?.opacity(1) ?? Color.clear), radius: 5, x: 3, y: 3)

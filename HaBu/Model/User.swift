@@ -45,4 +45,44 @@ extension User {
         .init(id: "12365", email: "gülAydın@gmail.com", created_at: "23.10.2000", username: "gul_aydin", name: "Gül", surname: "Aydın", password: "123456", rating: 31, department: "International Relations"),
     ]
 }
+/*
+// enum FacultyCode: String {
+ case computerScience = "1370"
+ case electricalEngineering = "1371"
+ case mechanicalEngineering = "1372"
+ 
+ // Fakülte kodlarına karşılık gelen isimleri döndüren hesaplanmış özellik
+ var name: String {
+     switch self {
+     case .computerScience:
+         return "Computer Science"
+     case .electricalEngineering:
+         return "Electrical Engineering"
+     case .mechanicalEngineering:
+         return "Mechanical Engineering"
+     }
+ }
+}
 
+// E-posta adresinden @ işaretinden önceki 12 sayıyı sınıflandıran bir fonksiyon.
+func classifyIDFromEmail() -> String? {
+ // E-posta adresini "@" işaretine göre ayırır.
+ let components = email.components(separatedBy: "@")
+ // Eğer iki bileşen varsa, ilk bileşeni alırız (kullanıcı adı) ve istenen 12 sayıyı alırız.
+ if components.count == 2 {
+     let idCandidate = components[0]
+     // İlgili parçaları ayırırız.
+     let year = idCandidate.prefix(4)
+     let facultyCodeString = idCandidate.dropFirst(4).prefix(4)
+     let departmentCode = idCandidate.dropFirst(8).prefix(1)
+     let sequenceNumber = idCandidate.dropFirst(9)
+     // Fakülte kodunu fakülte ismiyle değiştiririz.
+     if let facultyCode = FacultyCode(rawValue: String(facultyCodeString)) {
+         // Sınıflandırmayı oluştururuz.
+         let classification = "\(year) \(facultyCode.name) \(departmentCode) \(sequenceNumber)"
+         return classification
+     }
+ }
+ return nil
+}
+*/
