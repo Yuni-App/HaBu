@@ -20,6 +20,9 @@ class AuthService : ObservableObject , AuthProvider {
     static let shared = AuthService()
     @Published var user: FirebaseAuth.User?
     @Published var currentUser : User?
+    let db = Firestore.firestore()
+   
+
     //TODO: USER CHECK
     func checkUser() async throws {
         do {
@@ -50,19 +53,77 @@ class AuthService : ObservableObject , AuthProvider {
                 throw error
         }
     }
+    
+    
+    
+   
+    // Rastgele beş haneli bir ID oluşturma fonksiyonu
+    func rastgeleBesHaneliIDOlustur() -> String {
+        var id = ""
+        for _ in 0..<5 {
+            let rastgeleRakam = Int.random(in: 0...9)
+            id += "\(rastgeleRakam)"
+        }
+        return id
+    }
+
+    // Kullanılan ID'leri kontrol etme ve anonim kullanıcıyı kaydetme fonksiyonu
+   
+    func kontrolEtVeKaydetAnonimKullanici(completion: @escaping (String) -> Void) async {
+        // Rastgele beş haneli bir ID oluşturun
+        let anonimID = rastgeleBesHaneliIDOlustur()
+        
+        // Kullanılan kimlikler koleksiyonunu referans al
+        let kullanilanIDlerRef = db.collection("KullanılanIDler")
+        
+        do {
+            // Oluşturulan rastgele ID'nin daha önce kullanılıp kullanılmadığını kontrol et
+            let querySnapshot = try await kullanilanIDlerRef.whereField("ID", isEqualTo: anonimID).getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                // Bu ID daha önce kullanılmamış, kullanıcıyı kaydet
+                print("Anonim kullanıcı başarıyla kaydedildi. ID: \(anonimID)")
+                kullanilanIDlerRef.addDocument(data: ["ID": anonimID]) { (error) in
+                    if let error = error {
+                        print("Kullanılan ID'leri kaydetme işleminde bir hata oluştu: \(error.localizedDescription)")
+                    }
+                }
+                completion(anonimID)
+            } else {
+                // Bu ID daha önce kullanılmış, yeni bir ID oluştur
+                await kontrolEtVeKaydetAnonimKullanici(completion: completion)
+            }
+        } catch {
+            print("Kullanılan ID'leri kontrol ederken bir hata oluştu: \(error.localizedDescription)")
+        }
+    }
+
+
+
+
+
 
     //TODO: CREATE USER COLLECTİON FİELD 
     @MainActor
     func createUserCollection(authResult : AuthDataResult,email: String, password: String, username: String) async throws{
+        var anonimId2 : String = ""
         do{
             
           
          
             let uid = authResult.user.uid
             let userCollection = Firestore.firestore().collection("user")
+      
             
+            
+            await kontrolEtVeKaydetAnonimKullanici { (anonimID) in
+                print("Oluşturulan rastgele kimlik: \(anonimID)")
+                anonimId2 = anonimID
+                
+            }
             try await userCollection.document(uid).setData([
                 "id": uid,
+                "anonimId":anonimId2,
                 "email": email,
                 "created_at":"",
                 "username": username,
@@ -75,6 +136,7 @@ class AuthService : ObservableObject , AuthProvider {
             ])
             try Auth.auth().signOut()
             AuthService.shared.user = nil
+            
          
         }
     }
