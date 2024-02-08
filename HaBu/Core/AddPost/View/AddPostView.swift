@@ -50,7 +50,14 @@ struct AddPostView: View {
                         AddPostMedia(addpostVM: addPostVM)
                     }
                     .padding(.horizontal, 10)
-                }
+                } .disabled(addPostVM.isProgress)
+                
+                if addPostVM.isProgress {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                                        .padding()
+                                }
+               
             }
             .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
                 TabbarView()
