@@ -20,6 +20,7 @@ struct Post : Identifiable,Codable,Hashable{
     let isAnonim : Bool
     let tags : [String]
     let isAnonimComment : Bool
+    var user: User? = nil
     
 }
 extension Post {

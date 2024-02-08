@@ -12,14 +12,28 @@ struct UserInfo: View {
     let user:User
     let imageSize : ProfileImageSize
     var timeStamp: String?
+    var imageUrl = ""
     init(withTime user: User, imageSize: ProfileImageSize, timeStamp: String) {
         self.user = user
         self.imageSize = imageSize
         self.timeStamp = timeStamp
+        if let imageURlList = user.profileImageUrl{
+            print("imageUrlList")
+            if imageURlList.count > 0 {
+                print("count")
+                imageUrl = imageURlList[0]
+                print(imageUrl)
+            }
+        }
     }
     init(user:User,imageSize:ProfileImageSize) {
         self.user = user
         self.imageSize = imageSize
+        if let imageURlList = user.profileImageUrl{
+            if imageURlList.count > 0 {
+                imageUrl = imageURlList[0]
+            }
+        }
     }
     var body: some View {
         ZStack {
@@ -28,7 +42,8 @@ struct UserInfo: View {
                     ProfileView(user: user)
                 } label: {
                     HStack {
-                        CircleProfileImage(userIamgeUrl: "", size: imageSize)
+                        
+                        CircleProfileImage(userIamgeUrl: imageUrl, size: imageSize)
                         VStack{
                             Text("\(user.name) \(user.surname)")
                                 .fontWeight(.semibold)

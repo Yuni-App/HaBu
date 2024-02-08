@@ -34,7 +34,7 @@ struct FeedView: View {
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
-                    await feedVM.requestData()
+                    try await feedVM.requestData()
                     print("update")
                     print(feedVM.newPostCount)
 
@@ -72,7 +72,6 @@ struct FeedView: View {
                                 value.scrollTo(posts[0].id,anchor: .bottom)
                                 
                             }
-                            print("tıklandı")
                         }, label: {
                             Text("+ \(feedVM.newPostCount) post")
                                 .foregroundStyle(.white)
@@ -117,7 +116,7 @@ struct FeedView: View {
                                             .padding(.vertical,offset > 0 ?  -offset : 0)
                                     }
                                     ForEach(posts , id: \.id){post in
-                                        FeedViewCell(post: post,user: User.MockData[0]).id(post.id)
+                                        FeedViewCell(post: post,user: post.user!).id(post.id)
                                         Divider()
                                     }
                                     

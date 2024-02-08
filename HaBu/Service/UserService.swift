@@ -15,7 +15,8 @@ struct UserService : UserProvider{
    
     static func fetchUser(withUserID userID: String) async throws -> User {
         let snapshot = try await Firestore.firestore().collection("user").document(userID).getDocument()
-        return try snapshot.data(as: User.self)
+        let user = try snapshot.data(as: User.self)
+        return user
         
     }
     

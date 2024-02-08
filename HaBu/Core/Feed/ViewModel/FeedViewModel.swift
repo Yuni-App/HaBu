@@ -19,14 +19,26 @@ class FeedViewModel : ObservableObject{
     
     init() {
         Task{
-           await requestData()
+          try await requestData()
             listenForChanges()
         }
     }
     
-    func requestData() async{
-        let postsFromService = await PostService().fetchPosts()
+    func requestData() async throws {
+        var postsFromService = await PostService().fetchPosts()
+        print(postsFromService)
+
         PostCount = postsFromService.count
+        for i in 0..<postsFromService.count {
+            var user :User?
+            do {
+                user = try await UserService.fetchUser(withUserID: postsFromService[i].userId)
+                postsFromService[i].user = user
+            }
+            catch{
+                postsFromService[i].user = User.MockData[0]
+            }
+        }
         self.postsData.onNext(postsFromService)
     }
     
@@ -42,7 +54,7 @@ class FeedViewModel : ObservableObject{
                
                DispatchQueue.main.async {
                    withAnimation {
-                       self?.newPostCount = posts.count - self!.PostCount 
+                       self?.newPostCount = posts.count - self!.PostCount
                    }
                }
                }
