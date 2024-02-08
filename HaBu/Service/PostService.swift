@@ -44,7 +44,6 @@ class PostService : PostProvider{
             let userCollection = Firestore.firestore().collection("post")
             let documentReference = userCollection.document()
             if !selectedImages.isEmpty {
-                
                 for image in selectedImages {
                     if let imageUrl = try? await ImageUploder.imageUpload(image: image, targetFile: .profileFile, id: documentReference.documentID){
                         uploadedImageURLs.append(imageUrl)

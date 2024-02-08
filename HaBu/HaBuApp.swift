@@ -32,9 +32,9 @@ struct HaBuApp: App {
                            SplashView()
                        } else {
                            if authService.user != nil {
-                               ContentView()
+                               AddPostView()
                            } else {
-                               ContentView()
+                               AddPostView()
                            }
                        }
                    }
