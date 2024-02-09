@@ -10,8 +10,18 @@ import Foundation
 class LikesViewModel: ObservableObject {
     @Published var likeUsersList :[User]  = []
  
-    func fetchLikesUserList(userIdList : [String]){
-        likeUsersList = [User.MockData[2]]
+    init(userListString:[String]){
+        Task{
+            for userId in userListString{
+                do{
+                    var user = try await UserService.fetchUser(withUserID: userId)
+                    likeUsersList.append(user)
+                }
+                catch{
+                    print(userId)
+                }
+            }
+        }
     }
 }
 

@@ -187,7 +187,6 @@ extension Timestamp {
         let days = components.day ?? 0
         let hours = components.hour ?? 0
         let minutes = components.minute ?? 0
-        let seconds = components.second ?? 0
         
         if hours < 1 {
             return "\(minutes) d"
