@@ -190,7 +190,7 @@ struct FeedView: View {
                         .overlay(
                             Buttons.SlidableButton(action: {
                                 navigate = true
-                                navigationPage = AnyView(AddPostView())
+                                navigationPage = AnyView(AddPostView().navigationBarBackButtonHidden(true))
                             }, position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
                             .offset(x:hideTab ? -Const.width * 0.5:0)
                             

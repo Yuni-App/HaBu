@@ -57,13 +57,9 @@ struct RegisterView: View {
                 }
                 
             }.frame(width: Const.width , height: Const.height+100)
-            .disabled(registerVM.isRegistering) 
             
-                if registerVM.isRegistering {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                                        .padding()
-                                }
+            
+              
             
         }.background(
             Const.authBackGroundColor
