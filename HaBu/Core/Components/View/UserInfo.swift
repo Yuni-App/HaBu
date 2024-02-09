@@ -60,7 +60,7 @@ struct UserInfo: View {
 
                 Spacer()
                 if timeStamp != nil{
-                    Text("4s")
+                    Text(timeStamp ?? "!!")
                         .opacity(0.6)
                         .font(.footnote)
                         .fontWeight(.semibold)

@@ -22,7 +22,33 @@ enum PostError : Error{
     case parsingError
 }
 class PostService : PostProvider{
+    var postRef = Firestore.firestore().collection("post")
+    
+    
+    func likeActionPost(userId:String,postId:String,like:Bool) async throws -> Bool{
+        if like{
+            do {
+                try await postRef.document(postId).updateData([
+                    "likeList": FieldValue.arrayUnion([userId])])
+                return true
+            }
+            catch{
+                return false
+            }
+        }
+        else{
+            do {
+                try await postRef.document(postId).updateData([
+                    "likeList": FieldValue.arrayRemove([userId])
+                ])
+                return true
+            }
+            catch{
+                return false
+            }
 
+        }
+    }
     
     func fetchPosts() async -> [Post]{
         do {
@@ -32,6 +58,16 @@ class PostService : PostProvider{
         }
         catch{
             return []
+        }
+    }
+    func fetchPost(id : String) async -> Post{
+        do {
+            let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
+            let post = try snapshot.data(as: Post.self)
+            return post
+        }
+        catch{
+            return Post.MockData[0]
         }
     }
     

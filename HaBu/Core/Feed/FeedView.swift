@@ -95,7 +95,7 @@ struct FeedView: View {
                                         }
                                         Text(" Yükleniyor..")
                                     }
-                                    .padding(.top,Const.height * 0.12)
+                                    .padding(.top,Const.height * 0.5)
                                 }
                                 .frame(width: Const.width)
                             }
