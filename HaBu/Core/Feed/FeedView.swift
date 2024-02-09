@@ -10,6 +10,13 @@ import RxSwift
 import RxCocoa
 
 struct FeedView: View {
+    private func checkLike(post:Post,userID:String) -> ActionButtons{
+       let value = post.likeList.contains(userID)
+        return value ? .liked : .unLike
+        
+    }
+    
+    
     @StateObject var  feedVM = FeedViewModel()
     @State var showCategoryFilter = false
     var bottomEdge:CGFloat
@@ -116,7 +123,7 @@ struct FeedView: View {
                                             .padding(.vertical,offset > 0 ?  -offset : 0)
                                     }
                                     ForEach(posts , id: \.id){post in
-                                        FeedViewCell(post: post,user: post.user!).id(post.id)
+                                        FeedViewCell(post: post,user: post.user!,likeAction: checkLike(post: post, userID: AuthService.shared.currentUser!.id)).id(post.id)
                                         Divider()
                                     }
                                     

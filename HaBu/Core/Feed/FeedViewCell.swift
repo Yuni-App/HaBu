@@ -16,10 +16,11 @@ struct FeedViewCell: View {
     @State private var showingLikeList = false
     @State var post : Post
     var user : User
-    init(post: Post,user:User) {
+    init(post: Post,user:User,likeAction:ActionButtons) {
         _post = State(initialValue: post)
         self.user = user
         self.backButton = false
+        _likePost = State(initialValue: likeAction)
     }
     init(navigatedWithComment post: Post,user:User) {
         _post = State(initialValue: post)
