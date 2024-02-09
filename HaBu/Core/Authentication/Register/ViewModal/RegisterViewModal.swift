@@ -15,9 +15,8 @@ class RegisterViewModel: ObservableObject {
     @Published var textAgainPassword = ""
     @Published var textUserName = ""
     
-    
     @Published var isChecked : Bool = false
-    @Published var isRegistering : Bool = false
+   
     @Published var showAlert = false
     @Published var alertTitle = ""
     @Published var alertMessage = ""
@@ -29,13 +28,13 @@ class RegisterViewModel: ObservableObject {
     
     //TODO: REGISTER METHOD
     func register()async->Bool{
-        isRegistering=true
         guard !textEmail.isEmpty, !textPassword.isEmpty , !textAgainPassword.isEmpty , !textUserName.isEmpty else {
             if let errorMessage = ErrorMessage(rawValue: 1) {
+               
                 self.showAlert = true
                 self.alertTitle = "Hata!!"
                 self.alertMessage = errorMessage.description
-                self.isRegistering = false
+             
                 print(errorMessage.description)
             }
             return false
@@ -43,7 +42,6 @@ class RegisterViewModel: ObservableObject {
         guard textEmail.isValidEmail else {
             if let errorMessage = ErrorMessage(rawValue: 2) {
                 print(errorMessage.description)
-                self.isRegistering = false
                 self.showAlert = true
                 self.alertTitle = "Hata!!"
                 self.alertMessage = errorMessage.description
@@ -53,7 +51,6 @@ class RegisterViewModel: ObservableObject {
         }
         guard textPassword.count >= 6 else {
             if let errorMessage = ErrorMessage(rawValue: 3) {
-                self.isRegistering = false
                 self.showAlert = true
                 self.alertTitle = "Hata!!"
                 self.alertMessage = errorMessage.description
@@ -64,7 +61,6 @@ class RegisterViewModel: ObservableObject {
         }
         guard textPassword == textAgainPassword else {
             if let errorMessage = ErrorMessage(rawValue: 4) {
-                self.isRegistering = false
                 self.showAlert = true
                 self.alertTitle = "Hata!!"
                 self.alertMessage = errorMessage.description
@@ -74,7 +70,6 @@ class RegisterViewModel: ObservableObject {
         }
         guard isChecked == true else {
             if let errorMessage = ErrorMessage(rawValue: 5) {
-                self.isRegistering = false
                 self.showAlert = true
                 self.alertTitle = "Hata!!"
                 self.alertMessage = errorMessage.description
@@ -84,7 +79,6 @@ class RegisterViewModel: ObservableObject {
         }
         do {
             try await authService.createUser(email: textEmail, password: textPassword, username: textUserName)
-            self.isRegistering = false
             self.showAlert = true
             self.alertTitle = "Başarılı."
             self.alertMessage = "Hesabınız oluşturuşdu mailinizi onaylayarak giriş yapabilirsiniz.."
@@ -92,14 +86,12 @@ class RegisterViewModel: ObservableObject {
             return true
         } catch let error as NSError {
                 if let errorMessage = ErrorMessage(rawValue: error.code) {
-                    self.isRegistering = false
                     self.showAlert = true
                     self.alertTitle = "Hata!!"
                     self.alertMessage = errorMessage.description
                     print(errorMessage.description)
                     return false
                 }
-            self.isRegistering = false
             self.showAlert = true
             self.alertTitle = "Hata!!"
             self.alertMessage = "Beklenmedik bir hata oluştu"
