@@ -9,11 +9,11 @@ import SwiftUI
 
 struct LikesView: View {
    
-    let post : Post
+    let userListString : [String]
     @StateObject var likesVM : LikesViewModel
-    init(post: Post) {
-        self.post = post
-        self._likesVM = StateObject(wrappedValue: LikesViewModel())
+    init(userList: [String]) {
+        self.userListString = userList
+        self._likesVM = StateObject(wrappedValue: LikesViewModel(userListString: userList))
     }
     
     
@@ -24,12 +24,12 @@ struct LikesView: View {
                
                 Text("Beğenenler").fontWeight(.bold)
                 Spacer()
-                Text("\(String(post.likeList.count)) beğeni ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Text("\(String(userListString.count)) beğeni ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
             }.padding(.bottom , 30)
             ScrollView{
                 VStack{
-                    if post.likeList.count == 0 {
-                        Text("Gönderiyi Henüz Kimse Beğenmedi").frame(height: Const.height/2).fontWeight(.bold)
+                    if userListString.count == 0 {
+                        Text("Bu gönderiyi henüz kimse beğenmedi").frame(height: Const.height/2).fontWeight(.bold)
                     }else {
                         ForEach(likesVM.likeUsersList, id: \.id){ user in
                             LikesListTile(user: user)
@@ -41,13 +41,10 @@ struct LikesView: View {
                 }
             }.padding()
                 .navigationBarBackButtonHidden(true)
-                .onAppear{
-                    likesVM.fetchLikesUserList(userIdList: ["useridlist"])
-                }
             
         }
     }
 }
 #Preview {
-    LikesView(post: Post.MockData[0])
+    LikesView(userList: [])
 }

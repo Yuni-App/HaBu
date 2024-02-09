@@ -15,7 +15,7 @@ struct LikesListTile: View {
     var body: some View {
     
             HStack {
-                CircleProfileImage(userIamgeUrl: "", size: .small)
+                CircleProfileImage(userIamgeUrl: user.profileImageUrl?[0] ?? "" , size: .small)
                 VStack{
                     Text("\(user.name) \(user.surname)")
                         .fontWeight(.semibold)

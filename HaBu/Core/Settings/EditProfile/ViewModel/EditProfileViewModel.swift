@@ -126,6 +126,7 @@ class EditProfileViewModel : ObservableObject{
         data["profileImageUrl"] = imageUrlList ?? nil
         if !data.isEmpty{
             try await Firestore.firestore().collection("user").document(user.id).updateData(data)
+            AuthService().currentUser = try await UserService.fetchUser(withUserID: user.id)
         }
         
     }

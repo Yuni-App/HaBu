@@ -94,7 +94,7 @@ struct CircleProfileImage: View {
     var body: some View {
         if let size = self.size{
             if  userIamgeUrl != ""{
-                Image(userIamgeUrl)
+                KFImage(URL(string: userIamgeUrl))
                     .resizable()
                     .clipShape(.rect(cornerRadius: 30))
                     .overlay(
@@ -105,9 +105,10 @@ struct CircleProfileImage: View {
                 
             }
             else{
-                Image("profil3")
+                Image("profil")
                     .resizable()
                     .clipShape(.rect(cornerRadius: 15))
+                    .padding(5)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
                             .stroke(Color.white, lineWidth: 2)
