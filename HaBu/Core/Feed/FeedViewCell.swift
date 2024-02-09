@@ -138,8 +138,24 @@ struct FeedViewCell: View {
                     }
                 }
                 .padding()
+                HStack{
+                    ForEach(post.tags,id: \.self){ tag in
+                        HStack(spacing:10){
+                            Text("# \(tag)")
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                        }
+                        .frame(height: 20)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal,10)
+                        .background(
+                            Capsule().fill(Const.primaryColor)
+                        )
+                    }
+                    Spacer()
+                }
+                .padding(.bottom,5)
                 Spacer()
-                Divider()
 
             }
             .frame(width: Const.width * 0.98)
