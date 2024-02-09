@@ -33,8 +33,7 @@ class AddPostViewModel : ObservableObject {
 
     @Published var isAnonimComment = false
     @Published var isAnonimType : ImageType = .notSelected
-    
-    @Published var isProgress : Bool = false
+
     @Published var showAlert = false
     @Published var alertTitle = ""
     @Published var alertMessage = ""
@@ -46,9 +45,9 @@ class AddPostViewModel : ObservableObject {
     }
     
     func checkTextFields()  async{
-        isProgress = true
+     
         guard !textContent.isEmpty else {
-            isProgress = false
+         
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
@@ -56,7 +55,7 @@ class AddPostViewModel : ObservableObject {
             return
         }
         guard isAnonimType != .notSelected else {
-            isProgress = false
+           
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
@@ -64,14 +63,14 @@ class AddPostViewModel : ObservableObject {
             return
         }
         guard SelectedTags.count != 0  else {
-            isProgress = false
+            
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
             alertMessage = "En az bir tane kategori seçmelisiniz!"
             return
         }
-        isProgress = false
+       
         showAlert = true
         alertTitle = ""
         alertMessage = ""
@@ -81,19 +80,20 @@ class AddPostViewModel : ObservableObject {
     
     
     func createPost() async {
-        isProgress = true
+        
         guard isShare  else {
+           
             return
         }
         do {
             let isAnonim = (isAnonimType == .anonymous) ? true : false
             try await postService.createPost(textContent: textContent, selectedTags: SelectedTags, isAnonimComment: isAnonimComment, isAnonim: isAnonim , selectedImages: selectedImages)
-            isProgress = false
+          
             isShareSuccess = true
             
             
         } catch{
-            isProgress = false
+           
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
