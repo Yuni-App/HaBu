@@ -11,6 +11,7 @@ import SwiftUI
 struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
+    @State private var isActiveDestination: Bool = false
     @StateObject private var authService = AuthService.shared
     init() {
        
@@ -23,12 +24,10 @@ struct TabbarView: View {
     }
     var body: some View {
         
-        if let user = authService.currentUser{
+        if authService.currentUser != nil{
             NavigationStack{
                 GeometryReader{proxy in
                     let bottomEdge = proxy.safeAreaInsets.bottom
-                    let topEdge = proxy.safeAreaInsets.leading
-                    
                     TabView(selection:$currentTab){
                         FeedView(bottomEdge: bottomEdge, hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
@@ -42,7 +41,7 @@ struct TabbarView: View {
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Notification")
                             .toolbar(.hidden, for: .tabBar)
-                        ProfileView(hideTab: $hideBar, user: AuthService.shared.currentUser ?? user)
+                        ProfileView(hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Profile")
                             .toolbar(.hidden, for: .tabBar)
@@ -60,13 +59,18 @@ struct TabbarView: View {
             }
         }
         else{
-            
-            VStack {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-            }
+            Text("Giriş esnasında bir sorun oluştu tekrar deneyiniz")
+            Buttons.customButton(title: "Giriş Yap", buttonColor: .blue) {
+                
+                    Task {
+                       try await authService.logOut()
+                        isActiveDestination = true
+                    }
+                
+            }.navigationDestination(isPresented: $isActiveDestination, destination:{
+                InfoView()
+            })
         }
-        
     }
 }
 

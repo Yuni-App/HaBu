@@ -109,7 +109,7 @@ class EditProfileViewModel : ObservableObject{
             for i in 0..<images.count{
                 if let image = images[i] as? Image{
                     if let uiImage = image.renderToUiImage(){
-                        if let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, userId: user.id){
+                        if let imageUrl = try? await ImageUploder.imageUpload(image: uiImage, targetFile: .profileFile, id: user.id){
                             print(imageUrl)
                             if user.profileImageUrl?.count ?? 0 <= i{
                                 imageUrlList?.append(imageUrl)
@@ -126,6 +126,7 @@ class EditProfileViewModel : ObservableObject{
         data["profileImageUrl"] = imageUrlList ?? nil
         if !data.isEmpty{
             try await Firestore.firestore().collection("user").document(user.id).updateData(data)
+            AuthService().currentUser = try await UserService.fetchUser(withUserID: user.id)
         }
         
     }

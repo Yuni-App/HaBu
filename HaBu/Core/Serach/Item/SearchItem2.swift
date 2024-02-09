@@ -13,7 +13,7 @@ struct SearchItem2: View {
     @State private var deneme = true
     
     var body: some View {
-        NavigationLink(destination: ProfileView(hideTab: $deneme , user: user), label: {
+        NavigationLink(destination: ProfileView( user: user), label: {
                 VStack {
                     VStack {
                         Image("Mert")

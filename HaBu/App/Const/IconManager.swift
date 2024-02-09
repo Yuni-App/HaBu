@@ -43,6 +43,7 @@ enum AppIcon: String{
     case star = "star.fill"
     case treeDot = "ellipsis"
     case plus = "plus.app.fill"
+    case down_arrow = "arrow.down.circle.dotted"
     
 }
     

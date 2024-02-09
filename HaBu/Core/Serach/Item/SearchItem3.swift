@@ -13,7 +13,7 @@ struct SearchItem3: View {
     
     var body: some View {
         
-        NavigationLink(destination: ProfileView(hideTab: $deneme , user: user), label: {
+        NavigationLink(destination: ProfileView(user: user), label: {
             HStack {
                 CircleProfileImage(userIamgeUrl: "Mert", size: .xsmall)
                 VStack {

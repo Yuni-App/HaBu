@@ -13,7 +13,7 @@ import Kingfisher
 }
 
 struct SlidableImagesView: View {
-    var item : [String]
+    @State var item : [String]
     @Binding var index : Int
     var size : CGFloat
     var rect : CGRect

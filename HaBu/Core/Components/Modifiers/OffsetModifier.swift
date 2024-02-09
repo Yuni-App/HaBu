@@ -35,5 +35,5 @@ struct CustomCorner : Shape{
 }
 
 #Preview {
-    ProfileView(hideTab:.constant(true), user: User.MockData[0])
+    ProfileView(hideTab:.constant(true))
 }

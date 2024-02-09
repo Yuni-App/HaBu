@@ -9,35 +9,56 @@ import Foundation
 import Firebase
 import RxSwift
 import RxCocoa
+import SwiftUI
 
 class FeedViewModel : ObservableObject{
     var postsData: PublishSubject<[Post]> = PublishSubject()
     private var listener: ListenerRegistration?
-
+    var PostCount = 0
+  @Published  var newPostCount = 0
     
     init() {
         Task{
-           await requestData()
+          try await requestData()
             listenForChanges()
         }
     }
     
-    func requestData() async{
-        let postsFromService = await PostService().fetchPosts()
+    func requestData() async throws {
+        var postsFromService = await PostService().fetchPosts()
+        print(postsFromService)
+
+        PostCount = postsFromService.count
+        for i in 0..<postsFromService.count {
+            var user :User?
+            do {
+                user = try await UserService.fetchUser(withUserID: postsFromService[i].userId)
+                postsFromService[i].user = user
+            }
+            catch{
+                postsFromService[i].user = User.MockData[0]
+            }
+        }
         self.postsData.onNext(postsFromService)
     }
     
-    private func listenForChanges() {
-        listener = Firestore.firestore().collection("post").addSnapshotListener{ [weak self] (snapshot, error) in
-                guard let documents = snapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
-                }
-                
-                let posts = documents.compactMap({try? $0.data(as:Post.self)})
-                self?.postsData.onNext(posts)
-            }
-        }
+    func listenForChanges() {
+           listener = Firestore.firestore().collection("post").addSnapshotListener{ [weak self] (snapshot, error) in
+                   guard let documents = snapshot?.documents else {
+                       print("Error fetching documents: \(error!)")
+                       return
+                   }
+                   
+                   let posts = documents.compactMap({try? $0.data(as:Post.self)})
+               print(posts)
+               
+               DispatchQueue.main.async {
+                   withAnimation {
+                       self?.newPostCount = posts.count - self!.PostCount
+                   }
+               }
+               }
+           }
         
         deinit {
             listener?.remove()

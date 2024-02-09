@@ -9,8 +9,15 @@ import SwiftUI
 
 struct SplashView: View {
     var body: some View {
-        Text("Yuni...").foregroundStyle(Const.primaryColor).font(.custom("Kodchasan-Bold", size: 40))
-            .padding(10)
+        VStack {
+            Image("yuniSplash")
+                .resizable()
+            .frame(width: Const.width * 0.8,height: Const.width * 0.45)
+            
+        }
+        .frame(width: Const.width,height: Const.height)
+        .background(Const.LinearBackGroundColor.opacity(0.6))
+       
     }
 }
 

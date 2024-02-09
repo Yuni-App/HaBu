@@ -9,9 +9,10 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 protocol PostProvider{
-     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool , isAnonim : Bool) async throws -> Void
+     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool , isAnonim : Bool, selectedImages: [UIImage]) async throws -> Void
     // static func fetchPost( postID: String) async throws -> Post
     // static func fetchPosts() async throws ->  [Post]
 }
@@ -21,7 +22,33 @@ enum PostError : Error{
     case parsingError
 }
 class PostService : PostProvider{
+    var postRef = Firestore.firestore().collection("post")
+    
+    
+    func likeActionPost(userId:String,postId:String,like:Bool) async throws -> Bool{
+        if like{
+            do {
+                try await postRef.document(postId).updateData([
+                    "likeList": FieldValue.arrayUnion([userId])])
+                return true
+            }
+            catch{
+                return false
+            }
+        }
+        else{
+            do {
+                try await postRef.document(postId).updateData([
+                    "likeList": FieldValue.arrayRemove([userId])
+                ])
+                return true
+            }
+            catch{
+                return false
+            }
 
+        }
+    }
     
     func fetchPosts() async -> [Post]{
         do {
@@ -30,28 +57,46 @@ class PostService : PostProvider{
             return posts
         }
         catch{
-            print("error")
             return []
+        }
+    }
+    func fetchPost(id : String) async -> Post{
+        do {
+            let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
+            let post = try snapshot.data(as: Post.self)
+            return post
+        }
+        catch{
+            return Post.MockData[0]
         }
     }
     
     
    
-    func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool) async throws {
+    func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool, selectedImages: [UIImage]) async throws {
         let authService = AuthService.shared
+        var uploadedImageURLs: [String] = []
         do {
             let userCollection = Firestore.firestore().collection("post")
             let documentReference = userCollection.document()
+            if !selectedImages.isEmpty {
+                for image in selectedImages {
+                    if let imageUrl = try? await ImageUploder.imageUpload(image: image, targetFile: .profileFile, id: documentReference.documentID){
+                        uploadedImageURLs.append(imageUrl)
+                    }
+                }
+            }
+            print(uploadedImageURLs)
             try await documentReference.setData([
                 "id": documentReference.documentID,
                 "userId": authService.user?.uid,
+                "caption": textContent,
+                "imageUrl": uploadedImageURLs,
+                "timeStamp": FieldValue.serverTimestamp(),
+                "likeList": [],
                 "isAnonim": isAnonim,
                 "isAnonimComment": isAnonimComment,
-                "caption": textContent,
                 "tags": selectedTags,
-                "imageUrl": ["https://example.com/image.jpg","https://example.com/image.jpg"],
-                "timeStamp": FieldValue.serverTimestamp(),
-                "likeList": []
             ])
             print("Belge başarıyla eklendi.")
         } catch {
@@ -60,3 +105,4 @@ class PostService : PostProvider{
         
     }
 }
+

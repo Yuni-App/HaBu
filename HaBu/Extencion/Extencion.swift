@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import Kingfisher
-
+import Firebase
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexValue = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
@@ -73,7 +73,7 @@ extension Image {
     ) -> some View {
         Image(image.rawValue)
             .resizable()
-            .frame(width: width,height : height)
+            .frame(width: width, height : height)
             .background(backgroundColor?.opacity(0.1) ?? Color.clear)
             .cornerRadius(radius ?? 0)
             .shadow(color: (shadow?.opacity(1) ?? Color.clear), radius: 5, x: 3, y: 3)
@@ -91,6 +91,37 @@ extension View {
   func toastView(toast: Binding<Toast?>) -> some View {
     self.modifier(ToastModifier(toast: toast))
   }
+}
+extension View {
+    func hideKeyboardOnTap() -> some View {
+        self.onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+    }
+}
+extension View {
+    func moveFocusOnReturn() -> some View {
+        modifier(MoveFocusOnReturnModifier())
+    }
+}
+
+struct MoveFocusOnReturnModifier: ViewModifier {
+    @State private var textFieldTag = 0
+    
+    func body(content: Content) -> some View {
+        content
+            .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidEndEditingNotification)) { _ in
+                self.textFieldTag += 1
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+                DispatchQueue.main.async {
+                    let textField = UITextField()
+                    UIApplication.shared.windows.first?.addSubview(textField)
+                    textField.isHidden = true
+                    textField.becomeFirstResponder()
+                }
+            }
+    }
 }
 
 extension String {
@@ -143,5 +174,27 @@ extension UIImage {
         defer { UIGraphicsEndImageContext() }
         self.draw(in: rect)
         return UIGraphicsGetImageFromCurrentImageContext() ?? self
+    }
+}
+extension Timestamp {
+    func differenceFromTodayString() -> String {
+        let currentDate = Date()
+        let timeStampDate = self.dateValue()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .hour, .minute, .second], from: timeStampDate, to: currentDate)
+        
+        let days = components.day ?? 0
+        let hours = components.hour ?? 0
+        let minutes = components.minute ?? 0
+        
+        if hours < 1 {
+            return "\(minutes) d"
+        }
+        if days == 0 && hours < 24 {
+            return "\(hours) s"
+        } else {
+            return "\(days) g"
+        }
     }
 }
