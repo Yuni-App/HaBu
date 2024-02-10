@@ -14,7 +14,7 @@ import SwiftUI
 class FeedViewModel : ObservableObject{
     var postsData: PublishSubject<[Post]> = PublishSubject()
     private var listener: ListenerRegistration?
-    var PostCount = 0
+  @State var PostCount = 0
   @Published  var newPostCount = 0
     
     init() {
@@ -26,20 +26,22 @@ class FeedViewModel : ObservableObject{
     
     func requestData() async throws {
         var postsFromService = await PostService().fetchPosts()
-        print(postsFromService)
-
         PostCount = postsFromService.count
         for i in 0..<postsFromService.count {
             var user :User?
             do {
                 user = try await UserService.fetchUser(withUserID: postsFromService[i].userId)
                 postsFromService[i].user = user
+                
             }
             catch{
                 postsFromService[i].user = User.MockData[0]
             }
         }
         self.postsData.onNext(postsFromService)
+        PostCount = postsFromService.count
+
+        print(PostCount)
     }
     
     func listenForChanges() {
@@ -50,11 +52,9 @@ class FeedViewModel : ObservableObject{
                    }
                    
                    let posts = documents.compactMap({try? $0.data(as:Post.self)})
-               print(posts)
-               
                DispatchQueue.main.async {
                    withAnimation {
-                       self?.newPostCount = posts.count - self!.PostCount
+                       self?.newPostCount = posts.count 
                    }
                }
                }

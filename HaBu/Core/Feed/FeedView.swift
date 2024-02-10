@@ -80,7 +80,7 @@ struct FeedView: View {
                                 
                             }
                         }, label: {
-                            Text("+ \(feedVM.newPostCount) post")
+                            Text("+ \((feedVM.newPostCount - posts.count)) post")
                                 .foregroundStyle(.white)
                                 .font(.caption)
                                 .fontWeight(.bold)
@@ -90,7 +90,7 @@ struct FeedView: View {
                         .background(.blue)
                         .clipShape(.rect(cornerRadius: 15, style: .continuous))
                         .scaleEffect(hideTab ? 1.5 :1 )
-                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > 0 ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
+                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > posts.count ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
                         .zIndex(10)
                         
                         ScrollView(.vertical,showsIndicators: false){
