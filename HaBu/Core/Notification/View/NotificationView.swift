@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct NotificationView: View {
+    @StateObject var  notificationVM = NotificationViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack {
+               
                 HStack{
                     Text("Bildirimler")
                         .font(.title)
@@ -27,10 +30,11 @@ struct NotificationView: View {
                         }
                         .padding(.horizontal,15)
                         
-                        
-                        ForEach(0..<3){i in
-                            NotificationCell(notification: Notification.MOCK_DATA[i])
+                        ForEach(notificationVM.notifications) { notification in
+                            NotificationCell(notification: notification)
                             Divider()
+                        }
+                       
                             
                         }
                         
@@ -41,10 +45,11 @@ struct NotificationView: View {
                             Spacer()
                         }
                         .padding(.horizontal,15)
+                       /*
                         ForEach(0..<7){i in
                             NotificationCell(notification: Notification.MOCK_DATA[i])
                             Divider()
-                        }
+                        }*/
                         
                     }
                     .zIndex(1)
@@ -58,18 +63,14 @@ struct NotificationView: View {
     func NotificationCell(notification:Notification)-> some View{
         
         NavigationLink{
-            if let postId = Int(notification.targetId){
-                if let userId = Int(notification.userId){
-                    if notification.type == ""{
-                        FeedViewCell(navigated : Post.MockData[postId], user: User.MockData[userId])
-                    }
-                    else if notification.type == "" {
-                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
-                    }
-                    else if notification.type == ""{
-                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
-                    }
-                }
+            if notification.type == ""{
+                FeedViewCell(navigated : notification, user: User.MockData[0])
+            }
+            else if notification.type == "" {
+                FeedViewCell(navigatedWithComment: notification, user: User.MockData[0])
+            }
+            else if notification.type == ""{
+                FeedViewCell(navigatedWithComment: notification, user: User.MockData[0])
             }
         }label: {
             HStack{
@@ -79,7 +80,7 @@ struct NotificationView: View {
                         .foregroundStyle(.black.opacity(0.7))
                         .font(.footnote)
                         .fontWeight(.bold)
-                    Text(notification.caption ?? "")
+                    Text("Gönderinizi Beğendi")
                         .font(.headline)
                         .fontWeight(.semibold)
                     .foregroundStyle(.black)
@@ -91,7 +92,7 @@ struct NotificationView: View {
                         Image(systemName: "clock.fill")
                             .font(.caption2)
                             .foregroundStyle(.gray)
-                        Text(notification.createdAt)
+                        Text(convertTimestampToString(timestamp: notification.createdAt))
                             .font(.caption2)
                             .foregroundStyle(.black)
                         
@@ -109,8 +110,13 @@ struct NotificationView: View {
             
         }
     }
-}
 
+func convertTimestampToString(timestamp: Timestamp) -> String {
+    let date = timestamp.dateValue()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/yyyy HH:mm" // İstediğiniz tarih biçimini burada belirleyebilirsiniz
+    return dateFormatter.string(from: date)
+}
 
 #Preview {
     NotificationView()
