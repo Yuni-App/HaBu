@@ -19,11 +19,8 @@ struct UserInfo: View {
         self.timeStamp = timeStamp
         
         if let imageURlList = user.profileImageUrl{
-            print("imageUrlList")
             if imageURlList.count > 0 {
-                print("count")
                 imageUrl = imageURlList[0]
-                print(imageUrl)
             }
         }
     }

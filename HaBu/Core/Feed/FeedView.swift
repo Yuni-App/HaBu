@@ -65,6 +65,8 @@ struct FeedView: View {
             .observe(on: MainScheduler.asyncInstance)
             .subscribe { posts in
                 self.posts = posts
+               
+                
             }.disposed(by: disposeBag)
     }
     var body: some View {

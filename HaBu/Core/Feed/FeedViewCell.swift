@@ -88,12 +88,14 @@ struct FeedViewCell: View {
                     Buttons.actionButton(buttonType: likePost,action: {
                         if likePost == .unLike{
                             Task{
-                              let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true)
-                                if value{
-                                    likePost = .liked
-                                    post.likeList.append(user.id)
-                                    
-                                }
+                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true)
+                                  if value{
+                                      likePost = .liked
+                                      
+                                      post.likeList.append(AuthService.shared.currentUser!.id)
+                                      
+                                      
+                                  }
                             }
                         }
                         else{
@@ -101,7 +103,7 @@ struct FeedViewCell: View {
                               let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:false)
                                 if value{
                                     likePost = .unLike
-                                    post.likeList.removeAll { $0 == user.id }
+                                    post.likeList.removeAll { $0 == AuthService.shared.currentUser!.id }
 
                                     
                                 }
