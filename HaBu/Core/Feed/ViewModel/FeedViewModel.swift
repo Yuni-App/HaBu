@@ -54,7 +54,7 @@ class FeedViewModel : ObservableObject{
                    let posts = documents.compactMap({try? $0.data(as:Post.self)})
                DispatchQueue.main.async {
                    withAnimation {
-                       self?.newPostCount = posts.count 
+                       self?.newPostCount = posts.count
                    }
                }
                }
