@@ -14,22 +14,22 @@ struct FeedViewCell: View {
     private var backButton : Bool
     @State private var showingComment = false
     @State private var showingLikeList = false
-    @State var post : Post
+    @Binding var post : Post
     var user : User
-    init(post: Post,user:User,likeAction:ActionButtons) {
-        _post = State(initialValue: post)
+    init(post:  Binding<Post>,user:User,likeAction:ActionButtons) {
+        self._post = post
         self.user = user
         self.backButton = false
         _likePost = State(initialValue: likeAction)
     }
-    init(navigatedWithComment post: Post,user:User) {
-        _post = State(initialValue: post)
+    init(navigatedWithComment post: Binding<Post>,user:User) {
+        self._post = post
         self.user = user
         self.backButton = true
         self.showingComment = true
     }
-    init(navigated post:Post,user:User){
-        _post = State(initialValue: post)
+    init(navigated post:Binding<Post>,user:User){
+        self._post = post
         self.user = user
         self.backButton = true
 
@@ -45,7 +45,7 @@ struct FeedViewCell: View {
                 
                 Spacer()
                 //User Info
-                UserInfo(withTime: user, imageSize: .small, timeStamp:post.timeStamp.differenceFromTodayString() )
+                UserInfo(withTime: user, imageSize: .small, timeStamp:post.timeStamp.differenceFromTodayString(), isAnonim: post.isAnonim)
                     .foregroundStyle(.black)
                     .padding(.horizontal)
                 
@@ -88,12 +88,14 @@ struct FeedViewCell: View {
                     Buttons.actionButton(buttonType: likePost,action: {
                         if likePost == .unLike{
                             Task{
-                              let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true)
-                                if value{
-                                    likePost = .liked
-                                    post.likeList.append(user.id)
-                                    
-                                }
+                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true)
+                                  if value{
+                                      likePost = .liked
+                                      
+                                      post.likeList.append(AuthService.shared.currentUser!.id)
+                                      
+                                      
+                                  }
                             }
                         }
                         else{
@@ -101,7 +103,7 @@ struct FeedViewCell: View {
                               let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:false)
                                 if value{
                                     likePost = .unLike
-                                    post.likeList.removeAll { $0 == user.id }
+                                    post.likeList.removeAll { $0 == AuthService.shared.currentUser!.id }
 
                                     
                                 }
@@ -138,8 +140,24 @@ struct FeedViewCell: View {
                     }
                 }
                 .padding()
+                HStack{
+                    ForEach(post.tags,id: \.self){ tag in
+                        HStack(spacing:10){
+                            Text("# \(tag)")
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                        }
+                        .frame(height: 20)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal,10)
+                        .background(
+                            Capsule().fill(Const.primaryColor)
+                        )
+                    }
+                    Spacer()
+                }
+                .padding(.bottom,5)
                 Spacer()
-                Divider()
 
             }
             .frame(width: Const.width * 0.98)
@@ -147,6 +165,4 @@ struct FeedViewCell: View {
         
     }
 }
-#Preview {
-    FeedViewCell(navigatedWithComment: Post.MockData[0], user: User.MockData[0])
-}
+

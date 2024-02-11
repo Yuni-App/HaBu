@@ -50,13 +50,16 @@ class PostService : PostProvider{
         }
     }
     
-    func fetchPosts() async -> [Post]{
+    func fetchPosts() async -> [Post] {
         do {
-            let snapshot = try await Firestore.firestore().collection("post").getDocuments()
-            let posts = snapshot.documents.compactMap({try? $0.data(as:Post.self)})
+            let querySnapshot = try await Firestore.firestore().collection("post")
+                .order(by: "timeStamp", descending: true) 
+                .getDocuments()
+
+            let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
-        }
-        catch{
+        } catch {
+            print("Error fetching posts: \(error)")
             return []
         }
     }

@@ -37,13 +37,15 @@ struct FeedView: View {
     
     func detectScrollOffset()-> some View{
         DispatchQueue.main.async {
-          
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
-                    try await feedVM.requestData()
+                    self.posts =  try await feedVM.requestData()
                     print("update")
+                    print(self.posts.last)
                     print(feedVM.newPostCount)
+                    
+
 
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -63,8 +65,10 @@ struct FeedView: View {
         feedVM
             .postsData
             .observe(on: MainScheduler.asyncInstance)
-            .subscribe { posts in
+            .subscribe{ posts in
+               
                 self.posts = posts
+                
             }.disposed(by: disposeBag)
     }
     var body: some View {
@@ -80,7 +84,7 @@ struct FeedView: View {
                                 
                             }
                         }, label: {
-                            Text("+ \(feedVM.newPostCount) post")
+                            Text("+ \((feedVM.newPostCount - posts.count)) post")
                                 .foregroundStyle(.white)
                                 .font(.caption)
                                 .fontWeight(.bold)
@@ -90,7 +94,7 @@ struct FeedView: View {
                         .background(.blue)
                         .clipShape(.rect(cornerRadius: 15, style: .continuous))
                         .scaleEffect(hideTab ? 1.5 :1 )
-                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > 0 ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
+                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > posts.count ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
                         .zIndex(10)
                         
                         ScrollView(.vertical,showsIndicators: false){
@@ -122,8 +126,9 @@ struct FeedView: View {
                                             .scaleEffect(offset / 100)
                                             .padding(.vertical,offset > 0 ?  -offset : 0)
                                     }
-                                    ForEach(posts , id: \.id){post in
-                                        FeedViewCell(post: post,user: post.user!,likeAction: checkLike(post: post, userID: AuthService.shared.currentUser!.id)).id(post.id)
+                                    ForEach(posts.indices, id: \.self){index in
+                                        
+                                        FeedViewCell(post:$posts[index],user: posts[index].user!,likeAction: checkLike(post: posts[index], userID: AuthService.shared.currentUser!.id)).id(posts[index].id)
                                         Divider()
                                     }
                                     

@@ -63,6 +63,7 @@ struct NotificationView: View {
     func NotificationCell(notification:Notification)-> some View{
         
         NavigationLink{
+
             if notification.type == ""{
                 FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
@@ -71,6 +72,7 @@ struct NotificationView: View {
             }
             else if notification.type == ""{
                 FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+
             }
         }label: {
             HStack{

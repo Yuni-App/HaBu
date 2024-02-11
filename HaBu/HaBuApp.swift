@@ -34,7 +34,7 @@ struct HaBuApp: App {
                            if authService.user != nil {
                                TabbarView()
                            } else {
-                               ContentView()
+                               InfoView()
                            }
                        }
                    }
