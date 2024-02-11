@@ -63,17 +63,16 @@ class PostService : PostProvider{
             return []
         }
     }
-    func fetchPost(id : String) async -> Post{
+    func fetchPost(id: String) async -> Post? {
         do {
             let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
             let post = try snapshot.data(as: Post.self)
             return post
-        }
-        catch{
-            return Post.MockData[0]
+        } catch {
+            print("Post fetch error: \(error)")
+            return nil
         }
     }
-    
     
    
     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool, selectedImages: [UIImage]) async throws {

@@ -82,6 +82,8 @@
 		9465F96F2B34E4B600F25235 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */; };
 		9465F9722B34E5B800F25235 /* LikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9712B34E5B800F25235 /* LikesViewModel.swift */; };
 		94686A0F2B3980950089C7CD /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94686A0E2B3980950089C7CD /* RegisterView.swift */; };
+		946C10662B77D9460021646A /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C10652B77D9460021646A /* NotificationViewModel.swift */; };
+		946C10682B77E9500021646A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946C10672B77E94F0021646A /* NotificationService.swift */; };
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
@@ -173,6 +175,8 @@
 		9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		9465F9712B34E5B800F25235 /* LikesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesViewModel.swift; sourceTree = "<group>"; };
 		94686A0E2B3980950089C7CD /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		946C10652B77D9460021646A /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		946C10672B77E94F0021646A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 		5C2DAB542B050FB100C6E145 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				946C10642B77D9200021646A /* ViewModel */,
 				5C2DAB552B050FB800C6E145 /* View */,
 			);
 			path = Notification;
@@ -397,6 +402,7 @@
 				9439A8822B322F28005D0E20 /* AuthService.swift */,
 				5CB8E8F22B37361B00EC04B3 /* ImageUploader.swift */,
 				94C617ED2B44594A009F2A6F /* PostService.swift */,
+				946C10672B77E94F0021646A /* NotificationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -653,6 +659,14 @@
 			isa = PBXGroup;
 			children = (
 				9465F9712B34E5B800F25235 /* LikesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		946C10642B77D9200021646A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				946C10652B77D9460021646A /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -933,6 +947,7 @@
 				943B9CE42B06912500067376 /* LikesListTile.swift in Sources */,
 				5C8792DE2B2FB967007D288E /* Toast.swift in Sources */,
 				94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */,
+				946C10682B77E9500021646A /* NotificationService.swift in Sources */,
 				5CB8E8F32B37361B00EC04B3 /* ImageUploader.swift in Sources */,
 				5C4133BD2B04A7AD006F29AF /* FeedViewCell.swift in Sources */,
 				5C2DAB5D2B052AE100C6E145 /* IGTextFieldModifier.swift in Sources */,
@@ -968,6 +983,7 @@
 				5CF151962B1EC2000015BE31 /* NavigationStateManager.swift in Sources */,
 				9446D3CB2B38BA390054CFB5 /* LogOutViewModel.swift in Sources */,
 				88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */,
+				946C10662B77D9460021646A /* NotificationViewModel.swift in Sources */,
 				5C2658632B03C53C008BEB6D /* Extencion.swift in Sources */,
 				5C2DAB4F2B050EE800C6E145 /* TabbarView.swift in Sources */,
 				8821E5112B1DDCC1003089B6 /* SearchItem3.swift in Sources */,

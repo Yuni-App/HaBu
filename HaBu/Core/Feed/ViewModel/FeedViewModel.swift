@@ -8,8 +8,10 @@ import SwiftUI
 class FeedViewModel : ObservableObject{
     var postsData: PublishSubject<[Post]> = PublishSubject()
     private var listener: ListenerRegistration?
+
     @Published  var newPostCount = 0
     @Published var postCount = 0
+
     
     init() {
         Task {
