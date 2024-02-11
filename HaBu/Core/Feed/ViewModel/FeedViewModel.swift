@@ -9,6 +9,7 @@ class FeedViewModel : ObservableObject{
     var postsData: PublishSubject<[Post]> = PublishSubject()
     private var listener: ListenerRegistration?
     @Published  var newPostCount = 0
+    @Published var postCount = 0
     
     init() {
         Task {
@@ -18,9 +19,9 @@ class FeedViewModel : ObservableObject{
     }
    
     
-    func requestData() async throws {
+    func requestData() async throws  -> [Post]{
         var postsFromService = await PostService().fetchPosts()
-        for i in 0..<postsFromService.count {
+        for i in (postCount)..<postsFromService.count {
             var user: User?
             do {
                 user = try await UserService.fetchUser(withUserID: postsFromService[i].userId)
@@ -30,6 +31,7 @@ class FeedViewModel : ObservableObject{
             }
         }
         self.postsData.onNext(postsFromService)
+        return postsFromService
     }
 
     

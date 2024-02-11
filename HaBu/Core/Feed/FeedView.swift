@@ -37,13 +37,15 @@ struct FeedView: View {
     
     func detectScrollOffset()-> some View{
         DispatchQueue.main.async {
-          
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
-                    try await feedVM.requestData()
+                    self.posts =  try await feedVM.requestData()
                     print("update")
+                    print(self.posts.last)
                     print(feedVM.newPostCount)
+                    
+
 
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -63,9 +65,9 @@ struct FeedView: View {
         feedVM
             .postsData
             .observe(on: MainScheduler.asyncInstance)
-            .subscribe { posts in
-                self.posts = posts
+            .subscribe{ posts in
                
+                self.posts = posts
                 
             }.disposed(by: disposeBag)
     }
@@ -124,8 +126,9 @@ struct FeedView: View {
                                             .scaleEffect(offset / 100)
                                             .padding(.vertical,offset > 0 ?  -offset : 0)
                                     }
-                                    ForEach(posts , id: \.id){post in
-                                        FeedViewCell(post: post,user: post.user!,likeAction: checkLike(post: post, userID: AuthService.shared.currentUser!.id)).id(post.id)
+                                    ForEach(posts.indices, id: \.self){index in
+                                        
+                                        FeedViewCell(post:$posts[index],user: posts[index].user!,likeAction: checkLike(post: posts[index], userID: AuthService.shared.currentUser!.id)).id(posts[index].id)
                                         Divider()
                                     }
                                     

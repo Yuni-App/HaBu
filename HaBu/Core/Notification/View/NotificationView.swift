@@ -61,13 +61,13 @@ struct NotificationView: View {
             if let postId = Int(notification.targetId){
                 if let userId = Int(notification.userId){
                     if notification.type == ""{
-                        FeedViewCell(navigated : Post.MockData[postId], user: User.MockData[userId])
+                      //  FeedViewCell(navigated : Post.MockData[postId], user: User.MockData[userId])
                     }
                     else if notification.type == "" {
-                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
+                      //  FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
                     }
                     else if notification.type == ""{
-                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
+                       // FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
                     }
                 }
             }

@@ -14,22 +14,22 @@ struct FeedViewCell: View {
     private var backButton : Bool
     @State private var showingComment = false
     @State private var showingLikeList = false
-    @State var post : Post
+    @Binding var post : Post
     var user : User
-    init(post: Post,user:User,likeAction:ActionButtons) {
-        _post = State(initialValue: post)
+    init(post:  Binding<Post>,user:User,likeAction:ActionButtons) {
+        self._post = post
         self.user = user
         self.backButton = false
         _likePost = State(initialValue: likeAction)
     }
-    init(navigatedWithComment post: Post,user:User) {
-        _post = State(initialValue: post)
+    init(navigatedWithComment post: Binding<Post>,user:User) {
+        self._post = post
         self.user = user
         self.backButton = true
         self.showingComment = true
     }
-    init(navigated post:Post,user:User){
-        _post = State(initialValue: post)
+    init(navigated post:Binding<Post>,user:User){
+        self._post = post
         self.user = user
         self.backButton = true
 
@@ -165,6 +165,4 @@ struct FeedViewCell: View {
         
     }
 }
-#Preview {
-    FeedViewCell(navigatedWithComment: Post.MockData[0], user: User.MockData[0])
-}
+
