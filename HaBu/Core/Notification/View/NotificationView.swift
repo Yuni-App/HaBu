@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+
 struct NotificationView: View {
     @StateObject var  notificationVM = NotificationViewModel()
     
@@ -34,9 +35,7 @@ struct NotificationView: View {
                             NotificationCell(notification: notification)
                             Divider()
                         }
-                       
-                            
-                        }
+                        
                         
                         HStack{
                             Image(systemName: "clock.fill")
@@ -45,11 +44,12 @@ struct NotificationView: View {
                             Spacer()
                         }
                         .padding(.horizontal,15)
-                       /*
-                        ForEach(0..<7){i in
-                            NotificationCell(notification: Notification.MOCK_DATA[i])
-                            Divider()
-                        }*/
+                        /*
+                         ForEach(0..<7){i in
+                             NotificationCell(notification: Notification.MOCK_DATA[i])
+                             Divider()
+                         }
+                         */
                         
                     }
                     .zIndex(1)
@@ -64,13 +64,13 @@ struct NotificationView: View {
         
         NavigationLink{
             if notification.type == ""{
-                FeedViewCell(navigated : notification, user: User.MockData[0])
+                FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
             else if notification.type == "" {
-                FeedViewCell(navigatedWithComment: notification, user: User.MockData[0])
+                FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
             else if notification.type == ""{
-                FeedViewCell(navigatedWithComment: notification, user: User.MockData[0])
+                FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
         }label: {
             HStack{
@@ -92,7 +92,9 @@ struct NotificationView: View {
                         Image(systemName: "clock.fill")
                             .font(.caption2)
                             .foregroundStyle(.gray)
-                        Text(convertTimestampToString(timestamp: notification.createdAt))
+                        Text(formattedDate(from: notification.createdAt))
+                            .font(.caption2)
+                            .foregroundColor(.black)
                             .font(.caption2)
                             .foregroundStyle(.black)
                         
@@ -110,13 +112,14 @@ struct NotificationView: View {
             
         }
     }
-
-func convertTimestampToString(timestamp: Timestamp) -> String {
-    let date = timestamp.dateValue()
+}
+func formattedDate(from timestamp: Timestamp) -> String {
+    let date = Date(timeIntervalSince1970: TimeInterval(timestamp.seconds))
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy HH:mm" // İstediğiniz tarih biçimini burada belirleyebilirsiniz
+    dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
     return dateFormatter.string(from: date)
 }
+
 
 #Preview {
     NotificationView()
