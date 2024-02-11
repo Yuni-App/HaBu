@@ -45,7 +45,7 @@ struct FeedViewCell: View {
                 
                 Spacer()
                 //User Info
-                UserInfo(withTime: user, imageSize: .small, timeStamp:post.timeStamp.differenceFromTodayString() )
+                UserInfo(withTime: user, imageSize: .small, timeStamp:post.timeStamp.differenceFromTodayString(), isAnonim: post.isAnonim)
                     .foregroundStyle(.black)
                     .padding(.horizontal)
                 

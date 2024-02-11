@@ -56,7 +56,7 @@ struct CommentViewCell : View {
         VStack{
             //User Info
             HStack {
-                UserInfo(user: user, imageSize: .xsmall)
+                UserInfo(user: user, imageSize: .xsmall,isAnonim: false)
                     .padding(10)
                 Buttons.actionButton(buttonType: .liked, action: {
                     

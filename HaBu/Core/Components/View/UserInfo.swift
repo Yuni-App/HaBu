@@ -13,18 +13,21 @@ struct UserInfo: View {
     let imageSize : ProfileImageSize
     var timeStamp: String?
     var imageUrl = ""
-    init(withTime user: User, imageSize: ProfileImageSize, timeStamp: String) {
+    var isAnonim : Bool
+    init(withTime user: User, imageSize: ProfileImageSize, timeStamp: String,isAnonim : Bool) {
         self.user = user
         self.imageSize = imageSize
         self.timeStamp = timeStamp
-        
+        self.isAnonim = isAnonim
         if let imageURlList = user.profileImageUrl{
             if imageURlList.count > 0 {
                 imageUrl = imageURlList[0]
             }
         }
     }
-    init(user:User,imageSize:ProfileImageSize) {
+    init(user:User,imageSize:ProfileImageSize,isAnonim : Bool) {
+        self.isAnonim = isAnonim
+
         self.user = user
         self.imageSize = imageSize
         if let imageURlList = user.profileImageUrl{
@@ -37,16 +40,18 @@ struct UserInfo: View {
         ZStack {
             HStack {
                 NavigationLink {
-                    ProfileView(user: user)
+                    if !isAnonim{
+                        ProfileView(user: user)
+                    }
                 } label: {
                     HStack {
+                        CircleProfileImage(userIamgeUrl:isAnonim ? "anonim" : imageUrl , size: imageSize)
                         
-                        CircleProfileImage(userIamgeUrl: imageUrl, size: imageSize)
                         VStack{
-                            Text("\(user.name) \(user.surname)")
+                            Text("\(isAnonim ? "user\(user.anonimId)" : user.name) \(isAnonim ? "" : user.surname)")
                                 .fontWeight(.semibold)
                                 .font(.caption)
-                            Text("\(user.username)")
+                            Text("\(isAnonim ? "" :  user.username)")
                                 .opacity(0.5)
                                 .fontWeight(.semibold)
                                 .font(.caption2)
@@ -87,9 +92,4 @@ struct UserInfo: View {
         .toastView(toast: $toast)
         
     }
-}
-
-
-#Preview {
-    UserInfo(withTime : User.MockData[0], imageSize: .small, timeStamp: "12")
 }
