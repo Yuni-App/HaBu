@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Firebase
+import Firebase 
 
 struct Notification: Identifiable, Codable{
     let id: String

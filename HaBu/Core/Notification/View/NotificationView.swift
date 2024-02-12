@@ -31,11 +31,13 @@ struct NotificationView: View {
                         }
                         .padding(.horizontal,15)
                         
-                        ForEach(notificationVM.notifications) { notification in
-                            NotificationCell(notification: notification)
-                            Divider()
-                        }
-                        
+                       
+                        /*
+                         ForEach(0..<7){i in
+                             NotificationCell(notification: Notification.MOCK_DATA[i])
+                             Divider()
+                         }
+                         */
                         
                         HStack{
                             Image(systemName: "clock.fill")
@@ -44,12 +46,11 @@ struct NotificationView: View {
                             Spacer()
                         }
                         .padding(.horizontal,15)
-                        /*
-                         ForEach(0..<7){i in
-                             NotificationCell(notification: Notification.MOCK_DATA[i])
-                             Divider()
-                         }
-                         */
+                        ForEach(notificationVM.notifications) { notification in
+                            NotificationCell(notification: notification)
+                            Divider()
+                        }
+                       
                         
                     }
                     .zIndex(1)
@@ -74,13 +75,20 @@ struct NotificationView: View {
             }
         }label: {
             HStack{
-                CircleProfileImage(userIamgeUrl: "", size: .small)
+             
+
+                if let profileImageUrl = notification.user?.profileImageUrl?.first {
+                    CircleProfileImage(userIamgeUrl: profileImageUrl, size: .small)
+                } else {
+                    // Eğer profiil resmi URL'si mevcut değilse, varsayılan bir resim gösterilebilir.
+                    CircleProfileImage(userIamgeUrl: "", size: .small)
+                }
                 VStack (alignment:.leading){
-                    Text(User.MockData[0].username)
+                    Text(notification.user?.username ?? "Hata")
                         .foregroundStyle(.black.opacity(0.7))
                         .font(.footnote)
                         .fontWeight(.bold)
-                    Text("Gönderinizi Beğendi")
+                    Text(notification.type == NotificationType.postLike.rawValue  ?  "Gönderinizi Beğendi" : "Gönderinize Yorum Attı")
                         .font(.headline)
                         .fontWeight(.semibold)
                     .foregroundStyle(.black)

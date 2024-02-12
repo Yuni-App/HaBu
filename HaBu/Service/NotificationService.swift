@@ -25,7 +25,6 @@ class NotificationService :NotificationProvider{
                         .getDocuments()
             // Firestore'dan alınan belgelerin dönüşüm işleminden önce işlemler
             let data = snapshot.documents.map { $0.data() }
-            print("2rstdgfhk")
             // Dönüşüm işlemi
             var notifications: [Notification] = []
             for documentData in data {
@@ -42,13 +41,11 @@ class NotificationService :NotificationProvider{
                 let post = try await postService.fetchPost(id: postId)
                 let user = try await UserService.fetchUser(withUserID: userId)
                       
-                print("3rstdgfhk")
                 // Bildirimi oluştur
                 let notification = Notification(id: id, post: post, type: type, user: user, targetId: targetId, createdAt: createdAtTimestamp)
                 
                 notifications.append(notification)
             }
-            print("4rstdgfhk")
             print(notifications.count)
             return notifications
         } catch {
