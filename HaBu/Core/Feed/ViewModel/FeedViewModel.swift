@@ -8,9 +8,10 @@ import SwiftUI
 class FeedViewModel : ObservableObject{
     var postsData: PublishSubject<[Post]> = PublishSubject()
     private var listener: ListenerRegistration?
-
     @Published  var newPostCount = 0
     @Published var postCount = 0
+    @Published var tags = [String]()
+    @Published var selectedFilter = "Hepsi"
 
     
     init() {
@@ -22,7 +23,7 @@ class FeedViewModel : ObservableObject{
    
     
     func requestData() async throws  -> [Post]{
-        var postsFromService = await PostService().fetchPosts()
+        var postsFromService = await PostService().fetchPosts(tags: tags,postType: selectedFilter)
         for i in (postCount)..<postsFromService.count {
             var user: User?
             do {

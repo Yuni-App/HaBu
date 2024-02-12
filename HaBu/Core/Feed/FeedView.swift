@@ -34,6 +34,9 @@ struct FeedView: View {
     @State private var previousyOffset : CGFloat = 0
     @State var show :Bool = true
     @State var refresh = false
+    @State var tags = [String]()
+    @State var selectionFilter = "Hepsi"
+    
     
     func detectScrollOffset()-> some View{
         DispatchQueue.main.async {
@@ -42,10 +45,6 @@ struct FeedView: View {
                 Task{
                     self.posts =  try await feedVM.requestData()
                     print("update")
-                    print(self.posts.last)
-                    print(feedVM.newPostCount)
-                    
-
 
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -131,7 +130,6 @@ struct FeedView: View {
                                         FeedViewCell(post:$posts[index],user: posts[index].user!,likeAction: checkLike(post: posts[index], userID: AuthService.shared.currentUser!.id)).id(posts[index].id)
                                         Divider()
                                     }
-                                    
                                 }
                                 .padding(.top,Const.height * 0.12)
                                 .overlay(
@@ -201,7 +199,14 @@ struct FeedView: View {
                             
                         )
                         .sheet(isPresented: $showCategoryFilter) {
-                            CategoryFilterBottomSheet()
+                            CategoryFilterBottomSheet(SelectedTags: $tags, selectedFilter: $selectionFilter, onButtonTapped: {
+                                showCategoryFilter = false
+                                Task{
+                                    feedVM.tags = self.tags
+                                    feedVM.selectedFilter = self.selectionFilter
+                                    self.posts = try await feedVM.requestData()
+                                }
+                            })
                                 .presentationDetents([.height(Const.height * 0.6)])
                         }
                     }

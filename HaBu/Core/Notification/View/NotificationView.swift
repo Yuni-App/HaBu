@@ -65,13 +65,13 @@ struct NotificationView: View {
         NavigationLink{
 
             if notification.type == ""{
-                FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+              //  FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
             else if notification.type == "" {
-                FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+             //   FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
             else if notification.type == ""{
-                FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+                //FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
 
             }
         }label: {
