@@ -12,7 +12,7 @@ class FeedViewModel : ObservableObject{
     @Published var postCount = 0
     @Published var tags = [String]()
     @Published var selectedFilter = "Hepsi"
-
+    var postService = PostService()
     
     init() {
         Task {
@@ -23,7 +23,7 @@ class FeedViewModel : ObservableObject{
    
     
     func requestData() async throws  -> [Post]{
-        var postsFromService = await PostService().fetchPosts(tags: tags,postType: selectedFilter)
+        var postsFromService = await postService.fetchPosts(tags: tags,postType: selectedFilter)
         for i in (postCount)..<postsFromService.count {
             var user: User?
             do {
@@ -39,18 +39,12 @@ class FeedViewModel : ObservableObject{
 
     
     func listenForChanges() {
-           listener = Firestore.firestore().collection("post").addSnapshotListener{ [weak self] (snapshot, error) in
-                   guard let documents = snapshot?.documents else {
-                       print("Error fetching documents: \(error!)")
-                       return
-                   }
-                   
-                   let posts = documents.compactMap({try? $0.data(as:Post.self)})
-               DispatchQueue.main.async {
-                   withAnimation {
-                       self?.newPostCount = posts.count
-                   }
-               }
+        postService.listenForChanges { [weak self] posts in
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self?.newPostCount = posts.count
+                    }
+                }
             }
         }
         

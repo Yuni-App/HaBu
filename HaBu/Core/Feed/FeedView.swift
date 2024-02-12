@@ -205,6 +205,7 @@ struct FeedView: View {
                                     feedVM.tags = self.tags
                                     feedVM.selectedFilter = self.selectionFilter
                                     self.posts = try await feedVM.requestData()
+                                    feedVM.listenForChanges()
                                 }
                             })
                                 .presentationDetents([.height(Const.height * 0.6)])

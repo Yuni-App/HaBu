@@ -23,8 +23,7 @@ enum PostError : Error{
 }
 class PostService : PostProvider{
     var postRef = Firestore.firestore().collection("post")
-    
-    
+    var postFeedRef = Firestore.firestore().collection("post") as Query
     func likeActionPost(userId:String,postId:String,like:Bool) async throws -> Bool{
         if like{
             do {
@@ -52,23 +51,36 @@ class PostService : PostProvider{
     
     func fetchPosts(tags: [String] = [], postType: String = "Hepsi") async -> [Post] {
         do {
-            var ref = Firestore.firestore().collection("post") as Query
+            postFeedRef = Firestore.firestore().collection("post") as Query
             if postType == "Anonim"{
-               ref =  ref.whereField("isAnonim", isEqualTo: true)
+                postFeedRef =  postFeedRef.whereField("isAnonim", isEqualTo: true)
             }
             if postType == "Normal"{
-                ref = ref.whereField("isAnonim", isEqualTo: false)
+                postFeedRef = postFeedRef.whereField("isAnonim", isEqualTo: false)
             }
             if !tags.isEmpty{
-                ref = ref.whereField("tags", arrayContainsAny: tags)
+                postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
             
-            let querySnapshot = try await ref.getDocuments()
+            let querySnapshot = try await postFeedRef.getDocuments()
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
         } catch {
             print("Error fetching posts: \(error)")
             return []
+        }
+    }
+    func listenForChanges(completion: @escaping ([Post]) -> Void) {
+        postFeedRef.addSnapshotListener { snapshot, error in
+            guard let documents = snapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            
+            let posts = documents.compactMap({ try? $0.data(as: Post.self) })
+            completion(posts)
+            print(posts.count)
+            
         }
     }
 
