@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CategoryFilterBottomSheet: View {
-    @State var SelectedTags:[String] = []
+    @Binding var SelectedTags:[String]
     @State private var scrollOffset: CGFloat = 0
     @State var dragDirection: DragDirection = .none
-    @State var selectedFilter = "Hepsi"
+    @Binding var selectedFilter : String
+    var onButtonTapped: () -> Void
     var body: some View {
         VStack {
             Text("Paylaşım Türü")
@@ -34,7 +35,7 @@ struct CategoryFilterBottomSheet: View {
            
             ZStack{
                 Button(action: {
-                    
+                    onButtonTapped()
                 }, label: {
                     Text("Filtrele")
                         .fontWeight(.semibold)
@@ -55,12 +56,6 @@ struct CategoryFilterBottomSheet: View {
         }
     }
 }
-
-#Preview {
-    CategoryFilterBottomSheet()
-}
-
-
 
 @ViewBuilder
 func TagView(_ tag:String ,_ color: Color, _ icon:String)->some View{

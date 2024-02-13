@@ -83,8 +83,6 @@ import SwiftUI
 
 
 
-#Preview {
-    CategoryFilterBottomSheet()
-}
+
 
 
