@@ -25,7 +25,7 @@ struct ThreeDRotateFeedViewCell: View {
     var body: some View {
         
         VStack {
-            UserInfo(user: user, imageSize: .small)
+            UserInfo(user: user, imageSize: .small,isAnonim: false)
             .padding(.horizontal)
             .frame(height:  Const.height * 0.1)
             ZStack {

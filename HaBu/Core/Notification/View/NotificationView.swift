@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct NotificationView: View {
+    @StateObject var  notificationVM = NotificationViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack {
+               
                 HStack{
                     Text("Bildirimler")
                         .font(.title)
@@ -27,12 +31,13 @@ struct NotificationView: View {
                         }
                         .padding(.horizontal,15)
                         
-                        
-                        ForEach(0..<3){i in
-                            NotificationCell(notification: Notification.MOCK_DATA[i])
-                            Divider()
-                            
-                        }
+                       
+                        /*
+                         ForEach(0..<7){i in
+                             NotificationCell(notification: Notification.MOCK_DATA[i])
+                             Divider()
+                         }
+                         */
                         
                         HStack{
                             Image(systemName: "clock.fill")
@@ -41,10 +46,11 @@ struct NotificationView: View {
                             Spacer()
                         }
                         .padding(.horizontal,15)
-                        ForEach(0..<7){i in
-                            NotificationCell(notification: Notification.MOCK_DATA[i])
+                        ForEach(notificationVM.notifications) { notification in
+                            NotificationCell(notification: notification)
                             Divider()
                         }
+                       
                         
                     }
                     .zIndex(1)
@@ -58,28 +64,33 @@ struct NotificationView: View {
     func NotificationCell(notification:Notification)-> some View{
         
         NavigationLink{
-            if let postId = Int(notification.targetId){
-                if let userId = Int(notification.userId){
-                    if notification.type == ""{
-                        FeedViewCell(navigated : Post.MockData[postId], user: User.MockData[userId])
-                    }
-                    else if notification.type == "" {
-                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
-                    }
-                    else if notification.type == ""{
-                        FeedViewCell(navigatedWithComment: Post.MockData[postId], user: User.MockData[userId])
-                    }
-                }
+
+            if notification.type == ""{
+              //  FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+            }
+            else if notification.type == "" {
+             //   FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+            }
+            else if notification.type == ""{
+                //FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+
             }
         }label: {
             HStack{
-                CircleProfileImage(userIamgeUrl: "", size: .small)
+             
+
+                if let profileImageUrl = notification.user?.profileImageUrl?.first {
+                    CircleProfileImage(userIamgeUrl: profileImageUrl, size: .small)
+                } else {
+                    // Eğer profiil resmi URL'si mevcut değilse, varsayılan bir resim gösterilebilir.
+                    CircleProfileImage(userIamgeUrl: "", size: .small)
+                }
                 VStack (alignment:.leading){
-                    Text(User.MockData[0].username)
+                    Text(notification.user?.username ?? "Hata")
                         .foregroundStyle(.black.opacity(0.7))
                         .font(.footnote)
                         .fontWeight(.bold)
-                    Text(notification.caption ?? "")
+                    Text(notification.type == NotificationType.postLike.rawValue  ?  "Gönderinizi Beğendi" : "Gönderinize Yorum Attı")
                         .font(.headline)
                         .fontWeight(.semibold)
                     .foregroundStyle(.black)
@@ -91,7 +102,9 @@ struct NotificationView: View {
                         Image(systemName: "clock.fill")
                             .font(.caption2)
                             .foregroundStyle(.gray)
-                        Text(notification.createdAt)
+                        Text(formattedDate(from: notification.createdAt))
+                            .font(.caption2)
+                            .foregroundColor(.black)
                             .font(.caption2)
                             .foregroundStyle(.black)
                         
@@ -109,6 +122,12 @@ struct NotificationView: View {
             
         }
     }
+}
+func formattedDate(from timestamp: Timestamp) -> String {
+    let date = Date(timeIntervalSince1970: TimeInterval(timestamp.seconds))
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
+    return dateFormatter.string(from: date)
 }
 
 
