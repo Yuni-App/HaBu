@@ -60,7 +60,7 @@ class PostService : PostProvider{
             return []
         }
     }
-    func fetchPost(id: String) async -> Post? {
+   static func fetchPost(id: String) async -> Post? {
         do {
             let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
             let post = try snapshot.data(as: Post.self)

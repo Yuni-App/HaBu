@@ -38,7 +38,7 @@ class NotificationService :NotificationProvider{
                 else {
                     throw NotificationError.missingData
                 }
-                let post = try await postService.fetchPost(id: postId)
+                let post = try await PostService.fetchPost(id: postId)
                 let user = try await UserService.fetchUser(withUserID: userId)
                       
                 // Bildirimi oluştur
