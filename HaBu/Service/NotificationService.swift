@@ -11,51 +11,68 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 
+
 protocol NotificationProvider {
     func fetchNotifications() async throws -> [Notification]
 }
-class NotificationService :NotificationProvider{
+class NotificationService {
+    static let shared = NotificationService()
     private let db = Firestore.firestore()
-    private let postService = PostService()
+    private var listener: ListenerRegistration?
+    
 
-    func fetchNotifications() async throws -> [Notification] {
-        do {
-            let snapshot = try await db.collection("notification")
-                .whereField("targetId", isEqualTo: AuthService.shared.currentUser?.id)
-                        .getDocuments()
-            // Firestore'dan alınan belgelerin dönüşüm işleminden önce işlemler
-            let data = snapshot.documents.map { $0.data() }
-            // Dönüşüm işlemi
-            var notifications: [Notification] = []
-            for documentData in data {
-                // Document verilerini dönüştürme işlemi
-                guard let id = documentData["id"] as? String,
-                      let postId = documentData["postId"] as? String,
-                      let type = documentData["type"] as? String,
-                      let userId = documentData["userId"] as? String,
-                      let targetId = documentData["targetId"] as? String,
-                      let createdAtTimestamp = documentData["createdAt"] as? Timestamp
-                else {
-                    throw NotificationError.missingData
+    func listenForNotifications( completion: @escaping (Result<[NotificationData], Error>) -> Void) async {
+       // var notificationDatas : [NotificationData] = []
+        let query = await db.collection("notification").whereField("targetId", isEqualTo: AuthService.shared.currentUser?.id)
+        
+        listener = query.addSnapshotListener { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                var notifications = snapshot.documents.compactMap { document -> NotificationData? in
+                    do {
+                        let notification = try document.data(as: NotificationData.self)
+                        // Kullanıcı ve post verilerini al
+                        return notification
+                    } catch {
+                        print("Bildirim çözümlenemedi: \(error.localizedDescription)")
+                        return nil
+                    }
                 }
-                let post = try await PostService.fetchPost(id: postId)
-                let user = try await UserService.fetchUser(withUserID: userId)
-                      
-                // Bildirimi oluştur
-                let notification = Notification(id: id, post: post, type: type, user: user, targetId: targetId, createdAt: createdAtTimestamp)
+               
+               // var notificationDatas: [NotificationData] = notifications // Burada notificationDatas'ı oluştur
                 
-                notifications.append(notification)
+                // Dinleyici işlemi tamamlandıktan sonra for döngüsünü çalıştır
+                DispatchQueue.main.async {
+                    Task {
+                        for i in 0..<notifications.count {
+                            let post =  await PostService.fetchPost(id: notifications[i].postId)
+                            if let post = post {
+                                notifications[i].post = post
+                                print("Post: \(post)")
+                            }
+                            
+                            do {
+                                let user = try await UserService.fetchUser(withUserID: notifications[i].userId)
+                                notifications[i].user = user
+                                print("User: \(user)")
+                            } catch {
+                                print("hata")
+                            }
+                        }
+                     
+                        completion(.success(notifications))
+                    }
+                }
             }
-            print(notifications.count)
-            return notifications
-        } catch {
-            throw error
         }
+
+     
+       
     }
-
-}
-
-enum NotificationError: Error {
-    case missingData
-    case invalidFormat
+    
+    // Dinleme durdur
+    func stopListening() {
+        listener?.remove()
+    }
 }
