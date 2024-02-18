@@ -51,7 +51,8 @@ class PostService : PostProvider{
     
     func fetchPosts(tags: [String] = [], postType: String = "Hepsi") async -> [Post] {
         do {
-            postFeedRef = Firestore.firestore().collection("post") as Query
+            postFeedRef = Firestore.firestore().collection("post").order(by: "timeStamp", descending: true) as Query
+            
             if postType == "Anonim"{
                 postFeedRef =  postFeedRef.whereField("isAnonim", isEqualTo: true)
             }
@@ -61,7 +62,6 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-           postFeedRef = postFeedRef.order(by: "timeStamp", descending: true)
             let querySnapshot = try await postFeedRef.getDocuments()
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
