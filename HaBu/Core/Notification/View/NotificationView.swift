@@ -12,7 +12,7 @@ struct NotificationView: View {
     @StateObject var  notificationVM = NotificationViewModel()
     
     var body: some View {
-        NavigationStack {
+        
             VStack {
                
                 HStack{
@@ -22,22 +22,23 @@ struct NotificationView: View {
                 }
                 ZStack {
                     ScrollView{
-                        HStack(){
-                            Image(systemName: "horn.blast.fill")
-                                .foregroundStyle(.red)
-                            Text("3 Bildirim")
-                                .fontWeight(.bold)
-                            Spacer()
+                        if(notificationVM.newNotificaiton.count != 0 ){
+                            HStack(){
+                                Image(systemName: "horn.blast.fill")
+                                    .foregroundStyle(.red)
+                                Text("3 Yeni Bildirim")
+                                    .fontWeight(.bold)
+                                Spacer()
+                            }
+                            .padding(.horizontal,15)
                         }
-                        .padding(.horizontal,15)
                         
-                       
-                        /*
-                         ForEach(0..<7){i in
-                             NotificationCell(notification: Notification.MOCK_DATA[i])
-                             Divider()
-                         }
-                         */
+                        
+                        ForEach(notificationVM.newNotificaiton) { notification in
+                            NotificationCell(notification: notification)
+                            Divider()
+                        }
+
                         
                         HStack{
                             Image(systemName: "clock.fill")
@@ -56,22 +57,31 @@ struct NotificationView: View {
                     .zIndex(1)
                     Const.backgroundColor.zIndex(0)
                 }
+            }.onAppear {
+                // View görüntülendiğinde bildirimleri dinlemeye başla
+              //  Task{
+              //   await   notificationVM.listenForNotifications()
+               // }
             }
-        }
+            .onDisappear {
+                notificationVM.exitPage()
+            }
         
     }
     @ViewBuilder
-    func NotificationCell(notification:Notification)-> some View{
+    func NotificationCell(notification:NotificationData)-> some View{
         
         NavigationLink{
+
             if notification.type == ""{
-                FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+              //  FeedViewCell(navigated : notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
             else if notification.type == "" {
-                FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+             //   FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
             }
             else if notification.type == ""{
-                FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+                //FeedViewCell(navigatedWithComment: notification.post ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
+
             }
         }label: {
             HStack{
@@ -132,4 +142,3 @@ func formattedDate(from timestamp: Timestamp) -> String {
 #Preview {
     NotificationView()
 }
-

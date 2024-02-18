@@ -12,12 +12,16 @@ struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
     @StateObject private var authService = AuthService.shared
+    @StateObject var  notificationVM = NotificationViewModel()
+
     init() {
        
         UITableView.appearance().isHidden = true
+        
     
     }
     init(currentTab:String) {
+        
         UITableView.appearance().isHidden = true
 
     }
@@ -39,6 +43,7 @@ struct TabbarView: View {
                         NotificationView()
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Notification")
+                         
                             .toolbar(.hidden, for: .tabBar)
                         ProfileView(hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
@@ -69,7 +74,7 @@ private struct CustomTabbarView:View {
     var body: some View {
         HStack(spacing:0){
             ForEach(Const.tabBarItems,id: \.self){image in
-                CustomTabButton(badge: image == "Notification" ? 5:0, image: image, currentTab: $currentTab)
+                CustomTabButton(badge: image == "Notification" ? 9:0, image: image, currentTab: $currentTab)
             }
             .background(.white)
             
@@ -99,7 +104,7 @@ private struct CustomTabButton:View {
                 .frame(width: 35,height: 35)
                 .foregroundStyle(currentTab == image ? Const.primaryColor:Color.gray)
                 .overlay(
-                    Text("\(badge<100 ? badge: 99)+")
+                    Text("\(badge < 100 ? "\(badge)" : "99")" + (badge < 100 ? "" : "+"))
                         .font(.caption)
                         .fontWeight(.bold)
                         .foregroundStyle(sheme == .dark ? .black : .white)

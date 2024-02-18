@@ -12,10 +12,8 @@ import RxCocoa
 class NotificationViewModel: ObservableObject {
     @Published var notifications: [NotificationData] = []
     @Published var newNotificaiton : [NotificationData] = []
-    @Published var sayac : Int = 0
+    @Published var okundu : Int = 0
     private var notificationService = NotificationService.shared
-    
-
     
     // Bildirimleri Firestore'dan dinle
     func listenForNotifications() async {
@@ -23,12 +21,16 @@ class NotificationViewModel: ObservableObject {
             switch result {
             case .success(let notifications):
                 DispatchQueue.main.async {
-                    if(self.sayac==0){
+                    if(self.okundu==0){
                         self.notifications = notifications
-                        self.sayac = 1
+                        self.okundu = 1
                     }
                     else  {
-                        self.newNotificaiton = notifications
+                        let set1 = Set(notifications)
+                        let set2 = Set(self.notifications)
+                        let difference1 = set1.subtracting(set2)
+                        self.newNotificaiton = Array(difference1)
+                       
                     }
                 }
             case .failure(let error):
@@ -37,7 +39,12 @@ class NotificationViewModel: ObservableObject {
         }
         
     }
-    
+    func exitPage(){
+        self.okundu = 1
+        self.notifications.append(contentsOf: self.newNotificaiton)
+        self.newNotificaiton.removeAll()
+        
+    }
     // Dinlemeyi durdur
     func stopListening() {
         notificationService.stopListening()
