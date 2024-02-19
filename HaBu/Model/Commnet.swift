@@ -12,3 +12,9 @@ struct Comment: Identifiable, Codable{
     let comment: String
     let userId: String
 }
+
+extension Comment{
+    static var MockData :[Comment] = [
+        
+    ]
+}

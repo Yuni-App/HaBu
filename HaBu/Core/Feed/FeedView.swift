@@ -200,12 +200,12 @@ struct FeedView: View {
                         )
                         .sheet(isPresented: $showCategoryFilter) {
                             CategoryFilterBottomSheet(SelectedTags: $tags, selectedFilter: $selectionFilter, onButtonTapped: {
-                                showCategoryFilter = false
                                 Task{
                                     feedVM.tags = self.tags
                                     feedVM.selectedFilter = self.selectionFilter
                                     self.posts = try await feedVM.requestData()
                                     feedVM.listenForChanges()
+                                    self.showCategoryFilter.toggle()
                                 }
                             })
                                 .presentationDetents([.height(Const.height * 0.6)])

@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct CategoryFilterBottomSheet: View {
+    @State var tags : [String] = []
     @Binding var SelectedTags:[String]
     @State private var scrollOffset: CGFloat = 0
     @State var dragDirection: DragDirection = .none
     @Binding var selectedFilter : String
     var onButtonTapped: () -> Void
+    @State var progressView = false
     var body: some View {
         VStack {
             Text("Paylaşım Türü")
@@ -27,33 +29,56 @@ struct CategoryFilterBottomSheet: View {
                 Text("Normal")
                     .tag("Normal")
             }
-            .pickerStyle(.segmented)   
+            .pickerStyle(.segmented)
+            .opacity(progressView ? 0.4 : 1)
             
             Divider()
                 .padding()
             AddCategoryView(SelectedTags: $SelectedTags)
-           
+                .opacity(progressView ? 0.4 : 1)
+
+
             ZStack{
+                
                 Button(action: {
-                    onButtonTapped()
+                    Task{
+                        progressView.toggle()
+                        onButtonTapped()
+                        
+                    }
+                    
                 }, label: {
-                    Text("Filtrele")
-                        .fontWeight(.semibold)
+                    
+                    HStack{
+                        if progressView{
+                            ProgressView()
+                                .tint(.white)
+                                .frame(width: 20,height: 20)
+                        }
+                        Text(progressView ? "Yükleniyor":"Filtrele")
+                           
+                    } .fontWeight(.semibold)
                         .padding(.vertical,10)
                         .frame(maxWidth: .infinity)
                         .background(RoundedRectangle(cornerRadius: 12)
                             .fill(Const.thirColor.gradient)
                         )
                     
+                    
+                    
+                    
                 })
-                .disabled(SelectedTags.count < 1 )
-                .opacity(SelectedTags.count < 1 ? 0.5 : 1)
                 .padding(10)
                 .foregroundStyle(.white)
                 .background(.white)
                 .zIndex(2)
             }
+            
+            
+            
         }
+        .disabled(progressView)
+
     }
 }
 
@@ -130,11 +155,11 @@ struct AddCategoryView : View {
                 .padding(.horizontal,15)
                 .frame(height: 30)
                 .padding(.vertical,15)
-
+                
             }
             .background(.gray.opacity(0.15))
             .border(.gray)
-
+            
             .overlay {
                 if SelectedTags.isEmpty{
                     Text("Şeçilen Kategoriler")
@@ -158,7 +183,7 @@ struct AddCategoryView : View {
                     }
                 }
                 .frame(minHeight: CGFloat((Const.categoryTags.count / 3)) * 35)
-
+                
             }
             
             .scrollIndicators(.hidden)

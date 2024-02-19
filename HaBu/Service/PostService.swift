@@ -51,7 +51,7 @@ class PostService : PostProvider{
     
     func fetchPosts(tags: [String] = [], postType: String = "Hepsi") async -> [Post] {
         do {
-            postFeedRef = Firestore.firestore().collection("post").order(by: "timeStamp", descending: true) as Query
+            postFeedRef = Firestore.firestore().collection("post") as Query
             
             if postType == "Anonim"{
                 postFeedRef =  postFeedRef.whereField("isAnonim", isEqualTo: true)
@@ -78,6 +78,7 @@ class PostService : PostProvider{
             }
             
             let posts = documents.compactMap({ try? $0.data(as: Post.self) })
+            print("listener \(posts.count)")
             completion(posts)
             print(posts.count)
             
