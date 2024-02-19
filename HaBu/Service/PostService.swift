@@ -62,7 +62,7 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-            let querySnapshot = try await postFeedRef.getDocuments()
+            let querySnapshot = try await postFeedRef.order(by: "timeStamp",descending: true).getDocuments()
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
         } catch {
