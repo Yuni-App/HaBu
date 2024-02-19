@@ -22,7 +22,7 @@ struct CommentBottomSheet: View {
                 }
                 .padding(.horizontal,20)
                 ForEach(0..<4){_ in
-                    CommentViewCell(user: User.MockData[0])
+                    CommentViewCell(comment:Comment.MockData[0])
                 }
             }
             .padding(10)
@@ -50,13 +50,13 @@ struct CommentBottomSheet: View {
 
 
 struct CommentViewCell : View {
-    let user:User
+    let comment : Comment
     var body: some View {
         
         VStack{
             //User Info
             HStack {
-                UserInfo(user: user, imageSize: .xsmall,isAnonim: false)
+                UserInfo(user: comment.user ?? User.MockData[0], imageSize: .xsmall,isAnonim: false)
                     .padding(10)
                 Buttons.actionButton(buttonType: .liked, action: {
                     
@@ -64,7 +64,7 @@ struct CommentViewCell : View {
                 .padding(.all,10)
                 
             }
-            Text("benim şahane ötesi fikirlerimi beğenip beğenmemek size mi düştü arkadaşlar ben istediğimi yazar çizerim bu size alakadar etmez anladınız mı")
+            Text(comment.comment)
                 .font(.caption)
                 .fontWeight(.medium)
                 .padding(.horizontal)

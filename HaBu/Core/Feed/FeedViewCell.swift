@@ -101,7 +101,6 @@ struct FeedViewCell: View {
                         }
                         else{
                             likePost = .unLike
-
                             Task{
                               let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:false)
                                 if value{
