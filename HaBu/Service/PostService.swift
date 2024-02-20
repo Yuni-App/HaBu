@@ -85,17 +85,16 @@ class PostService : PostProvider{
     }
 
 
-    func fetchPost(id: String) async -> Post? {
-        do {
-            let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
-            let post = try snapshot.data(as: Post.self)
-            return post
-        } catch {
-            print("Post fetch error: \(error)")
-            return nil
-        }
-    }
-    
+    static func fetchPost(id: String) async -> Post? {
+         do {
+             let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
+             let post = try snapshot.data(as: Post.self)
+             return post
+         } catch {
+             print("Post fetch error: \(error)")
+             return nil
+         }
+     }
    
     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool, selectedImages: [UIImage]) async throws {
         let authService = AuthService.shared
@@ -129,4 +128,3 @@ class PostService : PostProvider{
         
     }
 }
-
