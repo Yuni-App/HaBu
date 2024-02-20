@@ -9,7 +9,13 @@ import SwiftUI
 
 struct CommentBottomSheet: View {
     @State private var commentText  : String = ""
-
+    var postId : String
+    var commentVM : CommentViewModel
+    init(postId: String) {
+        self.postId = postId
+        self.commentVM = CommentViewModel(postId: postId)
+    }
+    
     var body: some View {
         ZStack {
             ScrollView {
@@ -21,8 +27,8 @@ struct CommentBottomSheet: View {
                     Text("4 yorum")
                 }
                 .padding(.horizontal,20)
-                ForEach(0..<4){_ in
-                    CommentViewCell(comment:Comment.MockData[0])
+                ForEach(0..<commentVM.comments.count){i in
+                    CommentViewCell(comment:commentVM.comments[i])
                 }
             }
             .padding(10)
@@ -44,9 +50,7 @@ struct CommentBottomSheet: View {
   
 }
 
-#Preview {
-    CommentBottomSheet()
-}
+
 
 
 struct CommentViewCell : View {

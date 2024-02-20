@@ -16,7 +16,7 @@ struct FeedView: View {
         
     }
     
-    
+    @StateObject var notificationManager = NotificationManager()
     @StateObject var  feedVM = FeedViewModel()
     @State var showCategoryFilter = false
     var bottomEdge:CGFloat

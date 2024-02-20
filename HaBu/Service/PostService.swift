@@ -24,11 +24,21 @@ enum PostError : Error{
 class PostService : PostProvider{
     var postRef = Firestore.firestore().collection("post")
     var postFeedRef = Firestore.firestore().collection("post") as Query
-    func likeActionPost(userId:String,postId:String,like:Bool) async throws -> Bool{
+    func likeActionPost(userId:String,postId:String,like:Bool,targetUserId:String) async throws -> Bool{
         if like{
             do {
                 try await postRef.document(postId).updateData([
                     "likeList": FieldValue.arrayUnion([userId])])
+                let notificationDocumentRefrence = Firestore.firestore().collection("notification").document()
+                try await notificationDocumentRefrence.setData([
+                    "id":notificationDocumentRefrence.documentID,
+                    "createdAt":Timestamp(date: .now),
+                    "postId":postId,
+                    "seen":false,
+                    "targetId":targetUserId,
+                    "type": NotificationType.postLike.rawValue,
+                    "userId":userId
+                ])
                 return true
             }
             catch{
@@ -84,8 +94,6 @@ class PostService : PostProvider{
             
         }
     }
-
-
     func fetchPost(id: String) async -> Post? {
         do {
             let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
