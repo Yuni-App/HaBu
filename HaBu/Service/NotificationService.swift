@@ -20,6 +20,27 @@ class NotificationService {
     private let db = Firestore.firestore()
     private var listener: ListenerRegistration?
     
+    func seenNotification(notificationList: [NotificationData]) {
+        print("dsfgdfh")
+        let db = Firestore.firestore()
+        
+        for notification in notificationList {
+            let notificationRef = db.collection("notification").document(notification.id)
+            
+            // Güncellenecek alanlar ve değerleri oluştur
+            let updatedFields = ["seen": true]
+            
+            // Belirtilen alanları güncelle
+            notificationRef.updateData(updatedFields) { error in
+                if let error = error {
+                    print("Notification update failed: \(error)")
+                } else {
+                    print("Notification updated successfully")
+                }
+            }
+        }
+    }
+
 
     func listenForNotifications( completion: @escaping (Result<[NotificationData], Error>) -> Void) async {
        // var notificationDatas : [NotificationData] = []
@@ -40,8 +61,7 @@ class NotificationService {
                     }
                 }
                
-               // var notificationDatas: [NotificationData] = notifications // Burada notificationDatas'ı oluştur
-                
+                // var notificationDatas: [NotificationData] = notifications // Burada notificationDatas'ı oluştur
                 // Dinleyici işlemi tamamlandıktan sonra for döngüsünü çalıştır
                 DispatchQueue.main.async {
                     Task {

@@ -17,6 +17,7 @@ struct NotificationData: Identifiable, Codable , Hashable{
     let createdAt: Timestamp
     var post : Post?
     var user : User?
+    var seen : Bool
 }
 
 

@@ -13,7 +13,6 @@ struct TabbarView: View {
     @State var hideBar = false
     @State private var isActiveDestination: Bool = false
     @StateObject private var authService = AuthService.shared
-    @StateObject var  notificationVM = NotificationViewModel()
 
     init() {
        
@@ -27,7 +26,7 @@ struct TabbarView: View {
 
     }
     var body: some View {
-        
+
         if authService.currentUser != nil{
             NavigationStack{
                 GeometryReader{proxy in
@@ -84,11 +83,13 @@ struct TabbarView: View {
 }
 private struct CustomTabbarView:View {
     @Binding var currentTab:String
+    @StateObject var  notificationVM = NotificationViewModel.shared
+
     var bottomEdge:CGFloat
     var body: some View {
         HStack(spacing:0){
             ForEach(Const.tabBarItems,id: \.self){image in
-                CustomTabButton(badge: image == "Notification" ? 9:0, image: image, currentTab: $currentTab)
+                CustomTabButton(badge: image == "Notification" ? $notificationVM.newNotificaitons.count :0, image: image, currentTab: $currentTab)
             }
             .background(.white)
             

@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct NotificationView: View {
-    @StateObject var  notificationVM = NotificationViewModel()
+    @StateObject var  notificationVM = NotificationViewModel.shared
     
     var body: some View {
         
@@ -22,7 +22,7 @@ struct NotificationView: View {
                 }
                 ZStack {
                     ScrollView{
-                        if(notificationVM.newNotificaiton.count != 0 ){
+                        if(notificationVM.newNotificaitons.count != 0 ){
                             HStack(){
                                 Image(systemName: "horn.blast.fill")
                                     .foregroundStyle(.red)
@@ -34,7 +34,7 @@ struct NotificationView: View {
                         }
                         
                         
-                        ForEach(notificationVM.newNotificaiton) { notification in
+                        ForEach(notificationVM.newNotificaitons) { notification in
                             NotificationCell(notification: notification)
                             Divider()
                         }
@@ -47,7 +47,7 @@ struct NotificationView: View {
                             Spacer()
                         }
                         .padding(.horizontal,15)
-                        ForEach(notificationVM.notifications) { notification in
+                        ForEach(notificationVM.notificationsData) { notification in
                             NotificationCell(notification: notification)
                             Divider()
                         }
@@ -59,9 +59,9 @@ struct NotificationView: View {
                 }
             }.onAppear {
                 // View görüntülendiğinde bildirimleri dinlemeye başla
-                Task{
-                 await   notificationVM.listenForNotifications()
-                }
+             //   Task{
+              //   await   notificationVM.listenForNotifications()
+              //  }
             }
             .onDisappear {
                 notificationVM.exitPage()
