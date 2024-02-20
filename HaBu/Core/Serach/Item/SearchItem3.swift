@@ -27,7 +27,7 @@ struct SearchItem3: View {
                     }
                 }
             }.padding()
-                .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(UIColor(hex: "F0F0F0"))).cornerRadius(10)
+                .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(UIColor(hex: "c4c4c4"))).cornerRadius(10)
         }
         )
     }

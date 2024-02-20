@@ -93,7 +93,14 @@ struct CircleProfileImage: View {
     }
     var body: some View {
         if let size = self.size{
-            if  userIamgeUrl != ""{
+            if userIamgeUrl == "anonim"{
+                Image("anonim")
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 15))
+                   
+                    .frame(width: size.deminsion ,height: size.deminsion)
+            }
+            else if  userIamgeUrl != ""{
                 KFImage(URL(string: userIamgeUrl))
                     .resizable()
                     .clipShape(.rect(cornerRadius: 30))

@@ -23,8 +23,7 @@ enum PostError : Error{
 }
 class PostService : PostProvider{
     var postRef = Firestore.firestore().collection("post")
-    
-    
+    var postFeedRef = Firestore.firestore().collection("post") as Query
     func likeActionPost(userId:String,postId:String,like:Bool) async throws -> Bool{
         if like{
             do {
@@ -50,13 +49,24 @@ class PostService : PostProvider{
         }
     }
     
-    func fetchPosts() async -> [Post]{
+    func fetchPosts(tags: [String] = [], postType: String = "Hepsi") async -> [Post] {
         do {
-            let snapshot = try await Firestore.firestore().collection("post").getDocuments()
-            let posts = snapshot.documents.compactMap({try? $0.data(as:Post.self)})
+            postFeedRef = Firestore.firestore().collection("post") as Query
+            if postType == "Anonim"{
+                postFeedRef =  postFeedRef.whereField("isAnonim", isEqualTo: true)
+            }
+            if postType == "Normal"{
+                postFeedRef = postFeedRef.whereField("isAnonim", isEqualTo: false)
+            }
+            if !tags.isEmpty{
+                postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
+            }
+           postFeedRef = postFeedRef.order(by: "timeStamp", descending: true)
+            let querySnapshot = try await postFeedRef.getDocuments()
+            let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
-        }
-        catch{
+        } catch {
+            print("Error fetching posts: \(error)")
             return []
         }
     }

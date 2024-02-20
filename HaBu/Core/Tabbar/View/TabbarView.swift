@@ -11,6 +11,7 @@ import SwiftUI
 struct TabbarView: View {
     @State var currentTab : String = "Feed"
     @State var hideBar = false
+    @State private var isActiveDestination: Bool = false
     @StateObject private var authService = AuthService.shared
     @StateObject var  notificationVM = NotificationViewModel()
 
@@ -27,7 +28,7 @@ struct TabbarView: View {
     }
     var body: some View {
         
-        if let user = authService.currentUser{
+        if authService.currentUser != nil{
             NavigationStack{
                 GeometryReader{proxy in
                     let bottomEdge = proxy.safeAreaInsets.bottom
@@ -61,6 +62,19 @@ struct TabbarView: View {
                     )
                 }
             }
+        }
+        else{
+            Text("Giriş esnasında bir sorun oluştu tekrar deneyiniz")
+            Buttons.customButton(title: "Giriş Yap", buttonColor: .blue) {
+                
+                    Task {
+                       try await authService.logOut()
+                        isActiveDestination = true
+                    }
+                
+            }.navigationDestination(isPresented: $isActiveDestination, destination:{
+                InfoView()
+            })
         }
     }
 }
