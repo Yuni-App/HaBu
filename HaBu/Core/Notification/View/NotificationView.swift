@@ -59,9 +59,9 @@ struct NotificationView: View {
                 }
             }.onAppear {
                 // View görüntülendiğinde bildirimleri dinlemeye başla
-              //  Task{
-              //   await   notificationVM.listenForNotifications()
-               // }
+                Task{
+                 await   notificationVM.listenForNotifications()
+                }
             }
             .onDisappear {
                 notificationVM.exitPage()

@@ -70,19 +70,31 @@ class PostService : PostProvider{
             return []
         }
     }
-    
-    
-   static func fetchPost(id: String) async -> Post? {
-        do {
-            let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
-            let post = try snapshot.data(as: Post.self)
-            return post
-        } catch {
-            print("Post fetch error: \(error)")
-            return nil
+    func listenForChanges(completion: @escaping ([Post]) -> Void) {
+        postFeedRef.addSnapshotListener { snapshot, error in
+            guard let documents = snapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            
+            let posts = documents.compactMap({ try? $0.data(as: Post.self) })
+            completion(posts)
+            print(posts.count)
+            
         }
     }
-    
+
+
+    static func fetchPost(id: String) async -> Post? {
+         do {
+             let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
+             let post = try snapshot.data(as: Post.self)
+             return post
+         } catch {
+             print("Post fetch error: \(error)")
+             return nil
+         }
+     }
    
     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool, selectedImages: [UIImage]) async throws {
         let authService = AuthService.shared
@@ -116,4 +128,3 @@ class PostService : PostProvider{
         
     }
 }
-
