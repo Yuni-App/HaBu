@@ -9,10 +9,10 @@ import SwiftUI
 import Firebase
 
 struct NotificationView: View {
-    @StateObject var  notificationVM = NotificationViewModel()
+    @StateObject var  notificationVM = NotificationViewModel.shared
     
     var body: some View {
-        NavigationStack {
+        
             VStack {
                
                 HStack{
@@ -22,22 +22,23 @@ struct NotificationView: View {
                 }
                 ZStack {
                     ScrollView{
-                        HStack(){
-                            Image(systemName: "horn.blast.fill")
-                                .foregroundStyle(.red)
-                            Text("3 Bildirim")
-                                .fontWeight(.bold)
-                            Spacer()
+                        if(notificationVM.newNotificaitons.count != 0 ){
+                            HStack(){
+                                Image(systemName: "horn.blast.fill")
+                                    .foregroundStyle(.red)
+                                Text("3 Yeni Bildirim")
+                                    .fontWeight(.bold)
+                                Spacer()
+                            }
+                            .padding(.horizontal,15)
                         }
-                        .padding(.horizontal,15)
                         
-                       
-                        /*
-                         ForEach(0..<7){i in
-                             NotificationCell(notification: Notification.MOCK_DATA[i])
-                             Divider()
-                         }
-                         */
+                        
+                        ForEach(notificationVM.newNotificaitons) { notification in
+                            NotificationCell(notification: notification)
+                            Divider()
+                        }
+
                         
                         HStack{
                             Image(systemName: "clock.fill")
@@ -46,7 +47,7 @@ struct NotificationView: View {
                             Spacer()
                         }
                         .padding(.horizontal,15)
-                        ForEach(notificationVM.notifications) { notification in
+                        ForEach(notificationVM.notificationsData) { notification in
                             NotificationCell(notification: notification)
                             Divider()
                         }
@@ -56,12 +57,19 @@ struct NotificationView: View {
                     .zIndex(1)
                     Const.backgroundColor.zIndex(0)
                 }
+            }.onAppear {
+                // View görüntülendiğinde bildirimleri dinlemeye başla
+             //   Task{
+              //   await   notificationVM.listenForNotifications()
+              //  }
             }
-        }
+            .onDisappear {
+                notificationVM.exitPage()
+            }
         
     }
     @ViewBuilder
-    func NotificationCell(notification:Notification)-> some View{
+    func NotificationCell(notification:NotificationData)-> some View{
         
         NavigationLink{
 
@@ -134,4 +142,3 @@ func formattedDate(from timestamp: Timestamp) -> String {
 #Preview {
     NotificationView()
 }
-

@@ -24,11 +24,21 @@ enum PostError : Error{
 class PostService : PostProvider{
     var postRef = Firestore.firestore().collection("post")
     var postFeedRef = Firestore.firestore().collection("post") as Query
-    func likeActionPost(userId:String,postId:String,like:Bool) async throws -> Bool{
+    func likeActionPost(userId:String,postId:String,like:Bool,targetUserId:String) async throws -> Bool{
         if like{
             do {
                 try await postRef.document(postId).updateData([
                     "likeList": FieldValue.arrayUnion([userId])])
+                let notificationDocumentRefrence = Firestore.firestore().collection("notification").document()
+                try await notificationDocumentRefrence.setData([
+                    "id":notificationDocumentRefrence.documentID,
+                    "createdAt":Timestamp(date: .now),
+                    "postId":postId,
+                    "seen":false,
+                    "targetId":targetUserId,
+                    "type": NotificationType.postLike.rawValue,
+                    "userId":userId
+                ])
                 return true
             }
             catch{
@@ -52,6 +62,7 @@ class PostService : PostProvider{
     func fetchPosts(tags: [String] = [], postType: String = "Hepsi") async -> [Post] {
         do {
             postFeedRef = Firestore.firestore().collection("post") as Query
+            
             if postType == "Anonim"{
                 postFeedRef =  postFeedRef.whereField("isAnonim", isEqualTo: true)
             }
@@ -61,8 +72,7 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-           postFeedRef = postFeedRef.order(by: "timeStamp", descending: true)
-            let querySnapshot = try await postFeedRef.getDocuments()
+            let querySnapshot = try await postFeedRef.order(by: "timeStamp",descending: true).getDocuments()
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
         } catch {
@@ -78,6 +88,7 @@ class PostService : PostProvider{
             }
             
             let posts = documents.compactMap({ try? $0.data(as: Post.self) })
+            print("listener \(posts.count)")
             completion(posts)
             print(posts.count)
             
@@ -85,17 +96,16 @@ class PostService : PostProvider{
     }
 
 
-    func fetchPost(id: String) async -> Post? {
-        do {
-            let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
-            let post = try snapshot.data(as: Post.self)
-            return post
-        } catch {
-            print("Post fetch error: \(error)")
-            return nil
-        }
-    }
-    
+    static func fetchPost(id: String) async -> Post? {
+         do {
+             let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
+             let post = try snapshot.data(as: Post.self)
+             return post
+         } catch {
+             print("Post fetch error: \(error)")
+             return nil
+         }
+     }
    
     func createPost(textContent : String , selectedTags : [String] , isAnonimComment : Bool ,isAnonim : Bool, selectedImages: [UIImage]) async throws {
         let authService = AuthService.shared
@@ -129,4 +139,3 @@ class PostService : PostProvider{
         
     }
 }
-

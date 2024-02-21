@@ -13,17 +13,20 @@ struct TabbarView: View {
     @State var hideBar = false
     @State private var isActiveDestination: Bool = false
     @StateObject private var authService = AuthService.shared
+
     init() {
        
         UITableView.appearance().isHidden = true
+        
     
     }
     init(currentTab:String) {
+        
         UITableView.appearance().isHidden = true
 
     }
     var body: some View {
-        
+
         if authService.currentUser != nil{
             NavigationStack{
                 GeometryReader{proxy in
@@ -40,6 +43,7 @@ struct TabbarView: View {
                         NotificationView()
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Notification")
+                         
                             .toolbar(.hidden, for: .tabBar)
                         ProfileView(hideTab: $hideBar)
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
@@ -79,11 +83,13 @@ struct TabbarView: View {
 }
 private struct CustomTabbarView:View {
     @Binding var currentTab:String
+    @StateObject var  notificationVM = NotificationViewModel.shared
+
     var bottomEdge:CGFloat
     var body: some View {
         HStack(spacing:0){
             ForEach(Const.tabBarItems,id: \.self){image in
-                CustomTabButton(badge: image == "Notification" ? 5:0, image: image, currentTab: $currentTab)
+                CustomTabButton(badge: image == "Notification" ? $notificationVM.newNotificaitons.count :0, image: image, currentTab: $currentTab)
             }
             .background(.white)
             
@@ -113,7 +119,7 @@ private struct CustomTabButton:View {
                 .frame(width: 35,height: 35)
                 .foregroundStyle(currentTab == image ? Const.primaryColor:Color.gray)
                 .overlay(
-                    Text("\(badge<100 ? badge: 99)+")
+                    Text("\(badge < 100 ? "\(badge)" : "99")" + (badge < 100 ? "" : "+"))
                         .font(.caption)
                         .fontWeight(.bold)
                         .foregroundStyle(sheme == .dark ? .black : .white)

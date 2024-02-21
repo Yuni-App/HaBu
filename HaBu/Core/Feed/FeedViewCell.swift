@@ -87,22 +87,19 @@ struct FeedViewCell: View {
                     
                     Buttons.actionButton(buttonType: likePost,action: {
                         if likePost == .unLike{
+                            likePost = .liked
                             Task{
-                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true)
+                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true,targetUserId: post.userId)
                                   if value{
-                                      likePost = .liked
-                                      
                                       post.likeList.append(AuthService.shared.currentUser!.id)
-                                      
-                                      
                                   }
                             }
                         }
                         else{
+                            likePost = .unLike
                             Task{
-                              let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:false)
+                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:false,targetUserId: post.userId)
                                 if value{
-                                    likePost = .unLike
                                     post.likeList.removeAll { $0 == AuthService.shared.currentUser!.id }
 
                                     
@@ -120,10 +117,11 @@ struct FeedViewCell: View {
                     }
                     Buttons.actionButton(buttonType:.bubble, action: {
                         showingComment = true
-                        print("comment")
-                    }, getNumber: post.likeList.count)
+                    }, getNumber: post.likeList.count,textAction: {
+                        showingComment = true
+                    })
                     .sheet(isPresented: $showingComment) {
-                        CommentBottomSheet()
+                        CommentBottomSheet(postId: post.id)
                             .presentationDetents([.large,.medium])
                     }
                     Buttons.actionButton(buttonType: .send) {
