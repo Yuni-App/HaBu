@@ -31,8 +31,18 @@ struct LoginView: View {
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
                 VStack{
                     TextFields.CustomTextField(text: $loginVM.textEmail, icon: .mail, placeHolder: "e-posta")
+                        .focused($focusedField, equals: .email)
+                                                .onSubmit {
+                                                    focusedField = .password
+                                                }
+                        
                     
                     TextFields.CustomTextField(text: $loginVM.textPassword , icon: .key, placeHolder: "Şifre")
+                        .focused($focusedField, equals: .password)
+                                                .onSubmit {
+                                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                                }
+
                     
                     
                     

@@ -290,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				5C414C8F2B484F5F00EF3D79 /* ViewModel */,
-				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 				5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */,
 				5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */,
 			);
@@ -427,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				5C414C902B484F6E00EF3D79 /* FeedViewModel.swift */,
+				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

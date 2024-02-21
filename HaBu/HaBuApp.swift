@@ -29,6 +29,10 @@ struct HaBuApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authService = AuthService.shared
     @State private var isLoading = true
+    @StateObject private var notificationVM = NotificationViewModel.shared
+  
+    
+    init() {}
 
     var body: some Scene {
         WindowGroup {
@@ -39,6 +43,14 @@ struct HaBuApp: App {
                     } else {
                         if authService.user != nil {
                             TabbarView()
+                                .onAppear {
+                                     
+                                        Task {
+                                            await notificationVM.listenForNotifications()
+                                          
+                                        
+                                    }
+                                }
                         } else {
                             InfoView()
                         }

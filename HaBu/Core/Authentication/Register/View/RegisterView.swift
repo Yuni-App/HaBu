@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+enum FocusableField2{
+    case email, password,passwordAgain, userName
+}
+
+
 struct RegisterView: View {
     @Environment(\.dismiss) var dissmis
-   
+    @FocusState private var focusText : FocusableField2?
+    
     @StateObject var registerVM : RegisterViewModel
     init(){
         self._registerVM = StateObject(wrappedValue: RegisterViewModel(authService: AuthService()))
@@ -24,12 +30,32 @@ struct RegisterView: View {
                 CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.RegisterSecondVector)
                 VStack{
                     TextFields.CustomTextField(text: $registerVM.textEmail, icon: .mail, placeHolder: "e-posta")
+                        .focused($focusText, equals: .email)
+                        .onSubmit {
+                            focusText = .password
+                        }
+                    
                     TextFields.CustomTextField(text :$registerVM.textPassword ,icon: .key, placeHolder: "Şifre")
+                        .focused($focusText, equals: .password)
+                        .onSubmit {
+                            focusText = .passwordAgain
+                        }
+                    
                     TextFields.CustomTextField(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar")
+                        .focused($focusText, equals: .passwordAgain)
+                        .onSubmit {
+                            focusText = .userName
+                        }
+                    
                     TextFields.CustomTextField(text : $registerVM.textUserName , icon: .blocked, placeHolder: "Kullanıcı Adı")
+                        .focused($focusText, equals: .email)
+                        .onSubmit {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
+                    
                     Buttons.customButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
                         Task{
-                         await registerVM.register()
+                            await registerVM.register()
                         }
                     }
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.42)
@@ -40,7 +66,7 @@ struct RegisterView: View {
                     }
                     Text("Lütfen").foregroundStyle(.black).font(.system(size: 13))
                     Button(action: {
-                       
+                        
                         //open  bottomsheet
                     }, label: {
                         Text("Gizlilik Politikası").foregroundStyle(.blue).fontWeight(.bold).font(.system(size: 13))
@@ -59,14 +85,14 @@ struct RegisterView: View {
             }.frame(width: Const.width , height: Const.height+100)
             
             
-              
+            
             
         }.background(
             Const.authBackGroundColor
         )
         .alert(isPresented: $registerVM.showAlert) {
-                   Alert(title: Text(registerVM.alertTitle), message: Text( registerVM.alertMessage), dismissButton: .default(Text("Tamam")))
-               }
+            Alert(title: Text(registerVM.alertTitle), message: Text( registerVM.alertMessage), dismissButton: .default(Text("Tamam")))
+        }
         .navigationBarBackButtonHidden(true)
     }
 }
