@@ -191,7 +191,8 @@ struct ProfileGeometry: View {
                             ,alignment: .topLeading
                         )
                     ForEach(Post.MockData){post in
-                    //    FeedViewCell(post: post, user: User.MockData[0], likeAction: .liked)
+                
+                        FeedViewCell(post: .constant(post) , user: User.MockData[0], likeAction: .liked)
                         
                     }
                 }
