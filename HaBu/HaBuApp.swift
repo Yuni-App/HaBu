@@ -45,6 +45,7 @@ struct HaBuApp: App {
                     } else {
                         if authService.user != nil {
                             TabbarView()
+                             
                                 .onAppear {
                                      
                                         Task {
@@ -65,6 +66,11 @@ struct HaBuApp: App {
                     isLoading = false
                 }
             }
+            .onOpenURL { url in
+                if url.host() == "notification" {
+                    print("notificaton")
+                 }
+             }
         }
     }
 }

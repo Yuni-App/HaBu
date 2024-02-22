@@ -46,7 +46,9 @@ class NotificationManager: ObservableObject{
                     "subtitle":subtitle,
                     "body": caption
                 
-                ]
+                ],
+                "link":"yuni://notification"
+
             ]
             
             if let jsonData = try? JSONSerialization.data(withJSONObject: requestBody) {
