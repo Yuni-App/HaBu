@@ -105,7 +105,7 @@ struct ThreeDRotateFeedViewCell: View {
                     print("comment")
                 }, getNumber: 10)
                 .sheet(isPresented: $showingComment) {
-                    CommentBottomSheet()
+                    CommentBottomSheet(postId: post.id)
                         .presentationDetents([.large,.medium])
                 }
                 Buttons.actionButton(buttonType: .send) {
