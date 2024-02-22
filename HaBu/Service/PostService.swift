@@ -24,23 +24,23 @@ enum PostError : Error{
 class PostService : PostProvider{
     var postRef = Firestore.firestore().collection("post")
     var postFeedRef = Firestore.firestore().collection("post") as Query
-    func likeActionPost(userId:String,postId:String,like:Bool,targetUserId:String) async throws -> Bool{
+    func likeActionPost(user:User,post:Post,like:Bool,targetUserId:String) async throws -> Bool{
         if like{
             do {
-                try await postRef.document(postId).updateData([
-                    "likeList": FieldValue.arrayUnion([userId])])
+                try await postRef.document(post.id).updateData([
+                    "likeList": FieldValue.arrayUnion([user.id])])
                 let notificationDocumentRefrence = Firestore.firestore().collection("notification").document()
                 try await notificationDocumentRefrence.setData([
                     "id":notificationDocumentRefrence.documentID,
                     "createdAt":Timestamp(date: .now),
-                    "postId":postId,
+                    "postId":post.id,
                     "seen":false,
                     "targetId":targetUserId,
                     "type": NotificationType.postLike.rawValue,
-                    "userId":userId
+                    "userId":user.id
                 ])
                 
-                await NotificationManager.sendPushNotification(caption: "Deneme 123", title: "deneme", fcm: "")
+                await NotificationManager.sendPushNotification(caption: "gönderinizin beğeni sayısı : \(post.likeList.count+1) oldu", title:"Bir Beğeni Geldi 👍 ", subtitle: "\(user.username) gönderinizi beğendi", userId:targetUserId)
                 return true
             }
             catch{
@@ -49,8 +49,8 @@ class PostService : PostProvider{
         }
         else{
             do {
-                try await postRef.document(postId).updateData([
-                    "likeList": FieldValue.arrayRemove([userId])
+                try await postRef.document(post.id).updateData([
+                    "likeList": FieldValue.arrayRemove([user.id])
                 ])
                 return true
             }

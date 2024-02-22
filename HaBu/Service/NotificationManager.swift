@@ -18,8 +18,16 @@ class NotificationManager: ObservableObject{
         }
     }
     
-    static func sendPushNotification(caption:String,title:String,fcm:String){
-        let receiverFCM = AuthService.shared.fcm 
+    static func sendPushNotification(caption:String,title:String,subtitle:String,userId:String) async{
+        var  receiverFCM = ""
+        do{
+            receiverFCM = try await UserService.fetchUser(withUserID: userId).fcm ?? "null"
+        }
+        catch{
+            print("error \(error)")
+        }
+        print(receiverFCM)
+
             let serverKey = "AAAAdU2Gzmo:APA91bG0fH25beBLZaPuEOek7caU3OAhHQbHt0pi5XP5D67Y7yN0JoE1XrwtS1Tj7l-Gl55yDmkH-8SdiSYDzYymH2lGeMi-Qu4kVAvRTWMJeVXTpy4Acw47z_L1umA2B5saT-lR-Nfl"
             
             let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
@@ -35,7 +43,9 @@ class NotificationManager: ObservableObject{
                 "to": receiverFCM,
                 "notification": [
                     "title": title,
+                    "subtitle":subtitle,
                     "body": caption
+                
                 ]
             ]
             
