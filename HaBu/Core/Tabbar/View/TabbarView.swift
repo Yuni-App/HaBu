@@ -61,6 +61,11 @@ struct TabbarView: View {
                     )
                 }
             }
+            .onOpenURL { url in
+               if url.host() == "notification" {
+                    currentTab = "Notification"
+                }
+            }
         }
         else{
             Text("Giriş esnasında bir sorun oluştu tekrar deneyiniz")

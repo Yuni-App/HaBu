@@ -39,6 +39,8 @@ class PostService : PostProvider{
                     "type": NotificationType.postLike.rawValue,
                     "userId":userId
                 ])
+                
+                await NotificationManager.sendPushNotification(caption: "Deneme 123", title: "deneme", fcm: "")
                 return true
             }
             catch{

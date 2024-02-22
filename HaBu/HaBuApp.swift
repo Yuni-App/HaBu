@@ -20,6 +20,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNot
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcm = fcmToken {
             print("FCM registration token: \(fcm)")
+            UserDefaults.standard.set(fcm, forKey: "fcm")
+
         }
     }
 }

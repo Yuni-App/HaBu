@@ -21,6 +21,7 @@ struct User : Identifiable,Codable,Hashable{
     let department : String
     let register_year: String
     let anonimId : String
+    var fcm : String? = ""
 }
 extension User {
     static var MockData: [User] = [
