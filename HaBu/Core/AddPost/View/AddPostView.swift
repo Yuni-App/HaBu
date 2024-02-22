@@ -84,7 +84,7 @@ struct AddPostView: View {
         }.onReceive(Publishers.keyboardHeight) { keyboardHeight in
             self.keyboardHeight = keyboardHeight // Klavye yüksekliğini güncelliyoruz
         }
-        .padding(.top, keyboardHeight)
+        .padding(.top, keyboardHeight).animation(.easeInOut(duration: 0.3))
         .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
             TabbarView()
         })
