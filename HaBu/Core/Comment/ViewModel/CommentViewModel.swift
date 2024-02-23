@@ -11,11 +11,12 @@ import Foundation
 class CommentViewModel:ObservableObject{
     var commentService = CommentService()
     var postId : String
-    var comments : [Comment] = []
+    @Published var comments : [Comment]? 
     init( postId: String) {
         self.postId = postId
         Task{
             comments = try await requestData()
+            print("comments")
             print(comments)
         }
     }
@@ -25,6 +26,8 @@ class CommentViewModel:ObservableObject{
     func requestData() async throws  -> [Comment]{
         
         let comments = await commentService.getComments(postId: postId)
+        print(comments)
         return comments
+        
     }
 }

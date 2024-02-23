@@ -15,12 +15,18 @@ struct EditProfileView: View {
     @StateObject var editProfileVM : EditProfileViewModel
     @State var navigate = false
     var destination : AnyView?
+    @State var progressViewBoolen = false
     init(user:User){
         self.user = user
         self._editProfileVM = StateObject(wrappedValue: EditProfileViewModel(user: user))
     }
     var body: some View {
-        VStack {
+        ZStack {
+            if progressViewBoolen{
+                ProgressView()
+                    .frame(width: Const.width * 0.2,height: Const.width * 0.2)
+                    .zIndex(3)
+            }
             VStack {
                 ZStack {
                     Rectangle()
@@ -102,19 +108,25 @@ struct EditProfileView: View {
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 
-                Buttons.customButton(title: "Kaydet" , buttonColor: Const.thirColor, size:.lage) {
+                Buttons.customButton(title:"Kaydet" , buttonColor: Const.thirColor, size:.lage) {
+                    progressViewBoolen = true
                     Task{
                         try await editProfileVM.updateUserData()
                         try await AuthService.shared.checkUser()
+                        dismiss()
                     }
-                    dismiss()
                     
                     
                     
                 }
             }.frame(width: Const.width * 1)
                 .background(Const.primaryColor)
+                .zIndex(0)
+            
+                
         }
+        .opacity(progressViewBoolen ? 0.5 : 1)
+        .disabled(progressViewBoolen)
         .navigationBarBackButtonHidden(true)
     }
     

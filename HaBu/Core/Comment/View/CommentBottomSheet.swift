@@ -10,34 +10,50 @@ import SwiftUI
 struct CommentBottomSheet: View {
     @State private var commentText  : String = ""
     var postId : String
-    var commentVM : CommentViewModel
+    @StateObject var commentVM : CommentViewModel
     init(postId: String) {
         self.postId = postId
-        self.commentVM = CommentViewModel(postId: postId)
+        self._commentVM = StateObject(wrappedValue: CommentViewModel(postId: postId))
     }
     
     var body: some View {
-        ZStack {
-            ScrollView {
-                HStack{
-                    Text("Yorumlar")
-                        .font(.title3)
-                        .bold()
-                    Spacer()
-                    Text("4 yorum")
+        if let comments = commentVM.comments{
+            ZStack {
+                ScrollView {
+                    HStack{
+                        Text("Yorumlar")
+                            .font(.title3)
+                            .bold()
+                        Spacer()
+                        Text("\(comments.count) yorum")
+                    }
+                    .padding(.horizontal,20)
+                    
+                    if comments.count > 0{
+                        ForEach(comments){comment in
+                            CommentViewCell(comment: comment)
+                            
+                        }
+                    }
+                    else{
+                        Text("Bu Gönderi için Hiçbir Yorum Yapılmamıştır")
+                            .padding(100)
+                    }
                 }
-                .padding(.horizontal,20)
-                ForEach(0..<commentVM.comments.count){i in
-                    CommentViewCell(comment:commentVM.comments[i])
-                }
+                .padding(10)
+                .zIndex(1)
+                
+                Const.backgroundColor
+                    .zIndex(0)
+                    .ignoresSafeArea(.all)
             }
-            .padding(10)
-            .zIndex(1)
-            
-            Const.backgroundColor
-                .zIndex(0)
-                .ignoresSafeArea(.all)
         }
+        else{
+            ProgressView()
+                .padding(40)
+            Spacer()
+        }
+       
         HStack{
             TextFields.CommentTextField(commentText: $commentText)
             Button(action: {
@@ -57,7 +73,7 @@ struct CommentViewCell : View {
     let comment : Comment
     var body: some View {
         
-        VStack{
+        VStack(alignment:.leading){
             //User Info
             HStack {
                 UserInfo(user: comment.user ?? User.MockData[0], imageSize: .xsmall,isAnonim: false)

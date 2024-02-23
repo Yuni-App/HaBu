@@ -116,8 +116,11 @@ struct FeedViewCell: View {
                              .presentationDetents([.large,.medium])
                     }
                     Buttons.actionButton(buttonType:.bubble, action: {
+                        
                         showingComment = true
-                    }, getNumber: post.likeList.count,textAction: {
+                        
+                        
+                    },textAction: {
                         showingComment = true
                     })
                     .sheet(isPresented: $showingComment) {
