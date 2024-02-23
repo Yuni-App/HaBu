@@ -21,6 +21,7 @@ class AuthService : ObservableObject , AuthProvider {
     @Published var user: FirebaseAuth.User?
     @Published var currentUser : User?
     private  let db = Firestore.firestore()
+    @Published var fcm = ""
    
 
     //TODO: USER CHECK
@@ -29,6 +30,11 @@ class AuthService : ObservableObject , AuthProvider {
             if let currentUser = Auth.auth().currentUser{
                 AuthService.shared.user = currentUser
                 AuthService.shared.currentUser = try await UserService.fetchUser(withUserID: currentUser.uid)
+                let fcm = UserDefaults.standard.string(forKey: "fcm") ?? "error"
+                
+                if AuthService.shared.currentUser?.fcm != fcm{
+                    await UserService.changeFcm(userId: currentUser.uid, fcm:fcm)
+                }
             }
         }
         catch{

@@ -20,6 +20,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNot
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcm = fcmToken {
             print("FCM registration token: \(fcm)")
+            UserDefaults.standard.set(fcm, forKey: "fcm")
+
         }
     }
 }
@@ -43,6 +45,7 @@ struct HaBuApp: App {
                     } else {
                         if authService.user != nil {
                             TabbarView()
+                             
                                 .onAppear {
                                      
                                         Task {
@@ -63,6 +66,11 @@ struct HaBuApp: App {
                     isLoading = false
                 }
             }
+            .onOpenURL { url in
+                if url.host() == "notification" {
+                    print("notificaton")
+                 }
+             }
         }
     }
 }

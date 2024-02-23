@@ -24,4 +24,14 @@ struct UserService : UserProvider{
       let snapshot = try await  Firestore.firestore().collection("user").getDocuments()
        return snapshot.documents.compactMap({try? $0.data(as:User.self)})
     }
+    
+    static func changeFcm(userId: String,fcm:String)async ->Void{
+        do{
+            try await Firestore.firestore().collection("user").document(userId).updateData(["fcm":fcm])
+        }
+        catch{
+            print("error \(error)")
+        }
+    }
+  
 }
