@@ -27,7 +27,7 @@ struct TabbarView: View {
     }
     var body: some View {
 
-        if authService.currentUser != nil{
+        if let _ =  authService.currentUser{
             NavigationStack{
                 GeometryReader{proxy in
                     let bottomEdge = proxy.safeAreaInsets.bottom
@@ -61,6 +61,7 @@ struct TabbarView: View {
                     )
                 }
             }
+            .padding(.bottom,5)
            
         }
         else{

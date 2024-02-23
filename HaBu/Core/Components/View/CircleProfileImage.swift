@@ -96,19 +96,15 @@ struct CircleProfileImage: View {
             if userIamgeUrl == "anonim"{
                 Image("anonim")
                     .resizable()
-                    .clipShape(.rect(cornerRadius: 15))
-                   
                     .frame(width: size.deminsion ,height: size.deminsion)
             }
             else if  userIamgeUrl != ""{
                 KFImage(URL(string: userIamgeUrl))
                     .resizable()
-                    .clipShape(.rect(cornerRadius: 30))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: size.deminsion ,height: size.deminsion)
+
+                    .clipShape(.rect(cornerRadius: 15))
                 
             }
             else{
@@ -128,6 +124,7 @@ struct CircleProfileImage: View {
             if let image = userImage as? KFImage {
                 image
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(.rect(cornerRadius: 15))
                     .frame(width: value!.size, height: value!.size)
                     .position(value!.Position)
@@ -136,6 +133,7 @@ struct CircleProfileImage: View {
             else if let image = userImage as? Image{
                 image
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(.rect(cornerRadius: 15))
                     .frame(width: value!.size, height: value!.size)
                     .position(value!.Position)

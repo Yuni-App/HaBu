@@ -183,21 +183,24 @@ struct FeedView: View {
                         .coordinateSpace(name:"SCROLL")
                         //TollBar
                         .overlay(
-                            FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
-                                .background(.white)
-                                .offset(y:hideTab ? (-15 - 70 ) :0)
+                            VStack{
+                                FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
+                                                              .background(.white)
+                                                              .offset(y:hideTab ? (-15 - 70 ) :0)
+                                
+                                Buttons.SlidableButton(action: {
+                                    navigate = true
+                                    navigationPage = AnyView(AddPostView().navigationBarBackButtonHidden(true))
+                                }, position: CGPoint(x: Const.width * 0.05, y:0), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                                .offset(x:hideTab ? -Const.width * 0.5:0)
+                            }
                             ,alignment: .top
+                          
+                            
                         )
                         .ignoresSafeArea(.all,edges: .all)
                         //Slidable Button
-                        .overlay(
-                            Buttons.SlidableButton(action: {
-                                navigate = true
-                                navigationPage = AnyView(AddPostView().navigationBarBackButtonHidden(true))
-                            }, position: CGPoint(x: 20, y: 40), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                            .offset(x:hideTab ? -Const.width * 0.5:0)
-                            
-                        )
+                      
                         .sheet(isPresented: $showCategoryFilter) {
                             CategoryFilterBottomSheet(SelectedTags: $tags, selectedFilter: $selectionFilter, onButtonTapped: {
                                 Task{
@@ -294,16 +297,4 @@ struct FeedViewTollBar:View {
     }
 }
 
-struct CircleA : View {
-    @Binding var yOffset:CGFloat
-    var size :CGFloat = 80
-    var degress:CGFloat = 60
-    var color :Color
-    var body: some View {
-        Circle()
-            .stroke(style: StrokeStyle(lineWidth: 5,lineCap: .round,lineJoin: .round))
-            .frame(width: size,height: size)
-            .rotationEffect(.degrees(degress + yOffset))
-            .foregroundStyle(color)
-    }
-}
+
