@@ -63,6 +63,9 @@ struct NotificationView: View {
               //   await   notificationVM.listenForNotifications()
               //  }
             }
+            .onOpenURL(perform: { url in
+                print(url)
+            })
             .onDisappear {
                 notificationVM.exitPage()
             }

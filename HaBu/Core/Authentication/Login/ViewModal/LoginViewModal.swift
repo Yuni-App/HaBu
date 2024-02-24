@@ -63,6 +63,7 @@ class LoginViewModel: ObservableObject {
         do {
             try await authService.signIn(email: textEmail, password: textPassword)
             print("Başarılı giriş yapılıyor.")
+            
             isActiveDestination = true
             return true
         } catch let error as NSError{

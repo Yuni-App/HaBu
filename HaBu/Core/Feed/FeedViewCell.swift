@@ -89,7 +89,7 @@ struct FeedViewCell: View {
                         if likePost == .unLike{
                             likePost = .liked
                             Task{
-                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:true,targetUserId: post.userId)
+                                let value =  try await PostService().likeActionPost(user:AuthService.shared.currentUser!,post:post,like:true,targetUserId: post.userId)
                                   if value{
                                       post.likeList.append(AuthService.shared.currentUser!.id)
                                   }
@@ -98,7 +98,7 @@ struct FeedViewCell: View {
                         else{
                             likePost = .unLike
                             Task{
-                                let value =  try await PostService().likeActionPost(userId:AuthService.shared.currentUser?.id ?? "",postId:post.id,like:false,targetUserId: post.userId)
+                                let value =  try await PostService().likeActionPost(user:AuthService.shared.currentUser!,post:post,like:false,targetUserId: post.userId)
                                 if value{
                                     post.likeList.removeAll { $0 == AuthService.shared.currentUser!.id }
 
@@ -116,8 +116,11 @@ struct FeedViewCell: View {
                              .presentationDetents([.large,.medium])
                     }
                     Buttons.actionButton(buttonType:.bubble, action: {
+                        
                         showingComment = true
-                    }, getNumber: post.likeList.count,textAction: {
+                        
+                        
+                    },textAction: {
                         showingComment = true
                     })
                     .sheet(isPresented: $showingComment) {

@@ -59,7 +59,7 @@ struct ProfileGeometry: View {
     var body: some View {
         ScrollViewReader{ scrollProxy in
             let headerHeight = (size.height * 0.4) + safeArea.top
-            let minimumHeaderHeight = 100 + safeArea.top
+            let minimumHeaderHeight = Const.height * 0.1 + safeArea.top
             let proggress = max( min(-offsetY  / (headerHeight - minimumHeaderHeight), 1), 0)
             ScrollView{
                 VStack(spacing:0){
@@ -90,10 +90,9 @@ struct ProfileGeometry: View {
                                         }, label: {
                                             Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
                                         })
-                                       
-                                        
                                         .padding()
-                                    } .offset(x : -(rect.minX) * proggress,y: -resizedOffsetY * (proggress * 1.7) )
+                                        
+                                    } .offset(x : -(rect.minX) * (proggress ),y: -resizedOffsetY * (proggress * 1.7) )
                                     
                                     // rating and post count
                                     HStack{
@@ -102,7 +101,7 @@ struct ProfileGeometry: View {
                                             Text("90")
                                         }
                                         .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
-                                        .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.8)))
+                                        .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.75)))
                                         
                                         Spacer()
                                             .padding(.horizontal)
@@ -153,13 +152,12 @@ struct ProfileGeometry: View {
                                     
                                 }
                                 .frame(width: Const.width,height: headerHeight * 0.5)
-                                
                                 // userName
                                 HStack {
                                     Text(user.username)
                                         .font(.title2)
                                         .fontWeight(.bold)
-                                        .scaleEffect(1-(proggress * 0.1))
+                                        .scaleEffect(1-(proggress * 0.15))
                                         .padding(.horizontal)
                                         .fontWeight(.bold)
                                     
@@ -191,7 +189,6 @@ struct ProfileGeometry: View {
                             ,alignment: .topLeading
                         )
                     ForEach(Post.MockData){post in
-                
                         FeedViewCell(post: .constant(post) , user: User.MockData[0], likeAction: .liked)
                         
                     }
