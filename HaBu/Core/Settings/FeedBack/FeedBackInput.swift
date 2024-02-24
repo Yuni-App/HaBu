@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FeedBackInput: View {
     @State private var text : String = ""
@@ -13,6 +14,8 @@ struct FeedBackInput: View {
     @State private var isAnonimComment  = false
     @State private var selectedRating: Int = 0
     @Environment(\.dismiss) private var dismiss
+    
+    @State private var keyboardHeight: CGFloat = 0
     var body: some View {
             ZStack{
                 AddPostBackground()
@@ -26,16 +29,24 @@ struct FeedBackInput: View {
                             .fontWeight(.semibold)
                             .frame(width: Const.width * 0.9)
                     }.frame(width: Const.width * 1).padding(.top, 40)
+                        .ignoresSafeArea(.keyboard)
                     Image("Feed 1")
                         .padding()
-                    //PopUp(size: .lage, backgroundColor: .brown, contents: "merhaba", btnOpen: "aç", btnClose: "kapat")
                     TextFields.LineLimitTextField(text: $text)
                     Spacer()
                     Rate(selectedRating: $selectedRating)
                     Spacer()
                     SendButton(text: text).padding(.bottom, Const.height * 0.05)
-                }.frame(width: Const.width * 0.95)
-            }.frame(height: Const.height * 1).navigationBarBackButtonHidden(true)
+                }
+                .frame(width: Const.width * 0.95)
+            }
+            .onReceive(Publishers.keyboardHeight) { keyboardHeight in
+                self.keyboardHeight = keyboardHeight // Klavye yüksekliğini güncelliyoruz
+            }
+            .padding(.top, keyboardHeight*0.9).animation(.easeOut(duration: 0))
+            .frame(height: Const.height * 1).navigationBarBackButtonHidden(true)
+            .hideKeyboardOnTap()
+            
     }
 }
 

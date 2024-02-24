@@ -8,30 +8,6 @@
 import SwiftUI
 import Combine
 
-extension View {
-    func endEditing() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
-extension Notification {
-    var keyboardHeight: CGFloat {
-        (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
-    }
-}
-
-extension Publishers {
-    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
-        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
-            .map { $0.keyboardHeight }
-
-        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
-            .map { _ in CGFloat(0) }
-
-        return MergeMany(willShow, willHide)
-            .eraseToAnyPublisher()
-    }
-}
 
 
 
@@ -76,15 +52,11 @@ struct AddPostView: View {
                 AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
                 AddPostMedia(addpostVM: addPostVM).padding(.horizontal, 10)
             }
-            .onTapGesture {
-                self.endEditing()
-            }
-            
-            
         }.onReceive(Publishers.keyboardHeight) { keyboardHeight in
             self.keyboardHeight = keyboardHeight // Klavye yüksekliğini güncelliyoruz
         }
-        .padding(.top, keyboardHeight).animation(.easeInOut(duration: 0.3))
+        .hideKeyboardOnTap()
+        .padding(.top, keyboardHeight*0.9).animation(.easeInOut(duration: 0))
         .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
             TabbarView()
         })
