@@ -8,10 +8,13 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import SwiftUI
 
 struct FeedbackModel {
-      let text: String
-      let rating: Int
+    let text: String
+    let rating: Int
+    let name : String
+    let surname: String
 }
 
 let db = Firestore.firestore()
@@ -22,18 +25,28 @@ class FeedBackInputViewModel: ObservableObject {
     @Published var isSubmittingFeedback: Bool = false
     @Published var feedbackSubmitted: Bool = false
     
+    
     func submitFeedback() {
         guard !text.isEmpty else {
-            // Handle empty text case, e.g., display an alert
+            // gösterilecek hata mesajları
             return
         }
+        
+        // Check if user is authenticated
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        
         
         isSubmittingFeedback = true
         
         let feedbackData: [String: Any] = [
             "text": text,
             "rating": selectedRating,
-            "timestamp": Timestamp(date: Date())
+            "timestamp": Timestamp(date: Date()),
+            "UserId": currentUser.uid,
+            
+            
         ]
         
         db.collection("feedback").addDocument(data: feedbackData) { error in
@@ -47,5 +60,5 @@ class FeedBackInputViewModel: ObservableObject {
             }
         }
     }
-
+    
 }
