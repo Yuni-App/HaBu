@@ -9,9 +9,9 @@ import SwiftUI
 import Combine
 
 struct FeedBackInput: View {
+    @ObservedObject var viewModel = FeedBackInputViewModel()
+    
     @State private var text : String = ""
-    @State private var isAnonimPost = false
-    @State private var isAnonimComment  = false
     @State private var selectedRating: Int = 0
     @Environment(\.dismiss) private var dismiss
     
@@ -32,11 +32,11 @@ struct FeedBackInput: View {
                         .ignoresSafeArea(.keyboard)
                     Image("Feed 1")
                         .padding()
-                    TextFields.LineLimitTextField(text: $text)
+                    TextFields.LineLimitTextField(text: $viewModel.text)
                     Spacer()
-                    Rate(selectedRating: $selectedRating)
+                    Rate(viewModel: viewModel)
                     Spacer()
-                    SendButton(text: text).padding(.bottom, Const.height * 0.05)
+                    SendButton(viewModel: viewModel).padding(.bottom, Const.height * 0.05)
                 }
                 .frame(width: Const.width * 0.95)
             }
@@ -55,6 +55,44 @@ struct FeedBackInput: View {
     FeedBackInput()
 }
 
+@ViewBuilder
+func SendButton(viewModel: FeedBackInputViewModel) -> some View {
+    HStack {
+        Button(action: {
+            viewModel.submitFeedback()
+        }) {
+            Text("GÖNDER")
+                .fontWeight(.semibold)
+                .frame(width: Const.width * 0.5, height: Const.height * 0.05, alignment: .center)
+                .foregroundColor(.white)
+                .background(Const.primaryButtonColor)
+                .cornerRadius(8)
+                .opacity(viewModel.text.isEmpty ? 0.7 : 1.0)
+        }
+        .disabled(viewModel.text.isEmpty)
+        .padding(.top, 10) // İsteğe bağlı: Görsel olarak daha iyi bir görünüm için
+    }
+}
+
+@ViewBuilder
+func Rate(viewModel: FeedBackInputViewModel) -> some View {
+    HStack {
+        ForEach(1...5, id: \.self) { index in
+            Image(systemName: viewModel.selectedRating >= index ? "star.fill" : "star")
+                .resizable()
+                .frame(width: Const.width * 0.1, height: Const.height * 0.05)
+                .foregroundColor(viewModel.selectedRating >= index ? Color.yellow : Color.gray.opacity(0.4))
+                .onTapGesture {
+                    viewModel.selectedRating = index
+                }
+                .animation(.easeInOut(duration: 0.2))
+                .opacity(viewModel.selectedRating == index ? 1.0 : 0.7)
+        }
+    }
+}
+
+
+/*
 @ViewBuilder
 func SendButton(text: String) -> some View {
     HStack {
@@ -91,5 +129,5 @@ func Rate(selectedRating: Binding<Int>) -> some View {
         }
     }
 }
-
+*/
 
