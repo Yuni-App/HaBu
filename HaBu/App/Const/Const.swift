@@ -10,7 +10,7 @@ import SwiftUI
 class Const{
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height
-    static let primaryColor  = Color(uiColor: UIColor(hex: "55BCB6"))
+    static let primaryColor  = Color(uiColor: UIColor(hex: "04243E"))
     static let primaryUiColor = UIColor(hex: "55BCB6")
     static let thirColor = Color(uiColor: UIColor(hex: "5B8291"))
     static let secondaryColor = Color(uiColor : UIColor(hex:"68E4DD"))
@@ -41,7 +41,7 @@ class Const{
         endPoint: UnitPoint(x: 0.5, y: 1)
     )
     
-    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer"]
+    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Ders","İş","Kavga","Kitap"]
     static var anonimFilters: [anonimFilter]=[
         .init(id: 0, color: thirColor, title: "Hepsi", subTitle: "Bütün Gönderiler ", icon: "anonim"),
         .init(id: 1, color:thirColor, title: "Anonim", subTitle: "Sadece Anonim Gönderiler", icon: "anonim"),

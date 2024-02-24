@@ -16,7 +16,7 @@ struct SplashView: View {
             
         }
         .frame(width: Const.width,height: Const.height)
-        .background(Const.LinearBackGroundColor.opacity(0.6))
+        .background(Const.primaryColor)
        
     }
 }
