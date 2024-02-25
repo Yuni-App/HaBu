@@ -24,7 +24,7 @@ class FeedBackInputViewModel: ObservableObject {
     @Published var selectedRating: Int = 0
     @Published var isSubmittingFeedback: Bool = false
     @Published var feedbackSubmitted: Bool = false
-    
+    @State private var isActiveDestination: Bool = false
     
     func submitFeedback() {
         guard !text.isEmpty else {
@@ -56,6 +56,7 @@ class FeedBackInputViewModel: ObservableObject {
                 // Handle error
             } else {
                 self.feedbackSubmitted = true
+                self.isActiveDestination = true
                 // Do something after feedback is submitted, e.g., navigate back
             }
         }

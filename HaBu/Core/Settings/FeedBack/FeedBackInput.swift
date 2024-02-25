@@ -14,7 +14,7 @@ struct FeedBackInput: View {
     @State private var text : String = ""
     @State private var selectedRating: Int = 0
     @Environment(\.dismiss) private var dismiss
-    
+    @State private var isActiveDestination: Bool = false
     @State private var keyboardHeight: CGFloat = 0
     var body: some View {
             ZStack{
@@ -36,8 +36,11 @@ struct FeedBackInput: View {
                     Spacer()
                     Rate(viewModel: viewModel)
                     Spacer()
-                    SendButton(viewModel: viewModel).padding(.bottom, Const.height * 0.05)
-                }
+                    SendButton(viewModel: viewModel, isActiveDestinationBinding: $isActiveDestination).padding(.bottom, Const.height * 0.05)
+                    
+                }.navigationDestination(isPresented: $isActiveDestination, destination: {
+                    FeedBackSuccess()
+                })
                 .frame(width: Const.width * 0.95)
             }
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
@@ -56,10 +59,13 @@ struct FeedBackInput: View {
 }
 
 @ViewBuilder
-func SendButton(viewModel: FeedBackInputViewModel) -> some View {
+func SendButton(viewModel: FeedBackInputViewModel, isActiveDestinationBinding: Binding<Bool>) -> some View {
     HStack {
         Button(action: {
             viewModel.submitFeedback()
+            withAnimation {
+                    isActiveDestinationBinding.wrappedValue = true
+                  }
         }) {
             Text("GÖNDER")
                 .fontWeight(.semibold)
