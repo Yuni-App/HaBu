@@ -91,6 +91,8 @@
 		947079A12B1B8CE40005C4CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A02B1B8CE40005C4CB /* SettingsView.swift */; };
 		947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A32B1BCE500005C4CB /* AgreementView.swift */; };
 		947079A62B1BD1850005C4CB /* CustomSettingsTollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */; };
+		947CD1942B8B7C8D00339512 /* SavedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947CD1932B8B7C8D00339512 /* SavedPostViewModel.swift */; };
+		947CD1962B8B7FD900339512 /* SavedPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947CD1952B8B7FD900339512 /* SavedPostService.swift */; };
 		94808CD42B0CE63000CC51FD /* AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD32B0CE63000CC51FD /* AddCategory.swift */; };
 		94808CD82B0CE64D00CC51FD /* AddMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94808CD72B0CE64D00CC51FD /* AddMedia.swift */; };
 		948338622B1DC0ED006964BB /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948338612B1DC0ED006964BB /* TextFields.swift */; };
@@ -188,6 +190,8 @@
 		947079A02B1B8CE40005C4CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		947079A32B1BCE500005C4CB /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingsTollBar.swift; sourceTree = "<group>"; };
+		947CD1932B8B7C8D00339512 /* SavedPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostViewModel.swift; sourceTree = "<group>"; };
+		947CD1952B8B7FD900339512 /* SavedPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostService.swift; sourceTree = "<group>"; };
 		94808CD32B0CE63000CC51FD /* AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategory.swift; sourceTree = "<group>"; };
 		94808CD72B0CE64D00CC51FD /* AddMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedia.swift; sourceTree = "<group>"; };
 		948338612B1DC0ED006964BB /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 				946C10672B77E94F0021646A /* NotificationService.swift */,
 				5C2FB99D2B8387A000ECAA46 /* CommentService.swift */,
 				5CD0E2262B84FC69000A8382 /* NotificationManager.swift */,
+				947CD1952B8B7FD900339512 /* SavedPostService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 		944CD1572B2BB1310074D99D /* SavedPost */ = {
 			isa = PBXGroup;
 			children = (
+				947CD1922B8B7C7200339512 /* ViewModel */,
 				9439A8882B32F137005D0E20 /* View */,
 			);
 			path = SavedPost;
@@ -767,6 +773,14 @@
 				9465F9672B34E05D00F25235 /* View */,
 			);
 			path = DeleteAccount;
+			sourceTree = "<group>";
+		};
+		947CD1922B8B7C7200339512 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				947CD1932B8B7C8D00339512 /* SavedPostViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		94808CCF2B0CE5CA00CC51FD /* AddPost */ = {
@@ -1013,11 +1027,13 @@
 				949016E02B041EBD00164405 /* InfoView.swift in Sources */,
 				9439A8832B322F28005D0E20 /* AuthService.swift in Sources */,
 				5C2DAB532B050F7900C6E145 /* SerachView.swift in Sources */,
+				947CD1942B8B7C8D00339512 /* SavedPostViewModel.swift in Sources */,
 				9439A8812B32180B005D0E20 /* LoginViewModal.swift in Sources */,
 				9465F96A2B34E09E00F25235 /* DeleteAccountViewModel.swift in Sources */,
 				94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */,
 				5CE5AB9A2B056BDC00502D9F /* ProfileView.swift in Sources */,
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
+				947CD1962B8B7FD900339512 /* SavedPostService.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 				9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
