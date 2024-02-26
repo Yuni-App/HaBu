@@ -21,7 +21,6 @@ class NotificationService {
     private var listener: ListenerRegistration?
     
     func seenNotification(notificationList: [NotificationData]) {
-        print("dsfgdfh")
         let db = Firestore.firestore()
         
         for notification in notificationList {
