@@ -47,11 +47,11 @@ struct HaBuApp: App {
                             TabbarView()
                              
                                 .onAppear {
-                                     
                                         Task {
                                             await notificationVM.listenForNotifications()
-                                          
-                                        
+                                            if NotificationManager().hasPermission == false{
+                                                await NotificationManager().request()
+                                            }
                                     }
                                 }
                         } else {

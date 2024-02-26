@@ -74,6 +74,7 @@ struct FeedView: View {
         
         ZStack {
             VStack {
+              
                 ScrollViewReader{ value in
                     ZStack{
                         Button(action: {
