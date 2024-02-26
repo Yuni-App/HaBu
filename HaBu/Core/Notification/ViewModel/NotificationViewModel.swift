@@ -62,6 +62,9 @@ class NotificationViewModel: ObservableObject {
         self.notificationService.seenNotification(notificationList: self.newNotificaitons)
         self.notificationsData.append(contentsOf: self.newNotificaitons)
         self.newNotificaitons.removeAll()
+        self.notificationsData.sort(by: compareByTimestamp)
+
+        // newNotificaitons listesini timestampe göre sırala
         
     }
     // Dinlemeyi durdur
