@@ -21,6 +21,7 @@ class Buttons{
                 action()
             }, label: {
                 Text(title)
+                    .font(.custom("Baloo2-Bold", size: 20))
                     .padding()
                     .frame(width: size?.width ?? Const.width * 0.6 , height: size?.height ?? Const.height * 0.04 )
                     .background(buttonColor)
