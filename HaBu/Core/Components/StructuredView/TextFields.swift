@@ -94,10 +94,7 @@ class TextFields {
             .frame(height: 40)
             .padding(.horizontal, 10)
             .background(Const.whiteColor)
-            .overlay(
-                RoundedRectangle(cornerRadius: 2)
-                    .stroke(Const.secondaryColor, lineWidth: 2)
-            )
+            .cornerRadius(10)
             .padding(.horizontal, 20)
         }
         .padding(.vertical, 10)
