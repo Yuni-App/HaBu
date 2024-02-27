@@ -15,6 +15,7 @@ struct LoginView: View {
     @Environment(\.dismiss) var dissmis
     @StateObject var loginVM : LoginViewModel
     @State private var isKeyboardHidden = true
+    @State var eyehidden = true
     
     @FocusState private var focusedField: FocusableField?
     
@@ -41,7 +42,7 @@ struct LoginView: View {
                         .onSubmit {
                             focusedField = .password
                         }
-                    TextFields.CustomTextField(text: $loginVM.textPassword , icon: .key, placeHolder: "Şifre")
+                    TextFields.CustomTextFieldSecure(text: $loginVM.textPassword , icon: .key, placeHolder: "Şifre", hidden: $eyehidden)
                         .focused($focusedField, equals: .password)
                         .onSubmit {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

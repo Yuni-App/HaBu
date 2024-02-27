@@ -15,6 +15,8 @@ enum FocusableField2{
 struct RegisterView: View {
     @Environment(\.dismiss) var dissmis
     @FocusState private var focusText : FocusableField2?
+    @State var eyehidden = true
+    @State var eyehidden2 = true
     
     @StateObject var registerVM : RegisterViewModel
     init(){
@@ -39,13 +41,13 @@ struct RegisterView: View {
                             focusText = .password
                         }
                     
-                    TextFields.CustomTextField(text :$registerVM.textPassword ,icon: .key, placeHolder: "Şifre")
+                    TextFields.CustomTextFieldSecure(text :$registerVM.textPassword ,icon: .key, placeHolder: "Şifre", hidden: $eyehidden)
                         .focused($focusText, equals: .password)
                         .onSubmit {
                             focusText = .passwordAgain
                         }
                     
-                    TextFields.CustomTextField(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar")
+                    TextFields.CustomTextFieldSecure(text : $registerVM.textAgainPassword , icon: .key, placeHolder: "Şifre Tekrar", hidden: $eyehidden2)
                         .focused($focusText, equals: .passwordAgain)
                         .onSubmit {
                             focusText = .userName
