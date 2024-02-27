@@ -24,27 +24,28 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             VStack{
-                Buttons.backButton{
-                    dissmis()
+                
+                VStack {
+                    TextFields.CustomTitle(text: "Giriş", size: 50)
+                    TextFields.CustomTitle(text: "Tekrardan Hoşgeldin...", size: 25)
+                    
+                }.frame(height: Const.height * 0.4)
+                VStack {
+                    Divider().frame(width: Const.width * 0.6, height: Const.height * 0.003).overlay(Color.white).frame(width: Const.width, alignment: .leading)
+                    Divider().frame(width: Const.width * 0.4, height: Const.height * 0.003).overlay(Color.white).frame(width: Const.width, alignment: .leading)
                 }
-                .padding(.trailing,Const.width * 0.9)
-                CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.loginVector)
+                
                 VStack{
                     TextFields.CustomTextField(text: $loginVM.textEmail, icon: .mail, placeHolder: "e-posta")
                         .focused($focusedField, equals: .email)
-                                                .onSubmit {
-                                                    focusedField = .password
-                                                }
-                        
-                    
+                        .onSubmit {
+                            focusedField = .password
+                        }
                     TextFields.CustomTextField(text: $loginVM.textPassword , icon: .key, placeHolder: "Şifre")
                         .focused($focusedField, equals: .password)
-                                                .onSubmit {
-                                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                                }
-
-                    
-                    
+                        .onSubmit {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                     
                     HStack{
                         Spacer()
@@ -61,39 +62,50 @@ struct LoginView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 12))
                     }
-                    Buttons.customButton(title: "Giriş Yap", buttonColor: Const.secondaryColor , textColor: .black ) {
+                    Buttons.customButton(title: "Giriş Yap", buttonColor: Const.whiteColor , textColor: .black ) {
                         Task{
                             loginVM.isActiveDestination =   await loginVM.signIn()
                         }
                     }
                 }.frame(width: Const.width * 0.85, height:  Const.height * 0.35)
-                    .modifier(RectangleBlurModifier(color: Const.primaryColor))
+                    .modifier(RectangleBlurModifier(color: Const.rectangleColor))
+                VStack {
+                    Divider().frame(width: Const.width * 0.4, height: Const.height * 0.003).overlay(Color.white).frame(width: Const.width, alignment: .trailing)
+                    Divider().frame(width: Const.width * 0.6, height: Const.height * 0.003).overlay(Color.white).frame(width: Const.width, alignment: .trailing) 
+                }
+                Spacer()
                 HStack{
-                    Text("Bir hesabınız yok mı?").foregroundStyle(.black).font(.system(size: 14))
-                    
+                    TextFields.CustomText(text: "Bir hesabınız yok mu?", color: Const.textColor5, size: 13)
                     NavigationLink {
                         RegisterView()
                     } label: {
-                        Text("Kayıt Ol").foregroundStyle(.blue).fontWeight(.bold)
+                        TextFields.CustomTextBold(text: "Kayıt Ol", color: Const.whiteColor, size: 13)
                         
                     }
                 }
-            } .frame(width: Const.width , height: Const.height+100)
-                .padding()
-            
+                Spacer()
+            }.frame(width: Const.width, height: Const.height)
+                .overlay(alignment: .topLeading, content: {
+                    Buttons.backButton{
+                        dissmis()
+                    }.padding().padding(.top, Const.height * 0.03)
+                })
+                
+                
                 .navigationDestination(isPresented: $loginVM.isActiveDestination, destination: {
                     TabbarView()
                 })
                 .alert(isPresented: $loginVM.showAlert) {
                     Alert(title: Text(loginVM.alertTitle), message: Text( loginVM.alertMessage), dismissButton: .default(Text("Tamam")))
-                }.background(Const.authBackGroundColor)
+                }.background(Const.primaryColor)
                 .navigationBarBackButtonHidden(true)
+                
         }
         .hideKeyboardOnTap()
         
     }
     
-  
+    
 }
 #Preview {
     LoginView()
