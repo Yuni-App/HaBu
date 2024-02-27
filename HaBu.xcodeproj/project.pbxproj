@@ -58,6 +58,7 @@
 		88A23C0A2B03B8A80030183A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A23C092B03B8A80030183A /* Post.swift */; };
 		88A5A72E2B89DAB70065F11A /* FeedBackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5A72D2B89DAB70065F11A /* FeedBackViewModel.swift */; };
 		88B85B342B06348200D03ED9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B85B332B06348200D03ED9 /* EditProfileView.swift */; };
+		88C1CD642B8DC224008187C9 /* Baloo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88C1CD632B8DC224008187C9 /* Baloo2-Bold.ttf */; };
 		88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F552B1B3DB3005BE291 /* SearchItem.swift */; };
 		88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F592B1B5B63005BE291 /* SecondSearchView.swift */; };
 		88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */; };
@@ -158,6 +159,7 @@
 		88A23C092B03B8A80030183A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		88A5A72D2B89DAB70065F11A /* FeedBackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackViewModel.swift; sourceTree = "<group>"; };
 		88B85B332B06348200D03ED9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		88C1CD632B8DC224008187C9 /* Baloo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Bold.ttf"; sourceTree = "<group>"; };
 		88D69F552B1B3DB3005BE291 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		88D69F592B1B5B63005BE291 /* SecondSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSearchView.swift; sourceTree = "<group>"; };
 		88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem2.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 		5C2DAB492B050CFD00C6E145 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				88C1CD632B8DC224008187C9 /* Baloo2-Bold.ttf */,
 				5C0B721A2B2D660F00555AD2 /* Kodchasan-Bold.ttf */,
 				5C2DAB4A2B050D1C00C6E145 /* IrishGrover-Regular.ttf */,
 			);
@@ -979,6 +982,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88C1CD642B8DC224008187C9 /* Baloo2-Bold.ttf in Resources */,
 				5C0B721B2B2D660F00555AD2 /* Kodchasan-Bold.ttf in Resources */,
 				5C2658452B03B431008BEB6D /* Preview Assets.xcassets in Resources */,
 				5C5EB7742B31CCB7001D2370 /* GoogleService-Info.plist in Resources */,
@@ -1216,7 +1220,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HaBu/Preview Content\"";
-				DEVELOPMENT_TEAM = 72DGBQN223;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HaBu/Info.plist;
@@ -1248,7 +1252,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HaBu/Preview Content\"";
-				DEVELOPMENT_TEAM = 72DGBQN223;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HaBu/Info.plist;

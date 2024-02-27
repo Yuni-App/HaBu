@@ -13,30 +13,32 @@ struct InfoView: View {
     var body: some View {
             ZStack {
                 VStack {
-                    CustomImage(width: Const.width, height: Const.height * 0.4, imagePath: ImageManager.registerThirdVector)
+                    Spacer()
+                    VStack {
+                        CustomImage(width: Const.width * 1, height: Const.height * 0.2, imagePath: ImageManager.habuLogo)
+                        TextFields.CustomTitle(text: "KAMPÜSÜN GİZLİ", size: 30)
+                        TextFields.CustomTitle(text: "DÜNYASI!", size: 30)
+                    }
                     
+                    Spacer()
                     VStack{
-                        CustomImage(width: Const.width * 0.6, height: Const.height * 0.1, imagePath: ImageManager.habuLogo)
-                            
-                        Buttons.customButton(title: "Giriş Yap", buttonColor: Const.primaryColor , textColor: .white) {
+                        Buttons.customButton(title: "Giriş Yap", buttonColor: Const.whiteColor , textColor: .black) {
                             activeDestinaiton = AnyView(LoginView())
                             isActiveDestination = true
                         }.padding()
-                        Buttons.customButton(title: "Kayıt Ol", buttonColor: Const.secondaryColor , textColor: .black ) {
+                        Buttons.customButton(title: "Kayıt Ol", buttonColor: Const.whiteColor , textColor: .black ) {
                             activeDestinaiton = AnyView(RegisterView())
                             isActiveDestination = true
                         }
-                       
-
-                    }.frame(width: Const.width*0.85,height: Const.height * 0.35)
-                        .modifier(RectangleBlurModifier(color: Const.primaryColor))
+                    }
+                    Spacer()
                 }
                 .frame(width: Const.width , height: Const.height)
                 .navigationDestination(isPresented: $isActiveDestination, destination: {
                     activeDestinaiton
                 })
             }.navigationBarBackButtonHidden(true)
-            .background(Const.authBackGroundColor)
+            .background(Const.primaryColor)
         
        
     
