@@ -18,8 +18,13 @@ class ProfileViewModel:ObservableObject{
             print(profileImageList)
             self.images = profileImageList
         }
+        Task{
+            self.posts  = await PostService.fetchPostsFromUserId(userId: user.id)
+            print(posts)
+        }
     }
     @Published var user:User
+    @Published var posts : [Post]?
     @Published var editButtonPosition = CGPoint(x:Const.width, y : Const.height / 5)
     @Published private var shouldNavigate = false
     @Published var offset:CGFloat = 0

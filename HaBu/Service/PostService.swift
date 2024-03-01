@@ -98,6 +98,18 @@ class PostService : PostProvider{
     }
 
 
+    static func fetchPostsFromUserId(userId:String) async -> [Post]{
+        do {
+            let snapshot = try await Firestore.firestore().collection("post").whereField("userId", isEqualTo: userId).whereField("isAnonim", isEqualTo: false).getDocuments()
+            
+            let posts = snapshot.documents.compactMap({try? $0.data(as:Post.self)})
+            return posts
+        }
+        catch{
+            return[]
+        }
+    
+    }
     static func fetchPost(id: String) async -> Post? {
          do {
              let snapshot = try await Firestore.firestore().collection("post").document(id).getDocument()
