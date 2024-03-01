@@ -10,7 +10,7 @@ import SwiftUI
 class Const{
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height
-    static let primaryColor  = Color(uiColor: UIColor(hex: "55BCB6"))
+    static let primaryColor  = Color(uiColor: UIColor(hex: "04243E"))
     static let primaryUiColor = UIColor(hex: "55BCB6")
     static let thirColor = Color(uiColor: UIColor(hex: "5B8291"))
     static let secondaryColor = Color(uiColor : UIColor(hex:"68E4DD"))
@@ -22,6 +22,10 @@ class Const{
     static let secondaryButtonColor = Color(UIColor(hex: "B70404"))
     static let textColorSecondary = Color(UIColor(hex: "5B8291"))
     static let textFieldColor = Color(UIColor(hex: "13446C"))
+    
+    static let whiteColor = Color(UIColor(hex: "FDFCFA"))
+    static let rectangleColor = Color(UIColor(hex: "A5A5A5"))
+    static let textColor5 = Color(UIColor(hex: "9FB4D2"))
     static let LinearBackGroundColor =  LinearGradient(
         stops: [
             Gradient.Stop(color: Color(UIColor(hex: "04243E")), location: 0.00),
@@ -41,7 +45,7 @@ class Const{
         endPoint: UnitPoint(x: 0.5, y: 1)
     )
     
-    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Arkadaşlık","Ders","İş","Kavga","Kitap","Ömer"]
+    static let categoryTags: [String] = ["İtiraf","Satılık","Ev","Yardımlaşma","Ders","İş","Kavga","Kitap"]
     static var anonimFilters: [anonimFilter]=[
         .init(id: 0, color: thirColor, title: "Hepsi", subTitle: "Bütün Gönderiler ", icon: "anonim"),
         .init(id: 1, color:thirColor, title: "Anonim", subTitle: "Sadece Anonim Gönderiler", icon: "anonim"),
