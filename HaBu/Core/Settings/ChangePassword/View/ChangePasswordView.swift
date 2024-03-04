@@ -9,10 +9,8 @@ import SwiftUI
 
 struct ChangePasswordView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var textPassword: String = ""
-    @State private var textNewPassword : String = ""
-    @State private var textNewPasswordAgain : String = ""
-    @State private var isActiveDestination: Bool = false
+    @ObservedObject private var viewModel = ChangePasswordViewModel()
+    
     
     var body: some View {
         VStack{
@@ -31,22 +29,23 @@ struct ChangePasswordView: View {
                         Text("Şifre nasıl olmalıdır ? ").fontWeight(.bold).foregroundColor(Const.textColorSecondary)
                         Spacer()
                     }.padding(.vertical , 15)
-                    ChangeTextField(text: $textPassword, title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
-                    ChangeTextField(text: $textNewPassword,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
-                    ChangeTextField(text: $textNewPasswordAgain,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
+                    ChangeTextField(text: $viewModel.textPassword, title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
+                    ChangeTextField(text: $viewModel.textNewPassword,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
+                    ChangeTextField(text: $viewModel.textNewPasswordAgain,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
                 }.padding()
                 
             }
             Buttons.customButton(title: "Değiştir", buttonColor: Const.primaryButtonColor) {
-                isActiveDestination = true
-            }
-        }   .navigationBarBackButtonHidden(true)
-            .navigationDestination(isPresented: $isActiveDestination, destination: {
-                ChangePasswordView()
+                viewModel.updatePassword()
+                $viewModel.isActiveDestination }
+        }.navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $viewModel.isActiveDestination, destination: {
+                ChangePasswordSuccessView()
             })
-            .background(
-                Const.primaryBackGroundColor
-            )
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text(viewModel.alertTitle!), message: Text(viewModel.alertMessage!), dismissButton: .default(Text("Tamam")))
+            }
+            .background(Const.primaryBackGroundColor)
     }
 }
 
