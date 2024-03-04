@@ -58,7 +58,7 @@ class ChangePasswordViewModel: ObservableObject {
                     self.alertTitle = "Şifre Güncelleme"
                     self.alertMessage = "Başarılı bir şekilde şifreniz güncellendi. "
                     self.showingAlert = true
-                    self.isActiveDestination = true
+                   // self.isActiveDestination = true
                 }
             }
         }
