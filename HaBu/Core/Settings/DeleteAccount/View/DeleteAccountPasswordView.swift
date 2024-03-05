@@ -28,7 +28,7 @@ struct DeleteAccountPasswordView: View {
                 }.padding()
                 warningText()
             }
-            Buttons.customButton(title: "Kodu GÖnder", buttonColor: Const.secondaryButtonColor) {
+            Buttons.customButton(title: "Kodu Gönder", buttonColor: Const.secondaryButtonColor) {
                 isActiveDestination = true
             }
         }

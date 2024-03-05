@@ -112,21 +112,23 @@ struct AddPostView: View {
                 action()
             }
             Spacer()
-            Text("Gönderi Oluştur")
-                .foregroundColor(.white)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            Spacer()
             Button(action: {
                 Task{
                     await addpostVM.checkTextFields()
                 }
             }, label: {
                 Text("Paylaş")
-                    .foregroundColor(.green)
+                    .foregroundColor(.white)
                     .fontWeight(.bold)
                     .frame(width: Const.width/7)
             })
-        }.padding(.top , 25)
+        }.padding(.top , Const.height * 0.03)
+        VStack {
+            Text("Gönderi Oluştur")
+                .foregroundColor(.white)
+            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+        }.padding(.top, -Const.height * 0.07)
+        
     }
 }
 
@@ -137,10 +139,10 @@ func AddPostBackground()-> some View {
             .foregroundColor(.clear)
             .frame(height: Const.height * 2.5 / 10)
             .background(
-                Const.LinearBackGroundColor
+                Const.primaryColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-        Const.primaryBackGroundColor
+            Const.primaryBackGroundColor
             .frame(height: Const.height * 7.6 / 10)
     }
 }
