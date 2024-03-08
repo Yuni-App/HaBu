@@ -82,7 +82,6 @@
 		9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */; };
 		9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */; };
 		9452D3002B1C8130005E2A3B /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */; };
-		9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */; };
 		9465F9652B34DE0D00F25235 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9642B34DE0D00F25235 /* ErrorMessage.swift */; };
 		9465F96A2B34E09E00F25235 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */; };
 		9465F96F2B34E4B600F25235 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */; };
@@ -183,7 +182,6 @@
 		9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountPasswordView.swift; sourceTree = "<group>"; };
 		9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountCodeView.swift; sourceTree = "<group>"; };
 		9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
-		9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordSuccessView.swift; sourceTree = "<group>"; };
 		9465F9642B34DE0D00F25235 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
@@ -706,7 +704,6 @@
 		9465F96B2B34E47400F25235 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */,
 				9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */,
 			);
 			path = View;
@@ -1050,7 +1047,6 @@
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
 				947CD1962B8B7FD900339512 /* SavedPostService.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
-				9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				5CD0E2272B84FC69000A8382 /* NotificationManager.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,

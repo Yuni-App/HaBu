@@ -11,6 +11,7 @@ struct DeleteAccountPasswordView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var deleteAccountVM : DeleteAccountViewModel
     @State private var isActiveDestination: Bool = false
+    @State var eyeHidden = true
 
     init(){
         self._deleteAccountVM = StateObject(wrappedValue: DeleteAccountViewModel())
@@ -24,13 +25,23 @@ struct DeleteAccountPasswordView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek için Şifrenizi Giriniz ").fontWeight(.bold)
-                    TextFields.CustomTextField3(text : $deleteAccountVM.textPassword ,icon: .key, placeHolder: "şifre")
+                    TextFields.ChangeTextField(text : $deleteAccountVM.textPassword ,icon: .key, placeHolder: "şifre", hidden: $eyeHidden)
+                    
                 }.padding()
                 warningText()
             }
-            Buttons.customButton(title: "Kodu Gönder", buttonColor: Const.secondaryButtonColor) {
-                isActiveDestination = true
+            Buttons.customButton(title: "Onayla", buttonColor: Const.secondaryButtonColor) {
+                deleteAccountVM.deleteAccount { success, error in
+                    if success {
+                        isActiveDestination = true
+                    } else {
+                        // handle error
+                    }
+                }
             }
+        }
+        .alert(isPresented: $deleteAccountVM.showingAlert) {
+            Alert(title: Text(deleteAccountVM.alertTitle!), message: Text(deleteAccountVM.alertMessage!), dismissButton: .default(Text("Tamam")))
         }
         .navigationDestination(isPresented: $isActiveDestination, destination: {
             DeleteAccountCodeView()

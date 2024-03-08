@@ -23,7 +23,7 @@ struct DeleteAccountCodeView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek İçin Mailinize Gelen Kodu Giriniz").fontWeight(.bold)
-                    TextFields.CustomTextField3(text: $deleteAccountVM.textCode,icon: .code, placeHolder: "Kod")
+                    TextFields.CustomTextField3(text: $deleteAccountVM.textPassword,icon: .code, placeHolder: "Kod")
                 }.padding()
                 warningText()
             }
