@@ -45,7 +45,7 @@ class DeleteAccountViewModel: ObservableObject {
                     } else {
                         completion(true, nil)
                         self.alertTitle = "Uyarı!"
-                        self.alertMessage = "Hesabınız kalıcı olarak silenecektir."
+                        self.alertMessage = "Hesabınız silinmiştir."
                         self.showingAlert = true
                         return
                     }

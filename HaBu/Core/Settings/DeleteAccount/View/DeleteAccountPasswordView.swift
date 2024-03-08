@@ -11,12 +11,14 @@ struct DeleteAccountPasswordView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var deleteAccountVM : DeleteAccountViewModel
     @State private var isActiveDestination: Bool = false
+    @StateObject var vm : LogOutViewModel
     @State var eyeHidden = true
 
     init(){
         self._deleteAccountVM = StateObject(wrappedValue: DeleteAccountViewModel())
+        self._vm = StateObject(wrappedValue: LogOutViewModel(authService: AuthService()))
     }
- 
+    
     var body: some View {
         VStack{
             CustomSettingsTollBar(action: {
@@ -33,7 +35,9 @@ struct DeleteAccountPasswordView: View {
             Buttons.customButton(title: "Onayla", buttonColor: Const.secondaryButtonColor) {
                 deleteAccountVM.deleteAccount { success, error in
                     if success {
-                        isActiveDestination = true
+                        Task{
+                            isActiveDestination = await vm.logout()
+                        } 
                     } else {
                         // handle error
                     }
@@ -43,9 +47,6 @@ struct DeleteAccountPasswordView: View {
         .alert(isPresented: $deleteAccountVM.showingAlert) {
             Alert(title: Text(deleteAccountVM.alertTitle!), message: Text(deleteAccountVM.alertMessage!), dismissButton: .default(Text("Tamam")))
         }
-        .navigationDestination(isPresented: $isActiveDestination, destination: {
-            DeleteAccountCodeView()
-        })
         .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor
