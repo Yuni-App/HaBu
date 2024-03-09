@@ -23,7 +23,7 @@ class Buttons{
                 Text(title)
                     .font(.custom("Baloo2-Bold", size: 20))
                     .padding()
-                    .frame(width: size?.width ?? Const.width * 0.6 , height: size?.height ?? Const.height * 0.04 )
+                    .frame(width: size?.width ?? Const.width * 0.6 , height: size?.height ?? Const.height * 0.045 )
                     .background(buttonColor)
                     .foregroundColor(textColor ?? .white)
                     .cornerRadius(4)

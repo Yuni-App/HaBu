@@ -144,6 +144,8 @@ class TextFields {
     static func CustomTextBold(text: String, color: Color, size: Int) -> some View{
         Text(text).foregroundStyle(color).fontWeight(.bold).font(.system(size: CGFloat(size)))
     }
+    
+    
  
 }
 

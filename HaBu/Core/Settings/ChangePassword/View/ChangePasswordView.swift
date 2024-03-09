@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ChangePasswordView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var textPassword: String = ""
-    @State private var textNewPassword : String = ""
-    @State private var textNewPasswordAgain : String = ""
-    @State private var isActiveDestination: Bool = false
+    @ObservedObject private var viewModel = ChangePasswordViewModel()
+    @State var eyehidden = true
+    @State var eyehidden2 = true
+    @State var eyehidden3 = true
+    
     
     var body: some View {
         VStack{
@@ -31,22 +32,24 @@ struct ChangePasswordView: View {
                         Text("Şifre nasıl olmalıdır ? ").fontWeight(.bold).foregroundColor(Const.textColorSecondary)
                         Spacer()
                     }.padding(.vertical , 15)
-                    ChangeTextField(text: $textPassword, title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
-                    ChangeTextField(text: $textNewPassword,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
-                    ChangeTextField(text: $textNewPasswordAgain,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
+                    ChangeTextField(text: $viewModel.textPassword, icon: .key, placeHolder: "Mevcut şifrenizi giriniz", hidden: $eyehidden)
+                    ChangeTextField(text: $viewModel.textNewPassword,icon: .key, placeHolder: "Yeni şifre oluşturunuz", hidden: $eyehidden2)
+                    ChangeTextField(text: $viewModel.textNewPasswordAgain,icon: .key, placeHolder: "Şifreyi tekrar  giriniz", hidden: $eyehidden3)
                 }.padding()
-                
+                Spacer()
+                Buttons.customButton(title: "Değiştir", buttonColor: Const.primaryButtonColor) {
+                    viewModel.updatePassword()
+                    }
             }
-            Buttons.customButton(title: "Değiştir", buttonColor: Const.primaryButtonColor) {
-                isActiveDestination = true
-            }
-        }   .navigationBarBackButtonHidden(true)
-            .navigationDestination(isPresented: $isActiveDestination, destination: {
-                ChangePasswordView()
+            
+        }.navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $viewModel.isActiveDestination, destination: {
+                ChangePasswordSuccessView()
             })
-            .background(
-                Const.primaryBackGroundColor
-            )
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text(viewModel.alertTitle!), message: Text(viewModel.alertMessage!), dismissButton: .default(Text("Tamam")))
+            }
+            .background(Const.primaryBackGroundColor)
     }
 }
 
@@ -54,14 +57,35 @@ struct ChangePasswordView: View {
     ChangePasswordView()
 }
 @ViewBuilder
-private func ChangeTextField(text: Binding<String> ,title : String , placeHolder : String)->some View{
+private func ChangeTextField(text : Binding<String>,icon:AppIcon , placeHolder : String, hidden: Binding<Bool>)->some View{
     VStack {
-        HStack{
-            Text(title).fontWeight(.bold)
-            Spacer()
+        HStack(alignment: .center) {
+            Image.iconManager(icon, size: 15, weight: .bold, color: .black)
+            ZStack(alignment: .leading) {
+                if text.wrappedValue.isEmpty {
+                    Text(placeHolder)
+                        .foregroundColor(.black.opacity(0.6))
+                }
+                if hidden.wrappedValue {
+                    SecureField("", text: text)
+                        .foregroundColor(.black)
+                } else {
+                    TextField("", text: text)
+                        .foregroundColor(.black)
+                }
+            }
+            Button(action: {
+                hidden.wrappedValue.toggle()
+            }) {
+                Image(systemName: hidden.wrappedValue ? "eye.fill" : "eye.slash")
+                    .foregroundColor(.black)
+            }
         }
-        TextFields.CustomTextField3(text: text, icon: .key, placeHolder: placeHolder)
-    }.padding(.vertical , 7)
-    
-    
+        .frame(height: Const.height * 0.07)
+        .padding(.horizontal, 10)
+        .background(Const.whiteColor)
+        .cornerRadius(10)
+        
+    }
+    .padding(.vertical, 10)
 }
