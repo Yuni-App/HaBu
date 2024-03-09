@@ -177,15 +177,15 @@ struct ProfileGeometry: View {
                     }.frame(height: headerHeight)
                         .zIndex(1)
                     Rectangle()
-                        .fill(Const.thirColor)
-                        .frame(height: user.bio?.count ?? 0 > 5 ? Const.height * 0.15 : 0)
+                        .fill(Const.primaryColor)
+                        .frame(height: user.bio?.count ?? 0 > 5 ? Const.height * 0.1 : 0)
                         .overlay (
                             Text(user.bio ?? "")
                                 .font(.footnote)
                                 .foregroundStyle(.white)
                                 .fontWeight(.semibold)
                                 .padding(.horizontal,5)
-                                .padding(.top,5)
+                                .padding(.top,10)
                             ,alignment: .topLeading
                         )
                    
