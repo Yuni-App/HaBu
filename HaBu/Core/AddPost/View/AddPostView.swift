@@ -61,11 +61,12 @@ struct AddPostView: View {
             .alert(isPresented: $addPostVM.showAlert) {
                 CustomAlert.make(for: addPostVM.alertType, addPostVM: addPostVM)
             }
-            .background(AddPostBackground())
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
                 self.keyboardHeight = keyboardHeight // Klavye yüksekliğini güncelliyoruz
             }
-            .padding(.top, keyboardHeight * 0.9).animation(.easeInOut(duration: 0))
+            .background(AddPostBackground().padding(.top, keyboardHeight * 0.9).animation(.easeInOut(duration: 0)))
+            
+            //.padding(.top, keyboardHeight * 0.9)
         
     }
     
