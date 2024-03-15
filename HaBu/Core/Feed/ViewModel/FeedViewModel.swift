@@ -36,6 +36,7 @@ class FeedViewModel : ObservableObject{
         }
         self.postsData.onNext(postsFromService)
         self.lastPostFromFirebase = postsFromService[0]
+        self.newPostCount = 0
 
         return postsFromService
     }
