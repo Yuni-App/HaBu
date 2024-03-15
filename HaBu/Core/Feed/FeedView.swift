@@ -43,7 +43,7 @@ struct FeedView: View {
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
-                    self.posts =  try await feedVM.requestData()
+                    self.posts = try await feedVM.requestData()
                     print("update")
 
                 }
@@ -141,6 +141,7 @@ struct FeedView: View {
                                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                                     withAnimation(.easeOut ){
                                                         hideTab = true
+                                                        
                                                     }
                                                     lastOffset = -offset
                                                 }

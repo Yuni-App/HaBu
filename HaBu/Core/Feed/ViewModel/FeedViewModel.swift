@@ -9,6 +9,7 @@ class FeedViewModel : ObservableObject{
     var postsData: PublishSubject<[Post]> = PublishSubject()
     private var listener: ListenerRegistration?
     @Published  var newPostCount = 0
+    @Published var lastPostFromFirebase : Post?
     @Published var postCount = 0
     @Published var tags = [String]()
     @Published var selectedFilter = "Hepsi"
@@ -34,6 +35,8 @@ class FeedViewModel : ObservableObject{
             }
         }
         self.postsData.onNext(postsFromService)
+        self.lastPostFromFirebase = postsFromService[0]
+
         return postsFromService
     }
 
@@ -41,8 +44,13 @@ class FeedViewModel : ObservableObject{
     func listenForChanges() {
         postService.listenForChanges { [weak self] posts in
                 DispatchQueue.main.async {
-                    withAnimation {
-                        self?.newPostCount = posts.count
+                    withAnimation{
+                        if let lastPost = self?.lastPostFromFirebase{
+                            print(lastPost)
+                            let indexOfLastPost = posts.firstIndex(where: {$0.id == lastPost.id})
+                            self?.newPostCount = indexOfLastPost!
+
+                        }
                     }
                 }
             }
@@ -52,3 +60,10 @@ class FeedViewModel : ObservableObject{
             listener?.remove()
         }
 }
+
+
+
+
+
+
+

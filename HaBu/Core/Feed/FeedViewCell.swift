@@ -128,7 +128,6 @@ struct FeedViewCell: View {
                             .presentationDetents([.large,.medium])
                     }
                     Buttons.actionButton(buttonType: .send) {
-                        print("send")
                     }
                     Spacer()
                     Buttons.actionButton(buttonType: savePost) {

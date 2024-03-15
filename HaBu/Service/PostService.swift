@@ -74,7 +74,8 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-            let querySnapshot = try await postFeedRef.order(by: "timeStamp",descending: true).getDocuments()
+            postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).limit(to: 10)
+            let querySnapshot = try await postFeedRef.getDocuments()
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
         } catch {
@@ -83,17 +84,13 @@ class PostService : PostProvider{
         }
     }
     func listenForChanges(completion: @escaping ([Post]) -> Void) {
-        postFeedRef.addSnapshotListener { snapshot, error in
+        postFeedRef.addSnapshotListener{ snapshot, error in
             guard let documents = snapshot?.documents else {
                 print("Error fetching documents: \(error!)")
                 return
             }
-            
             let posts = documents.compactMap({ try? $0.data(as: Post.self) })
-            print("listener \(posts.count)")
             completion(posts)
-            print(posts.count)
-            
         }
     }
 
@@ -134,7 +131,6 @@ class PostService : PostProvider{
                     }
                 }
             }
-            print(uploadedImageURLs)
             try await documentReference.setData([
                 "id": documentReference.documentID,
                 "userId": authService.user?.uid,
