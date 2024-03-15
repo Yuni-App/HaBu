@@ -13,6 +13,7 @@ class FeedViewModel : ObservableObject{
     @Published var postCount = 0
     @Published var tags = [String]()
     @Published var selectedFilter = "Hepsi"
+    @Published var limit = 10
     var postService = PostService()
     
     init() {
@@ -22,9 +23,12 @@ class FeedViewModel : ObservableObject{
         }
     }
    
-    
+    func pagination() async throws {
+        limit += 10
+        try await requestData()
+    }
     func requestData() async throws  -> [Post]{
-        var postsFromService = await postService.fetchPosts(tags: tags,postType: selectedFilter)
+        var postsFromService = await postService.fetchPosts(tags: tags,postType: selectedFilter,limit:limit)
         for i in (postCount)..<postsFromService.count {
             var user: User?
             do {

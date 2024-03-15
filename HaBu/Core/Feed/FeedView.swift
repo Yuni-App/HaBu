@@ -36,6 +36,7 @@ struct FeedView: View {
     @State var refresh = false
     @State var tags = [String]()
     @State var selectionFilter = "Hepsi"
+    @State var pagination = false
     
     
     func detectScrollOffset()-> some View{
@@ -130,13 +131,32 @@ struct FeedView: View {
                                         FeedViewCell(post:$posts[index],user: posts[index].user!,likeAction: checkLike(post: posts[index], userID: AuthService.shared.currentUser!.id)).id(posts[index].id)
                                         Divider()
                                     }
+                                    if pagination{
+                                        ProgressView()
+                                            .onAppear {
+                                                Task{
+                                                   try await feedVM.pagination()
+                                                    pagination = false
+
+                                                }
+                                            }
+                                    }
+                                
+                                    
+                                   
                                 }
                                 .padding(.top,Const.height * 0.12)
                                 .overlay(
                                     GeometryReader{proxy -> Color in
+                                        print(proxy.size)
+                                        let scrolling = proxy.frame(in: .global).maxY
+                                        print(scrolling)
                                         let minY = proxy.frame(in: .named("SCROLL")).minY
                                         let durationOffset: CGFloat = 35
                                         DispatchQueue.main.async {
+                                            if scrolling < 800{
+                                                self.pagination = true
+                                            }
                                             if minY < offset{
                                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                                     withAnimation(.easeOut ){
@@ -172,7 +192,6 @@ struct FeedView: View {
                                 .padding()
                                 .padding(.bottom,15 + bottomEdge + 35)
                             }
-                            
                             
                         }
                         .background(GeometryReader{_ in
@@ -216,6 +235,7 @@ struct FeedView: View {
                         }
                     }
                 }
+                
             }
               
             .navigationDestination(isPresented: $navigate) {

@@ -61,7 +61,7 @@ class PostService : PostProvider{
         }
     }
     
-    func fetchPosts(tags: [String] = [], postType: String = "Hepsi") async -> [Post] {
+    func fetchPosts(tags: [String] = [], postType: String = "Hepsi",limit:Int) async -> [Post] {
         do {
             postFeedRef = Firestore.firestore().collection("post") as Query
             
@@ -74,7 +74,7 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-            postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).limit(to: 10)
+            postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).limit(to: limit)
             let querySnapshot = try await postFeedRef.getDocuments()
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
