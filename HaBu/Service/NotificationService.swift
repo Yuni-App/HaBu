@@ -68,13 +68,11 @@ class NotificationService {
                             let post =  await PostService.fetchPost(id: notifications[i].postId)
                             if let post = post {
                                 notifications[i].post = post
-                                print("Post: \(post)")
                             }
                             
                             do {
                                 let user = try await UserService.fetchUser(withUserID: notifications[i].userId)
                                 notifications[i].user = user
-                                print("User: \(user)")
                             } catch {
                                 print("hata")
                             }

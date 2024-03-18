@@ -62,10 +62,10 @@ struct SettingsView: View {
                 SettingsTile(destination: {
                     ChangePasswordView()}, icon: AppIcon.lock, text: "Şifreyi Değiştir")
                 Divider().frame(width: Const.width * 0.84)
-                SettingsTile(destination: {
+                /* SettingsTile(destination: {
                     BlockedUsersView()
                 }, icon: AppIcon.blocked, text: "Engellenen Kullanıcılar")
-                Divider().frame(width: Const.width * 0.84)
+                Divider().frame(width: Const.width * 0.84)  */
                 SettingsTile(destination: {
                     SavedPostView()
                 }, icon: AppIcon.savePost, text: "Kaydedilenler ")
@@ -87,6 +87,10 @@ struct SettingsView: View {
                 SettingsTile(destination: {
                     FeedBackInput()
                 }, icon: AppIcon.feedBack, text: "Geri Bildirim")
+                Divider().frame(width: Const.width * 0.84)
+                 SettingsTile(destination: {
+                    NotificationSettings()
+                }, icon: AppIcon.blocked, text: "Bildirim Ayarları")
                 Divider().frame(width: Const.width * 0.84)
                 SettingsTile(destination: {
                     AgreementView()

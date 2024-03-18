@@ -29,7 +29,7 @@ struct AddPostView: View {
                               radius: addPostVM.isAnonimType == .notSelected ? 7.0 :
                                 addPostVM.isAnonimType == .anonymous ? 7.0 : 35.0,
                               image: addPostVM.isAnonimType == .notSelected ? .qUser :
-                                addPostVM.isAnonimType == .anonymous ? .anonim : .mert)
+                                addPostVM.isAnonimType == .anonymous ? .anonim : .profilImage)
                 .padding(5)
                 
                 TextField("Ne düşünüyorsunuz ? ", text: $addPostVM.textContent, axis: .vertical)
@@ -89,12 +89,23 @@ struct AddPostView: View {
     @ViewBuilder
     private func UserTypeImage(showAlert :Binding<Bool> ,alertType: Binding<AlertType>, radius : CGFloat ,image:AppImage )->some View{
         ZStack {
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: Const.width/10, height: Const.width/10)
-                .background(
-                    Image.imageManager(image:image ,radius: radius)
-                )
+            if(image != .profilImage){
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: Const.width/10, height: Const.width/10)
+                    .background(
+                        Image.imageManager(image:image ,radius: radius)
+                    )
+            }
+            else {
+                if let profileImageUrl = AuthService.shared.currentUser?.profileImageUrl?.first {
+                    CircleProfileImage(userIamgeUrl: profileImageUrl, size: .small)
+                } else {
+                    // Eğer profiil resmi URL'si mevcut değilse, varsayılan bir resim gösterilebilir.
+                    CircleProfileImage(userIamgeUrl: "", size: .small)
+                }
+
+            }
             
             
         }.onTapGesture {

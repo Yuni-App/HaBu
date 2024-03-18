@@ -20,24 +20,37 @@ class NotificationViewModel: ObservableObject {
             switch result {
             case .success(let notifications):
                 DispatchQueue.main.async {
+                    self.notificationsData.removeAll()
+                    self.newNotificaitons.removeAll()
                     notifications.forEach {noti in
                         if(noti.seen){
-                            self.notificationsData.append(noti)
+                          
+                            if !self.notificationsData.contains(noti) {
+                                self.notificationsData.append(noti)
+                            }
                         }
                         else {
-                            self.newNotificaitons.append(noti)
+              
+                            if !self.newNotificaitons.contains(noti) {
+                                
+                                self.newNotificaitons.append(noti)
+                            }
+                            
+                            
                         }
                     }
-                    if(self.okundu==0){
-                        self.notificationsData = notifications
-                        self.okundu = 1
-                    }
-                    else  {
-                        let set1 = Set(notifications)
-                        let set2 = Set(self.notificationsData)
-                        let difference1 = set1.subtracting(set2)
-                        self.newNotificaitons = Array(difference1)
-                    }
+                    
+                    
+                  
+
+                    // notificationsData listesini timestampe göre sırala
+                    self.notificationsData.sort(by: compareByTimestamp)
+
+                    // newNotificaitons listesini timestampe göre sırala
+                    self.newNotificaitons.sort(by: compareByTimestamp)
+
+                    
+                    
                 }
             case .failure(let error):
                 print("Bildirimler dinlenirken hata oluştu: \(error.localizedDescription)")
@@ -49,10 +62,17 @@ class NotificationViewModel: ObservableObject {
         self.notificationService.seenNotification(notificationList: self.newNotificaitons)
         self.notificationsData.append(contentsOf: self.newNotificaitons)
         self.newNotificaitons.removeAll()
+        self.notificationsData.sort(by: compareByTimestamp)
+
+        // newNotificaitons listesini timestampe göre sırala
         
     }
     // Dinlemeyi durdur
     func stopListening() {
         notificationService.stopListening()
     }
+}
+
+func compareByTimestamp(_ data1: NotificationData, _ data2: NotificationData) -> Bool {
+    return data1.createdAt.dateValue() > data2.createdAt.dateValue()
 }

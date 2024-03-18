@@ -218,3 +218,14 @@ extension Publishers {
             .eraseToAnyPublisher()
     }
 }
+
+extension String {
+    func generateStringSequence() -> [String] {
+        /// E.g) "Mark" yields "M", "Ma", "Mar", "Mark"
+        var sequences: [String] = []
+        for i in 1...self.count {
+            sequences.append(String(self.prefix(i)))
+        }
+        return sequences
+    }
+}

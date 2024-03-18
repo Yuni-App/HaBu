@@ -101,6 +101,9 @@
 		94A06ACA2B22124000814CD6 /* RectangleBlurModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */; };
 		94BCDEB12B0E2DEF00785CBE /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BCDEB02B0E2DEF00785CBE /* IconManager.swift */; };
 		94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */; };
+		94BED3982B8C70D500BB5E97 /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BED3972B8C70D500BB5E97 /* NotificationSettings.swift */; };
+		94C021732BA8B6E70080FC4B /* ProfileSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C021722BA8B6E70080FC4B /* ProfileSearchView.swift */; };
+		94C021792BA8B93D0080FC4B /* UsersLookupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C021782BA8B93D0080FC4B /* UsersLookupViewModel.swift */; };
 		94C617EC2B444BF5009F2A6F /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C617EB2B444BF5009F2A6F /* AddPostViewModel.swift */; };
 		94C617EE2B44594A009F2A6F /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C617ED2B44594A009F2A6F /* PostService.swift */; };
 		94CCABE42B03C7A500DCFB51 /* CircleProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */; };
@@ -200,6 +203,9 @@
 		94A06AC92B22124000814CD6 /* RectangleBlurModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleBlurModifier.swift; sourceTree = "<group>"; };
 		94BCDEB02B0E2DEF00785CBE /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
 		94BDAD642B07AA1000F66312 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
+		94BED3972B8C70D500BB5E97 /* NotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
+		94C021722BA8B6E70080FC4B /* ProfileSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSearchView.swift; sourceTree = "<group>"; };
+		94C021782BA8B93D0080FC4B /* UsersLookupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersLookupViewModel.swift; sourceTree = "<group>"; };
 		94C617EB2B444BF5009F2A6F /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		94C617ED2B44594A009F2A6F /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImage.swift; sourceTree = "<group>"; };
@@ -370,6 +376,7 @@
 		5C2DAB502B050F6100C6E145 /* Serach */ = {
 			isa = PBXGroup;
 			children = (
+				94C021752BA8B7040080FC4B /* new */,
 				8821E50D2B1DCAE3003089B6 /* SearchBar */,
 				8821E50A2B1DA619003089B6 /* Item */,
 				5C2DAB512B050F6C00C6E145 /* View */,
@@ -742,6 +749,7 @@
 		9470799E2B1B8C680005C4CB /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				94BED3952B8C70AD00BB5E97 /* NotificaitonSettings */,
 				947079A52B1BD1850005C4CB /* CustomSettingsTollBar.swift */,
 				947079A02B1B8CE40005C4CB /* SettingsView.swift */,
 				947079A22B1BCE230005C4CB /* Agreement */,
@@ -857,6 +865,30 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
+		94BED3952B8C70AD00BB5E97 /* NotificaitonSettings */ = {
+			isa = PBXGroup;
+			children = (
+				94BED3992B8C70EE00BB5E97 /* ViewModel */,
+				94BED3962B8C70C700BB5E97 /* View */,
+			);
+			path = NotificaitonSettings;
+			sourceTree = "<group>";
+		};
+		94BED3962B8C70C700BB5E97 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94BED3972B8C70D500BB5E97 /* NotificationSettings.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94BED3992B8C70EE00BB5E97 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		94C016C52B3CA25E000A0FAE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,6 +903,15 @@
 				9446D3CA2B38BA390054CFB5 /* LogOutViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		94C021752BA8B7040080FC4B /* new */ = {
+			isa = PBXGroup;
+			children = (
+				94C021722BA8B6E70080FC4B /* ProfileSearchView.swift */,
+				94C021782BA8B93D0080FC4B /* UsersLookupViewModel.swift */,
+			);
+			path = new;
 			sourceTree = "<group>";
 		};
 		94C617EA2B444BDF009F2A6F /* ViewModel */ = {
@@ -1005,6 +1046,7 @@
 				947079A42B1BCE500005C4CB /* AgreementView.swift in Sources */,
 				9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */,
 				5C2FB9A02B838E5700ECAA46 /* CommentViewModel.swift in Sources */,
+				94BED3982B8C70D500BB5E97 /* NotificationSettings.swift in Sources */,
 				943FB8E22B063701009C55C6 /* ForgotPasswordCodeBottomSheet.swift in Sources */,
 				5C1686232B1A218200A20636 /* Buttons.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
@@ -1044,6 +1086,7 @@
 				947CD1962B8B7FD900339512 /* SavedPostService.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
+				94C021732BA8B6E70080FC4B /* ProfileSearchView.swift in Sources */,
 				5CD0E2272B84FC69000A8382 /* NotificationManager.swift in Sources */,
 				94D588E72B03B70C006327A3 /* User.swift in Sources */,
 				94C617EE2B44594A009F2A6F /* PostService.swift in Sources */,
@@ -1066,6 +1109,7 @@
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
 				94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */,
 				5CBA01932B135144007F9022 /* OffsetModifier.swift in Sources */,
+				94C021792BA8B93D0080FC4B /* UsersLookupViewModel.swift in Sources */,
 				5C2658602B03C51C008BEB6D /* Const.swift in Sources */,
 				5C6F523F2B128CF000D79208 /* TagLayout.swift in Sources */,
 				5CE5AB9C2B056D3C00502D9F /* UserInfo.swift in Sources */,
