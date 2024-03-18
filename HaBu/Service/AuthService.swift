@@ -96,6 +96,8 @@ class AuthService : ObservableObject , AuthProvider {
                 print("Oluşturulan rastgele kimlik: \(anonimID)")
                 anonimId = anonimID
             }
+            let keywords = username.generateStringSequence() // Kullanıcı adından anahtar kelimeleri oluşturuyoruz
+
             try await userCollection.document(uid).setData([
                 "id": uid,
                 "anonimId":anonimId,
@@ -107,7 +109,8 @@ class AuthService : ObservableObject , AuthProvider {
                 "password": password,
                 "register_year": "",
                 "rating": 0.0,
-                "department":""
+                "department":"",
+                "keywordsForLookup":keywords
             ])
             try Auth.auth().signOut()
             AuthService.shared.user = nil

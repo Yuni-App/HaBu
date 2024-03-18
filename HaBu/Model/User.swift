@@ -22,6 +22,9 @@ struct User : Identifiable,Codable,Hashable{
     let register_year: String
     let anonimId : String
     var fcm : String? = ""
+    var keywordsForLookup: [String]  {
+          [self.username.generateStringSequence(), self.name.generateStringSequence(), self.surname.generateStringSequence(), "\(self.name) \(self.surname)".generateStringSequence()].flatMap { $0 }
+      }
 }
 extension User {
     static var MockData: [User] = [
@@ -29,6 +32,7 @@ extension User {
         
     ]
 }
+
 /*
 // enum FacultyCode: String {
  case computerScience = "1370"
