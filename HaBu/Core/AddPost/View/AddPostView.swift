@@ -20,31 +20,17 @@ struct AddPostView: View {
     }
     @State private var keyboardHeight: CGFloat = 0
     var body: some View {
-        ZStack {
-            AddPostBackground()
-            VStack {
-                
-                AddPostAppBar(addpostVM: addPostVM, action: {dismiss()}).padding()
-                
-                HStack(alignment: .top) {
-                    UserTypeImage(showAlert: $addPostVM.showAlert,
-                                  alertType: $addPostVM.alertType,
-                                  radius: addPostVM.isAnonimType == .notSelected ? 7.0 :
-                                    addPostVM.isAnonimType == .anonymous ? 7.0 : 35.0,
-                                  image: addPostVM.isAnonimType == .notSelected ? .qUser :
-                                    addPostVM.isAnonimType == .anonymous ? .anonim : .profilImage)
-                    .padding(5)
-                    
-                    TextField("Ne düşünüyorsunuz ? ", text: $addPostVM.textContent, axis: .vertical)
-                        .lineLimit(9...)
-                        .background(Color.white)
-                        .cornerRadius(7)
-                        .padding(.vertical)
-                }
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 5, style: .circular))
-                .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y: 3)
-                .padding()
+        VStack {
+            AddPostAppBar(addpostVM: addPostVM, action: {dismiss()}).padding(.horizontal)
+            ScrollView{
+            HStack(alignment: .top) {
+                UserTypeImage(showAlert: $addPostVM.showAlert,
+                              alertType: $addPostVM.alertType,
+                              radius: addPostVM.isAnonimType == .notSelected ? 7.0 :
+                                addPostVM.isAnonimType == .anonymous ? 7.0 : 35.0,
+                              image: addPostVM.isAnonimType == .notSelected ? .qUser :
+                                addPostVM.isAnonimType == .anonymous ? .anonim : .profilImage)
+                .padding(5)
                 
                 TextField("Ne düşünüyorsunuz ? ", text: $addPostVM.textContent, axis: .vertical)
                     .lineLimit(9...)
