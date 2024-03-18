@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ChangePasswordView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var textPassword: String = ""
-    @State private var textNewPassword : String = ""
-    @State private var textNewPasswordAgain : String = ""
-    @State private var isActiveDestination: Bool = false
+    @ObservedObject private var viewModel = ChangePasswordViewModel()
+    @State var eyehidden = true
+    @State var eyehidden2 = true
+    @State var eyehidden3 = true
+    
     
     var body: some View {
         VStack{
@@ -31,37 +32,27 @@ struct ChangePasswordView: View {
                         Text("Şifre nasıl olmalıdır ? ").fontWeight(.bold).foregroundColor(Const.textColorSecondary)
                         Spacer()
                     }.padding(.vertical , 15)
-                    ChangeTextField(text: $textPassword, title: "Mevcut Şifre", placeHolder: "Mevcut şifrenizi giriniz")
-                    ChangeTextField(text: $textNewPassword,title: "Yeni Şifre", placeHolder: "Yeni şifre oluşturunuz")
-                    ChangeTextField(text: $textNewPasswordAgain,title: "Yeni Şifre Tekrar", placeHolder: "Şifreyi tekrar  giriniz")
+                    TextFields.ChangeTextField(text: $viewModel.textPassword, icon: .key, placeHolder: "Mevcut şifrenizi giriniz", hidden: $eyehidden)
+                    TextFields.ChangeTextField(text: $viewModel.textNewPassword,icon: .key, placeHolder: "Yeni şifre oluşturunuz", hidden: $eyehidden2)
+                    TextFields.ChangeTextField(text: $viewModel.textNewPasswordAgain,icon: .key, placeHolder: "Şifreyi tekrar  giriniz", hidden: $eyehidden3)
                 }.padding()
-                
+                Spacer()
+                Buttons.customButton(title: "Değiştir", buttonColor: Const.primaryButtonColor) {
+                    viewModel.updatePassword()
+                    }
             }
-            Buttons.customButton(title: "Değiştir", buttonColor: Const.primaryButtonColor) {
-                isActiveDestination = true
+            
+        }.navigationBarBackButtonHidden(true)
+            /*.navigationDestination(isPresented: $viewModel.isActiveDestination, destination: {
+                ChangePasswordSuccessView()
+            })*/
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text(viewModel.alertTitle!), message: Text(viewModel.alertMessage!), dismissButton: .default(Text("Tamam")))
             }
-        }   .navigationBarBackButtonHidden(true)
-            .navigationDestination(isPresented: $isActiveDestination, destination: {
-                ChangePasswordView()
-            })
-            .background(
-                Const.primaryBackGroundColor
-            )
+            .background(Const.primaryBackGroundColor)
     }
 }
 
 #Preview {
     ChangePasswordView()
-}
-@ViewBuilder
-private func ChangeTextField(text: Binding<String> ,title : String , placeHolder : String)->some View{
-    VStack {
-        HStack{
-            Text(title).fontWeight(.bold)
-            Spacer()
-        }
-        TextFields.CustomTextField3(text: text, icon: .key, placeHolder: placeHolder)
-    }.padding(.vertical , 7)
-    
-    
 }

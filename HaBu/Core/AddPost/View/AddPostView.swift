@@ -46,27 +46,42 @@ struct AddPostView: View {
                 .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y: 3)
                 .padding()
                 
-                AddCategoryView(SelectedTags: $addPostVM.SelectedTags)
-                    .padding(.vertical, 20)
-
-                AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
-                AddPostMedia(addpostVM: addPostVM).padding(.horizontal, 10)
+                TextField("Ne düşünüyorsunuz ? ", text: $addPostVM.textContent, axis: .vertical)
+                    .lineLimit(9...)
+                    .background(Color.white)
+                    .cornerRadius(7)
+                    .padding(.vertical)
             }
-        }.onReceive(Publishers.keyboardHeight) { keyboardHeight in
-            self.keyboardHeight = keyboardHeight // Klavye yüksekliğini güncelliyoruz
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 5, style: .circular))
+            .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y: 3)
+            .padding()
+            
+            AddCategoryView(SelectedTags: $addPostVM.SelectedTags)
+                .padding(.vertical, 20)
+            
+            AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
+            AddPostMedia(addpostVM: addPostVM).padding(.horizontal, 10)
         }
-        .hideKeyboardOnTap()
-        .padding(.top, keyboardHeight*0.9).animation(.easeInOut(duration: 0))
-        .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
-            TabbarView()
-        })
+            }
+            .hideKeyboardOnTap()
+            .navigationDestination(isPresented: $addPostVM.isShareSuccess, destination: {
+                TabbarView()
+            })
+            
+            .sheet(isPresented: $addPostVM.isShowingImagePicker) {
+                ImagePicker(selectedImages: $addPostVM.selectedImages)
+            }
+            .alert(isPresented: $addPostVM.showAlert) {
+                CustomAlert.make(for: addPostVM.alertType, addPostVM: addPostVM)
+            }
+            .onReceive(Publishers.keyboardHeight) { keyboardHeight in
+                self.keyboardHeight = keyboardHeight // Klavye yüksekliğini güncelliyoruz
+            }
+            .background(AddPostBackground().padding(.top, keyboardHeight * 0.9).animation(.easeInOut(duration: 0)))
+            
+            //.padding(.top, keyboardHeight * 0.9)
         
-        .sheet(isPresented: $addPostVM.isShowingImagePicker) {
-            ImagePicker(selectedImages: $addPostVM.selectedImages)
-        }
-        .alert(isPresented: $addPostVM.showAlert) {
-            CustomAlert.make(for: addPostVM.alertType, addPostVM: addPostVM)
-        }
     }
     
     
@@ -118,26 +133,28 @@ struct AddPostView: View {
     
     @ViewBuilder
     func AddPostAppBar(addpostVM: AddPostViewModel, action : @escaping()->Void) -> some View{
-        HStack{
-            Buttons.backButton {
-                action()
-            }
-            Spacer()
-            Text("Gönderi Oluştur")
-                .foregroundColor(.white)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            Spacer()
-            Button(action: {
-                Task{
-                    await addpostVM.checkTextFields()
+        VStack {
+            HStack{
+                Buttons.backButton {
+                    action()
                 }
-            }, label: {
-                Text("Paylaş")
-                    .foregroundColor(.green)
-                    .fontWeight(.bold)
-                    .frame(width: Const.width/7)
-            })
-        }.padding(.top , 25)
+                Spacer()
+                Text("Gönderi Oluştur")
+                    .foregroundColor(.white)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Spacer()
+                Button(action: {
+                    Task{
+                        await addpostVM.checkTextFields()
+                    }
+                }, label: {
+                    Text("Paylaş")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .frame(width: Const.width/7)
+                })
+            }.padding(.top , Const.height * 0.03)
+        }
     }
 }
 
@@ -148,10 +165,10 @@ func AddPostBackground()-> some View {
             .foregroundColor(.clear)
             .frame(height: Const.height * 2.5 / 10)
             .background(
-                Const.LinearBackGroundColor
+                Const.primaryColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-        Const.primaryBackGroundColor
+            Const.primaryBackGroundColor
             .frame(height: Const.height * 7.6 / 10)
     }
 }

@@ -31,9 +31,10 @@ class AuthService : ObservableObject , AuthProvider {
                 AuthService.shared.user = currentUser
                 AuthService.shared.currentUser = try await UserService.fetchUser(withUserID: currentUser.uid)
                 let fcm = UserDefaults.standard.string(forKey: "fcm") ?? "error"
-                
                 if AuthService.shared.currentUser?.fcm != fcm{
                     await UserService.changeFcm(userId: currentUser.uid, fcm:fcm)
+                    
+                
                 }
             }
         }

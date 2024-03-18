@@ -120,7 +120,7 @@ class TextFields {
                 Button(action: {
                     hidden.wrappedValue.toggle()
                 }) {
-                    Image(systemName: hidden.wrappedValue ? "eye.fill" : "eye.slash")
+                    Image(systemName: hidden.wrappedValue ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.black)
                 }
             }
@@ -144,6 +144,42 @@ class TextFields {
     static func CustomTextBold(text: String, color: Color, size: Int) -> some View{
         Text(text).foregroundStyle(color).fontWeight(.bold).font(.system(size: CGFloat(size)))
     }
+    @ViewBuilder
+    static func ChangeTextField(text : Binding<String>, icon:AppIcon , placeHolder : String, hidden: Binding<Bool>)->some View{
+        VStack {
+            HStack(alignment: .center) {
+                Image.iconManager(icon, size: 15, weight: .bold, color: .black)
+                ZStack(alignment: .leading) {
+                    if text.wrappedValue.isEmpty {
+                        Text(placeHolder)
+                            .foregroundColor(.black.opacity(0.6))
+                    }
+                    if hidden.wrappedValue {
+                        SecureField("", text: text)
+                            .foregroundColor(.black)
+                    } else {
+                        TextField("", text: text)
+                            .foregroundColor(.black)
+                    }
+                }
+                Button(action: {
+                    hidden.wrappedValue.toggle()
+                }) {
+                    Image(systemName: hidden.wrappedValue ? "eye.slash.fill" : "eye.fill")
+                        .foregroundColor(.black)
+                }
+            }
+            .frame(height: Const.height * 0.07)
+            .padding(.horizontal, 10)
+            .background(Const.whiteColor)
+            .cornerRadius(10)
+            
+        }
+        .padding(.vertical, 10)
+    }
+
+    
+    
  
 }
 

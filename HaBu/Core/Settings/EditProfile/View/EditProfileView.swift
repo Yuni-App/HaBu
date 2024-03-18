@@ -31,7 +31,7 @@ struct EditProfileView: View {
                 ZStack {
                     Rectangle()
                         .frame(width: Const.height * 0.52,height: Const.height * 0.52)
-                        .foregroundStyle(Const.thirColor)
+                        .foregroundStyle(Const.primaryColor)
                         .border(Const.primaryColor)
                         .rotationEffect(Angle(degrees: 45))
                         .position(x:Const.width / 2 ,y:-Const.height * 0.1)
@@ -108,7 +108,7 @@ struct EditProfileView: View {
                 TextFields.CustomTextField2(headline: "Biografi", color: .white, islocked: false, text: $editProfileVM.textBio, placeHolder: "Biografinizi giriniz", contentType: .oneTimeCode, keybordType: .default)
                 Spacer()
                 
-                Buttons.customButton(title:"Kaydet" , buttonColor: Const.thirColor, size:.lage) {
+                Buttons.customButton(title:"Kaydet" , buttonColor: Const.primaryColor, size:.lage) {
                     progressViewBoolen = true
                     Task{
                         try await editProfileVM.updateUserData()
@@ -120,7 +120,7 @@ struct EditProfileView: View {
                     
                 }
             }.frame(width: Const.width * 1)
-                .background(Const.primaryColor)
+                .background(Const.thirColor.gradient)
                 .zIndex(0)
             
                 

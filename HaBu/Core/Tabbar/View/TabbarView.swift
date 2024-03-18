@@ -56,12 +56,11 @@ struct TabbarView: View {
                         VStack{
                             CustomTabbarView(currentTab: $currentTab, bottomEdge: bottomEdge)
                         }
-                            .offset(y:hideBar ? (15 + 35 + bottomEdge):0)
+                            .offset(y:hideBar ? (50 + 35 + bottomEdge):0)
                         ,alignment: .bottom
                     )
                 }
             }
-            .padding(.bottom,5)
            
         }
         else{

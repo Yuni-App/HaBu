@@ -31,7 +31,7 @@ struct CustomSettingsTollBar: View {
         .background(
             .white
         )
-        .padding(.horizontal , 10)
+        
     }
 
 }

@@ -80,9 +80,7 @@
 		944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C97A32B1B4240005F8E96 /* AddPostView.swift */; };
 		944CD1592B2BB1530074D99D /* SavedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944CD1582B2BB1530074D99D /* SavedPostView.swift */; };
 		9452D2FA2B1C652F005E2A3B /* DeleteAccountPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */; };
-		9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */; };
 		9452D3002B1C8130005E2A3B /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */; };
-		9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */; };
 		9465F9652B34DE0D00F25235 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9642B34DE0D00F25235 /* ErrorMessage.swift */; };
 		9465F96A2B34E09E00F25235 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */; };
 		9465F96F2B34E4B600F25235 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */; };
@@ -184,9 +182,7 @@
 		944C97A32B1B4240005F8E96 /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
 		944CD1582B2BB1530074D99D /* SavedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostView.swift; sourceTree = "<group>"; };
 		9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountPasswordView.swift; sourceTree = "<group>"; };
-		9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountCodeView.swift; sourceTree = "<group>"; };
 		9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
-		9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordSuccessView.swift; sourceTree = "<group>"; };
 		9465F9642B34DE0D00F25235 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		9465F9692B34E09E00F25235 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		9465F96E2B34E4B600F25235 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
@@ -305,6 +301,7 @@
 			children = (
 				5C414C8F2B484F5F00EF3D79 /* ViewModel */,
 				5C4133BC2B04A7AD006F29AF /* FeedViewCell.swift */,
+				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 				5C9420942B061402004F9A17 /* ThreeDRotateFeedViewCell.swift */,
 			);
 			path = Feed;
@@ -442,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				5C414C902B484F6E00EF3D79 /* FeedViewModel.swift */,
-				5C26585B2B03C4A1008BEB6D /* FeedView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -697,7 +693,6 @@
 			isa = PBXGroup;
 			children = (
 				9452D2F92B1C652F005E2A3B /* DeleteAccountPasswordView.swift */,
-				9452D2FD2B1C724A005E2A3B /* DeleteAccountCodeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -713,7 +708,6 @@
 		9465F96B2B34E47400F25235 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9452D3012B1C8970005E2A3B /* ChangePasswordSuccessView.swift */,
 				9452D2FF2B1C8130005E2A3B /* ChangePasswordView.swift */,
 			);
 			path = View;
@@ -1057,7 +1051,6 @@
 				5C1686232B1A218200A20636 /* Buttons.swift in Sources */,
 				5C26585C2B03C4A1008BEB6D /* FeedView.swift in Sources */,
 				9439A88E2B32F19F005D0E20 /* BlockedUsersViewModal.swift in Sources */,
-				9452D2FE2B1C724A005E2A3B /* DeleteAccountCodeView.swift in Sources */,
 				5C2DAB592B05238B00C6E145 /* CommentBottomSheet.swift in Sources */,
 				943FB8E42B06374A009C55C6 /* ForgotPasswordCreatePasswordBottomSheet.swift in Sources */,
 				5C2DAB572B050FC500C6E145 /* NotificationView.swift in Sources */,
@@ -1092,7 +1085,6 @@
 				944C97A42B1B4240005F8E96 /* AddPostView.swift in Sources */,
 				947CD1962B8B7FD900339512 /* SavedPostService.swift in Sources */,
 				5C26583E2B03B430008BEB6D /* HaBuApp.swift in Sources */,
-				9452D3022B1C8970005E2A3B /* ChangePasswordSuccessView.swift in Sources */,
 				889C25342B03CA4200E6074C /* Commnet.swift in Sources */,
 				94C021732BA8B6E70080FC4B /* ProfileSearchView.swift in Sources */,
 				5CD0E2272B84FC69000A8382 /* NotificationManager.swift in Sources */,

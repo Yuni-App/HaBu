@@ -66,7 +66,7 @@ struct ProfileGeometry: View {
                     GeometryReader{_ in
                         ZStack{
                             Rectangle()
-                                .fill(Const.thirColor.gradient)
+                                .fill(Const.primaryColor.gradient)
                             VStack(spacing: 15){
                                 GeometryReader{
                                     let rect = $0.frame(in: .global)
@@ -78,7 +78,7 @@ struct ProfileGeometry: View {
                                     HStack{
                                         if activateBackButton{
                                             Buttons.backButton(action: {
-                                               dismiss()
+                                                dismiss()
                                             }, color: .white)
                                             .padding()
                                         }
@@ -177,21 +177,50 @@ struct ProfileGeometry: View {
                     }.frame(height: headerHeight)
                         .zIndex(1)
                     Rectangle()
-                        .fill(Const.thirColor)
-                        .frame(height: user.bio?.count ?? 0 > 5 ? Const.height * 0.15 : 0)
+                        .fill(Const.primaryColor)
+                        .frame(height: user.bio?.count ?? 0 > 5 ? Const.height * 0.1 : 0)
                         .overlay (
                             Text(user.bio ?? "")
                                 .font(.footnote)
                                 .foregroundStyle(.white)
                                 .fontWeight(.semibold)
                                 .padding(.horizontal,5)
-                                .padding(.top,5)
+                                .padding(.top,10)
                             ,alignment: .topLeading
                         )
-                    ForEach(Post.MockData){post in
-                        FeedViewCell(post: .constant(post) , user: User.MockData[0], likeAction: .liked)
-                        
+                   
+                    if let posts = profileVM.posts{
+                        if posts.isEmpty{
+                            
+                            Text("Bu Kullanıcının Hiçbir Postu Bulunamadı")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .frame(height: Const.height * 0.6)
+                                .foregroundStyle(Const.primaryColor)
+                        }
+                        else{
+                            ForEach(profileVM.posts!){post in
+                                FeedViewCell(post: .constant(post) , user: user, likeAction: .liked)
+                        }
                     }
+                    
+                }
+                    else{
+                        HStack {
+                            ProgressView()
+                                .tint(Const.primaryColor)
+                                .frame(width: 30,height: 30)
+                                .fontWeight(.bold)
+                            .padding()
+                            Text("Yükleniyor..")
+                                .fontWeight(.bold)
+                                .foregroundStyle(Const.primaryColor)
+                        }
+
+                    }
+                        
+                    
+                   
                 }
                 .id("SCROLLVIEW")
                 .background(
