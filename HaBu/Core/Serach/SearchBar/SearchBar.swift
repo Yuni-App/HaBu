@@ -14,7 +14,7 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            NavigationLink(destination: SecondSearchView(), isActive: $isSecondSearchViewActive) {
+            NavigationLink(destination: ProfileSearchView(), isActive: $isSecondSearchViewActive) {
             }
             TextField("Ara...", text: $searchText)
                 .padding(8)

@@ -15,7 +15,6 @@ class UsersLookupViewModel: ObservableObject {
     private let db = Firestore.firestore()
     
     func fetchUsers(with keyword: String) {
-        print("çalıştı")
         db.collection("user").whereField("keywordsForLookup", arrayContains: keyword).getDocuments { querySnapshot, error in
             guard let documents = querySnapshot?.documents, error == nil else {
                 print("No documents")

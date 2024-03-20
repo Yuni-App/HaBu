@@ -63,17 +63,24 @@ struct ProfileBarView: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-            .foregroundColor(Color.gray.opacity(0.2))
-            HStack {
-                Text("\(user.username)")
-                Spacer()
-                Text("\(user.name) \(user.surname)")
+            NavigationLink(destination: ProfileView(user: user), label: {
+                HStack {
+                    CircleProfileImage(userIamgeUrl: user.profileImageUrl?.first ?? "", size: .xsmall)
+                    VStack {
+                        HStack {
+                            Text("\(user.name) \(user.surname)").fontWeight(.semibold).foregroundStyle(Color.black)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("\(user.department)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color(UIColor(hex: "c4c4c4")))
+                            Spacer()
+                        }
+                    }
+                }.padding()
+                    .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(UIColor(hex: "777777"))).cornerRadius(10)
             }
-            .padding(.horizontal, 10)
+            )
         }
-        .frame(maxWidth: .infinity, minHeight: 100)
-        .cornerRadius(13)
-        .padding()
+     
     }
 }
