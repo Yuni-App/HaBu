@@ -19,6 +19,8 @@ struct SearchBar: View {
             TextField("Ara...", text: $searchText)
                 .padding(8)
                 .padding(.horizontal, 35)
+                .disableAutocorrection(true) // Otomatik düzeltmeyi devre dışı bırak
+                .autocapitalization(.none) 
                 .overlay(
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)

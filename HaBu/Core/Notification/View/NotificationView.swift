@@ -26,7 +26,8 @@ struct NotificationView: View {
                             HStack(){
                                 Image(systemName: "horn.blast.fill")
                                     .foregroundStyle(.red)
-                                Text("3 Yeni Bildirim")
+                                Text("\($notificationVM.newNotificaitons.count) Yeni Bildirim")
+
                                     .fontWeight(.bold)
                                 Spacer()
                             }
