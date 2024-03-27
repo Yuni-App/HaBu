@@ -227,7 +227,7 @@ struct FeedView: View {
                                     feedVM.tags = self.tags
                                     feedVM.selectedFilter = self.selectionFilter
                                     self.posts = try await feedVM.requestData()
-                                    feedVM.listenForChanges()
+                                    self.feedVM.listenForChanges()
                                     self.showCategoryFilter.toggle()
                                 }
                             })

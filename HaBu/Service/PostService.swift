@@ -24,6 +24,9 @@ enum PostError : Error{
 class PostService : PostProvider{
     var postRef = Firestore.firestore().collection("post")
     var postFeedRef = Firestore.firestore().collection("post") as Query
+    var limit = 10
+
+    private var lastDocument: DocumentSnapshot?
     func likeActionPost(user:User,post:Post,like:Bool,targetUserId:String) async throws -> Bool{
         if like{
             do {
@@ -61,7 +64,7 @@ class PostService : PostProvider{
         }
     }
     
-    func fetchPosts(tags: [String] = [], postType: String = "Hepsi",limit:Int) async -> [Post] {
+    func fetchPosts(tags: [String] = [], postType: String = "Hepsi",pagination:Bool) async -> [Post] {
         do {
             postFeedRef = Firestore.firestore().collection("post") as Query
             
@@ -74,8 +77,18 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-            postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).limit(to: limit)
+            
+            if pagination{
+                if let lastDocument = lastDocument{
+                    postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).start(afterDocument: lastDocument).limit(to:10 )
+                    
+                }
+            }
+            else{
+                postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).limit(to: 10)
+            }
             let querySnapshot = try await postFeedRef.getDocuments()
+            lastDocument = querySnapshot.documents.last
             let posts = try querySnapshot.documents.compactMap { try $0.data(as: Post.self) }
             return posts
         } catch {
@@ -83,13 +96,16 @@ class PostService : PostProvider{
             return []
         }
     }
-    func listenForChanges(completion: @escaping ([Post]) -> Void) {
-        postFeedRef.addSnapshotListener{ snapshot, error in
+    func listenForChanges(completion: @escaping ([Post]) -> Void) -> ListenerRegistration {
+        return postFeedRef.addSnapshotListener { snapshot, error in
             guard let documents = snapshot?.documents else {
                 print("Error fetching documents: \(error!)")
                 return
             }
             let posts = documents.compactMap({ try? $0.data(as: Post.self) })
+            for i in posts {
+                print(i.isAnonim)
+            }
             completion(posts)
         }
     }
