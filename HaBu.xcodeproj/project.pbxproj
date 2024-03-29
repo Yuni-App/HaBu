@@ -62,6 +62,7 @@
 		88D69F562B1B3DB3005BE291 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F552B1B3DB3005BE291 /* SearchItem.swift */; };
 		88D69F5A2B1B5B63005BE291 /* SecondSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F592B1B5B63005BE291 /* SecondSearchView.swift */; };
 		88D69F5C2B1B5B87005BE291 /* SearchItem2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */; };
+		940B80442BB6E3AC00CF127E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940B80432BB6E3AC00CF127E /* Progress.swift */; };
 		9411AA882B04E9C70042A354 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA872B04E9C70042A354 /* CheckBoxView.swift */; };
 		9411AA8A2B04F4900042A354 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA892B04F4900042A354 /* ImageManager.swift */; };
 		9411AA8E2B0510F80042A354 /* CustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411AA8D2B0510F80042A354 /* CustomImage.swift */; };
@@ -165,6 +166,7 @@
 		88D69F552B1B3DB3005BE291 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		88D69F592B1B5B63005BE291 /* SecondSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSearchView.swift; sourceTree = "<group>"; };
 		88D69F5B2B1B5B87005BE291 /* SearchItem2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem2.swift; sourceTree = "<group>"; };
+		940B80432BB6E3AC00CF127E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		9411AA872B04E9C70042A354 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9411AA892B04F4900042A354 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9411AA8D2B0510F80042A354 /* CustomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImage.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				94CCABE32B03C7A500DCFB51 /* CircleProfileImage.swift */,
 				5CE5AB9B2B056D3C00502D9F /* UserInfo.swift */,
 				5C8792DD2B2FB967007D288E /* Toast.swift */,
+				940B80432BB6E3AC00CF127E /* Progress.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1109,6 +1112,7 @@
 				8821E50F2B1DCAFB003089B6 /* SearchBar.swift in Sources */,
 				5CD3D3FD2B14CF0F00C4A944 /* SlidableImages.swift in Sources */,
 				949016E22B041EF400164405 /* LoginView.swift in Sources */,
+				940B80442BB6E3AC00CF127E /* Progress.swift in Sources */,
 				944CD1592B2BB1530074D99D /* SavedPostView.swift in Sources */,
 				88A23C0A2B03B8A80030183A /* Post.swift in Sources */,
 				94BDAD652B07AA1000F66312 /* BlockedUsersView.swift in Sources */,
