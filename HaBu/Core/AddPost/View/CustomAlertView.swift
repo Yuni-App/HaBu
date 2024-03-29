@@ -11,7 +11,7 @@ struct CustomAlert {
         switch alertType {
         case .anonymous:
             return Alert(
-                title: Text("Anonim mi olacak"),
+                title: Text("Profil Görünümü"),
                 primaryButton: .default(
                     Text("Anonim"),
                     action: {
@@ -20,7 +20,7 @@ struct CustomAlert {
                     }
                 ),
                 secondaryButton: .default(
-                    Text("Profili Göster"),
+                    Text("Gerçek"),
                     action: {
                         addPostVM.isAnonimType = .notAnonymous
                         print("Profili Göster seçildi.")

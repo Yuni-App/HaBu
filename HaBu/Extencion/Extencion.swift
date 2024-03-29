@@ -224,8 +224,13 @@ extension String {
         /// E.g) "Mark" yields "M", "Ma", "Mar", "Mark"
         var sequences: [String] = []
         for i in 1...self.count {
-            sequences.append(String(self.prefix(i)))
+            let substring = String(self.prefix(i))
+            sequences.append(substring)
+            if substring.lowercased() != substring {
+                sequences.append(substring.lowercased())
+            }
         }
         return sequences
     }
 }
+

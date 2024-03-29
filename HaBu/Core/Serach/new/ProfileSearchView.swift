@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileSearchView: View {
     @StateObject var usersLookup = UsersLookupViewModel()
     @State var keyword = ""
-    
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         let keywordBinding = Binding<String>(
             get: {
@@ -23,13 +23,22 @@ struct ProfileSearchView: View {
             }
         )
         VStack {
-          
-            SearchBarView(keyword: keywordBinding)
-            ScrollView {
-             
-                ForEach(usersLookup.queryResultUsers, id: \.id) { user in
-                    ProfileBarView(user: user)
+            HStack{
+                Buttons.backButton{
+                    dismiss()
                 }
+                SearchBarView(keyword: keywordBinding)
+
+            }
+            ScrollView {
+                           if usersLookup.queryResultUsers.isEmpty {
+                               Text("Kullanıcı Bulunamadı")
+                                   .padding()
+                           } else {
+                               ForEach(usersLookup.queryResultUsers, id: \.id) { user in
+                                   ProfileBarView(user: user)
+                               }
+                           }
             }
         }
         .navigationBarHidden(true)
@@ -40,40 +49,44 @@ struct ProfileSearchView: View {
 
 struct SearchBarView: View {
     @Binding var keyword: String
-    
+    @State private var isSearchBar = false
+    @State private var isSecondSearchViewActive: Bool = true
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(Color.gray.opacity(0.5))
             HStack {
-                Image(systemName: "magnifyingglass")
-                TextField("Arama...", text: $keyword)
+               
+                SearchBar(searchText: $keyword, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
+                    .frame(width: Const.width * 0.85)
+          
                 .autocapitalization(.none)
             }
-            .padding(.leading, 13)
         }
-        .frame(height: 40)
-        .cornerRadius(13)
-        .padding()
     }
 }
 
 struct ProfileBarView: View {
     var user: User
-    
+
     var body: some View {
         ZStack {
-            Rectangle()
-            .foregroundColor(Color.gray.opacity(0.2))
-            HStack {
-                Text("\(user.username)")
-                Spacer()
-                Text("\(user.name) \(user.surname)")
+            NavigationLink(destination: ProfileView(user: user), label: {
+                HStack {
+                    CircleProfileImage(userIamgeUrl: user.profileImageUrl?.first ?? "", size: .xsmall)
+                    VStack {
+                        HStack {
+                            Text("\(user.name) \(user.surname)").fontWeight(.semibold).foregroundStyle(Color.black)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("\(user.department)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color(UIColor(hex: "c4c4c4")))
+                            Spacer()
+                        }
+                    }
+                }.padding()
+                .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(.systemGray6)).cornerRadius(10)
             }
-            .padding(.horizontal, 10)
+            )
         }
-        .frame(maxWidth: .infinity, minHeight: 100)
-        .cornerRadius(13)
-        .padding()
+     
     }
 }
