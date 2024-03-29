@@ -13,6 +13,7 @@ class FeedViewModel : ObservableObject{
     @Published var postCount = 0
     @Published var tags = [String]()
     @Published var selectedFilter = "Hepsi"
+    var posts = [Post]()
     var postService = PostService()
     
     init() {
@@ -36,7 +37,8 @@ class FeedViewModel : ObservableObject{
                 postsFromService[i].user = User.MockData[0]
             }
         }
-        self.postsData.onNext(postsFromService)
+        posts.append(contentsOf: postsFromService)
+        self.postsData.onNext(posts)
         
         self.lastPostFromFirebase = postsFromService[0]
         print("last Post")
