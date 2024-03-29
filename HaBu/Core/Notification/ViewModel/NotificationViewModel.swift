@@ -11,11 +11,13 @@ import Firebase
 class NotificationViewModel: ObservableObject {
     @Published var notificationsData: [NotificationData] = []
     @Published var newNotificaitons : [NotificationData] = []
+    @Published var isLoading = false
     @Published var okundu : Int = 0
     static let shared = NotificationViewModel()
     private var notificationService = NotificationService.shared
     // Bildirimleri Firestore'dan dinle
     func listenForNotifications() async {
+        isLoading = true
         await notificationService.listenForNotifications() { result in
             switch result {
             case .success(let notifications):
@@ -38,6 +40,8 @@ class NotificationViewModel: ObservableObject {
                             
                             
                         }
+                        self.isLoading = false
+
                     }
                     
                     
@@ -53,6 +57,7 @@ class NotificationViewModel: ObservableObject {
                     
                 }
             case .failure(let error):
+                self.isLoading = false
                 print("Bildirimler dinlenirken hata oluştu: \(error.localizedDescription)")
             }
         }
@@ -70,6 +75,7 @@ class NotificationViewModel: ObservableObject {
     // Dinlemeyi durdur
     func stopListening() {
         notificationService.stopListening()
+        isLoading = false
     }
 }
 
