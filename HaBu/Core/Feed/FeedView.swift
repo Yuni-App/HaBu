@@ -44,6 +44,7 @@ struct FeedView: View {
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
+                    self.feedVM.posts = []
                     self.posts = try await feedVM.requestData()
                     print("update")
 

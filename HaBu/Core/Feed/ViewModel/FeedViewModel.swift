@@ -13,7 +13,7 @@ class FeedViewModel : ObservableObject{
     @Published var postCount = 0
     @Published var tags = [String]()
     @Published var selectedFilter = "Hepsi"
-    var posts = [Post]()
+    @Published var posts = [Post]()
     var postService = PostService()
     
     init() {
