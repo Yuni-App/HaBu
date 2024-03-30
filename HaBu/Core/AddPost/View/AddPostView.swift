@@ -95,10 +95,13 @@ struct AddPostView: View {
                 .fontWeight(.bold)
                 .padding(5)
         }
-        .background(RoundedRectangle(cornerRadius: 7)
-        .foregroundColor(Color.white))
+
+        .padding(.all,5)
+        .frame(width: Const.width * 0.95)
+        .background(Color.white)
+        .clipShape(.rect(cornerRadius: 10))
         .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
-        .padding(.horizontal,5)
+
 
     }
     
@@ -138,7 +141,7 @@ struct AddPostView: View {
     func AddPostAppBar(addpostVM: AddPostViewModel, action : @escaping()->Void) -> some View{
         VStack {
             HStack{
-                Buttons.backButton {
+                Buttons.backButton2 {
                     action()
                 }
                 Spacer()
@@ -156,8 +159,8 @@ struct AddPostView: View {
                         .fontWeight(.bold)
                         .frame(width: Const.width/7)
                 })
-            }.padding(.top , Const.height * 0.03)
-        }
+            }
+        }.padding(.top , Const.height * 0.02)
     }
 }
 
@@ -171,7 +174,7 @@ func AddPostBackground()-> some View {
                 Const.primaryColor
             )
             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-            Const.primaryBackGroundColor
+        Const.backColor3.opacity(0.9)
             .frame(height: Const.height * 7.6 / 10)
     }
 }

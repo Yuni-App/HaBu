@@ -26,6 +26,7 @@ class Const{
     static let whiteColor = Color(UIColor(hex: "FDFCFA"))
     static let rectangleColor = Color(UIColor(hex: "A5A5A5"))
     static let textColor5 = Color(UIColor(hex: "9FB4D2"))
+    static let backColor3 = Color(UIColor(hex: "C3DCFF"))
     static let LinearBackGroundColor =  LinearGradient(
         stops: [
             Gradient.Stop(color: Color(UIColor(hex: "04243E")), location: 0.00),

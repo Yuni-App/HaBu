@@ -68,7 +68,15 @@ class Buttons{
         })
         
     }
-    
+    @ViewBuilder
+    static func backButton2( action: @escaping ()-> Void,color:Color = .white) -> some View{
+        Button(action: {
+            action()
+        }, label: {
+            Image.iconManager(.back, size: 25, weight: .bold, color: color)
+        })
+        
+    }
     
     struct SlidableButton: View {
         var action  : () -> Void

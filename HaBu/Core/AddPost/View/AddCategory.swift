@@ -9,7 +9,7 @@ struct AddPostCategory: View {
             HStack{
                 Text("Kategori")
                     .foregroundColor(.black)
-                    .fontWeight(.bold)
+                    .fontWeight(.bold).padding()
                 Spacer()
             }
             ScrollView(.horizontal,showsIndicators: false) {
@@ -36,7 +36,7 @@ struct AddPostCategory: View {
                     
                 }
             }
-            .background(.white)
+            .background(Const.backColor3)
             .zIndex(1)
             VStack{
                 TagLayout(spacing: 10){
@@ -52,7 +52,12 @@ struct AddPostCategory: View {
                 }
             }
             .frame(minHeight: CGFloat((Const.categoryTags.count / 3)) * 55)
+            .background(Const.backColor3)
 
         }
     }
+}
+
+#Preview{
+    AddPostCategory()
 }
