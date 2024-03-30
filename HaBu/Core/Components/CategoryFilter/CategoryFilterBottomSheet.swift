@@ -134,11 +134,13 @@ struct AddCategoryView : View {
     @Binding var SelectedTags:[String]
     @Namespace private var animation
     var body: some View {
-        VStack{
+        VStack(){
             Text("Kategoriler")
                 .font(.title2)
+                //.frame(width: Const.width ,alignment: .leading)
                 .fontWeight(.bold)
-                .foregroundStyle(Const.thirColor)
+                .foregroundStyle(Color.black)
+                .padding(.horizontal, 10)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 5){
                     ForEach(SelectedTags ,id: \.self){tag in
@@ -157,8 +159,10 @@ struct AddCategoryView : View {
                 .padding(.vertical,15)
                 
             }
-            .background(.gray.opacity(0.15))
-            .border(.gray)
+            .frame(width: Const.width * 0.95)
+            .background(Color.white)
+            .clipShape(.rect(cornerRadius: 10))
+            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
             
             .overlay {
                 if SelectedTags.isEmpty{
@@ -168,7 +172,7 @@ struct AddCategoryView : View {
                     
                 }
             }
-            .background(.white)
+            
             .zIndex(1)
             VStack{
                 TagLayout(spacing: 10){
@@ -187,7 +191,10 @@ struct AddCategoryView : View {
             }
             
             .scrollIndicators(.hidden)
-            .background(.black.opacity(0.07))
+            .frame(width: Const.width * 0.95, height: Const.height * 0.13)
+            .background(Color.white)
+            .clipShape(.rect(cornerRadius: 10))
+            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 1, y: 2)
             .zIndex(0)
         }
     }

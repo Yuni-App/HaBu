@@ -11,11 +11,14 @@ struct DeleteAccountPasswordView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var deleteAccountVM : DeleteAccountViewModel
     @State private var isActiveDestination: Bool = false
+    @StateObject var vm : LogOutViewModel
+    @State var eyeHidden = true
 
     init(){
         self._deleteAccountVM = StateObject(wrappedValue: DeleteAccountViewModel())
+        self._vm = StateObject(wrappedValue: LogOutViewModel(authService: AuthService()))
     }
- 
+    
     var body: some View {
         VStack{
             CustomSettingsTollBar(action: {
@@ -24,17 +27,26 @@ struct DeleteAccountPasswordView: View {
             ScrollView{
                 VStack{
                     Text("Hesabınızı Silmek için Şifrenizi Giriniz ").fontWeight(.bold)
-                    TextFields.CustomTextField3(text : $deleteAccountVM.textPassword ,icon: .key, placeHolder: "şifre")
+                    TextFields.ChangeTextField(text : $deleteAccountVM.textPassword ,icon: .key, placeHolder: "şifre", hidden: $eyeHidden)
+                    
                 }.padding()
                 warningText()
             }
-            Buttons.customButton(title: "Kodu GÖnder", buttonColor: Const.secondaryButtonColor) {
-                isActiveDestination = true
+            Buttons.customButton(title: "Onayla", buttonColor: Const.secondaryButtonColor) {
+                deleteAccountVM.deleteAccount { success, error in
+                    if success {
+                        Task{
+                            isActiveDestination = await vm.logout()
+                        } 
+                    } else {
+                        // handle error
+                    }
+                }
             }
         }
-        .navigationDestination(isPresented: $isActiveDestination, destination: {
-            DeleteAccountCodeView()
-        })
+        .alert(isPresented: $deleteAccountVM.showingAlert) {
+            Alert(title: Text(deleteAccountVM.alertTitle!), message: Text(deleteAccountVM.alertMessage!), dismissButton: .default(Text("Tamam")))
+        }
         .navigationBarBackButtonHidden(true)
             .background(
                 Const.primaryBackGroundColor

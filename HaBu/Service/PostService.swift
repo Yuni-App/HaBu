@@ -142,7 +142,7 @@ class PostService : PostProvider{
             let documentReference = userCollection.document()
             if !selectedImages.isEmpty {
                 for image in selectedImages {
-                    if let imageUrl = try? await ImageUploder.imageUpload(image: image, targetFile: .profileFile, id: documentReference.documentID){
+                    if let imageUrl = try? await ImageUploder.imageUpload(image: image, targetFile: .postFile, id: documentReference.documentID){
                         uploadedImageURLs.append(imageUrl)
                     }
                 }

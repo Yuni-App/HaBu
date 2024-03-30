@@ -1,10 +1,3 @@
-//
-//  SerachView.swift
-//  HaBu
-//
-//  Created by OmerErbalta on 15.11.2023.
-//
-
 import SwiftUI
 
 

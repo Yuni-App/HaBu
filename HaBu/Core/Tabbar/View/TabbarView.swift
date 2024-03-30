@@ -36,7 +36,7 @@ struct TabbarView: View {
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Feed")
                             .toolbar(.hidden, for: .tabBar)
-                        SerachView()
+                        SearchView()
                             .frame(maxWidth: .infinity,maxHeight: .infinity)
                             .tag("Search")
                             .toolbar(.hidden, for: .tabBar)
