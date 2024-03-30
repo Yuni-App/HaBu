@@ -26,7 +26,7 @@ enum AppImage: String{
     case loginVector = "LoginVector"
     case success = "success"
     case addPhoto = "AddPhoto"
-    case mert = "Mert"
+    case profilImage = ""
     case anonim = "anonim"
     case qUser = "Quser"
     case star = "star"

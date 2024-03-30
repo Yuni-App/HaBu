@@ -38,6 +38,7 @@ class AddPostViewModel : ObservableObject {
     @Published var alertTitle = ""
     @Published var alertMessage = ""
     @Published var alertType : AlertType = .notSelected
+    @Published var isLoading  = false
    
     private var postService: PostService
     init(postService: PostService) {
@@ -47,7 +48,6 @@ class AddPostViewModel : ObservableObject {
     func checkTextFields()  async{
      
         guard !textContent.isEmpty else {
-         
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
@@ -55,7 +55,6 @@ class AddPostViewModel : ObservableObject {
             return
         }
         guard isAnonimType != .notSelected else {
-           
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
@@ -80,30 +79,24 @@ class AddPostViewModel : ObservableObject {
     
     
     func createPost() async {
-        
+        isLoading = true
         guard isShare  else {
-           
             return
         }
         do {
             let isAnonim = (isAnonimType == .anonymous) ? true : false
             try await postService.createPost(textContent: textContent, selectedTags: SelectedTags, isAnonimComment: isAnonimComment, isAnonim: isAnonim , selectedImages: selectedImages)
-          
+            self.isLoading = false
             isShareSuccess = true
             
-            
         } catch{
-           
+            self.isLoading = false
             showAlert = true
             alertTitle = "HATA"
             alertType = .errorAlert
             alertMessage = "Bir hata oluştu!"
         }
     }
-    
- 
-    
-    
 }
 
 
