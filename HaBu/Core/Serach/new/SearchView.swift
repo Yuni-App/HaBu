@@ -19,7 +19,7 @@ struct SearchView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: .infinity,height: .infinity)
-                .overlay(
+                
                     VStack {
                         HStack {
                             SearchBar(searchText: $searchText, isEditing: $isEditing, isSecondSearchViewActive: $isSecondSearchViewActive)
@@ -33,7 +33,7 @@ struct SearchView: View {
                                                        isShowingSheet = true
                                                    }
                     }
-                )
+                
         }.sheet(isPresented: $isShowingSheet) {
             Text(Const.businessText).padding()
         }.background(Const.primaryColor)

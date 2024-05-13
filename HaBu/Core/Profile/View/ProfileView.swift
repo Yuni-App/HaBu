@@ -35,7 +35,7 @@ struct ProfileView : View {
             ProfileGeometry(action: {dissmis()}, activateBackButton:activateBackButton, hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
             
         }
-        
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all,edges: .top)
     }
 }
