@@ -20,7 +20,6 @@ class ProfileViewModel:ObservableObject{
         }
         Task{
             self.posts  = await PostService.fetchPostsFromUserId(userId: user.id)
-            print(posts)
         }
     }
     @Published var user:User

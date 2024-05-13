@@ -36,6 +36,7 @@ struct FeedView: View {
     @State var refresh = false
     @State var tags = [String]()
     @State var selectionFilter = "Hepsi"
+    @State var pagination = false
     
     
     func detectScrollOffset()-> some View{
@@ -43,7 +44,8 @@ struct FeedView: View {
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
                 Task{
-                    self.posts =  try await feedVM.requestData()
+                    self.feedVM.posts = []
+                    self.posts = try await feedVM.requestData()
                     print("update")
 
                 }
@@ -84,7 +86,7 @@ struct FeedView: View {
                                 
                             }
                         }, label: {
-                            Text("+ \((feedVM.newPostCount - posts.count)) post")
+                            Text("+ \((feedVM.newPostCount)) post")
                                 .foregroundStyle(.white)
                                 .font(.caption)
                                 .fontWeight(.bold)
@@ -94,7 +96,7 @@ struct FeedView: View {
                         .background(.blue)
                         .clipShape(.rect(cornerRadius: 15, style: .continuous))
                         .scaleEffect(hideTab ? 1.5 :1 )
-                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > posts.count ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
+                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > 0 ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
                         .zIndex(10)
                         
                         ScrollView(.vertical,showsIndicators: false){
@@ -131,17 +133,37 @@ struct FeedView: View {
                                         FeedViewCell(post:$posts[index],user: posts[index].user!,likeAction: checkLike(post: posts[index], userID: AuthService.shared.currentUser!.id)).id(posts[index].id)
                                         Divider()
                                     }
+                                    if pagination{
+                                        ProgressView()
+                                            .onAppear {
+                                                Task{
+                                                   try await feedVM.pagination()
+                                                    pagination = false
+
+                                                }
+                                            }
+                                    }
+                                
+                                    
+                                   
                                 }
                                 .padding(.top,Const.height * 0.12)
                                 .overlay(
                                     GeometryReader{proxy -> Color in
+                                        print(proxy.size)
+                                        let scrolling = proxy.frame(in: .global).maxY
+                                        print(scrolling)
                                         let minY = proxy.frame(in: .named("SCROLL")).minY
                                         let durationOffset: CGFloat = 35
                                         DispatchQueue.main.async {
+                                            if scrolling < 800{
+                                                self.pagination = true
+                                            }
                                             if minY < offset{
                                                 if offset < 0 && -minY > (lastOffset + durationOffset){
                                                     withAnimation(.easeOut ){
                                                         hideTab = true
+                                                        
                                                     }
                                                     lastOffset = -offset
                                                 }
@@ -172,7 +194,6 @@ struct FeedView: View {
                                 .padding()
                                 .padding(.bottom,15 + bottomEdge + 35)
                             }
-                            
                             
                         }
                         .background(GeometryReader{_ in
@@ -208,7 +229,7 @@ struct FeedView: View {
                                     feedVM.tags = self.tags
                                     feedVM.selectedFilter = self.selectionFilter
                                     self.posts = try await feedVM.requestData()
-                                    feedVM.listenForChanges()
+                                    self.feedVM.listenForChanges()
                                     self.showCategoryFilter.toggle()
                                 }
                             })
@@ -216,6 +237,7 @@ struct FeedView: View {
                         }
                     }
                 }
+                
             }
               
             .navigationDestination(isPresented: $navigate) {

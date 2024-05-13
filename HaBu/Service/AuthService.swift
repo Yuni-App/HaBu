@@ -156,7 +156,6 @@ class AuthService : ObservableObject , AuthProvider {
     func signIn(email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            print("burada")
             if result.user.isEmailVerified {
                 // Kullanıcının e-posta adresi doğrulanmış
                 AuthService.shared.user = result.user
