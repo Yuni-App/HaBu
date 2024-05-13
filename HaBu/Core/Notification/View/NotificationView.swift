@@ -93,7 +93,50 @@ struct NotificationView: View {
     }
     @ViewBuilder
     func NotificationCell(notification:NotificationData)-> some View{
-        
+        HStack{
+            if let profileImageUrl = notification.user?.profileImageUrl?.first {
+                CircleProfileImage(userIamgeUrl: profileImageUrl, size: .small)
+            } else {
+                // Eğer profiil resmi URL'si mevcut değilse, varsayılan bir resim gösterilebilir.
+                CircleProfileImage(userIamgeUrl: "", size: .small)
+            }
+            VStack (alignment:.leading){
+                Text(notification.user?.username ?? "Hata")
+                    .fontWeight(.bold)
+                    .font(.system(size: 17))
+                    .foregroundStyle(.black)
+                Text(notification.type == NotificationType.postLike.rawValue  ?  "Gönderinizi Beğendi" : "Gönderinize Yorum Attı")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 15))
+                .foregroundStyle(.black)
+                HStack(spacing:1) {
+                    Image(systemName: "clock.fill")
+                        .font(.caption2)
+                        .foregroundStyle(.gray)
+                    Text(formattedDate(from: notification.createdAt))
+                        .font(.caption2)
+                        .foregroundColor(.black)
+                }
+            }
+            Spacer()
+            VStack{
+            
+                if let notificationImageUrl = notification.post!.imageUrl.first {
+                    CircleProfileImage(userIamgeUrl: notificationImageUrl, size: .small)
+                }else {
+                    // Eğer profiil resmi URL'si mevcut değilse, varsayılan bir resim gösterilebilir.
+                   Spacer()
+                }
+                
+            }
+           
+        }
+        .padding(.horizontal,12)
+        /*
+          bu kısım şuan için iptal edilmiştir.. Gerekli sayfaların uı güncellemesi gelecekte
+         yapılacaktır.
+         
+         
         NavigationLink{
           //  FeedViewCell(navigatedWithComment: notification. ?? Post.MockData[0], user: notification.user ?? User.MockData[0])
 
@@ -150,7 +193,7 @@ struct NotificationView: View {
             }
             .padding(.horizontal,12)
             
-        }
+        }*/
     }
 }
 func formattedDate(from timestamp: Timestamp) -> String {

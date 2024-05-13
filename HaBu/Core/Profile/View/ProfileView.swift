@@ -35,7 +35,7 @@ struct ProfileView : View {
             ProfileGeometry(action: {dissmis()}, activateBackButton:activateBackButton, hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
             
         }
-        
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all,edges: .top)
     }
 }
@@ -85,7 +85,7 @@ struct ProfileGeometry: View {
                                         Spacer()
                                         Button(action: {
                                             navigate = true
-                                            navigationPage = AnyView(SettingsView())
+                                            navigationPage = AnyView(SettingsView(user: user))
                                             
                                         }, label: {
                                             Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
