@@ -127,9 +127,11 @@ struct FeedViewCell: View {
                         CommentBottomSheet(postId: post.id)
                             .presentationDetents([.large,.medium])
                     }
+                    /*
                     Buttons.actionButton(buttonType: .send) {
-                    }
+                    }*/
                     Spacer()
+                    /*
                     Buttons.actionButton(buttonType: savePost) {
                         if savePost == .savePost{
                             savePost = .savedPost
@@ -138,6 +140,7 @@ struct FeedViewCell: View {
                             savePost = .savePost
                         }
                     }
+                    */
                 }
                 .padding()
                 HStack{
