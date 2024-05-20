@@ -16,6 +16,7 @@ struct EditProfileView: View {
     @State var navigate = false
     var destination : AnyView?
     @State var progressViewBoolen = false
+    
     init(user:User){
         self.user = user
         self._editProfileVM = StateObject(wrappedValue: EditProfileViewModel(user: user))

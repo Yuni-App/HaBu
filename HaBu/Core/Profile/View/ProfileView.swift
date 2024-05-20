@@ -35,7 +35,7 @@ struct ProfileView : View {
             ProfileGeometry(action: {dissmis()}, activateBackButton:activateBackButton, hideTab: $hideTab, size:size,safeArea:safeArea,profileVM:profileVM, user: user)
             
         }
-        
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all,edges: .top)
     }
 }
@@ -85,7 +85,7 @@ struct ProfileGeometry: View {
                                         Spacer()
                                         Button(action: {
                                             navigate = true
-                                            navigationPage = AnyView(SettingsView())
+                                            navigationPage = AnyView(SettingsView(user: user))
                                             
                                         }, label: {
                                             Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
@@ -95,31 +95,33 @@ struct ProfileGeometry: View {
                                     } .offset(x : -(rect.minX) * (proggress ),y: -resizedOffsetY * (proggress * 1.7) )
                                     
                                     // rating and post count
-                                    HStack{
-                                        VStack(alignment:.center) {
-                                            Image.iconManager(.star, size: 30, weight: .bold, color: .yellow)
-                                            Text("90")
-                                        }
-                                        .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
-                                        .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.75)))
-                                        
-                                        Spacer()
-                                            .padding(.horizontal)
-                                        VStack {
-                                            Text("Post")
-                                            Text("15")
-                                        }
-                                        .opacity(proggress == 0 ? 1:0)
-                                        
-                                    }.foregroundStyle(.white)
-                                        .font(.title2)
-                                        .fontWeight(.semibold)
-                                        .font(.title3)
-                                        .foregroundStyle(.white)
-                                        .fontWeight(.semibold)
-                                        .padding(.top,Const.height * 0.1)
-                                        .padding()
-                                    
+                                    /*
+                                     HStack{
+                                     
+                                     VStack(alignment:.center) {
+                                     Image.iconManager(.star, size: 30, weight: .bold, color: .yellow)
+                                     Text("90")
+                                     }
+                                     .scaleEffect(1 - (proggress * 0.45),anchor: .topLeading)
+                                     .offset(x : -(rect.minX-Const.width * 0.65 ) * proggress,y: -(resizedOffsetY * (proggress * 0.75)))
+                                     
+                                     Spacer()
+                                     .padding(.horizontal)
+                                     VStack {
+                                     Text("Post")
+                                     Text("15")
+                                     }
+                                     .opacity(proggress == 0 ? 1:0)
+                                     
+                                     }.foregroundStyle(.white)
+                                     .font(.title2)
+                                     .fontWeight(.semibold)
+                                     .font(.title3)
+                                     .foregroundStyle(.white)
+                                     .fontWeight(.semibold)
+                                     .padding(.top,Const.height * 0.1)
+                                     .padding()
+                                     */
                                     // user name and surname / depertment
                                     HStack{
                                         Spacer()
@@ -139,15 +141,17 @@ struct ProfileGeometry: View {
                                     .foregroundStyle(.black)
                                     .padding(.top,Const.height * 0.25)
                                     
-                                    
-                                    HStack{
-                                        Buttons.SlidableButton(action: {
-                                            navigate = true
-                                            navigationPage = AnyView(EditProfileView(user: user))
-                                        },position:profileVM.editButtonPosition , dragDirection: .left, text: activateBackButton ? "Mesaj" : "Edit", color: .white, textColor: .black)
-                                    }
-                                    .padding(.top,Const.height * 0.05)
-                                    .offset(x : 500 * proggress)
+                                    /*
+                                     HStack{
+                                     
+                                     Buttons.SlidableButton(action: {
+                                     navigate = true
+                                     navigationPage = AnyView(EditProfileView(user: user))
+                                     },position:profileVM.editButtonPosition , dragDirection: .left, text: activateBackButton ? "Mesaj" : "Edit", color: .white, textColor: .black)
+                                     }
+                                     .padding(.top,Const.height * 0.05)
+                                     .offset(x : 500 * proggress)
+                                     */
                                     SlidableImagesView(item:profileVM.images ?? [], index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
                                     
                                 }
@@ -187,8 +191,8 @@ struct ProfileGeometry: View {
                                 .padding(.horizontal,5)
                                 .padding(.top,10)
                             ,alignment: .topLeading
-                        )
-                   
+                        ).padding(.horizontal, Const.width * 0.03).background(Const.primaryColor)
+                    
                     if let posts = profileVM.posts{
                         if posts.isEmpty{
                             
@@ -201,26 +205,26 @@ struct ProfileGeometry: View {
                         else{
                             ForEach(profileVM.posts!){post in
                                 FeedViewCell(post: .constant(post) , user: user, likeAction: .liked)
+                            }
                         }
+                        
                     }
-                    
-                }
                     else{
                         HStack {
                             ProgressView()
                                 .tint(Const.primaryColor)
                                 .frame(width: 30,height: 30)
                                 .fontWeight(.bold)
-                            .padding()
+                                .padding()
                             Text("Yükleniyor..")
                                 .fontWeight(.bold)
                                 .foregroundStyle(Const.primaryColor)
                         }
-
-                    }
                         
+                    }
                     
-                   
+                    
+                    
                 }
                 .id("SCROLLVIEW")
                 .background(

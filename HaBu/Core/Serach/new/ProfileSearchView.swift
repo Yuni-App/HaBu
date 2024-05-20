@@ -28,20 +28,21 @@ struct ProfileSearchView: View {
                     dismiss()
                 }
                 SearchBarView(keyword: keywordBinding)
-
+                
             }
             ScrollView {
-                           if usersLookup.queryResultUsers.isEmpty {
-                               Text("Kullanıcı Bulunamadı")
-                                   .padding()
-                           } else {
-                               ForEach(usersLookup.queryResultUsers, id: \.id) { user in
-                                   ProfileBarView(user: user)
-                               }
-                           }
+                if usersLookup.queryResultUsers.isEmpty {
+                    Text("Kullanıcı Bulunamadı")
+                        .padding()
+                } else {
+                    ForEach(usersLookup.queryResultUsers, id: \.id) { user in
+                        ProfileBarView(user: user)
+                    }
+                }
             }
         }
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -54,11 +55,11 @@ struct SearchBarView: View {
     var body: some View {
         ZStack {
             HStack {
-               
+                
                 SearchBar(searchText: $keyword, isEditing: $isSearchBar, isSecondSearchViewActive: $isSecondSearchViewActive)
                     .frame(width: Const.width * 0.85)
-          
-                .autocapitalization(.none)
+                
+                    .autocapitalization(.none)
             }
         }
     }
@@ -66,7 +67,7 @@ struct SearchBarView: View {
 
 struct ProfileBarView: View {
     var user: User
-
+    
     var body: some View {
         ZStack {
             NavigationLink(destination: ProfileView(user: user), label: {
@@ -83,10 +84,13 @@ struct ProfileBarView: View {
                         }
                     }
                 }.padding()
-                .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(.systemGray6)).cornerRadius(10)
+                    .frame(width: Const.width * 0.9, height: Const.height * 0.07).background(Color(.systemGray6)).cornerRadius(10)
             }
             )
         }
-     
+        
     }
+}
+#Preview {
+    ProfileSearchView()
 }

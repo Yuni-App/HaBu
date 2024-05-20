@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    var user: User
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack{
@@ -15,7 +16,7 @@ struct SettingsView: View {
                 dismiss()
             }, title: "Ayarlar")
                 ScrollView{
-                    UserAboutBox()
+                    UserAboutBox(user: user)
                     AppAboutBox()
                     OtherBox()
                     Text("Uygulama Sürümü 1.0.0").foregroundColor(.black.opacity(0.3))
@@ -47,36 +48,37 @@ struct SettingsView: View {
        }
    }
    
-
-     @ViewBuilder
-    private func UserAboutBox() ->some View {
-        VStack{
-            Text("Kullanıcı Bilgileri").frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(.black.opacity(0.7))
-                .fontWeight(.bold)
+    struct UserAboutBox: View {
+        var user: User
+        var body: some View {
             VStack{
-                SettingsTile(destination: {
-                    EditProfileView(user: User.MockData[0])
-                },icon: AppIcon.person, text: "Profili Düzenle")
-                Divider().frame(width: Const.width * 0.84)
-                SettingsTile(destination: {
-                    ChangePasswordView()}, icon: AppIcon.lock, text: "Şifreyi Değiştir")
-                Divider().frame(width: Const.width * 0.84)
-                /* SettingsTile(destination: {
-                    BlockedUsersView()
-                }, icon: AppIcon.blocked, text: "Engellenen Kullanıcılar")
-                Divider().frame(width: Const.width * 0.84)  */
-                SettingsTile(destination: {
-                    SavedPostView()
-                }, icon: AppIcon.savePost, text: "Kaydedilenler ")
-            }.frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                    .white
-                ).cornerRadius(7)
-                .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
+                Text("Kullanıcı Bilgileri").frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.black.opacity(0.7))
+                    .fontWeight(.bold)
+                VStack{
+                    SettingsTile(destination: {
+                        AnyView(EditProfileView(user: user))
+                    },icon: AppIcon.person, text: "Profili Düzenle")
+                    Divider().frame(width: Const.width * 0.84)
+                    SettingsTile(destination: {
+                        ChangePasswordView()}, icon: AppIcon.lock, text: "Şifreyi Değiştir")
+                    Divider().frame(width: Const.width * 0.84)
+                    /* SettingsTile(destination: {
+                        BlockedUsersView()
+                    }, icon: AppIcon.blocked, text: "Engellenen Kullanıcılar")
+                    Divider().frame(width: Const.width * 0.84)  */
+                    SettingsTile(destination: {
+                        SavedPostView()
+                    }, icon: AppIcon.savePost, text: "Kaydedilenler ")
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        .white
+                    ).cornerRadius(7)
+                    .shadow(color: .black.opacity(0.25), radius: 2, x: 2, y: 4)
+            }
         }
     }
-
+    
     @ViewBuilder
     private func AppAboutBox() ->some View {
         VStack{
@@ -132,7 +134,7 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(user: User.MockData[0])
 }
 
 

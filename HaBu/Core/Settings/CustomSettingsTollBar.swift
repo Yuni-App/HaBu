@@ -37,5 +37,5 @@ struct CustomSettingsTollBar: View {
 }
 
 #Preview {
-  SettingsView()
+    SettingsView(user: User.MockData[0])
 }
