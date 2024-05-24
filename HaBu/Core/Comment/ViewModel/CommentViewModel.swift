@@ -16,8 +16,6 @@ class CommentViewModel:ObservableObject{
         self.postId = postId
         Task{
             comments = try await requestData()
-            print("comments")
-            print(comments)
         }
     }
     
@@ -28,6 +26,16 @@ class CommentViewModel:ObservableObject{
         let comments = await commentService.getComments(postId: postId)
         print(comments)
         return comments
-        
+    }
+    func addComment(_ comment:String,postID:String,user:User)async throws{
+            
+        let status = await commentService.addComment(comment, postId: postID, user: user)
+            
+        if status {
+            print("status")
+           try await requestData()
+            
+            
+        }
     }
 }

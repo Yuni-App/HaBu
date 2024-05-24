@@ -67,7 +67,6 @@ class PostService : PostProvider{
     func fetchPosts(tags: [String] = [], postType: String = "Hepsi",pagination:Bool) async -> [Post] {
         do {
             postFeedRef = Firestore.firestore().collection("post") as Query
-            
             if postType == "Anonim"{
                 postFeedRef =  postFeedRef.whereField("isAnonim", isEqualTo: true)
             }
@@ -77,7 +76,6 @@ class PostService : PostProvider{
             if !tags.isEmpty{
                 postFeedRef = postFeedRef.whereField("tags", arrayContainsAny: tags)
             }
-            
             if pagination{
                 if let lastDocument = lastDocument{
                     postFeedRef = postFeedRef.order(by: "timeStamp",descending: true).start(afterDocument: lastDocument).limit(to:10 )
