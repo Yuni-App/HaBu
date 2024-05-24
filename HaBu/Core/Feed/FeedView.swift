@@ -150,9 +150,7 @@ struct FeedView: View {
                                 .padding(.top,Const.height * 0.12)
                                 .overlay(
                                     GeometryReader{proxy -> Color in
-                                        print(proxy.size)
                                         let scrolling = proxy.frame(in: .global).maxY
-                                        print(scrolling)
                                         let minY = proxy.frame(in: .named("SCROLL")).minY
                                         let durationOffset: CGFloat = 35
                                         DispatchQueue.main.async {
@@ -228,6 +226,7 @@ struct FeedView: View {
                                 Task{
                                     feedVM.tags = self.tags
                                     feedVM.selectedFilter = self.selectionFilter
+                                    self.feedVM.posts = []
                                     self.posts = try await feedVM.requestData()
                                     self.feedVM.listenForChanges()
                                     self.showCategoryFilter.toggle()

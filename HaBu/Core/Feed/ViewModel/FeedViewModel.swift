@@ -27,6 +27,8 @@ class FeedViewModel : ObservableObject{
       _ =  try await requestData(pagination: true)
     }
     func requestData(pagination : Bool = false) async throws  -> [Post]{
+        print(tags)
+        print(selectedFilter)
         var postsFromService = await postService.fetchPosts(tags: tags,postType: selectedFilter,pagination:pagination)
         for i in (postCount)..<postsFromService.count {
             var user: User?
@@ -41,7 +43,6 @@ class FeedViewModel : ObservableObject{
         self.postsData.onNext(posts)
         
         self.lastPostFromFirebase = postsFromService[0]
-        print("last Post")
         self.newPostCount = 0
         return postsFromService
     }

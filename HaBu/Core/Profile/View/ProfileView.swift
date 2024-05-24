@@ -141,17 +141,20 @@ struct ProfileGeometry: View {
                                     .foregroundStyle(.black)
                                     .padding(.top,Const.height * 0.25)
                                     
-                                    /*
-                                     HStack{
-                                     
-                                     Buttons.SlidableButton(action: {
-                                     navigate = true
-                                     navigationPage = AnyView(EditProfileView(user: user))
-                                     },position:profileVM.editButtonPosition , dragDirection: .left, text: activateBackButton ? "Mesaj" : "Edit", color: .white, textColor: .black)
-                                     }
-                                     .padding(.top,Const.height * 0.05)
-                                     .offset(x : 500 * proggress)
-                                     */
+                                    if !activateBackButton{
+                                        HStack{
+                                        
+                                        Buttons.SlidableButton(action: {
+                                        navigate = true
+                                        navigationPage = AnyView(EditProfileView(user: user))
+                                        },position:profileVM.editButtonPosition , dragDirection: .left, text: activateBackButton ? "Mesaj" : "Edit", color: .white, textColor: .black)
+                                        }
+                                        .padding(.top,Const.height * 0.05)
+                                        .offset(x : 500 * proggress)
+                                        
+                                    }
+                                       
+                                    
                                     SlidableImagesView(item:profileVM.images ?? [], index: $imageIndex, size: 100 , rect :rect, proggress:proggress,resizedOffsetY:resizedOffsetY)
                                     
                                 }

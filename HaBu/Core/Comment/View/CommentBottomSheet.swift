@@ -17,7 +17,7 @@ struct CommentBottomSheet: View {
     }
     
     var body: some View {
-        if let comments = commentVM.comments{
+        if commentVM.comments != nil{
             ZStack {
                 ScrollView {
                     HStack{
@@ -25,12 +25,12 @@ struct CommentBottomSheet: View {
                             .font(.title3)
                             .bold()
                         Spacer()
-                        Text("\(comments.count) yorum")
+                        Text("\(commentVM.comments!.count) yorum")
                     }
                     .padding(.horizontal,20)
                     
-                    if comments.count > 0{
-                        ForEach(comments){comment in
+                    if commentVM.comments!.count > 0{
+                        ForEach(commentVM.comments!){comment in
                             CommentViewCell(comment: comment)
                             
                         }
@@ -48,15 +48,22 @@ struct CommentBottomSheet: View {
                     .ignoresSafeArea(.all)
             }
         }
-        else{
+           
+        
+        if commentVM.comments == nil{
             ProgressView()
                 .padding(40)
             Spacer()
         }
+            
+        
        
         HStack{
             TextFields.CommentTextField(commentText: $commentText)
             Button(action: {
+                Task{
+                    try await commentVM.addComment(commentText,postID: postId,user:AuthService.shared.currentUser!)
+                }
             }, label: {
                 Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)
                     .padding(10)
