@@ -83,14 +83,16 @@ struct ProfileGeometry: View {
                                             .padding()
                                         }
                                         Spacer()
-                                        Button(action: {
-                                            navigate = true
-                                            navigationPage = AnyView(SettingsView(user: user))
-                                            
-                                        }, label: {
-                                            Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
-                                        })
-                                        .padding()
+                                        if !activateBackButton{
+                                            Button(action: {
+                                                navigate = true
+                                                navigationPage = AnyView(SettingsView(user: user))
+                                                
+                                            }, label: {
+                                                Image.iconManager(.settings, size: 20, weight: .bold, color: .white)
+                                            })
+                                            .padding()
+                                        }
                                         
                                     } .offset(x : -(rect.minX) * (proggress ),y: -resizedOffsetY * (proggress * 1.7) )
                                     
