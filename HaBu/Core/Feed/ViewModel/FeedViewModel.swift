@@ -41,8 +41,10 @@ class FeedViewModel : ObservableObject{
         }
         posts.append(contentsOf: postsFromService)
         self.postsData.onNext(posts)
-        
-        self.lastPostFromFirebase = postsFromService[0]
+        if postsFromService.count > 1{
+            self.lastPostFromFirebase = postsFromService[0]
+
+        }
         self.newPostCount = 0
         return postsFromService
     }
