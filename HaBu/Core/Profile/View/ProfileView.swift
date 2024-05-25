@@ -79,7 +79,7 @@ struct ProfileGeometry: View {
                                         if activateBackButton{
                                             Buttons.backButton(action: {
                                                 dismiss()
-                                            }, color: .white)
+                                             }, color: .white)
                                             .padding()
                                         }
                                         Spacer()
@@ -209,7 +209,7 @@ struct ProfileGeometry: View {
                         }
                         else{
                             ForEach(profileVM.posts!){post in
-                                FeedViewCell(post: .constant(post) , user: user, likeAction: .liked)
+                                FeedViewCell(post:.constant(post),user: user,likeAction: checkLike(post: post, userID: AuthService.shared.currentUser!.id)).id(post.id)
                             }
                         }
                         
@@ -304,4 +304,9 @@ struct ScrollDetector:UIViewRepresentable{
             
         }
     }
+}
+ func checkLike(post:Post,userID:String) -> ActionButtons{
+   let value = post.likeList.contains(userID)
+    return value ? .liked : .unLike
+    
 }
