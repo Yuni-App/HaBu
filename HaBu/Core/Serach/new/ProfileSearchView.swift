@@ -79,6 +79,11 @@ struct ProfileBarView: View {
                             Spacer()
                         }
                         HStack {
+                            Text("\(user.username)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color.black)
+                            Spacer()
+                        }
+                        
+                        HStack {
                             Text("\(user.department)").font(.footnote).fontWeight(.semibold).foregroundStyle(Color(UIColor(hex: "c4c4c4")))
                             Spacer()
                         }

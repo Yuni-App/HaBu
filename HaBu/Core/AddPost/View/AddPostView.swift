@@ -47,7 +47,7 @@ struct AddPostView: View {
                 AddCategoryView(SelectedTags: $addPostVM.SelectedTags)
                     .padding(.vertical, 20)
                 
-                AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
+               // AddPostToggle(isAnonimComment: $addPostVM.isAnonimComment)
                 AddPostMedia(addpostVM: addPostVM).padding(.horizontal, 10)
                     }
                 }

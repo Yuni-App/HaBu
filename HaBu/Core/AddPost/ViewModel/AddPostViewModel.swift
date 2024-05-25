@@ -88,6 +88,10 @@ class AddPostViewModel : ObservableObject {
             try await postService.createPost(textContent: textContent, selectedTags: SelectedTags, isAnonimComment: isAnonimComment, isAnonim: isAnonim , selectedImages: selectedImages)
             self.isLoading = false
             isShareSuccess = true
+            textContent = ""
+            SelectedTags = []
+            isAnonimType = .notSelected
+            selectedImages = []
             
         } catch{
             self.isLoading = false
