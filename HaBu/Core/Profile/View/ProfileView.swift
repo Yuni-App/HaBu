@@ -11,6 +11,9 @@ import SwiftUI
 struct ProfileView : View {
     @Environment(\.dismiss) var dissmis
     @StateObject var profileVM :ProfileViewModel
+    var activateBackButton = false
+    let user : User
+    @Binding var hideTab:Bool
     
     init(hideTab:Binding<Bool>) {
         _hideTab = hideTab
@@ -24,10 +27,6 @@ struct ProfileView : View {
         self._profileVM = StateObject(wrappedValue: ProfileViewModel(user: user))
         
     }
-    var activateBackButton = false
-    let user : User
-    @Binding var hideTab:Bool
-    
     var body: some View{
         GeometryReader{ proxy in
             let size = proxy.size

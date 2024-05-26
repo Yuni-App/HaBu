@@ -18,7 +18,7 @@ struct CustomSettingsTollBar: View {
                 }, color: .black)
                 Spacer()
                 if let blockedCount = blockedCount{
-                    Text("\(blockedCount) Kişi ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    Text("\(blockedCount) Post ").fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 }
             }.padding(.leading,5)
             Text(title)
