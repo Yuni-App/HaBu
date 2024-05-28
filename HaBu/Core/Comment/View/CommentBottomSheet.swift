@@ -63,6 +63,7 @@ struct CommentBottomSheet: View {
             Button(action: {
                 Task{
                     try await commentVM.addComment(commentText,postID: postId,user:AuthService.shared.currentUser!)
+                    commentText = ""
                 }
             }, label: {
                 Image.iconManager(.paperplane, size: 30, weight: .bold, color: Const.thirColor)
@@ -85,10 +86,6 @@ struct CommentViewCell : View {
             HStack {
                 UserInfo(user: comment.user ?? User.MockData[0], imageSize: .xsmall,isAnonim: false)
                     .padding(10)
-                Buttons.actionButton(buttonType: .liked, action: {
-                    
-                }, getNumber: 10)
-                .padding(.all,10)
                 
             }
             Text(comment.comment)

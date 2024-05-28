@@ -27,8 +27,6 @@ class FeedViewModel : ObservableObject{
       _ =  try await requestData(pagination: true)
     }
     func requestData(pagination : Bool = false) async throws  -> [Post]{
-        print(tags)
-        print(selectedFilter)
         var postsFromService = await postService.fetchPosts(tags: tags,postType: selectedFilter,pagination:pagination)
         for i in (postCount)..<postsFromService.count {
             var user: User?
@@ -56,7 +54,6 @@ class FeedViewModel : ObservableObject{
             DispatchQueue.main.async {
                 withAnimation {
                     if let lastPost = self?.lastPostFromFirebase {
-                        print(posts.count)
                         let indexOfLastPost = posts.firstIndex(where: { $0.id == lastPost.id })
                         self?.newPostCount = indexOfLastPost ?? 0
                     }

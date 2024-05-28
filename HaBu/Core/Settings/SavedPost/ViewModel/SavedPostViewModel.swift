@@ -7,30 +7,25 @@
 
 import Foundation
 
+@MainActor
 class SavedPostViewModel : ObservableObject {
     @Published var savedPostList :[Post]  = []
     static let shared = SavedPostViewModel()
     private var savedPostService = SavedPostService.shared
+    @Published var loading = true
 
-    func listenForSavedPost() async {
-        await savedPostService.listenForSavedPost { result in
-            switch result {
-            case .success(let posts):
-                DispatchQueue.main.async {
-                    posts.forEach {post in
-                        if !self.savedPostList.contains(post) {
-                            self.savedPostList.append(post)
-                        }
-                    }
+    func fetchSavedPost() async throws{
+        savedPostList = []
+        if let savePostsId = AuthService.shared.currentUser?.savedPosts{
+            for postId in savePostsId {
+                if let post = await PostService.fetchPost(id: postId){
+                    var post = post
+                    post.user = try await UserService.fetchUser(withUserID: post.userId)
+                    savedPostList.append(post)
                 }
-            case .failure(let error):
-                print("Bildirimler dinlenirken hata oluştu: \(error.localizedDescription)")
             }
         }
+        loading = false
     }
     
-    
-    func stopListening(){
-        savedPostService.stopListening()
-    }
 }

@@ -4,226 +4,199 @@
 //
 //  Created by OmerErbalta on 14.11.2023.
 //
-
 import SwiftUI
 import RxSwift
 import RxCocoa
 
 struct FeedView: View {
-    private func checkLike(post:Post,userID:String) -> ActionButtons{
-       let value = post.likeList.contains(userID)
+    private func checkLike(post: Post, userID: String) -> ActionButtons {
+        let value = post.likeList.contains(userID)
         return value ? .liked : .unLike
-        
     }
-    
+
     @StateObject var notificationManager = NotificationManager()
-    @StateObject var  feedVM = FeedViewModel()
+    @StateObject var feedVM = FeedViewModel()
     @State var showCategoryFilter = false
-    var bottomEdge:CGFloat
-    @Binding var hideTab:Bool
-    @State var offset:CGFloat = 0
-    @State var lastOffset:CGFloat = 0
-    @State var lastOffsetPositive:CGFloat = 0
+    var bottomEdge: CGFloat
+    @Binding var hideTab: Bool
+    @State var offset: CGFloat = 0
+    @State var lastOffset: CGFloat = 0
+    @State var lastOffsetPositive: CGFloat = 0
     @State var messageBox = 20
     @State var addPostButtonPosition = CGPoint(x: 10, y: 20)
     @State var navigate = false
-    @State var navigationPage : AnyView? = nil
+    @State var navigationPage: AnyView? = nil
     let disposeBag = DisposeBag()
     @State var posts = [Post]()
-    @State private var yOffset : CGFloat = 0
-    @State private var previousyOffset : CGFloat = 0
-    @State var show :Bool = true
+    @State private var yOffset: CGFloat = 0
+    @State private var previousyOffset: CGFloat = 0
+    @State var show: Bool = true
     @State var refresh = false
     @State var tags = [String]()
     @State var selectionFilter = "Hepsi"
     @State var pagination = false
-    
-    
-    func detectScrollOffset()-> some View{
+
+    init(bottomEdge: CGFloat, hideTab: Binding<Bool>) {
+        self.bottomEdge = bottomEdge
+        self._hideTab = hideTab
+    }
+
+    private func detectScrollOffset(proxy: GeometryProxy) {
         DispatchQueue.main.async {
+            let minY = proxy.frame(in: .named("SCROLL")).minY
+            let durationOffset: CGFloat = 35
+
+            if minY < offset {
+                if offset < 0 && -minY > (lastOffset + durationOffset) {
+                    withAnimation(.easeOut) {
+                        hideTab = true
+                    }
+                    lastOffset = -offset
+                }
+            }
+
+            if offset > 0 && minY > lastOffsetPositive {
+                lastOffsetPositive = offset
+            }
+
+            if offset < 16 {
+                lastOffsetPositive = 0
+            }
+
+            if minY > offset && -minY < (lastOffset - durationOffset) {
+                withAnimation(.easeOut) {
+                    hideTab = false
+                }
+                lastOffset = -offset
+            }
+
+            self.offset = minY
+
             if lastOffsetPositive > 175 && refresh == false {
                 refresh = true
-                Task{
+                Task {
                     self.feedVM.posts = []
                     self.posts = try await feedVM.requestData()
                     print("update")
-
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     withAnimation {
                         refresh = false
                         lastOffsetPositive = offset
                     }
-                   
                 }
             }
-           
-        
         }
-        return Color.clear
     }
-    private func setupBinding(){
+
+    private func setupBinding() {
         feedVM
             .postsData
             .observe(on: MainScheduler.asyncInstance)
-            .subscribe{ posts in
-               
+            .subscribe { posts in
                 self.posts = posts
-                
             }.disposed(by: disposeBag)
     }
+
     var body: some View {
-        
         ZStack {
             VStack {
-              
-                ScrollViewReader{ value in
-                    ZStack{
+                ScrollViewReader { value in
+                    ZStack {
+                        test()
                         Button(action: {
                             lastOffsetPositive = 180
                             withAnimation {
-                                value.scrollTo(posts[0].id,anchor: .bottom)
-                                
+                                value.scrollTo(posts[0].id, anchor: .bottom)
                             }
                         }, label: {
                             Text("+ \((feedVM.newPostCount)) post")
                                 .foregroundStyle(.white)
                                 .font(.caption)
                                 .fontWeight(.bold)
-                                .padding(.horizontal,15)
-                                .padding(.vertical,8)
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 8)
                         })
                         .background(.blue)
-                        .clipShape(.rect(cornerRadius: 15, style: .continuous))
-                        .scaleEffect(hideTab ? 1.5 :1 )
-                        .offset(x:hideTab ? Const.width * 0.4 : 0 ,y: feedVM.newPostCount > 0 ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) :Const.height * -0.7)
+                        .scaleEffect(hideTab ? 1.5 : 1)
+                        .offset(x: hideTab ? Const.width * 0.4 : 0, y: feedVM.newPostCount > 0 ? (hideTab ? Const.height * -0.42 : Const.height * -0.38) : Const.height * -0.7)
                         .zIndex(10)
-                        
-                        ScrollView(.vertical,showsIndicators: false){
-                            if posts == []{
-                                VStack (alignment:.center){
-                                    HStack(spacing:20){
-                                        ZStack{
+
+                        ScrollView(.vertical, showsIndicators: false) {
+                            if posts.isEmpty {
+                                VStack(alignment: .center) {
+                                    HStack(spacing: 20) {
+                                        ZStack {
                                             ProgressView()
                                         }
                                         Text(" Yükleniyor..")
                                     }
-                                    .padding(.top,Const.height * 0.5)
+                                    .padding(.top, Const.height * 0.5)
                                 }
                                 .frame(width: Const.width)
-                            }
-                            else{
-                                VStack (alignment:.center){
+                            } else {
+                                VStack(alignment: .center) {
                                     if lastOffsetPositive > 170 || refresh == true {
                                         ProgressView()
-                                            .frame(width: 50,height: 50)
+                                            .frame(width: 50, height: 50)
                                             .scaleEffect(1.25)
-                                            .padding(.vertical,offset > 0 ?  -offset : 0)
-                                    }
-                                    else{
-                                        Image.iconManager(.down_arrow, size: 20, weight: .bold, color:.gray)
+                                            .padding(.vertical, offset > 0 ? -offset : 0)
+                                    } else {
+                                        Image.iconManager(.down_arrow, size: 20, weight: .bold, color: .gray)
                                             .fontWeight(.bold)
-                                            .opacity(offset > 30 ? 1:0)
+                                            .opacity(offset > 30 ? 1 : 0)
                                             .rotationEffect(.degrees(offset < 180 ? offset : 180), anchor: .center)
                                             .scaleEffect(offset / 100)
-                                            .padding(.vertical,offset > 0 ?  -offset : 0)
+                                            .padding(.vertical, offset > 0 ? -offset : 0)
                                     }
-                                    ForEach(posts.indices, id: \.self){index in
-                                        
-                                        FeedViewCell(post:$posts[index],user: posts[index].user!,likeAction: checkLike(post: posts[index], userID: AuthService.shared.currentUser!.id)).id(posts[index].id)
+                                    ForEach(posts) { post in
+                                        FeedViewCell(post: $posts[posts.firstIndex(where: { $0.id == post.id })!], user: post.user!, likeAction: checkLike(post: post, userID: AuthService.shared.currentUser!.id))
                                         Divider()
                                     }
-                                    if pagination{
+                                    if pagination {
                                         ProgressView()
                                             .onAppear {
-                                                Task{
-                                                   try await feedVM.pagination()
+                                                Task {
+                                                    try await feedVM.pagination()
                                                     pagination = false
-
                                                 }
                                             }
                                     }
-                                
-                                    
-                                   
                                 }
-                                .padding(.top,Const.height * 0.12)
-                                .overlay(
-                                    GeometryReader{proxy -> Color in
-                                        let scrolling = proxy.frame(in: .global).maxY
-                                        let minY = proxy.frame(in: .named("SCROLL")).minY
-                                        let durationOffset: CGFloat = 35
-                                        DispatchQueue.main.async {
-                                            if scrolling < 800{
-                                                self.pagination = true
-                                            }
-                                            if minY < offset{
-                                                if offset < 0 && -minY > (lastOffset + durationOffset){
-                                                    withAnimation(.easeOut ){
-                                                        hideTab = true
-                                                        
-                                                    }
-                                                    lastOffset = -offset
-                                                }
-                                                
-                                                
-                                            }
-                                            if offset > 0 && minY > lastOffsetPositive{
-                                                lastOffsetPositive = offset
-                                            }
-                                            if offset < 16{
-                                                lastOffsetPositive = 0
-                                            }
-                                            if minY > offset && -minY < (lastOffset - durationOffset){
-                                                withAnimation(.easeOut){
-                                                    hideTab = false
-                                                }
-                                                lastOffset = -offset
-                                                
-                                            }
-                                            
-                                            self.offset = minY
+                                .padding(.top, Const.height * 0.12)
+                                .background(GeometryReader { proxy in
+                                    Color.clear
+                                        .onAppear {
+                                            detectScrollOffset(proxy: proxy)
                                         }
-                                        return Color.clear
-                                        
-                                    }
-                                    
-                                )
+                                })
                                 .padding()
-                                .padding(.bottom,15 + bottomEdge + 35)
+                                .padding(.bottom, 15 + bottomEdge + 35)
                             }
-                            
                         }
-                        .background(GeometryReader{_ in
-                            self.detectScrollOffset()
-                        })
-                        .onAppear{
+                        .onAppear {
                             setupBinding()
                         }
-                        .coordinateSpace(name:"SCROLL")
-                        //TollBar
+                        .coordinateSpace(name: "SCROLL")
+                        // Toolbar
                         .overlay(
-                            VStack{
+                            VStack {
                                 FeedViewTollBar(showCategoryFilter: $showCategoryFilter, messageBox: $messageBox)
-                                                              .background(.white)
-                                                              .offset(y:hideTab ? (-15 - 70 ) :0)
-                                
+                                    .background(.white)
+                                    .offset(y: hideTab ? (-15 - 70) : 0)
                                 Buttons.SlidableButton(action: {
                                     navigate = true
                                     navigationPage = AnyView(AddPostView().navigationBarBackButtonHidden(true))
-                                }, position: CGPoint(x: Const.width * 0.05, y:0), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
-                                .offset(x:hideTab ? -Const.width * 0.5:0)
+                                }, position: CGPoint(x: Const.width * 0.05, y: 0), dragDirection: .right, text: "Post Ekle", color: Const.primaryColor, textColor: .white)
+                                .offset(x: hideTab ? -Const.width * 0.5 : 0)
                             }
-                            ,alignment: .top
-                          
-                            
+                            , alignment: .top
                         )
-                        .ignoresSafeArea(.all,edges: .all)
-                        //Slidable Button
-                      
+                        .ignoresSafeArea(.all, edges: .all)
+                        // Slidable Button
                         .sheet(isPresented: $showCategoryFilter) {
                             CategoryFilterBottomSheet(SelectedTags: $tags, selectedFilter: $selectionFilter, onButtonTapped: {
-                                Task{
+                                Task {
                                     feedVM.tags = self.tags
                                     feedVM.selectedFilter = self.selectionFilter
                                     self.feedVM.posts = []
@@ -232,27 +205,21 @@ struct FeedView: View {
                                     self.showCategoryFilter.toggle()
                                 }
                             })
-                                .presentationDetents([.height(Const.height * 0.6)])
+                            .presentationDetents([.height(Const.height * 0.6)])
                         }
                     }
                 }
-                
             }
-              
             .navigationDestination(isPresented: $navigate) {
                 navigationPage
+            }
         }
-        }
-     
-        
     }
 }
-
 
 #Preview {
     TabbarView()
 }
-
 
 struct FeedViewTollBar:View {
     @Binding var showCategoryFilter:Bool
@@ -320,3 +287,11 @@ struct FeedViewTollBar:View {
 }
 
 
+struct test:View {
+    init(){
+        print("test")
+    }
+    var body: some View {
+        Text("text")
+    }
+}

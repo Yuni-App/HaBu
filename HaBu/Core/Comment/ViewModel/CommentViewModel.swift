@@ -33,7 +33,7 @@ class CommentViewModel:ObservableObject{
             
         if status {
             print("status")
-           try await requestData()
+            self.comments =  try await requestData()
             
             
         }
